@@ -5,7 +5,23 @@ class UsersController < ApplicationController
   end
 
   def account
-    render "account"
+    if current_user
+      @orders = current_user.orders
+      @wishlist_items = []
+      @wishlist_items = current_user.wishlist.wishlist_items if current_user.wishlist
+      @default_address = current_user.addresses.find_by_default(true)
+      @default_address = current_user.addresses.first if @default_address.nil?
+
+      unless current_user.accounting_name.blank?
+        @accounting_name = current_user.accounting_name
+      else
+        @accounting_name = current_user.title_name.to_s + " " + current_user.first_name.to_s + " " + current_user.last_name.to_s
+      end
+
+      render "account"
+    else
+      render "register"
+    end
   end
 
   # GET /users

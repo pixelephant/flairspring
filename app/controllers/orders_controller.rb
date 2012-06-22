@@ -1,4 +1,15 @@
 class OrdersController < ApplicationController
+
+  def myorder
+    @order = Order.where(:id => params[:id], :user_id => current_user.id).first
+    @order_items = @order.order_items
+
+    respond_to do |format|
+      format.html { render :partial => 'myorder' }
+      format.json { render :json => @order }
+    end
+  end
+
   # GET /orders
   # GET /orders.json
   def index

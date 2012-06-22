@@ -3,13 +3,21 @@ class CartController < ApplicationController
 
   def index
 		@cart = Cart.find(session[:cart_id])
+    if @cart.line_items.any?
+      @r_products = Array.new
+
+      @cart.line_items.each do |li|
+        li.product.product_relates.each do |rel|
+          @r_products << rel
+        end
+      end
+      render "index"
+    else
+      render "empty"
+    end
 	rescue ActiveRecord::RecordNotFound
     @cart = Cart.new
-		if @cart.total == 0
-			render "empty"
-		else
-			render "index"
-		end
+		render "empty"
   end
 
   def new
@@ -38,6 +46,18 @@ class CartController < ApplicationController
   def remove_item
     respond_to do |format|
       if LineItem.delete_all(["cart_id = ? AND product_id = ?", current_cart, params[:id]])
+        format.json { render :json => "true" }
+      else
+        format.json { render :json => "false" }
+      end
+    end
+  end
+
+  def personal
+    respond_to do |format|
+      puts params[:action]
+      if params[:action] == 'personal' && current_user
+        session[:personal_discount] = current_user.id
         format.json { render :json => "true" }
       else
         format.json { render :json => "false" }

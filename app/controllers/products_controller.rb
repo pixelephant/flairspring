@@ -25,6 +25,19 @@ class ProductsController < ApplicationController
     @description = truncate(@product.long_description, :length => 156).capitalize
     @keywords = @product.name + "," + @category.name
 
+    if current_user
+      if current_user.wishlist
+        if current_user.wishlist.wishlist_items.where(:product_id => @product.id).any?
+          @on_wishlist = true
+        else
+          @on_wishlist = false
+        end
+      else
+        @on_wishlist = false
+      end
+    end
+    
+
 		#session[:last_viewed_products] = []
 		(session[:last_viewed_products] ||= []).delete(params[:id])
 		session[:last_viewed_products] << params[:id] if !session[:last_viewed_products].index(params[:id])
@@ -114,4 +127,41 @@ class ProductsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def add_to_wishlist
+    unless current_user.blank?
+      @product = Product.find(params[:id])
+
+      wishlist = Wishlist.find_by_user_id(current_user.id)
+      wishlist = Wishlist.create(:user_id => current_user.id) if wishlist.nil?
+
+      wishlist.wishlist_items << WishlistItem.create(:product_id => params[:id]) unless WishlistItem.find_by_product_id(params[:id])
+
+      respond_to do |format|
+        format.json { render :json => {:status => 'true'}.to_json }
+      end
+    else
+      respond_to do |format|
+        format.json { render :json => {:status => 'false'}.to_json }
+      end
+    end
+  end
+
+  def remove_from_wishlist
+    unless current_user.blank?
+      
+      wishlist = Wishlist.find_by_user_id(current_user.id)
+
+      wishlist.wishlist_items.find(params[:id]).delete unless params[:id].blank?
+
+      respond_to do |format|
+        format.json { render :json => {:status => 'true'}.to_json }
+      end
+    else
+      respond_to do |format|
+        format.json { render :json => {:status => 'false'}.to_json }
+      end
+    end
+  end
+
 end
