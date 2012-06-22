@@ -1,0 +1,60 @@
+<div class="clearfix">
+	<section id="sidebar">
+			<nav id="category-nav">
+				<%= render "home/category_menu_left" %>
+			</nav>
+	</section>
+
+		<section id="promo-list">
+			
+			<div class="clearfix">
+				<div class="box cpromo big" id="fotelek">
+					<h3>Funkciógazdag fotelek asd</h3>
+				</div>
+
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>2</p>
+				</div>
+			</div>
+			<div class="clearfix crow">
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small last">
+					<p>1</p>
+				</div>
+			</div>
+			<div class="box promo">
+				<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+			</div>
+			<div class="box promo">
+				<%= image_tag "uttermost.png", :title => "title", :class => "class" %>
+			</div>
+			<div class="box promo">
+				<%= image_tag "cart-icon.png", :title => "title", :class => "class" %>
+			</div>
+			<div class="box promo">
+				<%= image_tag "cart-icon.png", :title => "title", :class => "class" %>
+			</div>
+			<div class="box promo">
+				<%= image_tag "logo.png", :title => "title", :class => "class" %>
+			</div>
+		</section>
+</div>
+
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Legújabb ágyaink", :id => "newest-beds", :products => @category.products.order(:updated_at).limit(10) } %>
+<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Népszerű", :id1 => "popular-products", :id2 => "super-deals", :title2 => "Szuper akció" } %>
+
+<%= render 'home/last_viewed_carousel' if !session[:last_viewed_products].blank? %>

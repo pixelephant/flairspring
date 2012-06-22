@@ -1,0 +1,215 @@
+@import '_mixins.css.scss';
+
+/* ----- Comingsoon ------ */
+
+#comingsoon{
+	#header-wrapper{
+		overflow:hidden;
+	}
+	#logo{
+		margin:0 auto;
+		float:none;
+		height:120px;
+	}
+	.box{
+		text-align:center;
+		h2{
+			color:$brand-darkblue;
+			margin-bottom:10px;
+			font-size:50px;
+		}
+	}
+	h1{
+		height:80px;
+		line-height:30px;
+		font-size:20px;
+		font-style:italic;
+		color:#444;
+		float:left;
+		span{
+			color:$brand-orange;
+		}
+	}
+	#social-promo{
+		height:100px;
+		p,em{
+		}
+	}
+}
+
+.how{
+	text-align:left !important;
+	h3,h4{
+		margin:20px 0 !important;
+	}
+}
+
+.about{
+	margin-bottom:20px;
+}
+
+.about strong{
+	color:$brand-orange;
+}
+
+#soon-newsletter{
+	margin-top:30px;
+	padding:0 20px;
+	float:left;
+	width:420px;
+	p{
+		margin-top:10px;
+		font-size:20px;
+		margin-bottom:20px;
+	}
+	em{
+		font-style:italic;
+	}
+	strong{
+		color:$brand-darkblue;
+
+	}
+	.button{
+		@include orange-button;
+		font-size:16px;
+		vertical-align:top;
+	}
+	input[type="email"]{
+		@include text-input;
+		height:36px;
+		font-size:16px;
+		padding:2px;
+		margin-right:4px;
+		width:220px;
+	}
+
+}
+
+p.small-text{
+	font-size:12px;
+	margin-top:20px;
+}
+
+#soon-slider {
+	float:left;
+	width:440px;
+	height:260px;
+	background:#aaa;
+	list-style: none;
+	/* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+	overflow-y: auto;
+	overflow-x: hidden;
+	img{
+		width:440px;
+		height:260px;
+	}
+}
+
+.anythingSlider{
+	float:left;
+}
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper: 45px right & left padding for the arrows, 28px @ bottom for navigation */
+div.anythingSlider {
+	display: block;
+	overflow: visible !important; /* needed for Opera and Safari */
+	position: relative;
+	border:10px solid $border-blue;
+	margin:0;
+}
+/* anythingSlider viewport window */
+div.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* anythingSlider base (original element) */
+.anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+/* all panels inside the slider */
+.anythingBase .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+/* Navigation Arrows */
+div.anythingSlider .arrow {
+	top: 40%;
+	position: absolute;
+	display: block;
+}
+
+div.anythingSlider .arrow a {
+	display: block;
+	width:40px;
+	height: 40px;
+	text-align: center;
+	zoom: 1;
+}
+
+div.anythingSlider .back, div.anythingSlider .forward {
+opacity:0.6;
+-webkit-transition: all 0.3s ease-out;  /* Saf3.2+, Chrome */
+ -moz-transition: all 0.3s ease-out;  /* FF4+ */
+  -ms-transition: all 0.3s ease-out;  /* IE10 */
+   -o-transition: all 0.3s ease-out;  /* Opera 10.5+ */
+      transition: all 0.3s ease-out;
+}
+
+
+div.anythingSlider .back:hover,div.anythingSlider .forward:hover {
+	opacity:1;
+}
+
+
+div.anythingSlider .forward:active{
+	background-position:center right;
+}
+
+/* hide text, target the span so IE7 doesn't text-indent the link */
+div.anythingSlider .arrow a span { display: block; visibility: hidden; }
+
+
+div.anythingSlider .back {
+	left: 10px;
+	background:url(arrows.png);
+	width:30px;
+	height:30px;
+	background-position:0 0;
+	.no-touch &:hover{
+		background-position:61px 0;
+	}
+	&:active{
+		background-position:30px 0;
+	}
+}
+
+div.anythingSlider .forward {
+	right: 10px;
+	background:url(arrows.png);
+	width:30px;
+	height:30px;
+	background-position:0 31px;
+	.no-touch &:hover{
+		background-position:61px 31px;
+	}
+	&:active{
+		background-position:30px 31px;
+	}
+}

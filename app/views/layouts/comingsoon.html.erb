@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Flairspring - Hamarosan nyitunk</title>
+  <%= stylesheet_link_tag    "application", controller_name %>
+  <%= javascript_include_tag "application", controller_name %>
+  <%= csrf_meta_tags %>
+  <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya:400italic,700italic,400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body id="comingsoon">
+	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6. chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+	<header id="main-header">
+		<div id="header-wrapper">
+				<a href="/">
+					<h1 id="logo">
+						Flairspring<span>Comfort on your side</span>
+					</h1>
+				</a>
+		</div>
+	</header>
+
+	<div id="main-wrap">
+		<%= yield %>
+	</div>
+	<section id="social-promo">
+		<%= render 'home/blog_promo' %>
+		<%= render 'home/social_promo' %>
+	</section>
+</body>
+</html>

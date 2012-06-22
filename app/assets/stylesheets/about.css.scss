@@ -1,0 +1,14 @@
+@import '_mixins.css.scss';
+
+#store_image{
+	border:5px solid $border-blue;
+	margin:20px auto;
+	width:635px;
+	display:block;
+}
+
+.employee img{
+	float:left;
+	margin:10px;
+	margin-top:0;
+}

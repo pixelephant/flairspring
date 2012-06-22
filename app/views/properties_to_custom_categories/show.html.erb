@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Custom category:</b>
+  <%= @properties_to_custom_category.custom_category_id %>
+</p>
+
+<p>
+  <b>Property:</b>
+  <%= @properties_to_custom_category.property_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_properties_to_custom_category_path(@properties_to_custom_category) %> |
+<%= link_to 'Back', properties_to_custom_categories_path %>

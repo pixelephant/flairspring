@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="<%= DESCRIPTION + (@description.to_s || "") %>" />
+  <meta name="keywords" content="<%= KEYWORDS + (@keywords.to_s || "") %>" />
+
+  <title>Flairspring - <%= (@title || "") %></title>
+  <%= stylesheet_link_tag    "application", controller_name %>
+  <%= javascript_include_tag "application", controller_name %>
+  <%= csrf_meta_tags %>
+  <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya:400italic,700italic,400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<!-- VIDEÓ -->
+<% if params[:controller] == 'home'%>
+<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/c/video.js"></script>
+<%end%>
+</head>
+<body>
+	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6. chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+<div class="hidden">
+	<%= render 'home/misc_nav' %>
+<%= render 'home/minicart' %>
+<% if params[:controller] != 'home'%>
+		<nav id="breadcrumb" class="clearfix">
+			<p>
+				<%= render :partial => 'home/breadcrumb', :locals => {:controller => params['controller']} %>
+			</p>
+		</nav>
+		<% end %>
+</div>
+<header id="main-header">
+	<div class="inner">
+		<h1 id="logo">
+			<a href="/">
+				<%= image_tag 'logo.png', :title => 'Flairpsring - Comfort on your side' %>
+			</a>
+		</h1>
+		<%= form_tag "/kereses", :id => 'search-form', :method => :get do %>
+	    	<div>
+	    		<p id="help-text">
+	    			Segíthetünk? Hívja ügyfélszolgálatunkat: +36-30-375-8600
+	    		</p>
+	    		<h2>Keresés:</h2>
+	    		<%= text_field_tag :search, params[:search], :type => 'search' %>
+				<%= submit_tag 'K', :name => nil %>	
+				<p id="search-examples">Pl.: 
+				<% SEARCH_TERMS.sample(2).each do |term| %>
+					<a href="/kereses?utf8=✓&search=<%= u term %>"> <%= term.to_s %></a>
+				<% end %>
+    		</p>
+	    	</div>
+		<% end %>
+	</div>	
+</header>
+
+<nav id="main-nav">
+	<ul class="clearfix">
+		<%= render 'home/categories_top' %>
+	</ul>
+</nav>
+
+<% if params[:controller] == 'home'%>
+	<%= render 'slider' %>
+<% end %>
+
+<div id="main-wrap">
+	<%= yield %>
+</div>
+
+<section id="social-promo">
+	<%= render 'home/newsletter' %>
+	<%= render 'home/shops_promo' %>
+</section>
+
+<%= render 'home/footer' %>
+
+</body>
+</html>

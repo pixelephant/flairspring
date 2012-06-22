@@ -1,0 +1,73 @@
+<section id="sidebar">
+		<nav id="category-nav" class="box">
+			<h3>Kategóriák</h3>
+			<ul>
+				<li class="level-1"><a href="#">Hálószoba bútorok</a></li>
+				<li class="level-2"><a href="#">Szekrények</a></li>
+				<li class="level-3"><a href="#">Fiókos</a></li>
+				<li class="level-3"><a href="#">Ajtós</a></li>
+				<li class="level-2"><a href="#">Ágyak</a></li>
+			</ul>
+			<ul>
+				<li class="level-1"><a href="#">Hálószoba bútorok</a></li>
+				<li class="level-2"><a href="#">Szekrények</a></li>
+				<li class="level-3"><a href="#">Fiókos</a></li>
+				<li class="level-3"><a href="#">Ajtós</a></li>
+				<li class="level-2"><a href="#">Ágyak</a></li>
+			</ul>
+		<%= render 'home/category_menu_left' %>
+		</nav>
+		<form action="#" id="filter-form" class="box">
+			<h3>Szűrés</h3>
+			<fieldset>
+				<legend>Kedvezmények</legend>
+				<div class="field"><label for="">Ingyenes szállítás</label><input type="checkbox" name="kedv" id="" /></div>
+				<div class="field"><label for="">Ajándék jár hozzá</label><input type="checkbox" name="kedv" id="" /></div>
+			</fieldset>
+		</form>
+</section>
+
+<section id="product-list" class="box">
+	<form action="#" id="action-form-top">
+		asd
+	</form>
+	<div id="product-grid">
+		<div class="product">
+			<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+			<p class="name">Routledge íróasztal</p>
+			<p class="price">117 000 Ft</p>
+		</div>
+		<div class="product">
+			<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+		</div>
+		<div class="product last">
+			<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+		</div>
+		<div class="product">
+			<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+		</div>
+		<div class="product">
+			<%= image_tag "matthew.png", :title => "title", :class => "class" %>
+		</div>
+	</div>
+	<form action="#" id="action-form-bottom">
+		asd
+	</form>
+</section>
+
+<section class="box full slider clearfix" id="last-viewed">
+	<h3>Utoljára megtekintett termékek</h3>
+	  <a href="#" class="arrow left"></a>
+	  <div class="carousel">
+		<ul>
+			<li><%= image_tag "matthew.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "uttermost.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "matthew.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "matthew.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "uttermost.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "uttermost.png", :title => "title", :class => "class" %></li>
+			<li><%= image_tag "matthew.png", :title => "title", :class => "class" %></li>
+		</ul>
+	</div><!-- carousel -->
+	<a href="#" class="arrow right"></a>
+</section>

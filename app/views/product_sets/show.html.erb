@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Price:</b>
+  <%= @product_set.price %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @product_set.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_set_path(@product_set) %> |
+<%= link_to 'Back', product_sets_path %>

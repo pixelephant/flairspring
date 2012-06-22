@@ -1,0 +1,11 @@
+<div id="search-wrapper">
+	<%= form_tag "/kereses", :id => 'search-form', :method => :get do %>
+	    <%= text_field_tag :search, params[:search], :type => 'search' %>
+		<%= submit_tag t('search'), :name => nil %>
+		<p id="search-examples"><strong>Pl.:</strong> 
+		<% SEARCH_TERMS.sample(2).each do |term| %>
+			<a href="/kereses?utf8=✓&search=<%= u term %>"> <%= term.to_s %></a>
+		<% end %>
+    	</p>
+	<% end %>
+</div>

@@ -1,0 +1,80 @@
+<div class="clearfix" id="brand-uttermost">
+	<section id="sidebar">
+			<nav id="category-nav">
+				<div class="box">
+					<h3>Uttermost termékek</h3>
+					<ul>
+						<li><a href="/tukrok">Tükrök</a></li>
+						<li><a href="/kiegeszitok">Kiegészítők</a></li>
+						<li><a href="/faldekor">Faldekor</a></li>
+						<li><a href="/fotelek">Fotelek</a></li>
+						<li><a href="/butorok">Bútorok</a></li>
+						<li><a href="/lampak">Lámpák</a></li>
+						<li><a href="/kanapek">Kanapék</a></li>
+					</ul>					
+				</div>
+			</nav>
+	</section>
+
+		<section id="promo-list">
+			
+			<div class="clearfix">
+				<div class="box cpromo big">
+					<%= image_tag "brands/uttermost/uttermost_big.png", :title => "Uttermost logó" %>
+				</div>
+
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>2</p>
+				</div>
+			</div>
+			<div class="clearfix crow">
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small">
+					<p>1</p>
+				</div>
+				<div class="box cpromo small last">
+					<p>1</p>
+				</div>
+			</div>
+		</section>
+</div>
+
+			<div class="box full about-box">
+				<h3>Az Uttermostról</h3>
+				<p class="full"><%= image_tag "brands/uttermost/dog.jpg", :title => "Uttermost" %><span class="lead">Az Uttermost márkát</span> 36 éve alapította Bob és Belle Cooper az Egyesült Államokban. A vállalatot, amely azóta is a Cooper család tulajdonában van, jelenleg Mac Cooper irányítja. Az Uttermost folyamatosan bővülő termékkínálatában megtalálhatóak <a href="#">bútorok</a>, <a href="#">órák</a>, <a href="#">művészeti alkotások</a> és <a href="#">különböző lakásdekorációs termékek</a>, de a cég a legnagyobb sikerét évek óta az általa gyártott <a href="#">lámpák</a> és <a href="#">tükrök</a> hatalmas választékának köszönheti. </p>
+
+				<p class="full">Az Uttermost olyan designerekkel dolgozik együtt, mint <em>Carolyn Kinder</em>, <em>Gace Feyock</em>, <em>Billy Moon</em>, <em>Matthew Williams</em>, <em>David Frisch</em>, <em>emJoe Famulari</em> és <em>Constance Lael-Linyard</em>, akik számos tervezői díj és szakmai elismerés birtokosai és meghatározó szereplők a lakberendezési iparágban. </p>
+
+				<p class="full">Az Uttermost büszke arra, hogy termékei a világ minden táján megtalálhatóak a legrangosabb hotelekben és a legnagyobb presztizsű bútor- és lakberendezési boltokban.
+				A Cooper család szenvedélyesen szereti az Uttermost által gyártott tárgyakat. Az a <em>gondosság és figyelem</em>, amellyel a tervezés és a gyártás folyamatát végigkísérik meglátszik a termékek kiváló minőségén, valamint azokon a <em>különlegesen elegáns formákon</em>, amelyekről az Uttermost termékek könnyen felismerhetőek.  Az Uttermost célja az elmúlt évtizedekben is az volt és mind a mai napig az, hogy csodálatos lakberendezési kiegészítőket gyártsanak reális áron.  
+				</p>
+			</div>
+			<%= (render :partial => "home/product_slider_full_big", :locals => {:title => "Legnépszerűbb termékek", :id => "popular-products", :products => @products}) %>
+
+			<div class="clearfix">
+				<% Brand.where(:name => "Uttermost").first.designers.each do |designer| %>
+					<div class="box third first">
+					<div class="ribbon">
+						<span class="ribbon-start"></span>
+						<p><%= designer.name %></p>
+						<span class="ribbon-end"></span>
+					</div>
+					
+					<p><%= designer.description %></p>
+				</div>
+				<% end %>
+			</div>
+			<div class="box full">
+				<h3>További márkáink</h3>
+			</div>

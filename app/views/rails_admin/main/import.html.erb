@@ -1,0 +1,25 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<h1> Choose Upload file</h1>
+<h2>Parses, process the file</h2>
+
+<% file = @object.filename.to_s %>
+<%    book = Spreadsheet.open "public/" << file %>
+<%    sheet1 = book.worksheet 0 %>
+<% for i in 0..5 %>
+<%   row = sheet1.row(i) %>
+<%=  row[0] %>
+<%=  row[2] %>
+<%=  row[39] %>
+<br />
+<% end %>
+
+<%=form_tag('/admin/parse_save_from_excel') %>
+
+<p><%= @object.filename %></p>
+<input type="hidden" name="file_name" id="file_name" value="<%= @object.filename %>">
+<p>
+<%= submit_tag "Process this file" %>
+</p>
+</form>

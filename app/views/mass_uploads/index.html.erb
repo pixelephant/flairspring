@@ -1,0 +1,23 @@
+<h1>Listing mass_uploads</h1>
+
+<table>
+  <tr>
+    <th>Filename</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mass_uploads.each do |mass_upload| %>
+  <tr>
+    <td><%= mass_upload.filename %></td>
+    <td><%= link_to 'Show', mass_upload %></td>
+    <td><%= link_to 'Edit', edit_mass_upload_path(mass_upload) %></td>
+    <td><%= link_to 'Destroy', mass_upload, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mass upload', new_mass_upload_path %>

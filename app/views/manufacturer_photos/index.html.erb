@@ -1,0 +1,27 @@
+<h1>Listing manufacturer_photos</h1>
+
+<table>
+  <tr>
+    <th>Manufacturer</th>
+    <th>Image file</th>
+    <th>Alt</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @manufacturer_photos.each do |manufacturer_photo| %>
+  <tr>
+    <td><%= manufacturer_photo.manufacturer_id %></td>
+    <td><%= manufacturer_photo.image_file %></td>
+    <td><%= manufacturer_photo.alt %></td>
+    <td><%= link_to 'Show', manufacturer_photo %></td>
+    <td><%= link_to 'Edit', edit_manufacturer_photo_path(manufacturer_photo) %></td>
+    <td><%= link_to 'Destroy', manufacturer_photo, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Manufacturer photo', new_manufacturer_photo_path %>

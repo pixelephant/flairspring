@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @manufacturer_photo.manufacturer_id %>
+</p>
+
+<p>
+  <b>Image file:</b>
+  <%= @manufacturer_photo.image_file %>
+</p>
+
+<p>
+  <b>Alt:</b>
+  <%= @manufacturer_photo.alt %>
+</p>
+
+
+<%= link_to 'Edit', edit_manufacturer_photo_path(@manufacturer_photo) %> |
+<%= link_to 'Back', manufacturer_photos_path %>

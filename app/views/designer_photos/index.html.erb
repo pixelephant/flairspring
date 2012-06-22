@@ -1,0 +1,27 @@
+<h1>Listing designer_photos</h1>
+
+<table>
+  <tr>
+    <th>Designer</th>
+    <th>Image file</th>
+    <th>Alt</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @designer_photos.each do |designer_photo| %>
+  <tr>
+    <td><%= designer_photo.designer_id %></td>
+    <td><%= designer_photo.image_file %></td>
+    <td><%= designer_photo.alt %></td>
+    <td><%= link_to 'Show', designer_photo %></td>
+    <td><%= link_to 'Edit', edit_designer_photo_path(designer_photo) %></td>
+    <td><%= link_to 'Destroy', designer_photo, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Designer photo', new_designer_photo_path %>

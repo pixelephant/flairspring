@@ -1,0 +1,25 @@
+<h1>Listing discounts_to_products</h1>
+
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Discount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @discounts_to_products.each do |discounts_to_product| %>
+  <tr>
+    <td><%= discounts_to_product.product_id %></td>
+    <td><%= discounts_to_product.discount_id %></td>
+    <td><%= link_to 'Show', discounts_to_product %></td>
+    <td><%= link_to 'Edit', edit_discounts_to_product_path(discounts_to_product) %></td>
+    <td><%= link_to 'Destroy', discounts_to_product, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Discounts to product', new_discounts_to_product_path %>

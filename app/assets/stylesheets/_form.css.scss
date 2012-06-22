@@ -1,0 +1,76 @@
+@import '_mixins.css.scss';
+
+form{
+	input[type="text"],input[type="email"],input[type="password"],input[type="tel"]{
+		border:1px solid $border-gray;
+		height:20px;
+		padding:2px;
+		@include font-garamond;
+	}
+
+	label{
+		color:#333;
+		margin-bottom:10px !important;
+		display:block;
+	}
+
+	input[type="submit"]{
+		@include orange-button;
+	}
+
+	a{
+		font-size:12px;
+		color:$brand-lightblue;
+		@include transition-03s;
+		&:hover{
+			color:$brand-darkblue;
+		}
+	}
+	h5{
+		color:$brand-orange;
+		@include font-gill;
+		margin-bottom:20px;
+	}
+	
+	.half{
+		float:left;
+		margin-right:10px;
+	}
+	.block{
+		padding:20px;
+		background:#F2F7FB;
+		border:1px dashed $border-gray;
+		margin-bottom:10px;
+		width:595px;
+	}
+	fieldset{
+		margin-bottom:20px;
+	}
+}
+
+a.tooltip{
+	text-indent:-9999em;
+	background:url(question.png) no-repeat center;
+	margin-left:10px;
+	position:relative;
+	top:-4px;
+	width:18px;
+	height:18px;
+	@include inline-block;
+}
+
+input[type="checkbox"]{
+	margin:0 5px;
+}
+
+input.error,.error-box{
+	background:#ffc0cb;
+}
+.error-box{
+	color:red;
+}
+
+label.error{
+	font-size:13px;
+	@include font-gill;
+}

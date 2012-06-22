@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  custom_url: MyString
+  user_id: 1
+  public: false
+
+two:
+  custom_url: MyString
+  user_id: 1
+  public: false

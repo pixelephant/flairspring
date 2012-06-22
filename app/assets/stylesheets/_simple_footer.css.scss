@@ -1,0 +1,16 @@
+#main-footer-inner{
+	border:none;
+	a{
+		display:block;
+		float:left;
+		padding-top:10px;
+		color:white;
+		margin:0 5px;
+		text-decoration:none;
+		color:white;
+		@include transition-03s;
+		&:hover{
+			color:$brand-darkblue;
+		}
+	}
+}

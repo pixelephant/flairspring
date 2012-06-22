@@ -1,0 +1,21 @@
+<%= form_for(@property_category) do |f| %>
+  <% if @property_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property_category.errors.count, "error") %> prohibited this property_category from being saved:</h2>
+
+      <ul>
+      <% @property_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_name %><br />
+    <%= f.text_field :category_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

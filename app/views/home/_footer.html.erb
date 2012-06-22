@@ -1,0 +1,25 @@
+<footer id="main-footer">
+	<div class="inner">
+		<div class="col">
+			<h3>Termékeink</h3>
+			<ul>
+			<% Category.all.each do |category| %>
+				<li><%= link_to category.name, category_url(:id => category.slug) %></li>
+			<% end %>
+			</ul>
+		</div>
+		<div class="col">
+			<h3>Rólunk</h3>
+			<ul>
+				<li><a href="http://blog.flairspring.hu">Flairspring Magazin</a></li>
+				<li><a href="/rolunk">Rólunk</a></li>
+			</ul>
+		</div>
+		<div class="last col">
+			<h3>Kapcsolat</h3>
+			<p>Ügyfélszolgálatunk: +36-30-375-8600</p>
+			<p><a href="http://g.co/maps/eubnb">1054 Budapest, Szabadság tér 14</a></p>
+			<p><a href="http://www.facebook.com/Flairspring">Facebook oldalunk</a></p>
+		</div>
+	</div>
+</footer>

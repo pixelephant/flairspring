@@ -1,0 +1,119 @@
+<% @r_products = Array.new %>
+<p id="notice"><%= notice %></p>
+
+<section id="cart" class="box full clearfix">
+	<div id="cart-top" class="clearfix">
+		<h3>Kosarad tartalma</h3>
+		<p class="right"><a href="/login">Login</a> or <a href="/register">Register</a> for faster checkout!</p>
+	</div>
+	<% if @cart %>
+		<table id="cart-table">
+			<thead>
+				<tr>
+						<th>Termék</th>
+						<th>Tulajdonságok</th>
+						<th>Kedvezmények</th>
+						<th>Darab ár</th>
+						<th width=20 class="multiply-cell">&nbsp;</th>
+						<th>Mennyiség</th>
+						<th></th>
+						<th>Összesen</th>
+						<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @cart.line_items.each do |li| %>
+
+				<% li.product.product_relates.each do |rel| %>
+					<% @r_products << rel %>
+				<% end %>
+				<tr data-id="<%= li.product.id %>">
+						<td class="product-cell">
+							<div class="clearfix">
+								<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
+								<h6><%= li.product.name %></h6>
+							</div>
+						</td>
+						<td class="property-cell">
+							<% li.product.optional_properties.each do |property| %>
+								<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
+							<% end %>
+						</td>
+						<td class="discount-cell">
+							<span class="discount-element">Ajándék kutya</span>
+							<span class="discount-element">Ingyenes összeszerelés</span>
+						</td>
+						<td class="price-cell">
+							<span>
+								<%= productPrice(li.product.id) %>
+							</span> Ft
+						</td>
+						<td class="multiply-cell">
+							x
+						</td>
+						<td class="quantity-cell">
+							<input type="number" min='0' max="5" name="" id="" value="<%= li.quantity %>"/> db
+						</td>
+						<td class="equals-cell">
+							=
+						</td>
+						<td class="sum-price-cell">
+							<span>630</span> Ft
+						</td>
+						<td class="actions-cell">
+							<a class="delete" href="">x</a>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<div id="cart-bottom" class="clearfix">
+			<div id="coupon">
+				<div>
+					<label for="coupon-code">Kupon-kód</label>
+					<div>
+						<input type="text" name="coupon-code" id="coupon-code" />
+						<a class="button" href="#">Beváltom</a>
+					</div>
+				</div>
+				<div>
+					<label class="loy" for="loyalty">Törzsvásárlói pontjaim</label>
+					<div>
+						<span>123 011 Ft</span>
+						<a class="button" href="#">Beváltom</a>
+					</div>
+				</div>
+			</div>
+			<div id="total">
+					<p><b>Cart subtotal</b> <span class="subtotal"><%= cart_subtotal %></span> Ft</p>
+					<p><b>Shipping</b> <span class="shipping-cost">123</span> Ft</p>
+					<p id="total-price"><b>Total</b> <span class="total-price">123</span> Ft</p>
+			</div>
+		</div>
+		<form id="checkout-form" action="/checkout">
+			<input type="submit" value="Fizetés" />
+		 	 | <%= link_to "Vásárlás folytatása", :back %>
+		</form>
+	<% else %>
+		<p class="empty-cart">Kosarad üres! Nézd meg a speckó ajánlatainkat alább! </p>
+	<% end %>
+</section>
+
+<div class="box-wrap clearfix">
+	<section class="box third" id="payment-options">
+		<h3>Fizetési lehetőségek</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus.</p>
+	</section>
+
+	<section class="box third mid" id="delivery-options">
+		<h3>Szállítási információk</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus.</p>
+	</section>
+
+	<section class="box third last" id="faq-links">
+		<h3>Biztonságos shopping</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. <a href="#">több infó</a></p>
+	</section>
+</div>
+
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "A kosaradban lévőkhöz ajánljuk", :id => "cart-slider", :products => @r_products } %>

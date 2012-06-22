@@ -1,0 +1,190 @@
+<section class="box full" id="product-box">
+	<div id="product-inner" class="clearfix">
+		<div id="left-side">
+			<% if @product.photos.any? %>
+				<div id="picture-wrap">
+					<div id="current-picture">
+						<a href=<%= @product.default_photo.image_file.to_s %> class='zoomable' rel="gal1">
+							<%= image_tag(@product.default_photo.image_file.product_page_default.to_s) %>
+						</a>
+					</div>
+				</div>
+				<div id="picture-list">
+					<% @product.photos.each do |photo| %>
+							<a class="<%= photo.default? ? 'zoomThumbActive' : '' %>" href="#" rel="{gallery: 'gal1', smallimage: '<%=photo.image_file.medium.to_s %>',largeimage: '<%=photo.image_file.to_s%>'}">
+					  			<%= image_tag(photo.image_file.thumb.to_s) %>
+							</a>
+					<% end %>
+				</div>
+				<div id="social-buttons">
+				  	<div id="fb-root"></div>
+					<script>(function(d, s, id) {
+					  var js, fjs = d.getElementsByTagName(s)[0];
+					  if (d.getElementById(id)) return;
+					  js = d.createElement(s); js.id = id;
+					  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=136997593064327";
+					  fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script>
+
+					<div class="fb-like" data-href="http://www.flairspring.hu/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+					
+				</div>
+			</div>
+			<% end %>
+		<div id="right-side">
+			<div id="product-title">
+				<h2><%= @product.name %> <span class="sku">Cikkszám:  <%= @product.sku %></span> </h2>
+				<%= image_tag(@product.brand.small_image_file.to_s) unless @product.brand.blank? %>
+			</div>
+			<div id="info-box">
+				<div id="price">
+					<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+					<% if @product.price != productPrice(@product) %>
+						<p class="list-price"><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
+					<% end %>
+				</div>
+				<!--<div class="third">
+
+				</div>
+				<div class="third last">
+
+				</div>-->
+			</div>
+			<div id="properties-box">
+			<!-- FormFor -->
+						<% @size_weight.each do |property| %>
+							<p>
+								<%= label(:property_category, :id, PropertyCategory.find(property.property_category_id).category_name.capitalize ) %>
+								<%= property.property_name.capitalize %>
+							</p>
+						<% end %>
+
+						<p><label for="">Szállítási idő</label> 12 nap</p>
+			</div>
+			<div id="buy-box">
+				<%= form_for LineItem.new, :url => line_items_path(:product_id => @product.id) do |f| %>
+				<p><label for="">Mennyiség</label><input type="number" name="quantity" min="1" max="5" id="quantity" value='1' /></p>
+				<%= f.submit t('.add_to_cart'), :disable_with => "Folyamatban...", :id => 'add-to-cart' %>
+				<a id="add-to-whishlist" href="#"> ♥ <span>Kívánságlista</span></a>
+				<% end %>
+				<p class="links">
+					<a class="fancybox" href="#szallitas">Szállítás információk</a>
+					<a class="fancybox" href="#fizetes">Fizetési lehetőségek</a>
+					<a class="fancybox" href="#garancia">Garancia</a>
+				</p>	
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="specifications" class="box full">
+	<h3><%= t('.specifications') %></h3>
+	<p id="short-description">
+		<%= lead(@product.long_description).html_safe %>
+	</p>
+	<% if !@designer.nil? %>
+			<p><span><%= t('designer') %>: </span><%= @designer.name %></p>
+		<% end %>
+
+		<%= render :partial => ('products/properties') %>
+</div>
+
+<% box = 0 %>
+<div class="box-wrap clearfix">
+	<!--<section class="box third has-ribbon" id="specifications">
+		<div class="ribbon"></div>
+		
+		
+		<% if !@designer.nil? %>
+			<p><span><%= t('designer') %>: </span><%= @designer.name %></p>
+		<% end %>
+
+		<%= render :partial => ('products/properties') %>
+		<% box += 1 %>
+	</section>-->
+
+	<% if !@product.advice.nil? %>
+		<section class="box third has-ribbon<%= box_class(box % 3) %>" id="expert-advice">
+			<div class="ribbon"></div>
+			<h3><%= t('.expert_advice') %></h3>
+			<p>
+				<%= lead(@product.advice).html_safe %>
+			</p>
+		</section>
+		<% box += 1 %>
+	<% end %>
+
+	<% if @product.stores.any? %>
+		<% store = @product.stores.first %>
+		<section class="box third has-ribbon<%= box_class(box % 3) %>" id="try-it">
+			<div class="ribbon"></div>
+			<h3><%= t('.try_it_out') %></h3>
+			<strong><%= t('.try_it_out_store_start') %><%= store.name %><%= t('.try_it_out_store_end') %></strong>
+			<div class="address">
+				<p>1101 <a target="_blank" href="http://maps.google.com/?q=<%= store.lat << ',' << store.long %>"><%= image_tag "map.png", :title => "title", :class => "class" %></a></p>
+				<p><%= store.address %></p>
+				<p>H-SZ: 10-18</p>
+			</div>
+		</section>
+		<% box += 1 %>
+	<% end %>
+
+	<% if !@product.video.blank? %>
+		<section class="box third has-ribbon<%= box_class(box % 3) %>" id="video">
+			<%= @product.video %>
+		</section>
+		<% box += 1 %>
+	<% end %>
+
+	<% if @product.links.any? %>
+		<% @product.links.each do |link| %>
+			<section class="box third has-ribbon<%= box_class(box % 3) %>" id="link">
+				<%= link_to link.link_text, link.url %>
+			</section>
+			<% box += 1 %>
+		<% end %>
+	<% end %>
+
+	<% #while (box % 3) > 0 do %>
+	<%  (1..7).each do |i|  %>
+	
+	<%= render :partial => ('home/product_ad_' + i.to_s), :locals => {:cl => (i % 3)} %>
+	
+	<% end %>
+
+</div>
+
+<div class="clearfix">
+	<!-- DESIGNER -->
+	<% unless @designer.nil? || @designer.description.blank? %>
+		<%= render :partial => "about_designer", :locals => {:designer => @designer}%>
+	<% end %>
+
+	<!-- MANUFACTURER -->
+	<% if !@brand.nil? %>
+		<%= render :partial => "about_brand", :locals => {:brand => @brand}%>
+	<% end %>
+</div>
+
+
+<!-- TOP SELLERS & OTHER ALSO BOUGHT -->
+<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Legnépszerűbbek", :id1 => "popular-products", :title2 => "Mások ezt vették hozzá", :id2 => "also-products"} %>
+
+<!-- RELATED PRODUCTS -->
+<%= (render :partial => "home/product_slider_full_big", :locals => {:title => "A termékhez ajánljuk", :id => "related-products", :products => @product.product_relates }) if @product.product_relates.any? %>
+
+<div id="product-modals">
+	<div id="szallitas">
+		<h3>Szállítási információk</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. Fusce molestie ultrices tortor sed tincidunt. Nam at sapien enim, quis vestibulum tortor. Pellentesque et leo nulla, nec vulputate nulla. Sed blandit quam eu dolor viverra ac suscipit est sollicitudin. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ac libero eu massa sollicitudin mattis porta sollicitudin turpis. Vivamus elementum nisl non neque gravida ultricies. Cras dapibus tempor neque a scelerisque. Sed vulputate, risus eget.</p>
+	</div>
+	<div id="fizetes">
+		<h3>Fizetési lehetőségek</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. Fusce molestie ultrices tortor sed tincidunt. Nam at sapien enim, quis vestibulum tortor. Pellentesque et leo nulla, nec vulputate nulla. Sed blandit quam eu dolor viverra ac suscipit est sollicitudin. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ac libero eu massa sollicitudin mattis porta sollicitudin turpis. Vivamus elementum nisl non neque gravida ultricies. Cras dapibus tempor neque a scelerisque. Sed vulputate, risus eget.</p>
+	</div>
+	<div id="garancia">
+		<h3>Garancia</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. Fusce molestie ultrices tortor sed tincidunt. Nam at sapien enim, quis vestibulum tortor. Pellentesque et leo nulla, nec vulputate nulla. Sed blandit quam eu dolor viverra ac suscipit est sollicitudin. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ac libero eu massa sollicitudin mattis porta sollicitudin turpis. Vivamus elementum nisl non neque gravida ultricies. Cras dapibus tempor neque a scelerisque. Sed vulputate, risus eget.</p>
+	</div>
+</div>

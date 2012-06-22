@@ -1,0 +1,70 @@
+<p>
+  <b>Long description:</b>
+  <%= @product.long_description %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @product.category ? @product.category.name : "" %>
+</p>
+
+<h3>Advantages:</h3>
+<% @product.advantages.each do |advantage_id| %> 
+
+		<ul>
+			<li><%= Advantage.find(advantage_id).advantage %></li>
+		</ul>
+
+<% end %>
+
+<% @product.properties.group(:property_category_id).each do |property| %> 
+	<h3>Property group: <%= PropertyCategory.find(property.property_category_id).category_name %></h3>
+
+	<% @product.properties.where({:property_category_id => property.property_category_id}).each do |property| %>
+		<ul>
+			<li><%= property.property_name %></li>
+		</ul>
+	<% end %>
+
+<% end %>
+
+<h3>Manufacturer</h3>
+
+<% if @product.manufacturer.present? %>
+<p>
+  <b><%= @product.manufacturer.name %></b><br />
+  <%= @product.manufacturer.description %>
+</p>
+<% else %>
+<p>
+  <b>No manufacturer</b><br />
+</p>
+<% end %>
+
+<h3>Designer</h3>
+
+<% if @product.designer.present? %>
+<p>
+  <b><%= @product.designer.name %></b><br />
+  <%= @product.designer.description %>
+</p>
+<% else %>
+<p>
+  <b>No designer</b><br />
+</p>
+<% end %>
+
+<h3>Related Products</h3>
+<div id="ca-container" class="ca-container">
+	<div class="ca-wrapper">
+<% @product.product_relates.each_with_index do |related_product,i| %>
+	<% p = Product.find(related_product.id) %>
+		<div class="ca-item ca-item-<%=i%>">
+			<div class="ca-item-main">
+				<%= p.photos.any? ? image_tag(p.default_photo.image_file.product_page_default.to_s) : '' %>
+				<h3><%= p.name %></h3>
+			</div>
+		</div>
+<% end %>
+	</div><!-- ca-wrapper -->
+</div><!-- ca-container -->

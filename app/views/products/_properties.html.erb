@@ -1,0 +1,9 @@
+<% @properties.group(:property_category_id).each do |prop_cat| %>
+	<p>
+		<%= label(:property_category, :id, PropertyCategory.find(prop_cat.property_category_id).category_name.capitalize ) + ":" %>
+		<% @properties.where(:property_category_id => prop_cat.property_category_id).each_with_index do |property, i| %>
+			<%= "," if i > 0 %>
+			<%= property.property_name.capitalize %>
+		<% end %>
+	</p>
+<% end %>

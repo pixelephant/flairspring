@@ -1,0 +1,44 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<h1>Admin#index</h1>
+
+<h2>Current number of products: <%= @products.count %></h2>
+
+<hr />
+
+<%= link_to "Add new product", new_product_path %>
+
+<hr />
+
+<% @products.each do |product| %>
+	<div class="product">
+		<h3><%= product.name %></h3>
+		<div class="product-info">
+			<div>Short description: <%= product.short_description %></div>
+			<div>Long description: <%= product.long_description %></div>
+		</div>
+		<%= link_to 'Edit ' + product.name, edit_product_path(product) %>
+	</div>
+<% end %>
+
+<hr />
+
+<h2>Registered users</h2>
+
+Number of users: <%= @users.count %>
+
+<hr />
+
+<h2>User details</h2>
+
+<% @users.each do |user| %>
+	<div class="user">
+		<h3><%= user.id %></h3>
+		<div class="user-info">
+			<div>Name: <%= user.name %></div>
+			<div>Address: <%= user_full_address(user.id) %></div>
+		</div>
+		<%= link_to 'Edit ' + user.name, edit_user_path(user) %>
+	</div>
+<% end %>

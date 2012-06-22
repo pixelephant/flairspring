@@ -1,0 +1,25 @@
+<h1>Listing properties_to_products</h1>
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Product</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @properties_to_products.each do |properties_to_product| %>
+  <tr>
+    <td><%= properties_to_product.property_id %></td>
+    <td><%= properties_to_product.product_id %></td>
+    <td><%= link_to 'Show', properties_to_product %></td>
+    <td><%= link_to 'Edit', edit_properties_to_product_path(properties_to_product) %></td>
+    <td><%= link_to 'Destroy', properties_to_product, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Properties to product', new_properties_to_product_path %>

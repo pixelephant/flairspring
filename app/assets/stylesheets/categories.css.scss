@@ -1,0 +1,212 @@
+@import '_mixins.css.scss';
+
+#sidebar{
+	margin-top:-20px;
+	width:230px;
+	float:left;
+	margin-right:20px;
+	.box{
+		padding:20px;
+	}
+	a{
+		text-decoration:none;
+		margin-bottom: 5px;
+		padding-left: 3px;
+		display:block;
+		color:$brand-lightblue;
+		@include transition-03s;
+		&:hover{
+			color:$brand-darkblue;
+		}
+}
+}
+
+#category-nav{
+	ul{
+		margin-bottom:20px;
+	}
+	li{
+		margin-bottom:15px;
+	}
+}
+
+#product-list{	
+	padding:25px;
+	width:660px;
+	float:right;
+}
+
+#promo-list{
+	margin-top:-20px;
+	width:710px;
+	float:left;
+}
+
+.no-touch a.quicklook{
+	top:-25px;
+}
+
+.touch a.quicklook{
+	top:10px;
+}
+
+#product-grid{
+	overflow:hidden;
+	padding:10px 15px 10px 20px;
+	a{
+		text-decoration:none;
+		color:$text-color;
+	}
+	.product{
+		float:left;
+		width:175px;
+		height:240px;
+		margin:10px 50px 25px 0px;
+		position:relative;
+		overflow:hidden;
+		&.last{
+			margin:10px 0px 25px 0px;
+		}
+		a.quicklook{
+			position:absolute;
+			z-index:1;
+			left:10px;
+			color:white;
+			@include font-gill;
+			width:155px;
+			height:25px;
+			text-align:center;
+			line-height:25px;
+			font-size:15px;
+			text-transform:uppercase;
+			display:block;
+			background-image:url(quicklook.png);
+			background-repeat:no-repeat;
+			background-position:130px center;
+			@include box-rgba(0,0,0,0.6);
+			text-decoration:none;
+			@include transition-03s;
+		}
+		&:hover .quicklook{
+			top:10px;
+		}
+		.left{
+			float:left;
+			padding-right:5px;
+			width:150px;
+		}
+		.price{
+			font-weight:bold;
+			text-decoration:none;
+			color:$text-color;
+		}
+		.image{
+			overflow:hidden;
+			position:relative;
+			border:10px solid $border-gray;
+			height:155px;
+			margin-bottom:10px;
+		}
+		img{
+			width:155px;
+			height:155px;
+			@include transition-03s;
+			z-index:1;
+		}
+		p{
+			@include font-gill;
+		}
+	}
+}
+
+#product-modal-wrap{
+	display:none;
+}
+
+#product-modal{
+	width:800px;
+	margin:0 auto;
+	.top{
+		padding-bottom:10px;
+		margin-bottom:10px;
+		border-bottom:1px solid $border-gray;
+		h3,h4{
+			@include font-gill;
+			color:$text-color;
+			font-weight:bold;
+			text-transform:uppercase;
+			font-size:20px;
+		}
+		h4{
+			font-size:16px;
+			color:$brand-orange;
+			font-weight:normal;
+		}
+	}
+	.images{
+		float:left;
+		img{
+			width:50px;
+			height:50px;
+			border:5px solid $border-gray;
+			margin:0 10px;
+		}
+	}
+	.discounts{
+		float:right;
+		padding-right:50px;
+		color:$brand-orange;
+		li{
+			line-height:1.5;
+		}
+	}
+	.short-description{
+		margin:10px 0;
+	}
+	.properties{
+		float:left;
+		margin:10px 0;
+		span{
+			@include small-caps;
+		}
+	}
+	.button{
+		
+		float:right;
+		padding:9px;
+		position:absolute;
+		bottom:20px;
+		right:20px;
+	}
+}
+
+/* Promó dobozok */
+
+.cpromo{
+	padding:20px;
+	float:left;
+	&.small{
+		width:86px;
+		height:125px;
+	}
+	&.big{
+		width:524px;
+		height:310px;
+		margin-right:20px;
+	}
+}
+
+.crow{
+	.small{
+		margin-right:20px;
+		&.last{
+			margin-right:0;
+		}
+	}
+}
+
+#category-nav{
+	display:block !important;
+}
+
+@import '_quicklook_product.css.scss';

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipping_address_id: 1
+  invoice_address_id: 1
+  user_id: 1
+  basket_serialization: MyText
+
+two:
+  shipping_address_id: 1
+  invoice_address_id: 1
+  user_id: 1
+  basket_serialization: MyText

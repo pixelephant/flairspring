@@ -1,0 +1,31 @@
+<% @products.each_with_index do |product,i| %>
+<% cl = i % 3 == 2 ? 'product last' : 'product'%>
+<div data-id="<%= product.id %>" class="<%= cl %> product-box box ">
+		<div class="ribbon"><span class="ribbon-start"></span><p>Új</p><span class="ribbon-end"></span></div>
+		<a rel="group" class="fancybox ajax" href="/products/quicklook/<%= product.id %>"><span class="quicklook"></span></a>
+		<%= link_to product_path(product) do %>
+		<div class="image">
+			<table>
+				<tr>
+					<td>
+						<%= image_tag product.default_photo.image_file.medium, :title => product.default_photo.alt, :class => "class" if !product.default_photo.nil? %>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="clearfix">
+			<div class="left">
+				<p class="name">
+					<%= product.name.titleize %>
+				</p>
+				<%= render 'products/price', :product => product %>
+			</div>
+			<div class="right">
+				<% if !product.brand.blank? %>
+				<%= image_tag product.brand.small_image_file %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+<% end %>

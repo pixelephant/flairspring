@@ -1,0 +1,45 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :short_description %><br />
+    <%= f.text_field :short_description %>
+  </div>
+  <div class="field">
+    <%= f.label :long_description %><br />
+    <%= f.text_area :long_description %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= collection_select(:product, :category_id, bottomCategories, :id, :name, :prompt => 'Pick a category') %>
+  </div>
+
+	<% @product.properties.group(:property_category_id).each do |property_category| %> 
+	<h3>Property group: <%= PropertyCategory.find(property_category.property_category_id).category_name %></h3>
+			<ul>
+		<% Property.where({:property_category_id => property_category.property_category_id}).each do |property| %>
+				<li><%= property.property_name %>
+				<%= check_box(:property, property.id, :checked => product_has_property(property.id, @product.id)) %>
+				</li>
+		<% end %>
+			</ul>
+	<% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

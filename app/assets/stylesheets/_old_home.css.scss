@@ -1,0 +1,564 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import '_mixins.css.scss';
+
+.helptext{
+	color:white;
+}
+
+#main-header{
+	background-color:#66364E;
+	-moz-box-shadow: 1px 10px 10px 1px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 10px 10px 1px rgba(0, 0, 0, 0.4);
+	padding-bottom:20px;
+}
+
+#slider-wrap{
+	padding-top:20px;
+	padding-bottom:25px;
+}
+
+#slider{
+	margin:0 auto;
+	width:940px;
+	height:415px;
+	border:10px solid white;
+	-moz-box-shadow:    inset 0 0 20px #000000;
+    -webkit-box-shadow: inset 0 0 20px #000000;
+    box-shadow:         inset 0 0 20px #000000;
+	overflow:hidden;
+	.slide{
+		width:940px;
+		height:425px;
+		float:left;
+		position:relative;
+		&.video{
+			background:black;
+		}
+	}
+}
+
+.arrow_box {
+	position: relative;
+	background: #E95321;
+	border: 4px solid #E95321;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-bottom-color: #E95321;
+	border-width: 10px;
+	left: 50%;
+	margin-left: -10px;
+}
+.arrow_box:before {
+	border-bottom-color: #E95321;
+	border-width: 16px;
+	left: 50%;
+	margin-left: -16px;
+}
+
+#slider-thumbs{
+	width:960px;
+	margin:0 auto;
+	ul{
+		position:relative;
+		z-index:3;
+		margin-top:-80px;
+		li{
+			cursor:pointer;
+			float:left;
+			width:130px;
+			height:100px;
+			border:5px solid $border-gray;
+			margin:0 10px;
+			position:relative;
+			&.active{
+				border:5px solid $brand-orange;
+				@extend .arrow_box;
+			}
+			a{
+				display:block;
+				img{
+					width:130px;
+					height:100px;
+				}
+			}
+			.mask{
+				position: absolute;
+			    overflow: hidden;
+			    top: 0px;
+			    left: 0px;
+				width:130px;
+				height:100px;
+				@include transition-03s;
+				opacity:0;
+				cursor:pointer;
+				-webkit-backface-visibility: hidden;  
+			}
+			h5{
+				@include font-gill;
+				text-transform:uppercase;
+				color:white;
+				font-size:16px;
+				line-height:100px;
+				text-align:center;
+				opacity: 0;
+				@include transition-03s;
+				-webkit-backface-visibility: hidden;  
+			}
+			/*Touchon nem kell hover effect, furán működik*/
+			.no-touch &:hover,.no-touch &:focus,.no-touch &.active{
+				.mask{
+					opacity:1;
+					-webkit-transition-delay: 0.1s;
+					-moz-transition-delay: 0.1s;
+					-o-transition-delay: 0.1s;
+					-ms-transition-delay: 0.1s;
+					transition-delay: 0.1s;
+					cursor:pointer;
+				}
+				h5{
+					opacity:1;
+					-webkit-transition-delay: 0.3s;
+					-moz-transition-delay: 0.3s;
+					-o-transition-delay: 0.3s;
+					-ms-transition-delay: 0.3s;
+					transition-delay: 0.3s;
+				}
+				img{
+				
+				}
+			}
+		}
+	}
+}
+
+#slide-1{
+	background:url(slider_images/uttermost_1.jpg) no-repeat;
+}
+
+#slide-2{
+	background:url(slider_images/uttermost_2.jpg) no-repeat;
+}
+
+#slide-4{
+	background:url(slider_images/open.jpg) no-repeat left top white;
+	div{
+		float:right;
+		width:306px;
+		text-align:center;
+	}
+	img{
+		margin-top:70px;
+	}
+	p,h4{
+		font-size:20px;
+		line-height:2;
+	}
+	em{
+		@include small-caps;
+	}
+	h4{
+		color:$brand-darkblue;
+		@include font-gill;
+		text-transform:uppercase;
+	}	
+}
+
+#slide-5{
+	background:url(slider_images/laz1.jpg) no-repeat;
+	img{
+		position:absolute;
+	}
+}
+
+#slide-6{
+	background:url(slider_images/laz2.jpg) no-repeat;
+	img{
+		position:absolute;
+	}
+}
+
+#slide-1-thumb .mask{
+	background:rgba(102,54,78,0.6);
+}
+
+#slide-2-thumb .mask{
+	background:rgba(54, 54, 102,0.6);
+}
+
+#slide-3-thumb .mask{
+	background:rgba(57,20,175,0.6);
+}
+
+#slide-4-thumb .mask{
+	background:rgba(54,91,102,0.6);
+}
+
+#slide-5-thumb .mask{
+	background:rgba(102,71,54,0.6);
+}
+
+#slide-6-thumb .mask{
+	background:rgba(54,74,102,0.6);
+}
+
+.plus{
+	display:block;
+	font-family:Arial;
+	color:white;
+	background:black;
+	@include border-radius(26px,26px,26px,26px);
+	opacity:0.6;
+	font-size:26px;
+	position:absolute;
+	text-decoration:none;
+	@include transition-03s;
+	width:26px;
+	height:26px;
+	text-align:center;
+	line-height:26px;
+	-webkit-backface-visibility: hidden;    
+	&:hover{
+		opacity:1;
+	}
+}
+
+#slide-1-plus-1{
+	top:100px;
+	left:100px;
+}
+
+#slide-1-plus-2{
+	top:137px;
+	left:211px;
+}
+
+#slide-1-plus-3{
+	top:123px;
+	left:290px;
+}
+
+#slide-1-plus-4{
+	top:300px;
+	left:170px;
+}
+
+#slide-1-plus-5{
+	top:173px;
+	left:441px;
+}
+
+#slide-1-plus-6{
+	top:22px;
+	left:770px;
+}
+
+#slide-1-plus-7{
+	top:320px;
+	left:416px;
+}
+
+#slide-1-plus-8{
+	top:295px;
+	left:790px;
+}
+
+#slide-1-plus-9{
+	top:224px;
+	left:810px;
+}
+
+#slide-1-plus-10{
+	top:273px;
+	left:899px;
+}
+
+#slide-1-plus-10{
+	top:210px;
+	left:596px;
+}
+
+
+
+#slide-2-plus-1{
+	top:300px;
+	left:90px;
+}
+
+#slide-2-plus-2{
+	top:236px;
+	left:35px;
+}
+
+#slide-2-plus-3{
+	top:137px;
+	left:211px;
+}
+
+#slide-2-plus-4{
+	top:192px;
+	left:290px;
+}
+
+#slide-2-plus-5{
+	top:42px;
+	left:270px;
+}
+
+#slide-2-plus-6{
+	top:222px;
+	left:490px;
+}
+
+#slide-2-plus-7{
+	top:226px;
+	left:647px;
+}
+
+#slide-2-plus-8{
+	top:336px;
+	left:377px;
+}
+
+#slide-2-plus-9{
+	top:218px;
+	left:755px;
+}
+
+#slide-2-plus-10{
+	top:118px;
+	left:570px;
+}
+
+
+#main-wrap{
+	position:relative;
+}
+
+#ribbon{
+	margin-top:40px;
+	background:url(ribbon_new.png) no-repeat;
+	width:1040px;
+	height:50px;
+	text-align:center;
+	color:white;
+	font-size:18px;
+	@include small-caps;
+	color:white;
+	position:relative;
+	margin-bottom:-75px;
+	margin-left:-30px;
+	p{
+		height:45px;
+		line-height:38px;
+	}
+	span{
+		margin:0 5px;
+	}
+}
+
+#newest-products{
+	padding-top:60px;
+}
+
+#about-us{
+	p{
+		.lead{
+			@include small-caps;
+		}
+		margin-top:20px;
+	}
+	overflow:hidden;
+	margin-top:0;
+}
+
+.blog-entry{
+	float:left;
+	width:440px;
+	padding-right:20px;
+	overflow:hidden;
+	img{
+		margin:10px 15px 0px 10px;
+		border:5px solid $border-blue;
+		width:120px;
+		height:90px;
+		float:left;
+	}
+	a{
+		color:$brand-lightblue;
+		float:right;
+		margin:5px;
+		&:hover{
+			color:$brand-darkblue;
+		}
+	}
+}
+
+#promo-boxes{
+	width:960px;
+	overflow:hidden;
+	a{
+		text-decoration:none;
+	}
+}
+
+.promowrap{
+	float:left;
+	width:320px;
+}
+
+#random-item{
+	height:300px;
+	width:190px;
+}
+
+#lamps-promo{
+	height:300px;
+	text-align:center;
+	h5{
+		top:40%;
+		position:absolute;
+		@include font-gill;
+		color:$brand-darkblue;
+		font-size:30px;
+		text-align:center;
+		width:370px;
+	}
+}
+
+#news-promo{
+	margin-top:0;
+	a{text-decoration:none;}
+	.inner{
+		width:280px;
+		height:130px;
+		background:url(/assets/home/newsletter.png) no-repeat center;
+	}
+	h5{
+		letter-spacing:1px;
+		@include font-gill;
+		text-transform:uppercase;
+		font-size:26px;
+		color:$brand-darkblue;
+		margin-top:0;
+		padding:10px 10px 22px 10px;
+	}
+	p{
+		line-height:1;
+		padding:10px 5px;
+		color:$brand-lightblue;
+		span{
+			color:$brand-orange;
+		}
+		background:rgba(255,255,255,0.8);
+	}
+}
+
+#facebook-promo{
+	padding:0;
+	background:url(bg-f.png) no-repeat;
+	padding:0;
+	padding:20px;
+	width:260px;
+	height:110px;
+	h3,h4{
+		color:white;
+	}
+	h4{
+		margin-bottom:35px;
+	}
+}
+
+#twitter-promo{
+	background:url(bg-tw.png) no-repeat;
+	padding:0;
+	padding:20px;
+	width:270px;
+	height:135px;
+	h3,h4{
+		color:white;
+	}
+	h4{
+		margin-bottom:45px;
+	}
+	iframe{
+		display:block;
+		margin:10px 0;
+	}
+}
+
+#brands a{
+	margin:0 25px;
+	text-decoration:none;
+}
+
+
+
+#lazyboy-promo{
+	margin-top:0;
+	margin-bottom:0;
+	.feat{
+		position:absolute;
+		color:$brand-darkblue;
+		@include font-gill;
+		text-transform:uppercase;
+		text-align:center;
+	}
+	#lab{
+		top:215px;
+		left:476px;
+	}
+	#doles{
+		top:90px;
+		left:195px;
+	}
+	#emel{
+		top:110px;
+		left:615px;
+	}
+}
+
+#store-promo{
+	width:530px;
+	height:300px;
+	background: url(home/store.png) no-repeat center white;
+	h5{
+		margin-top:75px;
+		@include font-gill;
+		color:$brand-darkblue;
+		font-size:20px;
+
+	}
+	.st,h5{
+		width:212px;
+		text-align:center;
+	}
+	em{
+		color:$text-color;
+		@include small-caps;
+		font-style:normal;
+	}
+	a{
+		font-size:15px;
+	}
+}
+
+#mirror-promo{
+	height:300px;
+}
+
+@import 'fancybox.css.scss';
+
+@import 'quicklook_product.css.scss';

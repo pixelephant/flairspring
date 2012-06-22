@@ -1,0 +1,61 @@
+<% Category.all.each_with_index do |category, index| %>
+	<li<%= is_active_category_with_index?(category.slug, index) %>>
+		<%= link_to category.name, category_url(:locale => (I18n.locale unless I18n.locale == I18n.default_locale), :id => category.slug) %>
+		<% if category.custom_categories.any? %>
+			<ul class="sub <%= 'right ' if index > (Category.count - 2) %> clearfix">
+				<div class="col1">
+					<% sub_categories = category.custom_categories  %>
+					<% current = "" %>
+					<% product_per_column = sub_categories.count / 3 if !sub_categories.blank? %>
+					<% sub_categories.each_with_index do |sub_cat,i| %>
+						<% unless current == sub_cat.custom_category_group_id %>
+							<% if sub_cat.custom_category_group_id.blank? %>
+								<h5>-----------------------</h5>
+							<% else %>
+								<h5><%= sub_cat.custom_category_group.name %></h5>
+							<% end %>
+							<% current = sub_cat.custom_category_group_id %>
+						<% end %>
+						<% if i == product_per_column || i == product_per_column * 2 %>
+							</div>
+							<div class="col1">
+						<% end %>
+						<li>
+							<%= link_to_if(session[:view_all], sub_cat.name, custom_category_url(category, sub_cat, :page => 'all')) do %>
+							<%=	link_to(sub_cat.name, custom_category_url(category, sub_cat)) %>
+							<% end %>
+						</li>
+					<% end %>
+				</div>
+				<div class="col1 fix">
+					<li>
+						<%= link_to "Sale", "#" %>
+					</li>
+					<li>
+						<%= link_to "New arrivals", "#" %>
+					</li>
+				</div>
+			</ul>
+		<% end %>
+	</li>
+<% end %>
+<li>
+	<a href="http://www.blog.flairspring.hu/">Magazin</a>
+</li>	
+<li class="last">
+	<a href="/rolunk"><%= t('aboutus') %></a>
+	<ul class="sub right">
+		<div class="column">
+		<% Content.all.each do |content| %>
+			<div class="block">
+				<h5><%= content.name %></h5>
+				<% if content.subcontents.any? %>
+					<% content.subcontents.each do |subcontent| %>
+							<li><%= link_to subcontent.name, "/" + subcontent.slug %></li>
+					<% end %>
+				<% end %>
+			</div>
+		<% end %>
+		</div>
+	</ul>
+</li>

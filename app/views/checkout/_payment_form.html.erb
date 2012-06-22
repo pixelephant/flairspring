@@ -1,0 +1,41 @@
+<form action="/checkout/thankyou" id="payment-form">
+	<div class="block">
+		<h5>Ajándék lesz?</h5>
+		<fieldset>
+			<input type="checkbox" name="gift-wrap" id="gift-wrap" />
+			<label id="gift-label" for="gift-wrap">Szeretnék ingyenes díszcsomagolást</label>
+
+		</fieldset>
+	</div>
+	
+	<div class="block">
+		<h5>Fizetési mód</h5>
+		<fieldset>
+			<div class="clearfix">
+				<input type="radio" name="payment-type" id="payment-card" />
+				<label class="right-label" for="payment-card">Bankkártya</label>
+			</div>
+			
+			<div class="clearfix">
+				<input type="radio" name="payment-type" id="payment-paypal" />			
+				<label class="right-label" for="payment-paypal">Paypal</label>				
+			</div>
+			
+			<div class="clearfix">
+				<input type="radio" name="payment-type" id="payment-transfer" />
+				<label class="right-label" for="payment-transfer">Átutalás</label>
+			</div>
+
+		</fieldset>
+	</div>
+	
+	<div class="block" id="payment-credit-card">
+		<h5>Bankkártyás fizetés</h5>
+		<p>A megredenlés gombra kattintva átirányítjuk a BANK biztonságos fizetési oldalára. Sikeres átutalás után, a BANK visszairányítja hozzánk, ahol a rendelési nyugtát megkapja.</p>
+	</div>
+	<div class="block">
+		<input type="submit" value="megrendelem" /> 	
+		<a class="step-back" href="#">vissza az előző lépéshez</a>
+	</div>	
+
+</form>

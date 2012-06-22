@@ -1,0 +1,306 @@
+@import '_mixins.css.scss';
+@import '_zoom.css.scss';
+@import '_product_boxes.css.scss';
+@import 'fancybox.css.scss';
+
+#product-modals{
+	display:none;
+}
+
+#szallitas,#fizetes,#garancia{
+		width:980px;
+		h3{
+			@include font-gill;
+			color:$brand-darkblue;
+			text-transform:uppercase;
+			font-size:22px;
+			margin-bottom:20px;
+		}
+		p{
+			line-height:1.5;
+		}
+	}
+	
+#product-box{
+	margin-top:0;
+	padding:10px;
+}
+
+#product-inner{
+	border:1px solid $border-gray;
+	width:938px;
+}
+
+#picture-wrap{
+	width:440px;
+	height:300px;
+	padding:10px;
+	border-right:1px solid $border-gray;
+	border-bottom:1px solid $border-gray;
+	text-align:center;
+}
+
+#current-picture{
+	width:440px;
+	height:300px;
+	text-align:center;
+}
+
+.arrow-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid black;
+}
+
+#picture-list{
+	overflow:hidden;
+	width:460px;
+	height:100px;
+	border-right:1px solid $border-gray;
+	a{
+		margin:20px 10px;
+		display:block;
+		float:left;
+		border:5px solid $border-blue;
+		height:50px;
+		width:50px;
+	}
+	img{
+		width:50px;
+		height:50px;
+	}
+}
+
+#social-buttons{
+	border-top:1px solid $border-gray;
+	border-right:1px solid $border-gray;
+	width:450px;
+	height:75px;
+	line-height:75px;
+	padding-left:10px;
+	div{
+		float:left;
+		margin:0 5px;
+	}
+	.fb-like iframe{
+		
+	}
+	.tw-like{
+		top: 4px;
+		position: relative;
+	}
+}
+
+#left-side,#right-side{
+	float:left;
+}
+
+#left-side{
+	width:460px
+}
+
+#right-side{
+	width:478px;
+}
+
+#product-title{
+	width:477px;
+	height:49px;
+	line-height:20px;
+	border-bottom:1px solid $border-gray;
+	color:$brand-darkblue;
+	h2{
+		float:left;
+		font-size:22px;
+		padding:9px 10px 0 20px;
+		.sku{
+			font-size:12px;
+			display:block;
+			@include font-garamond;
+			text-transform:lowercase;
+		}
+	}
+	img{
+		float:right;
+		margin:4px 4px 0px 4px;
+	}
+}
+
+#info-box{
+	height:59px;
+	padding:10px;
+	border-bottom:1px solid $border-gray;
+	overflow:hidden;
+	.third{
+		width:138px;
+		height:59px;
+		border-right:1px solid $border-gray;
+		float:left;
+		padding:10px;
+		&.last{
+			border:none;
+			width:139px;
+		}
+	}
+}
+
+#price p{
+	line-height:1.4;
+	padding-left:10px;
+	margin-top:5px;
+	span{
+		font-weight:bold;
+		font-size:20px;
+	}
+	&.list-price span{
+		text-decoration:line-through;
+	}
+	&.discount-price span{
+		color:$brand-orange;
+	}
+}
+
+#properties-box{
+	height:150px;
+	border-bottom:1px solid $border-gray;
+	padding:20px;
+	p{
+		line-height:1.5;
+		label{
+			float:left;
+			width:175px;
+			margin-right:20px;
+			@include small-caps;
+		}
+	}
+}
+
+#add-to-cart{
+	@include cart-button;
+	font-size:18px;
+	padding:9px;
+	padding-left:35px;
+	margin:20px 0;
+}
+
+#add-to-whishlist{
+	@include gray-button;
+	font-size:10px;
+	padding:4px;
+	margin-left:20px;
+	position:relative;
+	top:-5px;
+	color:$brand-orange;
+	span{
+		color:$text-color;
+	}
+	&.added{
+		color:green;
+	}
+}
+
+#buy-box{
+	input[type="number"]{
+		width:35px;
+	}
+	height:136px;
+	padding:20px;
+	p{
+		line-height:1.5;
+		label{
+			float:left;
+			width:175px;
+			margin-right:20px;
+			@include small-caps;
+		}
+	}
+	.links{
+		a{
+			margin-right:20px;
+		}
+	}
+}
+
+#short-description{
+	margin-bottom:20px;
+}
+
+#expert-advice{
+	.ribbon{
+		//background:url(ribbon-advice.png) no-repeat;
+	}
+}
+
+#try-it{
+	.ribbon{
+		//background:url(ribbon-loc.png) no-repeat;
+	}
+	.address{
+		margin-top:10px;
+	}
+	strong{
+		font-size:15px;
+		margin-bottom:15px;
+		font-style:italic;
+		@include font-gill;
+	}
+	p{
+		line-height:1.5;
+		font-size:14px;
+	}
+	a{
+		float:left;
+		margin:0px 10px 0px 0px;
+		img{
+			width:80px;
+			height:65px;
+			border:5px solid $border-gray;
+		}
+	}
+}
+
+#specifications{
+	p{
+		display:block;
+		label{
+			@include small-caps;
+			font-size:17px;
+		}
+	}
+}
+
+#about-designer,#about-manufacturer{
+	p{
+	  line-height:1.5;
+	}
+	img{
+		float:right;
+		margin:20px;
+		height:160px;
+		border:5px solid $border-blue;
+	}
+}
+
+#set-slider{
+	a{
+		text-align:center;
+		margin-right:19px;
+		margin-bottom:20px;
+		display:block;
+		float:left;
+		text-decoration:none;
+		color:$brand-lightblue;
+		display:block;
+		text-decoration:underline;
+		@include font-gill;
+		@include transition-03s;
+		img{
+			border:5px solid $border-blue;
+		}
+		&:hover .name{
+			color: $brand-darkblue;
+		}
+	}
+}

@@ -1,0 +1,19 @@
+<section class="box full slider clearfix" id="last-viewed">
+	<h3><%= t('.last_viewed_products') %></h3>
+		<% if session[:last_viewed_products].count > 6 %>
+		  <!-- <a href="#" class="arrow left"></a>
+		  <div class="carousel"> -->
+		<% end %>
+		<ul>
+			<% session[:last_viewed_products].each do |product| %>
+				<% img = Product.find_by_slug(product).nil? ? nil : Product.find_by_slug(product).default_photo %>
+				<% unless img.nil? %>
+					<li><%= link_to (image_tag img.image_file.medium, :title => img.alt, :class => "class", :alt => img.alt), Product.find(product) %></li>
+				<% end %>
+			<% end %>
+		</ul>
+		<% if session[:last_viewed_products].count > 6 %>
+			<!-- </div> --><!-- carousel -->
+			<!-- <a href="#" class="arrow right"></a> -->
+		<% end %>
+</section>

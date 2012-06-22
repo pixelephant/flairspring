@@ -1,0 +1,55 @@
+<table class="order-table" width=100%>
+		<thead>
+			<tr>
+				<th colspan="2">Összesítő</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<!-- Ennek változnia kell ha pickup-ol és nem kiszállítatt -->
+				<td colspan="2">Az összesítő egy példányát elküldtük az e-mail címére: <span class="email"><%= @user.email %></span>. A szállítással kapcsolatos tudnivalókról e-mailben értesítjük.</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr class="info">
+				<td>Rendelés sorszáma</td>
+				<td class="right">FLRSPRNG-2012-<%= @order.id %></td>
+			</tr>
+			<tr class="info">
+				<td>Tracking code</td>
+				<td class="right">gasjid-123-esd</td>
+			</tr>
+			<tr class="info">
+				<td>Szállítás ilyenek</td>
+				<td class="right">Kellenek</td>
+			</tr>
+			<tr class="info last">
+				<td>Estimated arrival</td>
+				<td class="right"><%= @arrival %></td>
+			</tr>
+			<% @items.each do |item| %>
+			<tr>
+				<td>1db <%= item.product.name %></td>
+				<td class="right"><%= number_to_currency(productPrice(item.product.id), :precision => 0) %></td>
+			</tr>
+			<% end %>
+			<tr>
+				<td>
+					Ajándék csomagolás
+				</td>
+				<td class="right">Ingyenes</td>
+			</tr>
+			<tr>
+				<td>
+					Szállítás
+				</td>
+				<td class="right">
+					Ingyenes
+				</td>
+			</tr>
+			<tr>
+				<td><strong>Total</strong></td>
+				<td class="right"><strong><%= number_to_currency(@cart, :precision => 0) %></strong></td>
+			</tr>
+		</tbody>
+	</table>

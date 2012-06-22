@@ -1,0 +1,145 @@
+.arrow{
+	width:31px;
+	height:31px;
+	float:left;
+	background:url(arrows.png);
+	&.left{
+		background-position:0 0;
+		.no-touch &:hover{
+			background-position:61px 0;
+		}
+		&:active{
+			background-position:31px 0 !important;
+		}
+	}
+	&.right{
+		float:right;
+		top:-1px;
+		position:relative;
+		background-position:0 31px;
+		.no-touch &:hover{
+			background-position:61px 31px;
+		}
+		&:active{
+			background-position:31px 31px !important;
+		}
+	}
+}
+
+.slider{
+	background:white;
+	margin-top:10px;
+	.slider-inner{
+		overflow: scroll;
+		overflow-y: hidden !important;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom:30px;
+	}
+
+	li{
+		display:-moz-inline-stack;
+		display:inline-block;
+		zoom:1;
+		*display:inline;
+		text-align:center;
+	}
+	&.full{
+			width:980px;
+			li{
+				width:120px;
+				margin-right:20px;
+				overflow:hidden;
+			}
+			&.big{
+				td{
+					vertical-align:middle;
+					height:175px;
+					width:175px;
+					text-align:center;
+
+				}
+				img{
+					max-height:175px;
+					max-width:175px;
+				}
+				li{
+					width:175px;
+					margin-right:40px;
+					overflow:hidden;
+				}
+			}
+	}
+	.carousel{
+		float:left;
+		overflow:hidden;
+		li{
+			a{
+				text-align:center;
+				@include font-gill;
+				font-size:13px;
+				text-decoration:none;
+				color:$text-green;
+				.name{
+					color:$text-green;
+					margin-bottom:5px;
+				}
+				&:hover .name{
+					//color:$brand-darkblue;
+				}
+				.price{
+					font-size:13px;					
+				}
+				.current-price{
+					//color:$brand-orange;
+				}
+				.old-price{
+					
+					text-decoration:line-through;
+					font-weight:normal;
+					font-size:11px;
+				}
+			}
+		}
+	}
+	.arrow{
+		float:right;
+		margin-top:-5px;
+	}
+	.arrow.left{
+		margin-right:15px;
+	}
+	h3{
+		@include font-gill;
+		background: url(csill.png) no-repeat 470px center $background-green;
+		font-size:18px;
+		border-left:10px solid $orange;
+		padding:10px;
+		color:$text-brown;
+		font-weight:normal;
+	}
+	img{
+		
+	}
+	&.half{
+		float:left;
+		width:430px; /*470 - 40px padding*/
+		&.first{
+			margin-right:20px;
+		}
+		img{
+			margin:0 5px;
+			width:50px;
+			height:50px;
+		}
+		li{
+			width:70px;
+			overflow:hidden;
+			margin-right:20px;
+		}
+	}
+}
+
+.no-touch .slider-inner{
+	overflow:hidden;
+}

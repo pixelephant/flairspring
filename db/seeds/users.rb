@@ -1,0 +1,1 @@
+User.create(:id => 1, :email => "0antalbalazs0@gmail.com", :encrypted_password => "$2a$10$Wj1KfJ9CgwaTNA2cUtnfxOqEwkzdia8AREVDH4FO0ln.cP7nBrrqS", :sign_in_count => 1, :current_sign_in_at => Tue, 31 Jan 2012 10:00:21 UTC +00:00, :last_sign_in_at => Tue, 31 Jan 2012 10:00:21 UTC +00:00, :current_sign_in_ip => "127.0.0.1", :last_sign_in_ip => "127.0.0.1")

@@ -1,0 +1,151 @@
+.no-touch .quicklook{
+	opacity:0;
+	top:5px;
+}
+
+.touch .quicklook{
+	opacity:1;
+	top:5px;
+}
+
+.ribbon-start{
+	float:left;
+	height:35px;
+	width:11px;
+	background:url(ribbon-start.png) no-repeat;
+}
+.ribbon-end{
+	float:left;
+	height:30px;
+	width:11px;
+	background:url(ribbon-end.png) no-repeat;
+}
+.ribbon{
+	height:35px;
+	position:absolute;
+	left:-11px;
+	z-index:2;
+	top:10px;
+	p{
+		float:left;
+		background:$brand-orange;
+		@include font-gill;
+		color:white;
+		text-transform:uppercase;
+		height:30px;
+		line-height:30px;
+		padding:0 5px !important;
+		
+	}
+}
+
+.product{
+	padding:22px;
+	margin:20px 20px 0px 0px;
+	position:relative;
+	@include transition-03s;
+	
+	&.has-ribbon{
+		position:relative;
+		.ribbon{
+			width:50px;
+			height:75px;
+			position:absolute;
+			right:0;
+			top:-10px;
+		}
+	}
+	
+	&.last{
+		margin:20px 0px 0px 0px;
+	}
+	.quicklook{
+		position:absolute;
+		z-index:1;
+		color:white;
+		@include font-gill;
+		top:10px;
+		right:5px;
+		height:16px;
+		line-height:16px;
+		padding-right:30px;
+		display:block;
+		background-image:url(quicklook.png);
+		background-repeat:no-repeat;
+		background-position:center right;
+		@include transition-03s;
+	}
+	&:hover .quicklook{
+		opacity:1;
+	}
+	&:hover{
+	
+	}
+}
+
+.product{
+	float:left;
+	width:175px;
+	height:285px;
+	a{
+		text-decoration:none;
+		color:$brand-lightblue;
+		display:block;
+		@include transition-03s;
+		&:hover .name{
+			color: $brand-darkblue;
+		}
+	}
+	.left{
+	}
+	.right{
+		position:absolute;
+		bottom:10px;
+		img{
+			width:20px;
+			height:20px;
+		}
+	}
+	.price{
+		font-weight:bold;
+		text-decoration:none;
+		font-size:13px;
+		color:#3c3c3c;
+		.current-price{
+			color:$brand-orange;
+		}
+		.old-price{
+			font-weight:normal;
+			text-decoration:line-through;
+		}
+	}
+	.image{
+		overflow:hidden;
+		position:relative;
+		height:185px;
+		margin:0 auto;
+		margin-bottom:5px;
+		border-bottom:1px solid $border-gray;
+		text-align:center;
+	}
+	td{
+		height:185px;
+		width:175px;
+		vertical-align:middle;
+	}
+	img{
+		max-height:175px;
+		max-width:175px;
+		@include transition-03s;
+		z-index:1;
+	}
+	p{
+		@include font-gill;
+		padding:2px;
+	}
+	.name{
+		text-decoration:underline;
+	}
+}
+
+@import '_product_modal';

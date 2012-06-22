@@ -1,0 +1,27 @@
+<section class="full slider big clearfix" id="<%= id %>">
+	<h3>
+		<%= title %>
+		<% if products.count > 6 %>
+			<a href="#" class="arrow right"></a><a href="#" class="arrow left"></a>
+		<% end %>
+	</h3>
+  <div class="slider-inner">
+		<ul class="carousel">
+			<% products.each do |product| %>
+				<li>
+					<%= link_to product do %>
+						<table>
+							<tr>
+								<td>
+									<%= image_tag product.default_photo.image_file.medium, :title => product.default_photo.alt, :class => "class" if !product.default_photo.nil? %>	
+								</td>
+							</tr>
+						</table>
+						<p class="name"><%= product.name.titleize %></p>
+						<%= render :partial => "products/price", :locals => {:product => product } %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</section>

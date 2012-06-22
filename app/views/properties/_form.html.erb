@@ -1,0 +1,25 @@
+<%= form_for(@property) do |f| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :property_name %><br />
+    <%= f.text_field :property_name %>
+  </div>
+  <div class="field">
+    <%= f.label :property_category_id %><br />
+		<%= collection_select(:property, :property_category_id, PropertyCategory.all, :id, :category_name, :prompt => 'Pick a category') %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

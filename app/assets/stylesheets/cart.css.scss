@@ -1,0 +1,257 @@
+@import '_mixins.css.scss';
+
+p.empty-cart{
+	font-size:30px;
+	text-align:center;
+	margin-top:20px;
+}
+
+#cart{
+	margin-top: 120px;
+}
+
+#cart-top{
+	border-bottom:1px solid $border-gray;
+	padding-bottom:20px;
+	h3{
+		float:left;
+		margin-bottom:0;
+		margin-top:3px;
+	}
+	.right{
+		float:right;
+		font-weight:normal;
+		a{
+			@include small-caps;
+			color:$brand-lightblue;
+			@include transition-03s;
+			&:hover{
+				color:$brand-darkblue;
+			}
+		}
+	}
+}
+
+#cart-table{
+	width:100%;
+	
+	.cell-names{
+		color:#A9A9A9;
+		font-size:12px;
+		padding:10px 5px;
+	}
+	
+	
+	.discount-cell{
+		font-size:14px;
+	}
+	.discount-element{
+		margin:5px 0;
+		display:block;
+	}
+	
+	
+	.sum-price-cell{
+		width:130px;
+	}
+	input[type="number"]{
+		width:55px;
+	}
+	.quantity-cell{
+		width:100px;
+	}
+	
+	.product-cell{
+		width:120px;
+		vertical-align:middle;
+		text-align:center;
+		img{
+			max-width:50px;
+			max-height:50px;
+			margin-right:10px;
+		}
+		h6{
+			@include font-gill;
+			color:$brand-darkblue;
+			text-transform:uppercase;
+			font-size:13px;
+			margin-top:5px;
+			line-height:1.2;
+		}
+	}
+	
+	thead{
+		border-bottom:1px solid $border-gray;
+		th{
+			padding:10px 5px;
+			color:#adadad;
+			font-weight:normal;
+			text-align:left;
+			font-size:12px;
+		}
+	}
+	tbody{
+		tr{
+			border-bottom:1px solid $border-gray;
+			
+		}
+		td{
+			padding:20px 10px;
+			vertical-align:middle;
+		}
+		
+		
+		.multiply-cell,.equals-cell{
+			width:10px;
+			color:#adadad;
+			@include font-gill;
+			font-size:16px;
+		}
+		
+		
+		.property-cell{
+			font-size:14px;
+			p{
+				margin:5px 0;
+				line-height:1;
+			}
+		}
+		.property{
+			@include small-caps;
+		}
+		
+		.price-cell,.sum-price-cell{
+			@include font-gill;
+			font-size:16px;
+		}
+		.price-cell{
+			width:70px
+		}
+		.actions-cell{
+			text-align:center;
+			width:5px;
+		}
+	}
+}
+
+//sima-hover-active
+
+.delete{
+	display:block;
+	text-indent:-9999px;
+	width:20px;
+	height:20px;
+	background:url(x.png) 0 0 no-repeat;
+	&:hover{
+		background-position:-21px 0px;
+	}
+	&:active{
+		background-position:-42px 0px;
+	}
+}
+
+#cart-bottom{
+	margin-top:20px;
+	border:1px dashed #aaa;
+	background:#F2F7FB;
+	padding:20px;
+}
+
+#coupon{
+	float:left;
+	width:200px;
+	label{
+		display:block;
+		margin-bottom:10px;
+		color:#333;
+		@include small-caps;
+	}
+	input[type="text"]{
+		border: 1px solid #C2C2C2;
+		margin: 0;
+		padding: 0;
+		-moz-border-radius: 3px 3px 3px 3px;
+		border-radius: 3px 3px 3px 3px;
+		border-radius: 3px 3px 3px 3px;
+		-webkit-appearance: textfield;
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+		height: 20px;
+		font-size: 16px;
+		padding: 2px;
+		float:left;
+		width:100px;
+	}
+	.button{
+		@include gray-button;
+		font-size:12px;
+		padding:6px 5px;
+		float:left;
+		margin-left:5px;
+	}
+	div{
+		overflow:hidden;
+	}
+	span{
+		float:left;
+		height:26px;
+		line-height:26px;
+		font-size:20px;
+		margin-right:10px;
+	}
+}
+
+#total{
+	width:585px;
+	float:left;
+	text-align:right;
+	position:relative;
+	p{
+		@include font-gill;
+		padding-left:350px;
+	}
+	span,b{
+		font-weight:normal;
+		margin:3px;
+		@include font-gill;
+		font-size:18px;
+	}
+	.subtotal,.shipping-cost{
+		font-size:22px;
+	}
+	b{
+		@include small-caps;
+		float:left;
+	}
+	.total-price{
+		font-size:25px;
+		color:$brand-orange;
+	}
+	
+	#total-price{
+		color:$brand-orange;
+	}
+}
+
+#checkout-form{
+	margin-top:20px;
+	float:right;
+	input[type="submit"]{
+		@include orange-button;
+		font-size:15px;
+	}
+	a{
+		color:$brand-lightblue;
+		@include transition-03s;
+		&:hover{
+			color:$brand-darkblue;
+		}
+	}
+}
+
+.loy{
+	margin-top:20px;
+}
+
+@import "_simple_footer.css.scss";

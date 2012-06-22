@@ -1,0 +1,35 @@
+<div class="clearfix">
+	<section id="sidebar">
+			<form action="" id="filter-form" class="">
+				<div id="filters" class="box">
+					<h3><%= t('.filter') %></h3>
+				</div>
+				<nav id="category-nav">
+						<%= render 'home/category_menu_left' %>
+				</nav>
+				
+			</form>
+	</section>
+
+	<section id="product-list">
+		<div id="action-top" class="box">
+			<%= render 'home/product_grid_action_buttons' %>
+
+			<% c = "view-all" %>
+			<% c = c + " active" if session[:view_all] %>
+
+			<%= link_to t('.view_all'), request.path + "?page=all", :class => c %>
+			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+		</div>
+		<div id="product-grid" class="clearfix">
+			<%= render 'home/product_grid' %>
+		</div>
+		<div id="action-bottom" class="box">
+			<a id="back-to-top" href="#product-list">back to top</a>
+			<%= render 'home/product_grid_action_buttons' %>
+			<%= link_to t('.view_all'), request.path + "?page=all", :class => "view-all" %>
+			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+		</div>
+	</section>
+</div>
+<%= render 'home/last_viewed_carousel' if !session[:last_viewed_products].blank? %>

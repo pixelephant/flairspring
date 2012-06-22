@@ -1,0 +1,40 @@
+.order-table{
+		border:1px solid $border-gray;
+		margin-top:40px;
+		tr{
+			height:25px;
+			line-height:25px;
+			&.info{
+				color:$brand-lightblue;
+				&.last{
+					border-bottom:1px solid $border-gray;
+				}
+			}
+			td,th{
+				padding:5px;
+			}
+		}
+	}
+	thead{
+		tr{
+			border-bottom:1px solid $border-gray;
+		}
+	}
+	tbody{
+		td{
+			text-align:left;
+		}
+		td.right{
+			text-align:right;
+		}
+	}
+	tfoot{
+		tr{
+			border-top:1px solid $border-gray;
+			color:$brand-darkblue;
+		}
+		.email{
+			color:$brand-orange;
+			font-style:italic;
+		}
+	}

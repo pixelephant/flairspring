@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Madearthome</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+	<div class="topbar">
+	      <div class="fill">
+	        <div class="container">
+	          <h3><a href="#">Flairspring admin</a></h3>
+	          <ul>
+				<li><%= link_to "Főoldal", "admin", :html => {:class => "active"} %></li>
+				<li> <%= link_to "Kategóriák", "admin/categories" %></li>
+	            <li><a href="#">Link</a></li>
+	            <li><a href="#">Link</a></li>
+	          </ul>
+	          <ul class="nav secondary-nav">
+	            <li class="menu">
+	              <a href="#" class="menu">Dropdown</a>
+	              <ul class="menu-dropdown">
+	                <li><a href="#">Secondary link</a></li>
+	                <li><a href="#">Something else here</a></li>
+	                <li class="divider"></li>
+	                <li><a href="#">Another link</a></li>
+	              </ul>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	   </div>
+<div class="container">
+	<%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!-- <fieldset>
+	<legend>kedvezmények</legend>
+	<div class="field"><label for="">Ingyenes szállítás</label><input type="checkbox" name="kedv" id="" /></div>
+	<div class="field"><label for="">Ajándék jár hozzá</label><input type="checkbox" name="kedv" id="" /></div>
+</fieldset> -->
+
+<%= field_set_tag t('designer') do %>
+	<% @designers.each do |designer| %>
+		<div class="field">
+			<label for="<%= designer.name.parameterize %>"> <%= designer.name %> </label>
+			<%= check_box_tag 'designer[]', designer.id, ((params[:designer].include?(designer.id.to_s) ? true : false) if params[:designer]) %>
+		</div>
+	<% end %>
+		<% if @designers.any? %>
+			<div class="field">
+				<label for="nil"> Nincs designer </label>
+				<%= check_box_tag 'designer[]', "NULL", true %>
+			</div>
+		<% end %>
+	<%= submit_tag "update", :class => "update" %>
+<% end %>
+
+<% @property_categories.each do |property_category| %>
+	<% if property_category.properties.any? %>
+		<%= field_set_tag property_category.category_name.to_s do %>
+			<% unless property_category.properties.first.numeric.nil? || property_category.properties.last.numeric.nil? %>
+			
+			<% to = property_category.properties.order("properties.numeric").last.property_name %>
+			<% from = property_category.properties.order("properties.numeric").first.property_name %>
+
+			<% v = params[property_category.id.to_s].split(";") if params[property_category.id.to_s] %>
+			<% params[property_category.id.to_s] ? l = v[0] : l = from %>
+			<% params[property_category.id.to_s] ? h = v[1] : h = to %>
+
+			<% unit = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","") %>
+<!-- Csúszka helye -->
+			<!-- mértékegységek nem lehetnek törtek, a low és a high value nem jó mindenhol -->
+			<input id="<%= property_category.id.to_s.parameterize %>" type="slider" data-unit="<%= unit %>" data-from="<%= from.to_f.ceil %>" data-to="<%= to.to_f.ceil %>" name="<%= property_category.id.to_s.parameterize %>" value="<%=l.to_f.floor%>;<%=h.to_f.ceil%>" />
+<!-- Csúszka helye  -->
+			<% else %>
+				<% property_category.properties.each do |property| %>
+					<div class="field">
+						<label for="<%= property.property_category.id.to_s %>"> <%= property.property_name %> </label>
+						<%= check_box_tag property.property_category.id.to_s + "[]", property.id, ((params[property.property_category.id.to_s].include?(property.id.to_s) ? true : false) if params[property.property_category.id.to_s] ) %>
+					</div>
+				<% end %>
+			<% end %>
+			<%= submit_tag "update", :class => "update" %>
+		<% end %>
+	<% end %>
+<% end %>

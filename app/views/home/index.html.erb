@@ -1,0 +1,106 @@
+<p id="advantages">10 év garancia ülőgarnitúráinkra &amp; 30 nap visszavételi garancia &amp; Ingyenes lakberendezési tanácsadás</p>
+
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Legnépszerűbb termékeink", :id => "newest-products", :products => Product.where(:sku => ['26685', '23051', '09510', '23025', '14522 B', '24182', '24146', '19632', '26987', '32201', '20482', '50422', '08068']).order(:updated_at).limit(13) } %>
+
+<section id="promo-boxes">
+	<div class="box promo" id="lazyboy-promo">
+		<a href="/fotelek">
+			<h3>La-Z-Boy komfort fotelek</h3>
+			<span class="feat" id="doles">Nagy <br> dőlésszög</span>
+			<span class="feat" id="lab">Magasított <br> lábak</span>
+			<span class="feat" id="emel">Emelhető <br> lábrész</span>
+		</a>
+	</div>
+
+	<div class="clearfix">
+		<div class="box promo" id="lamps-promo">
+			<a href="/lampak">
+				<h3>900 féle lámpa</h3>
+			</a>
+		</div>
+
+		<div class="box promo" id="mirrors-promo">
+			<a href="/mirrors">
+				<h3>400 féle keretezett tükör</h3>
+			</a>
+		</div>
+	</div>
+
+	<div class="clearfix wrap">
+
+	<div class="box promo" id="store-promo">
+		<h3>Vásárlás előtt kipróbálná?</h3>
+		<h4>Nézzen be boltunkba!</h4>
+		<p class="st"><em>flairspring pest</em></p>
+		<p class="st"><a href="http://g.co/maps/eubnb">1054 Budapest, Szabadság tér 14</a></p>
+		<p class="st"><em>Nyitvatartás</em></p>
+		<p class="st">H-P : 10-18, Szo-V : 10-16 </p>
+	</div>
+
+	<div class="promo box" id="facebook-promo">
+		<h3>LÁJKOLJA az oldalunkat</h3>
+		<h4>nyereményekért és friss hírekért</h4>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=239184792781836";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<div class="fb-like" data-href="http://www.flairspring.hu/" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false"></div>
+	</div>
+	
+	<div class="box promo" id="news-promo">
+		<a href="http://eepurl.com/jS0aD">
+			<h3>Hírlevél</h3>
+				<p>Minden feliratkozónak</p>
+				<span class="left-arrow">2000 Ft</span>
+				<p>értékű kupon</p>
+		</a>
+	</div>
+	
+	</div>
+
+</div>
+
+</section>
+
+
+<section id="about-us">
+	<h3>Üdvözöljük a Flairspring online boltjában!</h3>
+	<h4>Böngésszen kedvére, tekintse meg széles termékválasztékunkat!</h4>
+	<p>A Flairspringnél azért dolgozunk, hogy ügyfeleink stílusos, meleg otthont tudjanak kialakítani maguknak, bútoraink és lakberendezési tárgyaink segítségével. Szeretnénk értéket adni vásárlóinknak, ezért olyan amerikai világmárkák termékeit válogattuk össze, amelyek hosszú évtizedek óta meghatározó szereplői a lakberendezési piacnak és sikerüket termékeik minőségének, különleges funkcióinak és reális árainak köszönhetik.</p>
+
+	<h4 class="gray">Milyen termékeket talál boltunkban?</h4>
+	<p>
+		<ul>
+		<li>különleges funkciókkal bíró komfort foteleket</li>
+		<li>hagyományos, komfort funkciós, ággyá alakítható, moziszobába való ülőgarnitúrákat</li>
+		<li>több, mint 400 keretezett tükröt</li>
+		<li>több, mint 900 lámpát</li>
+		<li>több, mint 1500 kisbútort és lakberendezési kiegészítőt</li>
+	</ul>
+	</p>
+	<p>Reméljük, hogy termékeink az Ön tetszését is elnyerik! Kellemes vásárlást kíván a Flairspring!</p>
+</section>
+
+<section id="blog">
+	<h3>Friss hírek</h3>
+	<h4>A Flairspring blogból</h4>
+	<% @blogposts.each do |article| %>
+		<div class="blog-entry">
+			<h5><%= article.post_title %></h5>			
+			<p><%= truncate strip_tags(article.post_content).html_safe, :length => 470, :omission => '...' %><%= link_to "Bővebben &raquo;".html_safe, "http://blog.flairsprin.hu/?p=" + article.id.to_s %></p>
+		</div>
+	<% end %>
+</section>
+
+<section class="box full" id="brands">
+	<h3>Our brands</h3>
+	<% Brand.all.each do |brand| %>
+		<%= link_to ('/brand/' + brand.name.downcase) do %>
+			<%= image_tag brand.image_file.thumb, :title => brand.name, :class => "class" %>
+		<% end %>
+	<% end %>
+</section>

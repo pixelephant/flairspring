@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  wishlist_id: 1
+  product_id: 1
+  sold: false
+
+two:
+  wishlist_id: 1
+  product_id: 1
+  sold: false

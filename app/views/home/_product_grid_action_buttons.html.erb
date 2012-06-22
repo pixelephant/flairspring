@@ -1,0 +1,7 @@
+<div class="order-buttons">
+	<!--a href="<%= request.fullpath %>"><%= t('.newest') %></a-->
+	<%= link_to t('.newest'), url_for(flatten_param_hash(params.merge(params.merge(:sort => 'by_newest')))), :class => ('active' if params[:sort] == 'by_newest') %>
+	<%= link_to t('.name'), url_for(flatten_param_hash(params.merge(params.merge(:sort => 'by_name')))), :class => ('active' if params[:sort] == 'by_name') %>
+	<%= link_to t('.lowest_price'), url_for(flatten_param_hash(params.merge(params.merge(:sort => 'by_lowest_price')))), :class => ('active' if params[:sort] == 'by_lowest_price') %>
+	<%= link_to t('.highest_price'), url_for(flatten_param_hash(params.merge(params.merge(:sort => 'by_highest_price')))), :class => ('active' if params[:sort] == 'by_highest_price') %>
+</div>

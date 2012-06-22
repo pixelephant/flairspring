@@ -1,0 +1,2 @@
+module DesignerPhotosHelper
+end

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: 1
+  image_url: MyString
+  alt: MyString
+  default: false
+
+two:
+  product_id: 1
+  image_url: MyString
+  alt: MyString
+  default: false

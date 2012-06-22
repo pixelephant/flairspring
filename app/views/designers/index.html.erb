@@ -1,0 +1,27 @@
+<h1>Listing designers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @designers.each do |designer| %>
+  <tr>
+    <td><%= designer.name %></td>
+    <td><%= designer.description %></td>
+    <td><%= designer.image %></td>
+    <td><%= link_to 'Show', designer %></td>
+    <td><%= link_to 'Edit', edit_designer_path(designer) %></td>
+    <td><%= link_to 'Destroy', designer, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Designer', new_designer_path %>

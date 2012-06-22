@@ -1,0 +1,23 @@
+<h1>Listing custom_categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @custom_categories.each do |custom_category| %>
+  <tr>
+    <td><%= custom_category.name %></td>
+    <td><%= link_to 'Show', custom_category %></td>
+    <td><%= link_to 'Edit', edit_custom_category_path(custom_category) %></td>
+    <td><%= link_to 'Destroy', custom_category, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Custom category', new_custom_category_path %>

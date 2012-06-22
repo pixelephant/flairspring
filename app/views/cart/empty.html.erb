@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<section id="cart" class="box full clearfix">
+	<div id="cart-top" class="clearfix">
+		<h3>Kosarad tartalma</h3>
+		<p class="right"><a href="/login">Login</a> or <a href="/register">Register</a> for faster checkout!</p>
+	</div>
+		<p class="empty-cart">Kosarad üres! Nézd meg a speckó ajánlatainkat alább! </p>
+</section>
+
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Speckó ajánlatok üres kosárra", :id => "cart-slider", :products => Product.order("updated_at").limit(10)} %>
+
+<div class="box-wrap clearfix">
+	<section class="box third" id="payment-options">
+		<h3>Fizetési lehetőségek</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus.</p>
+	</section>
+
+	<section class="box third mid" id="delivery-options">
+		<h3>Szállítási információk</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus.</p>
+	</section>
+
+	<section class="box third last" id="faq-links">
+		<h3>Biztonságos shopping</h3>
+		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. <a href="#">több infó</a></p>
+	</section>
+</div>

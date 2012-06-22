@@ -1,0 +1,24 @@
+<a class="home" href="/"><%= t('.home') %></a>
+
+<% if controller == 'search' %>
+
+<%= " } " + t('.search_text', :item_count => @products.count.to_s, :search_term => params['search']) %>
+
+<% else %>
+
+	<% links = [] %>
+	<% links << link_to(@category.name.capitalize, @category).to_s if !@category.nil? %>
+	<% #links << link_to(@custom_category.name.capitalize, custom_category_path(@category,@custom_category)).to_s if !@custom_category.nil? %>
+	<% links << link_to(@product.name.titleize, @product).to_s if !@product.nil? %>
+
+	<% links.each do |link| %>
+	<%= " } " %>
+	<%= link %>
+	<% end %>
+
+
+<h1 id="site-title">
+	<%= @title %>
+</h1>
+
+<% end %>

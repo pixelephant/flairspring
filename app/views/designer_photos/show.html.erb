@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Designer:</b>
+  <%= @designer_photo.designer_id %>
+</p>
+
+<p>
+  <b>Image file:</b>
+  <%= @designer_photo.image_file %>
+</p>
+
+<p>
+  <b>Alt:</b>
+  <%= @designer_photo.alt %>
+</p>
+
+
+<%= link_to 'Edit', edit_designer_photo_path(@designer_photo) %> |
+<%= link_to 'Back', designer_photos_path %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Property category:</b>
+  <%= @property_categories_to_category.property_category_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @property_categories_to_category.category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_property_categories_to_category_path(@property_categories_to_category) %> |
+<%= link_to 'Back', property_categories_to_categories_path %>

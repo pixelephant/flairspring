@@ -1,0 +1,80 @@
+<section id="register" class="box full clearfix">
+	<h3 id="top">Regisztráció <!--span id="secure">Secure connection</span--></h3>
+
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  	<%= devise_error_messages! %>
+		<div class="block">
+			<h5>Felhasználói adatok <a href="#" title="Ezzel tudsz majd bejelentkezni" class="tooltip">?</a></h5>
+			<fieldset>
+				<%= f.label :email, "E-mail cím" %>
+  				<%= f.email_field :email, :class => ["required","email"] %>
+			</fieldset>
+			<fieldset>
+				<%= f.label :password, "Jelszó" %>
+  				<%= f.password_field :password %>
+			</fieldset>
+			<fieldset>
+				<%= f.label :password_confirmation, "Jelszó megerősítése" %>
+  				<%= f.password_field :password_confirmation %>
+			</fieldset>
+		</div>
+		<% @user.addresses.build %>
+		<div class="block">
+			<h5>Szállítási információk <a href="#" title="Alternatív címeket a profil oldalon adhat hozzá" class="tooltip">?</a></h5>
+			<%= f.fields_for :addresses do |builder| %>
+    			<fieldset>
+					<%= builder.label :zip, "Irányítószám" %>
+	  				<%= builder.text_field :zip, :class => ["required","digits"], :minlength => 4, :length => 4 %>
+					<!--label for="register-zip">Irányítószám</label>
+					<input type="text" name="regsiter-zip" id="register-zip" /-->
+				</fieldset>
+				<fieldset>
+					<%= builder.label :city, "Város" %>
+	  				<%= builder.text_field :city, :class => ["required"] %>
+					<!-- <label for="regsiter-city">Város</label>
+					<input type="text" name="regsiter-city" id="register-city" /> -->
+				</fieldset>
+				<fieldset>
+					<%= builder.label :additional, "Cím" %>
+	  				<%= builder.text_field :additional, :class => ["required"] %>
+					<!-- <label for="register-address">Cím</label>
+					<input type="text" name="regsiter-address" id="register-address" /> -->
+				</fieldset>
+  			<% end %>
+		</div>
+		<div class="block">
+			<h5>Számlázási információk</h5>
+			<fieldset>
+				<%= label_tag "same", "Megegyezik a szállítási adatokkal", :id => "same_l" %>
+				<%= check_box_tag "same" %>
+			</fieldset>
+			<%= f.fields_for :addresses do |builder| %>
+					<%= builder.hidden_field :billing, :value => true %>
+    			<fieldset>
+					<%= builder.label :zip, "Irányítószám" %>
+	  				<%= builder.text_field :zip, :class => ["required","digits"], :minlength => 4, :length => 4 %>
+					<!--label for="register-zip">Irányítószám</label>
+					<input type="text" name="regsiter-zip" id="register-zip" /-->
+				</fieldset>
+				<fieldset>
+					<%= builder.label :city, "Város" %>
+	  				<%= builder.text_field :city, :class => ["required"] %>
+					<!-- <label for="regsiter-city">Város</label>
+					<input type="text" name="regsiter-city" id="register-city" /> -->
+				</fieldset>
+				<fieldset>
+					<%= builder.label :additional, "Cím" %>
+	  				<%= builder.text_field :additional, :class => ["required"] %>
+					<!-- <label for="register-address">Cím</label>
+					<input type="text" name="regsiter-address" id="register-address" /> -->
+				</fieldset>
+  			<% end %>
+		</div>
+		<div class="block">
+			<filedset>
+				<%= f.submit "Regisztráció" %>
+			</filedset>
+		</div>
+	<% end %>
+
+</section>

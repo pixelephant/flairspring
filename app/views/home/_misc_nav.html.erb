@@ -1,0 +1,23 @@
+<nav id="misc-menu">
+	<ul class="main-ul">
+		<li>
+			<!-- <ul id="language-selector">
+				<% LANGUAGES.each do |lang| %>
+					<% if lang[1] == I18n.locale.to_s %>
+						<li class="active <%= lang[1] %>"><%= link_to lang[0], url_for( params.merge(:locale => lang[1]) ) %></li>
+					<% else %>
+						<li class="<%= lang[1] %>"><%= link_to lang[0], url_for( :locale => lang[1] ) %></li>
+					 <% end %>
+				<% end %>
+			</ul> -->
+		</li>
+		<li><%= link_to t('wishlist'),"/wishlist" %></li>
+		<li id="blog-link"><%= link_to "Flairspring Blog", "http://www.madeartdesign.hu/magazinhu/" %></li>
+		<li><%= link_to t('register'), new_user_registration_path %></li>
+		<% if !user_signed_in? %>
+			<li><%= link_to t('login'), new_user_session_path %></li>
+		<% else %>
+			<li><%= link_to t('logout'), destroy_user_session_path, :method => :delete %></li>
+		<% end %>		
+	</ul>
+</nav>

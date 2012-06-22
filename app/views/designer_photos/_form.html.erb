@@ -1,0 +1,29 @@
+<%= form_for(@designer_photo) do |f| %>
+  <% if @designer_photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@designer_photo.errors.count, "error") %> prohibited this designer_photo from being saved:</h2>
+
+      <ul>
+      <% @designer_photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :designer_id %><br />
+    <%= f.number_field :designer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :image_file %><br />
+    <%= f.text_field :image_file %>
+  </div>
+  <div class="field">
+    <%= f.label :alt %><br />
+    <%= f.text_field :alt %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

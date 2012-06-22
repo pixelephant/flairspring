@@ -1,0 +1,32 @@
+@import '_mixins.css.scss';
+@import '_form.css.scss';
+
+#top{
+	border-bottom:1px solid $border-gray;
+	padding-bottom:20px;
+	span{
+		float:right;
+		color:#60bb78;
+		@include small-caps;
+		font-size:16px;
+		background: url(secure.png) no-repeat left center;
+		padding-left:25px;
+	}
+		margin-bottom:0;
+}
+
+#register #top{
+	margin-bottom:20px;
+}
+
+#register .block{
+	width:auto !important;
+}
+
+#user_addresses_attributes_0_zip,#user_addresses_attributes_1_zip{
+	width:50px;
+}
+
+#same_l{
+	float:left;
+}

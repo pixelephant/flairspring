@@ -1,0 +1,150 @@
+@import '_mixins.css.scss';
+
+#register-promo{
+	a{text-decoration:none;}
+	.inner{
+		background: #e6e7e9;
+	}
+	h5{
+		letter-spacing:1px;
+		@include font-gill;
+		text-transform:uppercase;
+		text-align:center;
+		font-size:20px;
+		color:white;
+		padding:10px 40px;
+		background:$brand-orange;
+	}
+	ul{
+		margin:20px 0 0 0;
+		padding-bottom:20px;
+		li{
+			color:$brand-lightblue;
+			font-size:20px;
+			line-height:1.5;
+			text-align:center;
+		}
+	}
+}
+
+#newsletter-promo{
+	a{text-decoration:none;}
+	.inner{
+		width:290px;
+		height:155px;
+		background:url(newsletter-promo.jpg) no-repeat center;
+	}
+	h5{
+		letter-spacing:1px;
+		@include font-gill;
+		text-transform:uppercase;
+		font-size:26px;
+		color:$brand-darkblue;
+		padding:58px 5px 0px 5px;
+	}
+	p{
+		line-height:1;
+		padding:10px 5px;
+		color:$brand-lightblue;
+		span{
+			color:$brand-orange;
+		}
+		background:rgba(255,255,255,0.8);
+	}
+}
+
+#loyalty-promo{
+	a{text-decoration:none;}
+	.inner{
+		width:290px;
+		height:155px;
+		background:url(loyalty-promo.jpg) no-repeat center;
+		position:relative;
+	}
+	p{
+		line-height:1;
+		padding:5px;
+		position:absolute;
+		bottom:0;
+		background:rgba(255,0,0,0.6);
+		color:white;
+	}
+}
+
+#guarantee-promo{
+	a{text-decoration:none;}
+	.inner{
+		width:290px;
+		height:155px;
+		background:url(guarantee-promo.jpg) no-repeat center;
+		position:relative;
+	}
+	p{
+		position:relative;
+		top:60px;
+		top:50px;
+		width:60%;
+		margin:0 auto;
+		text-align:center;
+		line-height:1;
+		padding:5px;
+		background:rgba(0,0,125,0.6);
+		color:white;
+	}
+}
+
+#store-promo{
+	text-align:center;
+	a{text-decoration:none;}
+	.inner{
+		background:#eee;
+		div{
+			padding:5px 0;
+			a{
+				color:$brand-lightblue;
+				text-decoration:underline;
+			}
+			p{
+				font-size:15px;
+			}
+		}
+	}
+	h5{
+		padding:10px 10px 10px 10px;
+		letter-spacing:1px;
+		@include font-gill;
+		text-transform:uppercase;
+		font-size:20px;
+		color:$brand-orange;
+	}
+}
+
+.list{
+	ol{
+		list-style-type:decimal;
+		list-style-position:inside;
+		overflow:hidden;
+		li{			
+			width:300px;
+			float:left;
+			margin:0 10px 20px 0;
+			color:$brand-darkblue;
+			font-size:20px;
+			span{
+				color:$text-color;
+				font-size:14px;
+			}
+		}
+	}
+	img{
+		float:right;
+		border:5px solid $border-blue;
+	}
+}
+
+#gif{
+	text-align:center;
+	img{
+		width:235px;
+	}
+}

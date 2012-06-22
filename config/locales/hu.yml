@@ -1,0 +1,90 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+hu:
+  depth: "Mélység"
+  designer: "Tervező"
+  next: "Következő"
+  previous: "Előző"
+  show: "Megtekintés"
+  title: "Oldal címe"
+  search: "Keresés"
+  top_menu_need_help: "Segítséget szeretne? Hívjon minket:"
+  register: "Regisztráció"
+  login: "Bejelentkezés"
+  wishlist: "Kívánságlista"
+  aboutus: "Rólunk"
+
+  home:
+    breadcrumb:
+      home: "Főoldal"
+      search_text: "%{item_count} találatot kaptunk az alábbi kifejezésre: \"%{search_term}\""
+    last_viewed_carousel:
+      last_viewed_products: "Utoljára megtekintve"
+    minicart:
+      cart_link: "Kosár"
+    product_grid:
+      view_product: "Megtekintem"
+    newsletter:
+      newsletter: "Hírlevél"
+      newsletter_sign_up: "Feliratkozom"
+      newsletter_email_placeholder: "Email cím"
+    product_grid_action_buttons:
+      newest: "Legújabb"
+      name: "Név"
+      lowest_price: "Legolcsóbb"
+      highest_price: "Legdrágább"
+      view_all: "Összes"
+
+  categories:
+    show:
+      categories: "Kategóriák"
+      filter: "Szűrés"
+  custom_categories:
+    show:
+      categories: "Kategóriák"
+      filter: "Szűrés"
+      newest: "Legújabb"
+      name: "Név"
+      lowest_price: "Legolcsóbb"
+      highest_price: "Legdrágább"
+      view_all: "Összes"
+      first: "&laquo; Első"
+      last: "Utolsó &raquo;"
+      previous: "&lsaquo; Előző"
+      next: "Következő &rsaquo;"
+      truncate: "..."
+
+  products:
+    show:
+      list_price: "Lista ár"
+      sale_price: "Akciós ár"
+      add_to_cart: "Kosárba rakom"
+      specifications: "Tulajdonságok"
+      designer: "Tervező"
+      dimensions: "Méretek"
+      weight: "Súly (kg)"
+      expert_advice: "Szakértői tanácsok"
+      try_it_out: "Próbálja ki!"
+      about_the_designer: "A tervezőről"
+      about_the_brand: "A márkáról"
+      suggested_products: "Ajánlott termékeink"
+      try_it_out_store_start: "A termék kipróbálható "
+      try_it_out_store_end: " üzletünkben"
+
+  views:
+    pagination:
+      first: "&laquo; Első"
+      last: "Utolsó &raquo;"
+      previous: "&lsaquo; Előző"
+      next: "Következő &rsaquo;"
+      truncate: "..."
+
+  number:
+    currency:
+      format:
+        unit: "Ft"
+        precision: "0"
+        separator: ","
+        delimiter: " "
+        format: "%n&nbsp;%u"
