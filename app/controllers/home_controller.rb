@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  layout "home"
+  layout "application"
   
   def index
   	# @blogposts = WpBlogPost.limit(2).order('post_date desc').where(:post_status => 'publish')
