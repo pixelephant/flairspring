@@ -39,6 +39,28 @@ $gray:#aaa;
 
 }
 
+@mixin orange-button-right($size){
+	background-color: $orange;
+	display:block;
+	height:$size;
+	position: relative;
+	&:after {
+		left: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-left-color: $orange;
+		border-width: $size/2;
+		top: 50%;
+		margin-top: -1*$size/2;
+	}
+
+
+}
+
 @mixin transition-03s{
 	  -webkit-transition: all 0.3s ease;  /* Saf3.2+, Chrome */
 	     -moz-transition: all 0.3s ease;  /* FF4+ */

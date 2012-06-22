@@ -267,7 +267,7 @@ html{
 	width:980px;
 	height:35px;
 	background:$background-green;
-	margin:5px auto;
+	margin:10px auto;
 	li{
 		float:left;
 		height:35px;
@@ -282,6 +282,7 @@ html{
 			display:block;
 			text-decoration:none;
 			color:#fff;
+			height:35px;
 		}
 		&:hover .sub,&:focus .sub{
 			left:-1px;
