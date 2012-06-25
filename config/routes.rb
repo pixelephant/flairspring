@@ -14,6 +14,7 @@ Madearthome::Application.routes.draw do
 
 	match "admin" => 'admin#index'
 
+
 	match "comingsoon" => "comingsoon#index"
 	match "adatvedelem" => "comingsoon#how"
 	match "sajtoanyagok" => "comingsoon#sajtoanyagok"

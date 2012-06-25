@@ -26,7 +26,7 @@
 			<%= render 'home/product_grid' %>
 		</div>
 		<div id="action-bottom" class="box">
-			<a id="back-to-top" href="#product-list">oldal tetejére</a>
+			<a id="back-to-top" href="#product-list">&uarr; oldal tetejére</a>
 			<%= render 'home/product_grid_action_buttons' %>
 			<%= link_to t('.view_all'), flatten_param_hash(params.merge(:page => 'all')), :class => "view-all" %>
 			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>

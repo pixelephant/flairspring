@@ -3,27 +3,23 @@
 <%= render :partial => "home/product_slider_full_big", :locals => {:title => "Legnépszerűbb termékeink", :id => "newest-products", :products => Product.where(:sku => ['26685', '23051', '09510', '23025', '14522 B', '24182', '24146', '19632', '26987', '32201', '20482', '50422', '08068']).order(:updated_at).limit(13) } %>
 
 <section id="promo-boxes">
-	<div class="box promo" id="lazyboy-promo">
-		<a href="/fotelek">
+	<a href="/fotelek" class="box promo" id="lazyboy-promo">
 			<h3>La-Z-Boy komfort fotelek</h3>
 			<span class="feat" id="doles">Nagy <br> dőlésszög</span>
 			<span class="feat" id="lab">Magasított <br> lábak</span>
 			<span class="feat" id="emel">Emelhető <br> lábrész</span>
-		</a>
-	</div>
+	</a>
 
 	<div class="clearfix">
-		<div class="box promo" id="lamps-promo">
-			<a href="/lampak">
+		<a href="/lampak" class="box promo" id="lamps-promo">
 				<h3>900 féle lámpa</h3>
-			</a>
-		</div>
+		</a>
 
-		<div class="box promo" id="mirrors-promo">
-			<a href="/mirrors">
+		<a href="/mirrors" class="box promo" id="mirrors-promo">
+			
 				<h3>400 féle keretezett tükör</h3>
-			</a>
-		</div>
+			
+		</a>
 	</div>
 
 	<div class="clearfix wrap">

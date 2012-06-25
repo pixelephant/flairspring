@@ -1,60 +1,60 @@
-<div class="clearfix">
-	<section id="sidebar">
+<div class="clearfix" id="category-fotelek">
+	<a href="/fotelek/lazboy" class="box promo full" id="lazboy-promo">
+		<h3>La-Z-Boy komfort fotelek</h3>
+		<span class="feat" id="doles">Nagy <br> dőlésszög</span>
+		<span class="feat" id="lab">Magasított <br> lábak</span>
+		<span class="feat" id="emel">Emelhető <br> lábrész</span>
+	</a>
+	<div class="clearfix">
+		<section id="sidebar">
 			<nav id="category-nav">
 				<%= render "home/category_menu_left" %>
 			</nav>
-	</section>
+		</section>
 
 		<section id="promo-list">
-			
-			<div class="clearfix">
-				<div class="box cpromo big" id="fotelek">
-					<h3>Funkciógazdag fotelek asd</h3>
-				</div>
-
-				<div class="box cpromo small">
-					<p>1</p>
-				</div>
-				<div class="box cpromo small">
-					<p>2</p>
-				</div>
+			<div id="big">
+				
 			</div>
-			<div class="clearfix crow">
-				<div class="box cpromo small">
-					<p>1</p>
-				</div>
-				<div class="box cpromo small">
-					<p>1</p>
-				</div>
-				<div class="box cpromo small">
-					<p>1</p>
-				</div>
-				<div class="box cpromo small">
-					<p>1</p>
-				</div>
-				<div class="box cpromo small last">
-					<p>1</p>
-				</div>
-			</div>
-			<div class="box promo">
-				<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-			</div>
-			<div class="box promo">
-				<%= image_tag "uttermost.png", :title => "title", :class => "class" %>
-			</div>
-			<div class="box promo">
-				<%= image_tag "cart-icon.png", :title => "title", :class => "class" %>
-			</div>
-			<div class="box promo">
-				<%= image_tag "cart-icon.png", :title => "title", :class => "class" %>
-			</div>
-			<div class="box promo">
-				<%= image_tag "logo.png", :title => "title", :class => "class" %>
+			<div id="side">
+				<a href="#" class="product">
+					<img alt="Medium_23073" class="class" src="/uploads/photo/image_file/medium_23073.jpg" title="sandy, wing chair">
+				</a>
+				<a href="#" class="product">
+					<img alt="Medium_23073" class="class" src="/uploads/photo/image_file/medium_23073.jpg" title="sandy, wing chair">
+				</a>
+				<a href="#" class="product">
+					<img alt="Medium_23073" class="class" src="/uploads/photo/image_file/medium_23073.jpg" title="sandy, wing chair">
+				</a>
+				<a href="#" class="product">
+					<img alt="Medium_23073" class="class" src="/uploads/photo/image_file/medium_23073.jpg" title="sandy, wing chair">
+				</a>
+				<a href="#" class="product">
+					<img alt="Medium_23073" class="class" src="/uploads/photo/image_file/medium_23073.jpg" title="sandy, wing chair">
+				</a>
 			</div>
 		</section>
+	</div>
+	<div class="clearfix" id="promos">
+		<a href="/lampak" class="box promo" id="hintazo-promo">
+			<h3>Hintázó komfort fotelek</h3>
+		</a>
+
+		<a href="/mirrors" class="box promo" id="magaslabu-promo">
+			<h3>Magas lábú komfort fotelek</h3>
+		</a>
+		<a href="/lampak" class="box promo" id="masfel-promo">
+			<h3>1.5 személyes fotelek</h3>
+		</a>
+		
+		<div class="clearfix">
+			<a href="/lampak" class="box promo" id="utm-promo">
+				<h3>Uttermost fotelek</h3>
+			</a>
+
+			<a href="/mirrors" class="box promo" id="bor-promo">
+				<h3>Bőr fotelek</h3>
+			</a>
+		</div>
+	</div>
 </div>
-
-<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Legújabb ágyaink", :id => "newest-beds", :products => @category.products.order(:updated_at).limit(10) } %>
-<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Népszerű", :id1 => "popular-products", :id2 => "super-deals", :title2 => "Szuper akció" } %>
-
-<%= render 'home/last_viewed_carousel' if !session[:last_viewed_products].blank? %>

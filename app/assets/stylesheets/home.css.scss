@@ -274,7 +274,8 @@
 }
 
 
-.promo a{
+a.promo{
+	text-decoration:none;
 	display:block;
 }
 
@@ -294,18 +295,19 @@
 		position:absolute;
 		text-transform:uppercase;
 		text-align:center;
+		color:$text-brown;
 	}
 	#lab{
-		top:215px;
-		left:476px;
+		top:205px;
+		left:496px;
 	}
 	#doles{
-		top:90px;
-		left:195px;
+		top:80px;
+		left:215px;
 	}
 	#emel{
-		top:110px;
-		left:615px;
+		top:100px;
+		left:635px;
 	}
 }
 

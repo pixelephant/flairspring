@@ -1,212 +1,236 @@
 @import '_mixins.css.scss';
 
 #sidebar{
-	margin-top:-20px;
-	width:230px;
+	width:235px;
 	float:left;
-	margin-right:20px;
-	.box{
-		padding:20px;
-	}
-	a{
-		text-decoration:none;
-		margin-bottom: 5px;
-		padding-left: 3px;
-		display:block;
-		color:$brand-lightblue;
-		@include transition-03s;
-		&:hover{
-			color:$brand-darkblue;
-		}
-}
+	margin-right:10px;
 }
 
 #category-nav{
+	min-height:500px;
 	ul{
 		margin-bottom:20px;
+		background:#e6e6e6;
+	}
+	h3{
+		background:$background-green;
+		font-size:16px;
+		font-weight:normal;
+		@include font-gill;
+		font-weight:normal;
+		border-left:10px solid $orange;
+		padding:10px;
+		color:$text-brown2;
 	}
 	li{
-		margin-bottom:15px;
+		line-height:1.5;
+		color:$text-brown2;
+		padding:5px 20px;
+		text-decoration:underline;
+		a{
+			color:$text-brown2;
+			text-decoration:underline;
+		}
 	}
 }
 
-#product-list{	
-	padding:25px;
-	width:660px;
-	float:right;
-}
-
-#promo-list{
-	margin-top:-20px;
-	width:710px;
+#product-list{
+	width:735px;
 	float:left;
 }
 
-.no-touch a.quicklook{
-	top:-25px;
-}
-
-.touch a.quicklook{
-	top:10px;
-}
-
 #product-grid{
-	overflow:hidden;
-	padding:10px 15px 10px 20px;
-	a{
-		text-decoration:none;
-		color:$text-color;
-	}
-	.product{
-		float:left;
-		width:175px;
-		height:240px;
-		margin:10px 50px 25px 0px;
-		position:relative;
-		overflow:hidden;
-		&.last{
-			margin:10px 0px 25px 0px;
-		}
-		a.quicklook{
-			position:absolute;
-			z-index:1;
-			left:10px;
-			color:white;
-			@include font-gill;
-			width:155px;
-			height:25px;
-			text-align:center;
-			line-height:25px;
-			font-size:15px;
-			text-transform:uppercase;
-			display:block;
-			background-image:url(quicklook.png);
-			background-repeat:no-repeat;
-			background-position:130px center;
-			@include box-rgba(0,0,0,0.6);
-			text-decoration:none;
-			@include transition-03s;
-		}
-		&:hover .quicklook{
-			top:10px;
-		}
-		.left{
-			float:left;
-			padding-right:5px;
-			width:150px;
-		}
-		.price{
-			font-weight:bold;
-			text-decoration:none;
-			color:$text-color;
-		}
-		.image{
-			overflow:hidden;
-			position:relative;
-			border:10px solid $border-gray;
-			height:155px;
-			margin-bottom:10px;
-		}
-		img{
-			width:155px;
-			height:155px;
-			@include transition-03s;
-			z-index:1;
-		}
-		p{
-			@include font-gill;
-		}
-	}
+	
 }
+
+#promo-list{
+	width:735px;
+	float:left;
+}
+
 
 #product-modal-wrap{
 	display:none;
 }
 
-#product-modal{
-	width:800px;
-	margin:0 auto;
-	.top{
-		padding-bottom:10px;
-		margin-bottom:10px;
-		border-bottom:1px solid $border-gray;
-		h3,h4{
-			@include font-gill;
-			color:$text-color;
-			font-weight:bold;
-			text-transform:uppercase;
-			font-size:20px;
-		}
-		h4{
-			font-size:16px;
-			color:$brand-orange;
-			font-weight:normal;
-		}
-	}
-	.images{
-		float:left;
-		img{
-			width:50px;
-			height:50px;
-			border:5px solid $border-gray;
-			margin:0 10px;
-		}
-	}
-	.discounts{
-		float:right;
-		padding-right:50px;
-		color:$brand-orange;
-		li{
-			line-height:1.5;
-		}
-	}
-	.short-description{
-		margin:10px 0;
-	}
-	.properties{
-		float:left;
-		margin:10px 0;
-		span{
-			@include small-caps;
-		}
-	}
-	.button{
-		
-		float:right;
-		padding:9px;
-		position:absolute;
-		bottom:20px;
-		right:20px;
+#big{
+	width:560px;
+	float:left;
+	height:500px;
+}
+
+#side{
+	width:175px;
+	float:left;
+	height:500px;
+	overflow:hidden;
+	.product{
+		border:none;
+		margin:0;
+		padding:0;
+		text-align:center;
+		height:175px;
 	}
 }
+
+#promos{
+	margin:20px 0;
+	a{
+		text-decoration:none;
+	}
+	.promo{
+		float:left;
+		h3{
+	  		background-color: transparent;
+	  		background-color: rgba(52, 67, 67, 0.4); 
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66344343,endColorstr=#66344343);
+	        zoom: 1;
+	        @include font-gill;
+			font-size: 18px;
+			padding: 10px;
+			color:$text-brown;
+			font-weight: normal;
+		}
+	}
+}
+
+.simply-scroll-container { /* Container DIV - automatically generated */
+	position: relative;
+}
+
+	.simply-scroll-clip { /* Clip DIV - automatically generated */
+		position: relative;
+		overflow: hidden;
+	}
+
+	.simply-scroll-list { /* UL/OL/DIV - the element that simplyScroll is inited on */
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+		.simply-scroll-list li {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+	
+		.simply-scroll-list li img {
+			border: none;
+			display: block;
+		}
+
+
+.vert { /* wider than clip to position buttons to side */
+	width: 175px;
+	height: 500px;
+	float:left;
+}
+
+	.vert .simply-scroll-clip {
+		width: 175px;
+		height: 500px;
+	}
+	
+		.vert .simply-scroll-list {}
+		
+		.vert .simply-scroll-list li {
+			width: 290px;
+			height: 200px;
+		}
+		.vert .simply-scroll-list li img {}
+	
+	.vert .simply-scroll-btn {}
+
+	.vert .simply-scroll-btn-up { /* modified btn pos */
+		right: 0;
+		top: 0;
+	}
+	.vert .simply-scroll-btn-up.disabled {}
+	.vert .simply-scroll-btn-up:hover {}
+	
+	.vert .simply-scroll-btn-down { /* modified btn pos */
+		right: 0;
+		top: 52px;
+	}
+	.vert .simply-scroll-btn-down.disabled {}
+	.vert .simply-scroll-btn-down:hover {}
 
 /* Promó dobozok */
 
-.cpromo{
-	padding:20px;
-	float:left;
-	&.small{
-		width:86px;
-		height:125px;
-	}
-	&.big{
-		width:524px;
-		height:310px;
-		margin-right:20px;
-	}
-}
-
-.crow{
-	.small{
-		margin-right:20px;
-		&.last{
-			margin-right:0;
+#category-fotelek{
+	#lazboy-promo{
+		margin-bottom:20px;
+		display:block;
+	    position:relative;
+		width:980px;
+		height:294px;
+		background:url(/assets/home/lazboy.png) no-repeat center;
+		h3{
+			background:$background-green;
+			float:left;
+			padding:10px;
+			color:$text-brown;
+			font-weight:normal;
+		}
+		.feat{
+			position:absolute;
+			text-transform:uppercase;
+			text-align:center;
+			color:$text-brown;
+		}
+		#lab{
+			top:205px;
+			left:496px;
+		}
+		#doles{
+			top:80px;
+			left:215px;
+		}
+		#emel{
+			top:100px;
+			left:635px;
 		}
 	}
-}
 
-#category-nav{
-	display:block !important;
+	#big{
+		background: url(category/fotelek/fotel-big.png) no-repeat center center white;
+	}
+
+	#hintazo-promo{
+		width:350px;
+		height:200px;
+		background: url(category/fotelek/hinta.png) no-repeat right 30px white;
+		margin-right:10px;
+	}
+
+	#magaslabu-promo{
+		width:250px;
+		height:200px;
+		background: url(category/fotelek/magaslab.png) no-repeat center 30px white;
+		margin-right:10px;
+	}
+
+	#masfel-promo{
+		width:350px;
+		height:200px;
+		background: url(category/fotelek/masfel.png) no-repeat center 30px white;
+		margin-right:10px;
+	}
+
+	#utm-promo{
+		width:500px;
+		height:200px;
+		background: url(category/fotelek/utm.png) no-repeat center 50px white;
+		margin-right:10px;
+	}
+
+	#bor-promo{
+		width:470px;
+		height:200px;
+		background: url(category/fotelek/bor.png) no-repeat center 20px white;
+	}
 }
 
 @import '_quicklook_product.css.scss';
