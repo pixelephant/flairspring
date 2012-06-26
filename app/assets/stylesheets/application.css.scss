@@ -190,7 +190,7 @@ html{
 	background:$header-green;
 	-webkit-box-shadow: inset 1px -10px 10px 0px rgba(0, 0, 0, 0.1);
 	box-shadow: inset 1px -10px 10px 0px rgba(0, 0, 0, 0.1);
-
+	margin-top:15px;
 	overflow:hidden;
 }
 
@@ -311,6 +311,11 @@ html{
 	display:none;
 }
 
+#newest-products{
+	border-bottom:1px solid #e3e4e0;
+	margin-bottom:10px;
+}
+
 #social-promo{
 	width:980px;
 	margin:0 auto;
@@ -341,15 +346,17 @@ html{
 }
 
 #newsletter-button{
-		@include orange-button-right(30px);
+		background: url(orange-arrow-right.png) no-repeat;
 		color:white !important;
 		float:left;
 		text-align:center;
 		font-size: 20px;
-		width: 200px;
-		line-height: 30px;
+		width: 294px;
+		height:52px;
+		line-height:52px;
 		text-decoration: none;
 		margin-top: 10px;
+		text-transform:uppercase;
 }
 
 
