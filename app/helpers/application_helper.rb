@@ -93,10 +93,10 @@ end
 	end
 
 	def cart_shipping
-		if cart_subtotal < 500
-			return 1000
-		else
+		if cart_subtotal.nil?
 			return 0
+		else
+			return 1000
 		end
 	end
 
