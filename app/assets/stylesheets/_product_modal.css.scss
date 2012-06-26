@@ -1,9 +1,9 @@
 #product-modal{
 	a{
-		color:$brand-lightblue;
+		
 		@include transition-03s;
 		&:hover{
-			color:$brand-darkblue;
+			
 		}
 	}
 	width:760px;
@@ -52,7 +52,7 @@
 		text-decoration:none;
 		color:#3c3c3c;
 		.current-price{
-			color:$brand-orange;
+			
 		}
 		.old-price{
 			font-weight:normal;
@@ -74,7 +74,7 @@
 	line-height:1;
 	@include font-gill;
 	text-transform:uppercase;
-	color:$brand-darkblue;
+	
 	img{
 		width:25px;
 		height:25px;
@@ -91,7 +91,7 @@
 		@include font-garamond;
 		text-transform:lowercase;
 	}
-	border-bottom:1px solid $border-gray;
+	border-bottom:1px solid;
 }
 
 #modal-next,#modal-prev{

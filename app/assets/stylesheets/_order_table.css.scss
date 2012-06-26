@@ -1,13 +1,13 @@
 .order-table{
-		border:1px solid $border-gray;
+		border:1px solid;
 		margin-top:40px;
 		tr{
 			height:25px;
 			line-height:25px;
 			&.info{
-				color:$brand-lightblue;
+				
 				&.last{
-					border-bottom:1px solid $border-gray;
+					border-bottom:1px solid;
 				}
 			}
 			td,th{
@@ -17,7 +17,7 @@
 	}
 	thead{
 		tr{
-			border-bottom:1px solid $border-gray;
+			border-bottom:1px solid;
 		}
 	}
 	tbody{
@@ -30,11 +30,11 @@
 	}
 	tfoot{
 		tr{
-			border-top:1px solid $border-gray;
-			color:$brand-darkblue;
+			border-top:1px solid;
+			
 		}
 		.email{
-			color:$brand-orange;
+			
 			font-style:italic;
 		}
 	}

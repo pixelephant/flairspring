@@ -5,12 +5,12 @@
 @import '_product_modal.css.scss';
 
 #top{
-	border-bottom:1px solid $border-gray;
+	// border-bottom:1px solid;
 	padding-bottom:20px;
 	span{
 		float:right;
 		color:#60bb78;
-		@include small-caps;
+		// @include small-caps;
 		font-size:16px;
 		background: url(secure.png) no-repeat left center;
 		padding-left:25px;
@@ -28,7 +28,7 @@
 
 #register-cta-box{
 	background:#F2F7FB;
-	border:1px dashed $border-gray;
+	// border:1px dashed;
 	padding:20px;
 	width:400px;
 	margin-top:20px;
@@ -51,7 +51,7 @@
 		}
 	}
 	a{
-		@include orange-button;
+		// @include orange-button;
 	}
 }
 
@@ -71,7 +71,7 @@
 
 #loyalty,#edit-data{
 	background:#F2F7FB;
-	border:1px dashed $border-gray;
+	// border:1px dashed;
 	padding:20px;
 	width:400px;
 	margin-top:20px;
@@ -93,22 +93,21 @@
 		margin-top:20px;
 	}
 	.button{
-		@include orange-button;
+		// @include orange-button;
 		top:20px;
 		position:relative;
 	}
 }
 
 #loyalty-sum{
-	font-size:24px;
-	color:$brand-darkblue;
-	@include font-gill;
+	font-size:24px;	
+	// @include font-gill;
 	margin-bottom:20px;
 }
 
 #edit-data{
 	.button{
-		@include blue-button;
+		// @include blue-button;
 		top:20px;
 		position:relative;
 	}
@@ -117,13 +116,13 @@
 
 .username{
 	background:none !important;
-	color:$text-color !important;
+	
 }
 
 .table-wrap{
 	margin-top:40px;
 	h4{
-		@include font-gill;
+		// @include font-gill;
 		text-transform:uppercase;
 		margin-top:0;
 		margin-bottom:20px;
@@ -135,10 +134,9 @@
 	width:100%;
 	border:1px solid #c2c2c2;
 	thead{
-		@include background-gradient(#fafafa,#efefef);
+		// @include background-gradient(#fafafa,#efefef);
 		th{
-			color:$brand-orange;
-			@include font-gill;
+			// @include font-gill;
 			font-size:14px;
 			font-weight:normal;
 			padding:10px;
@@ -146,24 +144,23 @@
 		}
 	}
 	tfoot{
-		@include background-gradient(#fafafa,#efefef);
+		// @include background-gradient(#fafafa,#efefef);
 	}
 	tbody{
 		a{
-			color:$brand-lightblue;
-			@include transition-03s;
+			// @include transition-03s;
 			&:hover{
-				color:$brand-darkblue;
+				
 			}
 		}
 		tr{
 			border-top:1px solid #c2c2c2;
 			border-bottom:1px solid #c2c2c2;
-			@include font-gill;
+			// @include font-gill;
 			font-weight:normal;
 			font-size:14px;
 			&:nth-child(even){
-				@include background-gradient(#f4f5f7,#dee8f4);
+				// @include background-gradient(#f4f5f7,#dee8f4);
 			}
 		}
 		td{
