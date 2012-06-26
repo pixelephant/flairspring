@@ -302,6 +302,20 @@ html{
 				float:right;  
 			    margin-right:0px;
 			}
+			h5{
+				padding-left:10px;
+				font-weight:normal;
+			}
+			.col1{
+				width:50%;
+				float:left;
+				li{
+					padding:5px 10px;
+					float:none;
+					text-transform:none;
+					line-height:1.2;
+				}
+			}
 		}
 	}
 }

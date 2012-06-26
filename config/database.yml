@@ -18,15 +18,15 @@ development:
   password:
   socket: /tmp/mysql.sock
 
-wordpress:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: flairspringblog
-  pool: 5
-  username: flairspring
-  password: tyeF2q
-  host: mysql.flairspring.hu
+#wordpress:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  database: flairspringblog
+#  pool: 5
+#  username: flairspring
+#  password: tyeF2q
+#  host: mysql.flairspring.hu
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
