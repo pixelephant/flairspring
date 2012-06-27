@@ -16,17 +16,17 @@ development:
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: /opt/lampp/var/mysql/mysql.sock
 
-wordpress:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: flairspringblog
-  pool: 5
-  username: flairspring
-  password: tyeF2q
-  host: mysql.flairspring.hu
+# wordpress:
+#   adapter: mysql2
+#   encoding: utf8
+#   reconnect: false
+#   database: flairspringblog
+#   pool: 5
+#   username: flairspring
+#   password: tyeF2q
+#   host: mysql.flairspring.hu
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -39,7 +39,7 @@ test:
   pool: 5
   username: root
   password: tyeF2q
-  host: 176.58.103.30
+  socket: /opt/lampp/var/mysql/mysql.sock
 
 production:
   adapter: mysql2
@@ -49,4 +49,4 @@ production:
   pool: 5
   username: root
   password: tyeF2q
-  host: 176.58.103.30
+  socket: /var/run/mysqld/mysqld.sock
