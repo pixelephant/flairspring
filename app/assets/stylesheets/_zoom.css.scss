@@ -56,7 +56,7 @@
 	z-index:6000;
 	height:auto;
   	z-index:10000;
-	border:5px solid $border-blue;
+	border:5px solid;
 	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.4); 
      -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.4); 
           box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
@@ -111,5 +111,5 @@
 / "zoomThumbActive" on the anchor selected
 /*********************************************************/
 .zoomThumbActive{
-	border:5px solid $brand-orange !important;
+	border:5px solid !important;
 }

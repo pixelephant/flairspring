@@ -4,7 +4,6 @@
 	height:300px;
 	position:relative;
 	background:url(boxes/visszavasarlas.png) no-repeat center 65px;
-	background-color:$brand-darkblue;
 	h3{
 		position:absolute;
 		bottom:0;
@@ -21,7 +20,7 @@
 		text-decoration:none;
 	}
 	img{
-		border:5px solid $border-blue;
+		border:5px solid;
 	}
 	p{
 		margin-top:25px;
@@ -38,7 +37,6 @@
 	}
 	.text{
 		text-align:center;
-		background:$brand-lightblue;
 		background:rgba(25,146,193,0.9);
 		color:white !important;
 		position:relative;
@@ -76,7 +74,6 @@
 
 #loyalty_ad{
 	height:300px;
-	background:$brand-lightblue;
 	h4{
 		color:white;
 		@include small-caps;
@@ -109,7 +106,6 @@
 	position:relative;
 	text-align:center;
 	h4{
-		color:$brand-orange;
 		@include font-gill;
 		text-transform:uppercase;
 		padding: 20px 10px;
@@ -123,7 +119,7 @@
 	ul{
 		margin:20px 0;
 		text-align:center;
-		color:$brand-lightblue;
+		
 		list-style:none;
 		font-size:20px;
 		li{
@@ -140,7 +136,7 @@
 #blog_ad{
 	position:relative;
 	height:300px;
-	background: url(boxes/blog.png) no-repeat center 20px $brand-orange;
+	background: url(boxes/blog.png) no-repeat center 20px;
 	color:white;
 	text-align:center;
 	overflow:hidden;
@@ -159,7 +155,6 @@
 	.white{
 		background:white;
 		padding:5px;
-		color:$text-color;
 		width:300px;
 		margin-left:-20px;
 	}

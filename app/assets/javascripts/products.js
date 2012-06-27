@@ -7,7 +7,19 @@ $(window).load(function(){
 	
 	$("#add-to-whishlist").click(function(){
 		//ajax call
-		$(this).addClass("added").find("span").html("Kívánságlistán");
+		$.ajax({
+		  type: 'POST',
+		  url: "/products/add_to_wishlist",
+			data: {id : $("#product-title").data("product")},
+			dataType: "json",
+			headers: {
+    		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  		},
+		  success: function(resp){
+		  	if(resp.status == 'true'){
+		  		$("#add-to-whishlist").addClass("added").find("span").html("Kívánságlistán");
+		  	}
+		}});
 		return false;
 	});
 
