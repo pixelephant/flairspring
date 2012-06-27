@@ -62,5 +62,23 @@ $(document).ready(function(){
 		optionsForRows : [5,10,20]
 	 });
 
+	$(".remove-from-wishlist").click(function(){
+		var id = $(this).data("product");
+		//ajax call
+		$.ajax({
+		  type: 'POST',
+		  url: "/products/remove_from_wishlist",
+			data: {id : id},
+			headers: {
+    		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  		},
+		  success: function(resp){
+		  	if(resp.status == 'true'){
+		  		console.log(id);
+		  		$("#" + id).remove();
+		  	}
+		}});
+		return false;
+	});
 	
 });
