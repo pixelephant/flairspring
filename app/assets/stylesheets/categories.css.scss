@@ -26,10 +26,9 @@
 		line-height:1.5;
 		color:$text-brown2;
 		padding:5px 20px;
-		text-decoration:underline;
 		a{
 			color:$text-brown2;
-			text-decoration:underline;
+			text-decoration:none;
 		}
 	}
 }
@@ -181,17 +180,17 @@
 			color:$text-brown;
 		}
 		#lab{
-		top: 225px;
+		top: 210px;
 		left: 500px;
-		}
-		#doles{
-			top: 90px;
-			left: 195px;
-		}
-		#emel{
-			top:110px;
-			left:655px;
-		}
+	}
+	#doles{
+		top: 75px;
+		left: 195px;
+	}
+	#emel{
+		top:95px;
+		left:655px;
+	}
 	}
 
 	#big{

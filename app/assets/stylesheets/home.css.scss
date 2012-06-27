@@ -254,10 +254,13 @@
 	text-align:center;
 }
 
+
+
 #about-us{
 	width:980px;
 	margin:0 auto;
 	text-align:center;
+	background:white;
 	p,li{
 		line-height:1.5;
 	}
@@ -284,8 +287,10 @@
 }
 
 #blog{
+	background:white;
 	width:980px;
-	margin:10px auto;
+	margin:0 auto;
+	padding:10px 0;
 	border-bottom:1px solid #e3e4e0;
 	border-top:1px solid #e3e4e0;
 	overflow:hidden;
@@ -479,13 +484,6 @@ a.promo{
 		margin-top:20px;
 	}
 }
-
-
-.wrap{
-	margin-bottom:10px;
-}
-
-
 
 
 @import '_sliders.css.scss';

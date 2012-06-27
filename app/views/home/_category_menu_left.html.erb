@@ -5,7 +5,7 @@
 		<% sub_categories.each_with_index do |sub_cat,i| %>
 			<% unless current == sub_cat.custom_category_group_id %>
 				<% if sub_cat.custom_category_group_id.nil? %>
-					<h3>-----------------------</h3>
+					<h3>Nincs nevem</h3>
 				<% else %>
 					<h3><%= sub_cat.custom_category_group.name %></h3>
 				<% end %>							
@@ -17,11 +17,17 @@
 				<% end %>
 			</li>
 		<% end %>
-		<li>
-			<%= link_to "Sale", "#" %>
-		</li>
-		<li>
-			<%= link_to "New arrivals", "#" %>
-		</li>
+	</ul>
+	<ul>
+		<h3>Ajánljuk</h3>
+					<li>
+						<%= link_to "Új termékek", "#" %>
+					</li>
+					<li>
+						<%= link_to "Akciós termékek", "#" %>
+					</li>
+					<li>
+						<%= link_to "Összes termék", "#" %>
+					</li>
 	</ul>
 <% end %>
