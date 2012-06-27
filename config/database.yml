@@ -16,7 +16,7 @@ development:
   pool: 5
   username: root
   password:
-  socket: /opt/lampp/var/mysql/mysql.sock
+  socket: /tmp/mysql.sock
 
 # wordpress:
 #   adapter: mysql2
@@ -39,7 +39,6 @@ test:
   pool: 5
   username: root
   password: tyeF2q
-  socket: /opt/lampp/var/mysql/mysql.sock
 
 production:
   adapter: mysql2
@@ -49,4 +48,3 @@ production:
   pool: 5
   username: root
   password: tyeF2q
-  socket: /var/run/mysqld/mysqld.sock

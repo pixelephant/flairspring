@@ -6,6 +6,32 @@
 	height:425px;
 	margin:0 auto;
 	overflow:hidden;
+	position:relative;
+	#bolt{
+		background: url(orange-arrow-left-big1.png) no-repeat;
+		color: white;
+		width: 211px;
+		height: 104px;
+		position: absolute;
+		bottom: 20px;
+		right: 0;
+		z-index: 10;
+		padding-left: 60px;
+		padding-top: 10px;
+		h5{
+			text-transform:uppercase;
+			font-size:18px;
+			text-align:center;
+			margin-bottom:10px;
+			font-weight:normal;
+		}
+		p{
+			text-align:center;
+		}
+		a{
+			color:white;
+		}
+	}
 	.slide{
 		width:940px;
 		height:425px;
@@ -31,11 +57,11 @@
 		cursor:pointer;
 	}
 	li{
-		float:left;
-		width:150px;
-		margin-right:8px;
-		text-align:center;
-		overflow:hidden;
+	float: left;
+	width: 120px;
+	margin-right: 44px;
+	text-align: center;
+	overflow: hidden;
 		&:last-child{
 			margin-right:0;
 		}
@@ -218,7 +244,7 @@
 }
 
 #advantages{
-	border-top:2px solid #a5a99a;
+	border-top:1px solid #e3e4e0;
 	width:980px;
 	margin:0 auto;
 	color:$text-green;
@@ -260,15 +286,15 @@
 #blog{
 	width:980px;
 	margin:10px auto;
-	border-top:1px solid $gray;
-	border-bottom:1px solid $gray;
+	border-bottom:1px solid #e3e4e0;
+	border-top:1px solid #e3e4e0;
 	overflow:hidden;
 	.blog-entry{
 		width:490px;
 		float:left;
 		&:first-child{
 			width:489px;
-			border-right:1px solid $gray;
+			border-right:1px solid #e3e4e0;
 		}
 	}
 }
@@ -282,7 +308,7 @@ a.promo{
 #lazyboy-promo{
 	position:relative;
 	width:980px;
-	height:294px;
+	height:320px;
 	background:url(/assets/home/lazboy.png) no-repeat center;
 	h3{
 		background:$background-green;
@@ -298,16 +324,16 @@ a.promo{
 		color:$text-brown;
 	}
 	#lab{
-		top:205px;
-		left:496px;
+		top: 225px;
+		left: 500px;
 	}
 	#doles{
-		top:80px;
-		left:215px;
+		top: 90px;
+		left: 195px;
 	}
 	#emel{
-		top:100px;
-		left:635px;
+		top:110px;
+		left:655px;
 	}
 }
 
@@ -418,12 +444,13 @@ a.promo{
 		}
 	}
 	.left-arrow{
-		@include orange-button-left;
+		background: url(orange-arrow-left.png) no-repeat center;
+		height:52px;
+		width:294px;
 		color:white;
 		font-size:40px;
 		line-height:50px;
 		float:right;
-		width:250px;
 		text-align:center;
 		
 	}
