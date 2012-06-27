@@ -1,4 +1,4 @@
-~<%= form_for "payment", :url => "checkout/payment" do |f| %>
+<%= form_for "payment", :url => "checkout/payment" do |f| %>
 <div class="block">
 	<h5>Kapcsolattartási információk</h5>
 		<fieldset>
@@ -30,48 +30,48 @@
 		<% f.label :shipping_name, "Szállítási név" do %>
 		<%= 'Cég név <small>(nem kötelező)</small>'.html_safe %>
 		<% end %>
-		<%= f.text_field :shipping_name, :value => @shipping_address.name %>
+		<%= f.text_field :shipping_name, :value => (@shipping_address.name unless @shipping_address.blank?) %>
 	</fieldset>
 	<fieldset>
 		<div class="half">
 			<%= f.label :shipping_zip, "Irányítószám" %>
-			<%= f.text_field :shipping_zip, :value => @shipping_address.zip, :size => 4 %>
+			<%= f.text_field :shipping_zip, :value => (@shipping_address.zip unless @shipping_address.blank?), :size => 4 %>
 		</div>
 		<div class="half">
 			<%= f.label :shipping_city, "Város" %>
-			<%= f.text_field :shipping_city, :value => @shipping_address.city %>
+			<%= f.text_field :shipping_city, :value => (@shipping_address.city unless @shipping_address.blank?) %>
 		</div>
 	</fieldset>
 	<fieldset>
 		<%= f.label :shipping_additional, "Cím" %>
-		<%= f.text_field :shipping_additional, :value => @shipping_address.additional %>
+		<%= f.text_field :shipping_additional, :value => (@shipping_address.additional unless @shipping_address.blank?) %>
 	</fieldset>
 	</div>
 	<div class="block">
 		<h5>Számlázási információk</h5>
 		<fieldset>
-			<%= f.label "same", "Same as delivery" %>
+			<%= f.label "same", "Szállítással megegyező" %>
 			<%= f.check_box "same" %>
 		</fieldset>
 		<fieldset>
 			<% f.label :billing_name do %>
 				<%= 'Cég név <small>(nem kötelező)</small>'.html_safe %>
 			<% end %>
-			<%= f.text_field :billing_name, :value => @billing_address.name %>
+			<%= f.text_field :billing_name, :value => (@billing_address.name unless @billing_address.blank?) %>
 		</fieldset>
 		<fieldset>
 			<div class="half">
 				<%= f.label :billing_zip, "irányítószám" %>
-				<%= f.text_field :billing_zip, :value => @billing_address.zip, :size => 4 %>
+				<%= f.text_field :billing_zip, :value => (@billing_address.zip unless @billing_address.blank?), :size => 4 %>
 			</div>
 			<div class="half">
 				<%= f.label :billing_city, "Város" %>
-				<%= f.text_field :billing_city, :value => @billing_address.city %>
+				<%= f.text_field :billing_city, :value => (@billing_address.city unless @billing_address.blank?) %>
 			</div>
 		</fieldset>
 		<fieldset>
 			<%= f.label :billing_additional, "Cím" %>
-			<%= f.text_field :billing_additional, :value => @billing_address.additional %>
+			<%= f.text_field :billing_additional, :value => (@billing_address.additional unless @billing_address.blank?) %>
 		</fieldset>
 	</div>
 	<div class="block">

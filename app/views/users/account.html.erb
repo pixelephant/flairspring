@@ -1,17 +1,17 @@
 <section id="account" class="box full clearfix">
-	<h3 id="top">Felhasználói fiókom <span class="username">kis_aladar@gmail.com</span></h3>
+	<h3 id="top">Felhasználói fiókom <span class="username"><%= current_user.email %></span></h3>
 	<div class="clearfix">
 		<div id="loyalty">
 			<p>Önnek eddig a</p>
 			<h4>Törzsvásárlói programban</h4>
-			<p id="loyalty-sum">257 932 Ft-ja</p>
+			<p id="loyalty-sum"><%= number_to_currency(current_user.personal_discount_available, :precision => 0) %>-ja</p>
 			<p>gyűlt össze, melyet bármikor beválthat tetszőleges vásárlásra a <a href="/cart">kosár oldalon</a> található gomb segítségével.</p>
 		</div>
 		<div id="edit-data">
 			<h4>Adatmódosítás</h4>
-			<p>Alapértelmezett szállítási címe: 1101 Garibaldi utca 123/1</p>
+			<p>Alapértelmezett szállítási címe: <%= @default_address.zip %>, <%= @default_address.city %>, <%= @default_address.additional %></p>
 			<p>Alapértelmezett fizetési módja: Banki átutalás</p>
-			<p>A számlát: Kis Aladár nevére állítjuk ki</p>
+			<p>A számlát: <%= @accounting_name %> nevére állítjuk ki</p>
 			<a href="#" class="button blue">Adatmódosítás</a>
 		</div>
 	</div>
@@ -33,34 +33,15 @@
 				</tr>
 			</tfoot>
 			<tbody>
-				<tr>
-					<td><a class="fancybox ajax" href="/orders/1">xyz-123</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>December 16, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
-				<tr>
-					<td><a class="fancybox ajax" href="/products/quicklook/1">xyz-123</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>December 16, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
-				<tr>
-					<td><a class="fancybox ajax" href="/products/quicklook/1">xyz-123</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>December 16, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
-				<tr>
-					<td><a class="fancybox ajax" href="/products/quicklook/1">xyz-123</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>December 16, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
+				<% @orders.each do |order| %>
+					<tr>
+						<td><a class="fancybox ajax" href="/megrendeleseim/<%= order.id %>">xyz-<%= order.id %></a></td>
+						<td><span class="status delivered"><%= order.status %></span></td>
+						<td><%= order.created_at %></td>
+						<td><%= order.estimated_date %></td>
+						<td><%= order.order_sum %></td>
+					</tr>
+				<% end %>
 			</tbody>
 		</table>
 	</div>
@@ -82,30 +63,14 @@
 				</tr>
 			</tfoot>
 			<tbody>
-				<tr>
-					<td><a rel="group" class="fancybox ajax" href="/products/quicklook/1">Termék neve</a></td>
-					<td><span class="status delivered">Még nem vették meg neked :(</span></td>
-					<td>12 000 Ft</td>
-					<td><a href="#">törlés</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">121-asd</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
-				<tr>
-					<td><a href="#">121-asd</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
-				<tr>
-					<td><a href="#">121-asd</a></td>
-					<td><span class="status delivered">Kiszállítva</span></td>
-					<td>December 12, 2011</td>
-					<td>125 000 Ft</td>
-				</tr>
+				<% @wishlist_items.each do |item| %>
+					<tr id="<%= item.id %>">
+						<td><a rel="group" class="fancybox ajax" href="/products/quicklook/<%= item.product.id %>"><%= item.product.name.titleize %></a></td>
+						<td><span class="status delivered"><%= item.sold ? 'Megvéve' : 'Még nem vették meg' %></span></td>
+						<td><%= number_to_currency(item.product.price, :precision => 0) %></td>
+						<td><a data-product="<%= item.id %>" class="remove-from-wishlist" href="#">törlés</a></td>
+					</tr>
+				<% end %>
 			</tbody>
 		</table>
 	</div>

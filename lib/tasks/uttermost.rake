@@ -141,4 +141,36 @@ namespace :import do
   	end
   end
 
+  task :related => :environment do
+
+  	counter = 0
+
+  	CSV.foreach("public/uttermost_related_products.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+	  	if counter > 0
+	  		if Product.exists?(:sku => row[1]) && !row[42].blank?
+	  			p = Product.where(:sku => row[1]).first
+	  			related = row[42].strip
+	  			related_products = related.split("|")
+	  			
+	  			related_products.each do |rel|
+	  				if Product.exists?(:sku => rel)
+	  					begin p.product_relates << Product.where(:sku => rel).first
+
+	  					rescue Exception => e
+	  						puts "Related products change error: #{e.class}"
+	  					end
+	  				end
+	  			end
+
+	  			begin p.save
+						puts "Related products changed"
+					rescue Exception => e
+		  			puts "Related products change error: #{e.class}"
+					end
+	  		end
+	  	end
+	  	counter = counter + 1
+  	end
+  end
+
 end
