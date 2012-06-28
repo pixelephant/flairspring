@@ -85,8 +85,11 @@ $("document").ready(function(){
 	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     	},
 			success: function(resp){
-				console.log(resp);
-				$("#use-coupon").addClass("active");
+				if(resp == true){
+					$("#use-coupon").addClass("active");
+				}else{
+					$("#use-coupon").removeClass("active");
+				}
 				//Ár levonása
 		}});
 		return false;
