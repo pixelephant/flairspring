@@ -109,6 +109,14 @@ class CheckoutController < ApplicationController
 
       session.delete(:order_id)
 
+      unless session[:coupon_code].nil?
+        c = Coupon.where(:code => session[:coupon_code]).first
+        c.used = 1
+        c.order_id = @order.id
+        c.save
+        session[:coupon_code] = nil
+      end
+
       render 'thankyou'
     end
   end

@@ -1,5 +1,7 @@
 class Coupon < ActiveRecord::Base
 
+	belongs_to :order
+
 	def coupon_value(cart)
 		discount = 0
 		discount = self.offer_value if self.offer_type == 1
