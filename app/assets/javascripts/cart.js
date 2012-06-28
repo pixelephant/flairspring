@@ -62,10 +62,15 @@ $("document").ready(function(){
 	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     	},
 			success: function(resp){
-				if(resp == true){
+				if(resp.status == "true"){
 					$("#personal-discount").addClass("active");
+					val = parseInt($(".total-price").html()) - parseInt(resp.value);
+					$(".total-price").html(val);
 				}else{
 					$("#personal-discount").removeClass("active");
+					val = parseInt($(".total-price").html()) + parseInt(resp.value);
+					console.log(val);
+					$(".total-price").html(val);
 				}
 				//Ár levonása
 		}});
@@ -85,8 +90,10 @@ $("document").ready(function(){
 	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     	},
 			success: function(resp){
-				if(resp == true){
+				console.log(resp);
+				if(resp.status == "true"){
 					$("#use-coupon").addClass("active");
+
 				}else{
 					$("#use-coupon").removeClass("active");
 				}

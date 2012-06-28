@@ -11,6 +11,7 @@ class CartController < ApplicationController
           @r_products << rel
         end
       end
+      @discount = (session[:personal_discount] == current_user.id ? current_user.personal_discount_available.to_i : 0)
       render "index"
     else
       render "empty"
@@ -57,10 +58,12 @@ class CartController < ApplicationController
     respond_to do |format|
       if params[:action] == 'personal' && current_user && (session[:personal_discount] != current_user.id)
         session[:personal_discount] = current_user.id
-        format.json { render :json => "true" }
+        discount = current_user.personal_discount_available
+        format.json { render :json => {:status => "true", :value => discount} }
       else
         session[:personal_discount] = nil
-        format.json { render :json => "false" }
+        discount = current_user.personal_discount_available
+        format.json { render :json => {:status => "false", :value => discount} }
       end
     end
   end
@@ -69,10 +72,10 @@ class CartController < ApplicationController
     respond_to do |format|
       if params[:action] == 'coupon' && Coupon.where("used = 0 AND code = '#{params[:code]}' AND valid > NOW()").any? && (session[:coupon_code] != params[:code])
         session[:coupon_code] = params[:code]
-        format.json { render :json => "true" }
+        format.json { render :json => {:status => "true", :value => "1"} }
       else
         session[:coupon_code] = nil
-        format.json { render :json => "false" }
+        format.json { render :json => {:status => "false", :value => "1"} }
       end
     end
   end

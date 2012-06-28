@@ -80,7 +80,7 @@
 						<label id="use-loyalty" class="loy" for="loyalty">Törzsvásárlói pontjaim</label>
 						<div>
 							<span><%= number_to_currency(current_user.personal_discount_available, :precision => 0) %></span>
-							<a class="button" id="personal-discount" href="#">Beváltom</a>
+							<a class="button<%= " active" if session[:personal_discount] == current_user.id %>" id="personal-discount" href="#">Beváltom</a>
 						</div>
 					</div>
 				<% end %>
@@ -88,7 +88,7 @@
 			<div id="total">
 					<p><b>Cart subtotal</b> <span class="subtotal"><%= number_to_currency(cart_subtotal, :precision => 0) %></span></p>
 					<p><b>Shipping</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
-					<p id="total-price"><b>Total</b> <span class="total-price"><%= number_to_currency((cart_subtotal + shipping),:precision => 0) %></span></p>
+					<p id="total-price"><b>Total</b> <span class="total-price"><%= (cart_subtotal + shipping - @discount) %></span> Ft</p>
 			</div>
 		</div>
 		<form id="checkout-form" action="/checkout">
