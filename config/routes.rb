@@ -36,6 +36,8 @@ Madearthome::Application.routes.draw do
 
 	post 'products/add_to_wishlist' => 'products#add_to_wishlist'
 	post 'products/remove_from_wishlist' => 'products#remove_from_wishlist'
+
+	post 'cart/coupon' => 'cart#coupon'	
 	#Ajax routes END
 
 	#Categories START

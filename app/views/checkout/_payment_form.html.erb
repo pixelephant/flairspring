@@ -1,4 +1,4 @@
-<form action="/checkout/thankyou" id="payment-form">
+<%= form_for "payment", :url => "/checkout/thankyou" do |f| %>
 	<div class="block">
 		<h5>Ajándék lesz?</h5>
 		<fieldset>
@@ -12,17 +12,17 @@
 		<h5>Fizetési mód</h5>
 		<fieldset>
 			<div class="clearfix">
-				<input type="radio" name="payment-type" id="payment-card" />
+				<input type="radio" name="payment_type" value="1" id="payment-card" />
 				<label class="right-label" for="payment-card">Bankkártya</label>
 			</div>
 			
 			<div class="clearfix">
-				<input type="radio" name="payment-type" id="payment-paypal" />			
+				<input type="radio" name="payment_type" value="2" id="payment-paypal" />			
 				<label class="right-label" for="payment-paypal">Paypal</label>				
 			</div>
 			
 			<div class="clearfix">
-				<input type="radio" name="payment-type" id="payment-transfer" />
+				<input type="radio" name="payment_type" value="3" id="payment-transfer" />
 				<label class="right-label" for="payment-transfer">Átutalás</label>
 			</div>
 
@@ -37,5 +37,4 @@
 		<input type="submit" value="megrendelem" /> 	
 		<a class="step-back" href="#">vissza az előző lépéshez</a>
 	</div>	
-
-</form>
+<% end %>

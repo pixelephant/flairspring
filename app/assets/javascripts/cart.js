@@ -52,14 +52,43 @@ $("document").ready(function(){
 		return false;
 	});
 
-	$("#coupon a").click(function(){
-		//$.ajax({
-		//  type: 'POST',
-		//  url: "/cart/coupon",
-		//	data: {code : $("#coupon-code").val()},
-		//  success: function(resp){
-			//vissza, hogy ok, nem ok, hogy módosítja az árat, ha el van fogadva akkor többet nem lehet beváltani (disable,törlés?)
-		//}});
+	$("#personal-discount").click(function(){
+		$.ajax({
+			type: 'POST',
+			url: "/cart/personal",
+			data: {action : "personal"},
+			headers: {
+	      'X-Transaction': 'POST Example',
+	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    	},
+			success: function(resp){
+				if(resp == true){
+					$("#personal-discount").addClass("active");
+				}else{
+					$("#personal-discount").removeClass("active");
+				}
+				//Ár levonása
+		}});
+		return false;
+	});
+
+	$("#use-coupon").click(function(){
+		$.ajax({
+			type: 'POST',
+			url: "/cart/coupon",
+			data: {
+				action : "coupon",
+				code : $("#coupon-code").val()
+			},
+			headers: {
+	      'X-Transaction': 'POST Example',
+	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    	},
+			success: function(resp){
+				console.log(resp);
+				$("#use-coupon").addClass("active");
+				//Ár levonása
+		}});
 		return false;
 	});
 

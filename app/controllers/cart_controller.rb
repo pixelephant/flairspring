@@ -55,9 +55,19 @@ class CartController < ApplicationController
 
   def personal
     respond_to do |format|
-      puts params[:action]
-      if params[:action] == 'personal' && current_user
+      if params[:action] == 'personal' && current_user && (session[:personal_discount] != current_user.id)
         session[:personal_discount] = current_user.id
+        format.json { render :json => "true" }
+      else
+        session[:personal_discount] = nil
+        format.json { render :json => "false" }
+      end
+    end
+  end
+
+  def coupon
+    respond_to do |format|
+      if params[:action] == 'coupon' && Coupon.where("used = 0 AND code = '#{params[:code]}' AND valid > NOW()").any?
         format.json { render :json => "true" }
       else
         format.json { render :json => "false" }

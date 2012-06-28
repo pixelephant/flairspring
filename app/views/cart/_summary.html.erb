@@ -4,7 +4,10 @@
 			<h5>Rendelés összesítő</h5>
 			<p>Rendelés összege <span class="price"><span><%= cart_subtotal %></span> Ft</span></p>
 			<p>Szállítási költség <span class="price"><span><%= cart_shipping %></span> Ft</span></p>
-			<p class="total">Összesen <span class="price"><span><%= cart_shipping + cart_subtotal %></span> Ft</span></p>
+			<% if @personal_discount.to_i > 0 %>
+				<p class="total">Hűségkedvezmény <span class="price"><span><%= @personal_discount.to_i %></span> Ft</span></p>	
+			<% end %>
+			<p class="total">Összesen <span class="price"><span><%= cart_shipping.to_i + cart_subtotal.to_i - @personal_discount.to_i%></span> Ft</span></p>
 		</div>
 		<div class="section">
 			<h5>Just ask</h5>

@@ -3,7 +3,7 @@
 <section id="cart" class="box full clearfix">
 	<div id="cart-top" class="clearfix">
 		<h3>Kosarad tartalma</h3>
-		<p class="right"><a href="/login">Login</a> or <a href="/register">Register</a> for faster checkout!</p>
+		<% render 'cart/register_cta' unless current_user %>
 	</div>
 		<p class="empty-cart">Kosarad üres! Nézd meg a speckó ajánlatainkat alább! </p>
 </section>

@@ -1,10 +1,9 @@
-<% @r_products = Array.new %>
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <section id="cart" class="box full clearfix">
 	<div id="cart-top" class="clearfix">
 		<h3>Kosarad tartalma</h3>
-		<p class="right"><a href="/login">Login</a> or <a href="/register">Register</a> for faster checkout!</p>
+		<% render 'cart/register_cta' unless current_user %>
 	</div>
 	<% if @cart %>
 		<table id="cart-table">
@@ -24,9 +23,6 @@
 			<tbody>
 			<% @cart.line_items.each do |li| %>
 
-				<% li.product.product_relates.each do |rel| %>
-					<% @r_products << rel %>
-				<% end %>
 				<tr data-id="<%= li.product.id %>">
 						<td class="product-cell">
 							<div class="clearfix">
@@ -38,6 +34,9 @@
 							<% li.product.optional_properties.each do |property| %>
 								<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
 							<% end %>
+
+							<p><span class="property">Mag X Szel X Mely: </span><%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %></p>
+
 						</td>
 						<td class="discount-cell">
 							<span class="discount-element">Ajándék kutya</span>
@@ -45,20 +44,20 @@
 						</td>
 						<td class="price-cell">
 							<span>
-								<%= productPrice(li.product.id) %>
-							</span> Ft
+								<%= price = productPrice(li.product.id) %> Ft
+							</span>
 						</td>
 						<td class="multiply-cell">
 							x
 						</td>
 						<td class="quantity-cell">
-							<input type="number" min='0' max="5" name="" id="" value="<%= li.quantity %>"/> db
+							<input type="number" min='0' max="5" name="" id="" value="<%= q = li.quantity %>"/> db
 						</td>
 						<td class="equals-cell">
 							=
 						</td>
 						<td class="sum-price-cell">
-							<span>630</span> Ft
+							<span><%= price * q %></span> Ft
 						</td>
 						<td class="actions-cell">
 							<a class="delete" href="">x</a>
@@ -73,21 +72,23 @@
 					<label for="coupon-code">Kupon-kód</label>
 					<div>
 						<input type="text" name="coupon-code" id="coupon-code" />
-						<a class="button" href="#">Beváltom</a>
+						<a id="use-coupon" class="button" href="#">Beváltom</a>
 					</div>
 				</div>
-				<div>
-					<label class="loy" for="loyalty">Törzsvásárlói pontjaim</label>
+				<% if current_user %>
 					<div>
-						<span>123 011 Ft</span>
-						<a class="button" href="#">Beváltom</a>
+						<label id="use-loyalty" class="loy" for="loyalty">Törzsvásárlói pontjaim</label>
+						<div>
+							<span><%= number_to_currency(current_user.personal_discount_available, :precision => 0) %></span>
+							<a class="button" id="personal-discount" href="#">Beváltom</a>
+						</div>
 					</div>
-				</div>
+				<% end %>
 			</div>
 			<div id="total">
-					<p><b>Cart subtotal</b> <span class="subtotal"><%= cart_subtotal %></span> Ft</p>
-					<p><b>Shipping</b> <span class="shipping-cost">123</span> Ft</p>
-					<p id="total-price"><b>Total</b> <span class="total-price">123</span> Ft</p>
+					<p><b>Cart subtotal</b> <span class="subtotal"><%= number_to_currency(cart_subtotal, :precision => 0) %></span></p>
+					<p><b>Shipping</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
+					<p id="total-price"><b>Total</b> <span class="total-price"><%= number_to_currency((cart_subtotal + shipping),:precision => 0) %></span></p>
 			</div>
 		</div>
 		<form id="checkout-form" action="/checkout">

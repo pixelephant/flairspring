@@ -25,12 +25,12 @@
 			</tr>
 			<tr class="info last">
 				<td>Estimated arrival</td>
-				<td class="right"><%= @arrival %></td>
+				<td class="right"><%= @order.estimated_date %></td>
 			</tr>
-			<% @items.each do |item| %>
+			<% @order.order_items.each do |item| %>
 			<tr>
-				<td>1db <%= item.product.name %></td>
-				<td class="right"><%= number_to_currency(productPrice(item.product.id), :precision => 0) %></td>
+				<td>1db <%= item.product.name.titleize %></td>
+				<td class="right"><%= number_to_currency(item.price, :precision => 0) %></td>
 			</tr>
 			<% end %>
 			<tr>
@@ -49,7 +49,7 @@
 			</tr>
 			<tr>
 				<td><strong>Total</strong></td>
-				<td class="right"><strong><%= number_to_currency(@cart, :precision => 0) %></strong></td>
+				<td class="right"><strong><%= number_to_currency(@order.price, :precision => 0) %></strong></td>
 			</tr>
 		</tbody>
 	</table>
