@@ -6,7 +6,7 @@ class CreateCoupons < ActiveRecord::Migration
     	t.boolean :used
     	t.integer :offer_value
     	t.integer :offer_type
-    	t.date :valid
+    	t.date :valid_date
 
       t.timestamps
     end

@@ -11,7 +11,11 @@ class CartController < ApplicationController
           @r_products << rel
         end
       end
-      @discount = (session[:personal_discount] == current_user.id ? current_user.personal_discount_available.to_i : 0)
+      if current_user
+        @discount = (session[:personal_discount] == current_user.id ? current_user.personal_discount_available.to_i : 0)
+      else
+        @discount = 0
+      end
       render "index"
     else
       render "empty"
@@ -56,26 +60,27 @@ class CartController < ApplicationController
 
   def personal
     respond_to do |format|
+      discount = current_user.personal_discount_available
       if params[:action] == 'personal' && current_user && (session[:personal_discount] != current_user.id)
         session[:personal_discount] = current_user.id
-        discount = current_user.personal_discount_available
         format.json { render :json => {:status => "true", :value => discount} }
       else
         session[:personal_discount] = nil
-        discount = current_user.personal_discount_available
         format.json { render :json => {:status => "false", :value => discount} }
       end
     end
   end
 
   def coupon
+    coupon = Coupon.where("used = 0 AND code = '#{params[:code]}' AND valid_date > NOW()")
+    discount = (coupon.any? ? coupon.first.coupon_value(session[:cart_id]) : 0)
     respond_to do |format|
-      if params[:action] == 'coupon' && Coupon.where("used = 0 AND code = '#{params[:code]}' AND valid > NOW()").any? && (session[:coupon_code] != params[:code])
+      if params[:action] == 'coupon' && coupon.any? && (session[:coupon_code] != params[:code])
         session[:coupon_code] = params[:code]
-        format.json { render :json => {:status => "true", :value => "1"} }
+        format.json { render :json => {:status => "true", :value => discount} }
       else
         session[:coupon_code] = nil
-        format.json { render :json => {:status => "false", :value => "1"} }
+        format.json { render :json => {:status => "false", :value => discount} }
       end
     end
   end

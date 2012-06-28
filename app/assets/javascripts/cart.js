@@ -69,7 +69,6 @@ $("document").ready(function(){
 				}else{
 					$("#personal-discount").removeClass("active");
 					val = parseInt($(".total-price").html()) + parseInt(resp.value);
-					console.log(val);
 					$(".total-price").html(val);
 				}
 				//Ár levonása
@@ -90,12 +89,14 @@ $("document").ready(function(){
 	      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     	},
 			success: function(resp){
-				console.log(resp);
 				if(resp.status == "true"){
 					$("#use-coupon").addClass("active");
-
+					val = parseInt($(".total-price").html()) - parseInt(resp.value);
+					$(".total-price").html(val);
 				}else{
 					$("#use-coupon").removeClass("active");
+					val = parseInt($(".total-price").html()) + parseInt(resp.value);
+					$(".total-price").html(val);
 				}
 				//Ár levonása
 		}});
