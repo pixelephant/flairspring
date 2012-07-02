@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.string   "additional"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "billing",    :default => false, :null => false
+t.boolean  "billing",    :default => false, :null => false
     t.text     "name"
     t.boolean  "default"
   end
@@ -112,17 +112,6 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
   end
 
   add_index "contents", ["slug"], :name => "index_contents_on_slug"
-
-  create_table "coupons", :force => true do |t|
-    t.string   "code"
-    t.boolean  "used",        :default => false, :null => false
-    t.integer  "offer_value"
-    t.integer  "offer_type"
-    t.date     "valid_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order_id"
-  end
 
   create_table "custom_categories", :force => true do |t|
     t.string   "name"
@@ -264,8 +253,6 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity"
-    t.integer  "price"
   end
 
   create_table "orders", :force => true do |t|
@@ -275,11 +262,6 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.text     "basket_serialization"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.date     "estimated_date"
-    t.integer  "payment_type"
-    t.integer  "discount_used"
-    t.integer  "price"
   end
 
   create_table "photos", :force => true do |t|
@@ -363,7 +345,7 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.integer  "property_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "num"
+    t.float    "numeric"
   end
 
   create_table "properties_to_categories", :force => true do |t|
@@ -502,7 +484,6 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
-    t.string   "accounting_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

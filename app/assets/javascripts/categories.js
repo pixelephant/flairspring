@@ -2,9 +2,9 @@
 //= require carousel
 //= require jquery.fancybox
 //= require custom_categories
-//= require simplyscroll
+//= require jquery.easytabs.min
 
 
 $("document").ready(function(){
-		$("#side").simplyScroll({orientation:'vertical',customClass:'vert'});
+		$('#tab-wrap').easytabs();
 });

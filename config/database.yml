@@ -38,8 +38,7 @@ test:
   database: madearthome_test
   pool: 5
   username: root
-  password: 
-  socket: /opt/lampp/var/mysql/mysql.sock
+  password: tyeF2q
 
 production:
   adapter: mysql2

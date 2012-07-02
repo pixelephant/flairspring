@@ -244,7 +244,7 @@
 }
 
 #advantages{
-	border-top:1px solid #e3e4e0;
+	border-top:1px solid $border-gray;
 	width:980px;
 	margin:0 auto;
 	color:$text-green;
@@ -291,15 +291,15 @@
 	width:980px;
 	margin:0 auto;
 	padding:10px 0;
-	border-bottom:1px solid #e3e4e0;
-	border-top:1px solid #e3e4e0;
+	border-bottom:1px solid $border-gray;
+	border-top:1px solid $border-gray;
 	overflow:hidden;
 	.blog-entry{
 		width:490px;
 		float:left;
 		&:first-child{
 			width:489px;
-			border-right:1px solid #e3e4e0;
+			border-right:1px solid $border-gray;
 		}
 	}
 }

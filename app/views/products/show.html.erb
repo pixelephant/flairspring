@@ -1,5 +1,8 @@
 <section class="box full" id="product-box">
 	<div id="product-inner" class="clearfix">
+		<div id="product-title" data-product="<%= @product.id %>">
+				<h2><%= @product.name %> <span class="sku">Cikkszám:  <%= @product.sku %></span> </h2>
+		</div>
 		<div id="left-side">
 			<% if @product.photos.any? %>
 				<div id="picture-wrap">
@@ -8,13 +11,6 @@
 							<%= image_tag(@product.default_photo.image_file.product_page_default.to_s) %>
 						</a>
 					</div>
-				</div>
-				<div id="picture-list">
-					<% @product.photos.each do |photo| %>
-							<a class="<%= photo.default? ? 'zoomThumbActive' : '' %>" href="#" rel="{gallery: 'gal1', smallimage: '<%=photo.image_file.medium.to_s %>',largeimage: '<%=photo.image_file.to_s%>'}">
-					  			<%= image_tag(photo.image_file.thumb.to_s) %>
-							</a>
-					<% end %>
 				</div>
 				<div id="social-buttons">
 				  	<div id="fb-root"></div>
@@ -32,10 +28,6 @@
 			</div>
 			<% end %>
 		<div id="right-side">
-			<div id="product-title" data-product="<%= @product.id %>">
-				<h2><%= @product.name %> <span class="sku">Cikkszám:  <%= @product.sku %></span> </h2>
-				<%= image_tag(@product.brand.small_image_file.to_s) unless @product.brand.blank? %>
-			</div>
 			<div id="info-box">
 				<div id="price">
 					<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
@@ -44,55 +36,47 @@
 						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
 					<% end %>
 				</div>
-				<!--<div class="third">
-
-				</div>
-				<div class="third last">
-
-				</div>-->
-			</div>
-			<div id="properties-box">
-			<!-- FormFor -->
-						<% @size_weight.each do |property| %>
-							<p>
-								<%= label(:property_category, :id, PropertyCategory.find(property.property_category_id).category_name.capitalize ) %>
-								<%= property.property_name.capitalize %>
-							</p>
+				<div id="buy-box">
+					<%= form_for LineItem.new, :url => line_items_path(:product_id => @product.id) do |f| %>
+					<p><label for="">Mennyiség</label><input type="number" name="quantity" min="1" max="5" id="quantity" value='1' /></p>
+					<%= f.submit t('.add_to_cart'), :disable_with => "Folyamatban...", :id => 'add-to-cart' %>
+						<% if @on_wishlist %>
+							<a id="add-to-whishlist" class="added" href="#"> ♥ <span>Kívánságlistán</span></a>
+						<% else %>
+							<a id="add-to-whishlist" href="#"> ♥ <span>Kívánságlista</span></a>
 						<% end %>
-
-						<p><label for="">Szállítási idő</label> 12 nap</p>
-			</div>
-			<div id="buy-box">
-				<%= form_for LineItem.new, :url => line_items_path(:product_id => @product.id) do |f| %>
-				<p><label for="">Mennyiség</label><input type="number" name="quantity" min="1" max="5" id="quantity" value='1' /></p>
-				<%= f.submit t('.add_to_cart'), :disable_with => "Folyamatban...", :id => 'add-to-cart' %>
-					<% if @on_wishlist %>
-						<a id="add-to-whishlist" class="added" href="#"> ♥ <span>Kívánságlistán</span></a>
-					<% else %>
-						<a id="add-to-whishlist" href="#"> ♥ <span>Kívánságlista</span></a>
 					<% end %>
+					<p class="links">
+						<a class="fancybox" href="#szallitas">Szállítás információk</a>
+						<a class="fancybox" href="#fizetes">Fizetési lehetőségek</a>
+						<a class="fancybox" href="#garancia">Garancia</a>
+					</p>	
+				</div>
+			</div>
+			<div id="short-description">
+				<h2><%= @product.name %></h2>
+				<%= lead(@product.long_description).html_safe %>
+			</div>
+
+			
+
+			<div id="properties-box">
+				<p><label for="">Szállítási idő</label> 12 nap</p>
+				<% if !@designer.nil? %>
+
+					<p><span><%= t('designer') %>: </span><%= @designer.name %></p>
 				<% end %>
-				<p class="links">
-					<a class="fancybox" href="#szallitas">Szállítás információk</a>
-					<a class="fancybox" href="#fizetes">Fizetési lehetőségek</a>
-					<a class="fancybox" href="#garancia">Garancia</a>
-				</p>	
+				<% @size_weight.each do |property| %>
+					<p>
+						<%= label(:property_category, :id, PropertyCategory.find(property.property_category_id).category_name.capitalize ) %>
+						<%= property.property_name.capitalize %>
+					</p>
+				<% end %>
+				<%= render :partial => ('products/properties') %>
 			</div>
 		</div>
 	</div>
 </section>
-
-<div id="specifications" class="box full">
-	<h3><%= t('.specifications') %></h3>
-	<p id="short-description">
-		<%= lead(@product.long_description).html_safe %>
-	</p>
-	<% if !@designer.nil? %>
-			<p><span><%= t('designer') %>: </span><%= @designer.name %></p>
-		<% end %>
-
-		<%= render :partial => ('products/properties') %>
-</div>
 
 <% box = 0 %>
 <div class="box-wrap clearfix">
