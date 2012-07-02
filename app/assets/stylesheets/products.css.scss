@@ -42,22 +42,16 @@
 }
 
 #social-buttons{
-	border-top:1px solid;
-	border-right:1px solid;
+	border-top:1px solid $border-gray;
 	width:450px;
 	height:75px;
 	line-height:75px;
-	padding-left:10px;
 	div{
 		float:left;
 		margin:0 5px;
 	}
 	.fb-like iframe{
 		
-	}
-	.tw-like{
-		top: 4px;
-		position: relative;
 	}
 }
 
@@ -71,6 +65,7 @@
 
 #right-side{
 	width:520px;
+	padding-top:20px;
 }
 
 #product-title{
@@ -100,7 +95,7 @@
 
 #price p{
 	line-height:1.4;
-	font-size:18px;
+	font-size:22px;
 	color:$text-brown2;
 	span{
 		font-size:24px;
@@ -114,16 +109,14 @@
 }
 
 #properties-box{
-	height:150px;
-	border-bottom:1px solid;
-	padding:20px;
+	border-top:1px solid $border-gray;
+	padding-top:20px;
 	p{
 		line-height:1.5;
 		label{
 			float:left;
 			width:175px;
 			margin-right:20px;
-			@include small-caps;
 		}
 	}
 }
@@ -153,18 +146,15 @@
 }
 
 #buy-box{
+	padding-bottom:20px;
 	input[type="number"]{
 		width:35px;
 	}
 	
-	
 	p{
 		line-height:1.5;
 		label{
-			float:left;
-			width:175px;
 			margin-right:20px;
-			@include small-caps;
 		}
 	}
 	.links{
@@ -175,7 +165,12 @@
 }
 
 #short-description{
+	padding-top:20px;
 	margin-bottom:20px;
+	line-height:1.5;
+	h2{
+		text-transform:uppercase;
+	}
 }
 
 #expert-advice{
