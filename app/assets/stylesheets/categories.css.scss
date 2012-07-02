@@ -33,43 +33,63 @@
 	}
 }
 
-#product-list{
-	width:735px;
-	float:left;
-}
-
-#product-grid{
-	
-}
-
-#promo-list{
-	width:735px;
-	float:left;
-}
-
-
 #product-modal-wrap{
 	display:none;
 }
 
-#big{
-	width:560px;
-	float:left;
-	height:500px;
+#tab-wrap{
+	margin-bottom:20px;
+	padding-bottom:20px;
+	border-bottom: 1px solid #E3E4E0;
 }
 
-#side{
-	width:175px;
-	float:left;
-	height:500px;
-	overflow:hidden;
-	.product{
-		border:none;
-		margin:0;
-		padding:0;
-		text-align:center;
-		height:175px;
-	}
+.etabs {
+	margin: 0;
+	padding: 0;
+}
+.tab { 
+	 display: inline-block;
+	 zoom:1;
+	 *display:inline;
+	 background: #bcb7ae;
+	 -moz-border-radius: 2px;
+	 -webkit-border-radius: 2px;
+	 border-radius: 2px;
+	 width:160px;
+}
+
+.tab a { 
+	 color:$text-brown;
+	 display: block;
+	 padding: 10px;
+	 outline: none;
+	 text-decoration:none;
+}
+
+.tab a:hover { 
+	text-decoration: underline;
+}
+
+.tab.active {
+	background:#8f8b84;
+}
+
+.tab a.active {
+	font-weight: bold;
+}
+
+.tab-container .panel-container {
+	background: #fff;
+	border: solid #666 1px; 
+	padding: 10px; 
+}
+
+.tab-div{
+	min-height:300px;
+	line-height:300px;
+	text-align:center;
+	font-size:60px;
+	background:#e6e6e6;
 }
 
 #promos{
@@ -93,68 +113,61 @@
 	}
 }
 
-.simply-scroll-container { /* Container DIV - automatically generated */
-	position: relative;
-}
-
-	.simply-scroll-clip { /* Clip DIV - automatically generated */
-		position: relative;
-		overflow: hidden;
-	}
-
-	.simply-scroll-list { /* UL/OL/DIV - the element that simplyScroll is inited on */
-		overflow: hidden;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	
-		.simply-scroll-list li {
-			padding: 0;
-			margin: 0;
-			list-style: none;
-		}
-	
-		.simply-scroll-list li img {
-			border: none;
-			display: block;
-		}
-
-
-.vert { /* wider than clip to position buttons to side */
-	width: 175px;
-	height: 500px;
+#sub-list{
+	margin-left:10px;
+	width:725px;
 	float:left;
+	overflow:hidden;
+	.sub{
+		width:352.5px;
+		float:left;
+		height:200px;
+		
+		margin-bottom:20px;
+		&:nth-child(odd){
+			margin-right:20px;
+			
+		}
+		h3{
+	  		background-color: transparent;
+	  		background-color: rgba(52, 67, 67, 0.4); 
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66344343,endColorstr=#66344343);
+	        zoom: 1;
+	        @include font-gill;
+			font-size: 18px;
+			padding: 10px;
+			color:$text-brown;
+			font-weight: normal;
+		}
+	}
 }
 
-	.vert .simply-scroll-clip {
-		width: 175px;
-		height: 500px;
-	}
-	
-		.vert .simply-scroll-list {}
-		
-		.vert .simply-scroll-list li {
-			width: 290px;
-			height: 200px;
-		}
-		.vert .simply-scroll-list li img {}
-	
-	.vert .simply-scroll-btn {}
 
-	.vert .simply-scroll-btn-up { /* modified btn pos */
-		right: 0;
-		top: 0;
-	}
-	.vert .simply-scroll-btn-up.disabled {}
-	.vert .simply-scroll-btn-up:hover {}
-	
-	.vert .simply-scroll-btn-down { /* modified btn pos */
-		right: 0;
-		top: 52px;
-	}
-	.vert .simply-scroll-btn-down.disabled {}
-	.vert .simply-scroll-btn-down:hover {}
+/* Sub dobozok */
+
+#sub-hinta{
+	background: url(/assets/category/fotelek/subs/hintazo.png) no-repeat center top;
+}
+
+#sub-forgo{
+	background: url(/assets/category/fotelek/subs/forgo.png) no-repeat center top;
+}
+
+#sub-fal{
+	background: url(/assets/category/fotelek/subs/fal.png) no-repeat center ;
+}
+
+#sub-falforgo{
+	background: url(/assets/category/fotelek/subs/falforgo.png) no-repeat center ;
+}
+
+#sub-motoros{
+	background: url(/assets/category/fotelek/subs/motoros.png) no-repeat center ;
+}
+
+#sub-magas{
+	background: url(/assets/category/fotelek/subs/magas.png) no-repeat center top;
+}
 
 /* Promó dobozok */
 

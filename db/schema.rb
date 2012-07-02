@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120611144541) do
+ActiveRecord::Schema.define(:version => 20120628145001) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -111,6 +111,17 @@ ActiveRecord::Schema.define(:version => 20120611144541) do
   end
 
   add_index "contents", ["slug"], :name => "index_contents_on_slug"
+
+  create_table "coupons", :force => true do |t|
+    t.string   "code"
+    t.boolean  "used"
+    t.integer  "offer_value"
+    t.integer  "offer_type"
+    t.date     "valid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order_id"
+  end
 
   create_table "custom_categories", :force => true do |t|
     t.string   "name"
