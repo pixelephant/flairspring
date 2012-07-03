@@ -44,10 +44,10 @@
 }
 
 #slider-thumbs{
-	width:940px;
+	width:980px;
 	margin:10px auto;
 	ul{
-		width:940px;
+		width:980px;
 		overflow:hidden;
 	}
 	a{
@@ -58,10 +58,11 @@
 	}
 	li{
 	float: left;
-	width: 120px;
-	margin-right: 44px;
+	width: 150px;
 	text-align: center;
 	overflow: hidden;
+	margin-right:16px;
+	background:#eee;
 		&:last-child{
 			margin-right:0;
 		}

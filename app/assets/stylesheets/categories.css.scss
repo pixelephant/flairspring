@@ -46,16 +46,19 @@
 .etabs {
 	margin: 0;
 	padding: 0;
+	overflow:hidden;
 }
 .tab { 
-	 display: inline-block;
-	 zoom:1;
-	 *display:inline;
+	 float:left;
 	 background: #bcb7ae;
 	 -moz-border-radius: 2px;
 	 -webkit-border-radius: 2px;
 	 border-radius: 2px;
 	 width:160px;
+	 margin-right:4px;
+	 &:last-child{
+	 	margin-right:0;
+	 }
 }
 
 .tab a { 
@@ -119,13 +122,13 @@
 	float:left;
 	overflow:hidden;
 	.sub{
-		width:352.5px;
+		width:228px;
 		float:left;
 		height:200px;
-		
 		margin-bottom:20px;
-		&:nth-child(odd){
-			margin-right:20px;
+		margin-right:20px;
+		&:nth-child(3n){
+			margin-right:0;
 			
 		}
 		h3{
