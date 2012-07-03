@@ -9,15 +9,15 @@ class CheckoutController < ApplicationController
 
     if current_user
       #redirect_to billing_shipping
-      @user = current_user
-      @shipping_address = current_user.addresses.limit(1).where(:billing => 0).first
-      @billing_address = current_user.addresses.limit(1).where(:billing => 1).first
+      # @user = current_user
+      # @shipping_address = current_user.addresses.limit(1).where(:billing => 0).first
+      # @billing_address = current_user.addresses.limit(1).where(:billing => 1).first
 
-      if session[:personal_discount] == @user.id
-        @personal_discount = (@user.personal_discount_available > current_cart.total ? current_cart.total : @user.personal_discount_available)
-      end
+      # if session[:personal_discount] == @user.id
+      #   @personal_discount = (@user.personal_discount_available > current_cart.total ? current_cart.total : @user.personal_discount_available)
+      # end
 
-      render 'billing-shipping'
+      redirect_to :action => "billing_shipping"
     else
       render 'register-login'
     end
@@ -25,13 +25,10 @@ class CheckoutController < ApplicationController
   end
 
   def billing_shipping
-    if current_user
+    unless current_user.blank?
       @user = current_user
       @shipping_address = current_user.addresses.where(:billing => 0).first
       @billing_address = current_user.addresses.where(:billing => 1).first
-    else
-      @user = User.new
-      current_user = @user
     end
 
     render 'billing-shipping'
@@ -39,23 +36,24 @@ class CheckoutController < ApplicationController
 
   def payment
 
-    unless current_user
-      render 'billing-shipping'
-    end
-
     data = params[:payment]
 
-    shipping_address = current_user.addresses.where(:billing => 0).first
-    billing_address = data[:same] == 0 ? current_user.addresses.where(:billing => 1).first : shipping_address
+    if current_user.blank?
+      @user = User.create(:email => data[:email], :password => data[:email])
+      @user.save!
+      @user.title_name = data[:title_name]
+      @user.first_name = data[:first_name]
+      @user.last_name = data[:last_name]
+      @user.phone = data[:phone]
+      @user.admin = false
+      @user.save!
+      session[:checkout_user] = @user.id
+    else
+      @user = current_user
+    end
 
-    shipping_address = Address.new(:user_id => current_user.id, :billing => 0) if shipping_address.nil?
-    billing_address = Address.new(:user_id => current_user.id, :billing => 1) if billing_address.nil? && data[:same] == 0
-
-    billing_address.city = data[:billing_city]
-    billing_address.name = data[:billing_name]
-    billing_address.zip = data[:billing_zip]
-    billing_address.additional = data[:billing_additional]
-    billing_address.save!
+    shipping_address = @user.addresses.where(:billing => 0).first
+    shipping_address = Address.new(:user_id => @user.id, :billing => 0) if shipping_address.nil?
 
     shipping_address.city = data[:shipping_city]
     shipping_address.name = data[:shipping_name]
@@ -64,9 +62,22 @@ class CheckoutController < ApplicationController
     shipping_address.save!
 
     shipping = shipping_address.id
-    billing = data[:same] == 0 ? billing_address.id : shipping
 
-    @order = Order.create(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => current_user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date))
+    if data[:same] == 1 && !shipping_address.nil?
+      billing = shipping
+    else
+      billing_address = Address.new(:user_id => @user.id, :billing => 1)
+
+      billing_address.city = data[:billing_city]
+      billing_address.name = data[:billing_name]
+      billing_address.zip = data[:billing_zip]
+      billing_address.additional = data[:billing_additional]
+      billing_address.save!
+
+      billing = billing_address.id
+    end
+
+    @order = Order.create(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => @user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date))
 
     sum = 0
 
@@ -78,8 +89,10 @@ class CheckoutController < ApplicationController
     @order.price = sum
     @personal_discount = 0
 
-    if session[:personal_discount] == current_user.id
-      @personal_discount = (current_user.personal_discount_available > current_cart.total ? current_cart.total : current_user.personal_discount_available)
+    if current_user
+      if session[:personal_discount] == current_user.id
+        @personal_discount = (current_user.personal_discount_available > current_cart.total ? current_cart.total : current_user.personal_discount_available)
+      end
     end
 
     session.delete(:personal_discount)
@@ -105,7 +118,12 @@ class CheckoutController < ApplicationController
       if @order.save
         LineItem.destroy_all(:cart_id => current_cart.id)
       end
-      @user = current_user
+
+      if current_user
+        @user = current_user
+      else
+        @user = User.find(session[:checkout_user])
+      end
 
       session.delete(:order_id)
 
@@ -118,6 +136,17 @@ class CheckoutController < ApplicationController
       end
 
       render 'thankyou'
+    end
+  end
+
+  def lazy_registration
+    respond_to do |format|
+      if session[:checkout_user].blank?
+        format.json { render :json => {:status => "false"} }
+      else
+        session[:checkout_user] = nil
+        format.json { render :json => {:status => "true"} }
+      end
     end
   end
 
