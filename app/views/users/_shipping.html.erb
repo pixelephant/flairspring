@@ -27,9 +27,7 @@
 <div class="block">
 	<h5>Szállítási információk</h5>
 	<fieldset>
-		<% f.label :shipping_name, "Szállítási név" do %>
-		<%= 'Cég név <small>(nem kötelező)</small>'.html_safe %>
-		<% end %>
+		<%= f.label :shipping_name, "Szállítási név" %>
 		<%= f.text_field :shipping_name, :value => (@shipping_address.name unless @shipping_address.blank?) %>
 	</fieldset>
 	<fieldset>
@@ -50,13 +48,11 @@
 	<div class="block">
 		<h5>Számlázási információk</h5>
 		<fieldset>
-			<%= f.label "same", "Szállítással megegyező" %>
 			<%= f.check_box "same" %>
+			<%= f.label "same", "Megegyezik a szállítási adatokkal", :id => "same_l" %>
 		</fieldset>
 		<fieldset>
-			<% f.label :billing_name do %>
-				<%= 'Cég név <small>(nem kötelező)</small>'.html_safe %>
-			<% end %>
+			<%= f.label :billing_name, "Számlázási név" %>
 			<%= f.text_field :billing_name, :value => (@billing_address.name unless @billing_address.blank?) %>
 		</fieldset>
 		<fieldset>

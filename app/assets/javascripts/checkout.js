@@ -16,6 +16,28 @@ $("document").ready(function(){
     });
   }
 
+
+
+
+
+  $("#payment_same").change(function(){
+
+    if($(this).is(":checked")){
+      $("#payment_billing_name").val($("#payment_shipping_name").val());
+      $("#payment_billing_zip").val($("#payment_shipping_zip").val());
+      $("#payment_billing_city").val($("#payment_shipping_city").val());
+      $("#payment_billing_additional").val($("#payment_shipping_additional").val());
+    }
+    else{
+      $("#payment_billing_name").val("");
+      $("#payment_billing_zip").val("");
+      $("#payment_billing_city").val("");
+      $("#payment_billing_additional").val("");
+    }
+
+  });
+
+
   $("#lazy-registration").click(function(){
     //ajax call
     $.ajax({

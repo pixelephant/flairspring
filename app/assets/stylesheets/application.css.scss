@@ -261,6 +261,10 @@ body{
 	line-height:1.5;
 	margin:0;
 	color:$text-green;
+	&.simple{
+		float:right;
+		padding-top:35px;
+	}
 }
 
 #search-examples{
@@ -292,26 +296,48 @@ body{
 		text-transform:uppercase;
 		font-size:16px;
 		font-weight:normal;
+		border:1px solid transparent;
+		border-bottom:none;
 		a{
 			display:block;
 			text-decoration:none;
 			color:#fff;
 			height:35px;
+			font-size:15px;
+		}
+		&:hover,&:focus{
+			background:white;
+			border:1px solid $gray;
+			border-bottom:none;
+			a{
+				color:$text-brown;
+			}
 		}
 		&:hover .sub,&:focus .sub{
 			left:-1px;
+			top:33px;
 		}
 		&:hover .sub.right,	&:focus .sub.right{
 			right:-1px;
 			left:auto;
 		}
 		ul.sub{
+			border:1px solid $gray;
+			padding:20px;
+			li:hover,li:focus{
+				border:none;
+				color:$text-brown2;
+			}
+			a{
+				color:$text-brown;
+				padding-left:5px;
+			}
 			z-index:100;
 			position:absolute;
 			left:-999em;
-			background:$background-green;
-			color:white;
+			color:$text-brown;
 			width:525px;
+			background:white;
 			&.right{
 				float:right;  
 			    margin-right:0px;
@@ -319,6 +345,9 @@ body{
 			h5{
 				padding-left:10px;
 				font-weight:normal;
+				color:$purple;
+				border-bottom:1px solid $gray;
+				margin-bottom:10px;
 			}
 			.col1{
 				width:50%;

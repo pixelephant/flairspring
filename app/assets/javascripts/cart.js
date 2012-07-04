@@ -43,7 +43,7 @@ $("document").ready(function(){
 					$(this).remove();
 					if(!$("#cart-table tbody tr").length){
 						$("#cart-table,#cart-bottom,form").remove();
-						$("#cart").append("<p>Üres</p>");
+						$("#cart").append("<p></p>");
 					}
 					recalculate_sum();
 					});

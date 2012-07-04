@@ -12,56 +12,31 @@
 
   <title>Flairspring - <%= (@title || "") %></title>
   <%= stylesheet_link_tag    "application", controller_name %>
-  <%= stylesheet_link_tag    "comingsoon" %>
   <%= javascript_include_tag "application", controller_name %>
   <%= csrf_meta_tags %>
   <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+SC|Alegreya:400italic,700italic,400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6. chromium.org/developers/how-tos/chrome-frame-getting-started -->
 	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
 <header id="main-header">
-	<%= render 'home/misc_nav' %>
-	<div id="header-wrapper">
-		<a href="/">
-			<% if params[:controller] == 'home'%>
-			<h1 id="logo">
-				Flairspring<span>Comfort on your side</span>
-			</h1>
-			<% else %>
-			<h2 id="logo">
-				Flairspring<span>Comfort on your side</span>
-			</h2>
-			<% end %>
-		</a>
-		<span class="helptext">
-			<em>Need help?</em> <span class="lead">call our support line</span>
-			<span class="telephone">06-1-123-5432</span>
-		</span>
-	</div>
+	<div class="inner">
+		<h1 id="logo">
+			<a href="/">
+				<%= image_tag 'logo.png', :title => 'Flairpsring - Comfort on your side' %>
+			</a>
+		</h1>
+		<p id="help-text" class="simple">
+			Segíthetünk? Hívja ügyfélszolgálatunkat: +36-30-375-8600
+		</p>
+	</div>	
 </header>
 
-
-<% if params[:controller] == 'home'%>
-<%= render 'slider' %>
-<% end %>
 <div id="main-wrap">
 	<%= yield %>
 </div>
 
-<section id="social-promo">
-	<%= render 'home/shops_promo' %>
-	<%= render 'home/support_promo' %>
-</section>
-
-<footer id="main-footer">
-	<div id="main-footer-inner">
-		<a href="#">Biztonságos vásárlás</a>
-		<a href="#">Szállítási információk</a>
-		<a href="#">Fizetési lehetőségek</a>
-	</div>
-</footer>
+<%= render 'home/footer' %>
 </body>
 </html>

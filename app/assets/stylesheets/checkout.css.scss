@@ -4,37 +4,38 @@
 @import '_shipping.css.scss';
 
 #checkout{
-	margin-top: 120px;
 	position:relative;
+	padding-top:20px
 }
 
 #top{
-	border-bottom:1px solid $border-gray;
+	float:left;
 	padding-bottom:20px;
-	span{
-		float:right;
-		color:#60bb78;
-		@include small-caps;
-		font-size:16px;
-		background: url(secure.png) no-repeat left center;
-		padding-left:25px;
-	}
+	background:#d2d1d1;
+	color:$text-brown;
+	padding:10px 20px;
+	clear:right;
+	margin-bottom:20px
+}
+
+form{
+	clear:both;
 }
 
 #steps{
-	margin:0 auto 20px auto;
-	width:550px;
+	clear:both;
+	margin:20px auto 50px auto;
+	width:650px;
 	text-align:center;
 	li{
 		float:left;
 		padding:0px 30px 10px 30px;
 		color:#afafaf;
 		font-style:italic;
-		border-bottom:1px solid $brand-lightblue;
-		background:url(flags/hu.png) no-repeat center 20px;
+		border-bottom:1px solid $gray;
 		&.active{
-			background:url(flags/bh.png) no-repeat center 20px;
 			color:black;
+			font-weight:bold;
 		}
 	}
 }
@@ -75,7 +76,6 @@
 #summary-wrap{
 	position:absolute;
 	right:40px;
-	top:110px;
 	width:250px;
 	height:300px;
 }
@@ -96,20 +96,15 @@
 			margin-top:20px;
 			h5{
 				text-transform:uppercase;
-				@include font-gill;
-				color:$brand-lightblue;
+				color:$orange;
 				text-align:center;
 				margin-bottom:20px;
 			}
 			a{
 				font-size:14px;
-				margin:5px 0;
+				margin:15px 0;
 				display:block;
-				color:$brand-lightblue;
-				@include transition-03s;
-				&:hover,&:active{
-					color:$brand-darkblue;
-				}
+				color:$text-brown;
 			}
 			p{
 				margin:5px 0;
@@ -118,14 +113,12 @@
 					float:right;
 				}
 				&.total{
-					border-top:1px dotted;
+					border-top:1px solid $gray;
 					padding-top:5px;
-					color:$brand-orange;
-					@include font-gill;
+					color:$orange;
 				}
 				&.phone{
-					font-size:28px;
-					color:$brand-orange;
+					font-size:20px;
 					text-align:center;
 					font-style:italic;
 					margin-top:-10px;
@@ -146,6 +139,10 @@ input[type="radio"]{
 	float:left;
 }
 
+#payment_same,#same_l{
+	float:left;
+}
+
 .right-label{
 	float:left;
 	margin-left:10px;
@@ -155,6 +152,7 @@ input[type="radio"]{
 	float:right;
 	font-size:12px;
 	margin-top:18px;
+	color:$text-brown;
 }
 
 

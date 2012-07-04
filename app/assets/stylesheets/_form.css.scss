@@ -5,7 +5,7 @@ form{
 		border:1px solid;
 		height:20px;
 		padding:2px;
-		@include font-garamond;
+	
 	}
 
 	label{
@@ -27,8 +27,7 @@ form{
 		}
 	}
 	h5{
-
-		@include font-gill;
+		color:$orange;
 		margin-bottom:20px;
 	}
 	
@@ -38,8 +37,7 @@ form{
 	}
 	.block{
 		padding:20px;
-		background:#F2F7FB;
-		border:1px dashed;
+		background:#f9f9f9;
 		margin-bottom:10px;
 		width:595px;
 	}

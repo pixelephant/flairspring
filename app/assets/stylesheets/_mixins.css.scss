@@ -16,6 +16,8 @@ $background-green:#a5a99a;
 $orange:#f15e2f;
 $gray:#aaa;
 
+$purple:#997fa9;
+
 $border-gray:#e3e4e0;
 
 @mixin orange-button-left{
@@ -336,57 +338,11 @@ $border-gray:#e3e4e0;
 }
 
 @mixin orange-button{
-	color:white;
-	@include orange-gradient;
-	@include button;
-	border: 1px solid #e95422;
-	-moz-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	-webkit-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);	
-	text-shadow:
-		-1px -1px 0px rgba(071,031,000,0.3),
-		1px 1px 0px rgba(255,255,255,0.4);
-
-	&:hover,&:focus{
-		border: 1px solid #e95422;
-		@include orange-gradient-hover;
-		-moz-box-shadow:
-			2px 2px 2px rgba(000,000,000,0.1),
-			inset 0px 0px 3px rgba(255,255,255,0.7);
-		-webkit-box-shadow:
-			2px 2px 2px rgba(000,000,000,0.1),
-			inset 0px 0px 3px rgba(255,255,255,0.7);
-		box-shadow:
-			2px 2px 2px rgba(000,000,000,0.1),
-			inset 0px 0px 3px rgba(255,255,255,0.7);
-		text-shadow:
-			-1px -1px 0px rgba(079,032,006,0.3),
-			1px 1px 0px rgba(255,255,255,0.4);
-
-	}
-	&:active{
-		border: 1px solid #e95422;
-		-moz-box-shadow:
-			2px 2px 2px rgba(000,000,000,0),
-			inset 0px 0px 5px rgba(143,086,026,0.3);
-		-webkit-box-shadow:
-			2px 2px 2px rgba(000,000,000,0),
-			inset 0px 0px 5px rgba(143,086,026,0.3);
-		box-shadow:
-			2px 2px 2px rgba(000,000,000,0),
-			inset 0px 0px 5px rgba(143,086,026,0.3);
-		text-shadow:
-			-1px -1px 0px rgba(069,040,010,0.3),
-			1px 1px 0px rgba(255,255,255,0.4);
-		@include orange-gradient-active;
-
-	}
+	border:none;
+	color:#371d0e;
+	background:$orange;
+	padding:10px 25px;
+	text-align:center;
 }
 
 @mixin blue-button{
