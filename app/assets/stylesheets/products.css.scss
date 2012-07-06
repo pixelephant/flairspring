@@ -122,10 +122,8 @@
 }
 
 #add-to-cart{
-	@include cart-button;
+	@include orange-button;
 	font-size:18px;
-	padding:9px;
-	padding-left:35px;
 	margin:20px 0;
 }
 

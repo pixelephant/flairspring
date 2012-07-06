@@ -343,57 +343,16 @@ $border-gray:#e3e4e0;
 	background:$orange;
 	padding:10px 25px;
 	text-align:center;
+	text-decoration:none;
 }
 
 @mixin blue-button{
-	color:white;
-	@include blue-gradient;
-	@include button;
-	border: 1px solid #1990bf;
-	-moz-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	-webkit-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	text-shadow:
-		-1px -1px 0px rgba(030,038,087,0.3),
-		1px 1px 0px rgba(255,255,255,0.4);
-	&:hover,&:focus{
-		@include blue-gradient-hover;
-	border: 1px solid #91bad9;
-	-moz-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	-webkit-box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);
-	box-shadow:
-		2px 2px 2px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,0.7);	
-	text-shadow:
-		-1px -1px 0px rgba(033,043,082,0.3),
-		1px 1px 0px rgba(255,255,255,0.4);
-	}
-	&:active{
-		@include blue-gradient-active;
-		border: 1px solid #91bad9;
-	-moz-box-shadow:
-		2px 2px 2px rgba(000,000,000,0),
-		inset 0px 0px 5px rgba(255,255,255,0.3);
-	-webkit-box-shadow:
-		2px 2px 2px rgba(000,000,000,0),
-		inset 0px 0px 5px rgba(255,255,255,0.3);
-	box-shadow:
-		2px 2px 2px rgba(000,000,000,0),
-		inset 0px 0px 5px rgba(255,255,255,0.3);
-	text-shadow:
-		-1px -1px 0px rgba(035,051,092,0.3),
-		1px 1px 0px rgba(255,255,255,0.4);
-	}
+	border:none;
+	color:#371d0e;
+	background:$orange;
+	padding:10px 25px;
+	text-align:center;
+	text-decoration:none;
 }
 
 @mixin gray-button{

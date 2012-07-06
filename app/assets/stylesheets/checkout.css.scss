@@ -5,17 +5,22 @@
 
 #checkout{
 	position:relative;
-	padding-top:20px
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+.wr{
+	margin:0 auto;
+	width:900px;
 }
 
 #top{
-	float:left;
+	width:130px;
 	padding-bottom:20px;
 	background:#d2d1d1;
 	color:$text-brown;
 	padding:10px 20px;
-	clear:right;
-	margin-bottom:20px
+	margin-bottom:10px
 }
 
 form{
@@ -45,11 +50,11 @@ form{
 }
 
 #guest-box{
-	background:#F2F7FB;
-	border:1px dashed $border-gray;
+	background:#f9f9f9;
 	padding:20px;
 	width:400px;
 	margin-top:20px;
+	margin-bottom:20px;
 	height:330px;
 	float:left;
 	text-align:center;
@@ -104,7 +109,7 @@ form{
 				font-size:14px;
 				margin:15px 0;
 				display:block;
-				color:$text-brown;
+				color:$text-brown2;
 			}
 			p{
 				margin:5px 0;
@@ -158,29 +163,26 @@ input[type="radio"]{
 
 .thankyou{
 	h3{
-		font-size:100px;
-		color:$brand-orange;
-		@include font-garamond;
-		font-style:italic;
+		font-size:50px;
+		margin-bottom:10px;
+		color:$orange;
 		text-align:center;
 	}
 	h4{
 		text-align:center;
 		font-size:25px;
-		color:$text-color;
-		@include small-caps;
+		color:$text-brown;
 	}
 	.promo{
 			text-align:center;
 			margin-top:40px;
 			padding:20px;
-			background:#eaf1f8;
-			border:1px dashed $border-gray;
+			background:#f9f9f9;
 			p{
 				font-size:30px;
 				em{
-				 	color:$brand-darkblue;
-				font-style:italic;
+				
+					font-style:italic;
 				}
 				margin-bottom:20px;
 			}
