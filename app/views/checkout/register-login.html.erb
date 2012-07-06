@@ -1,10 +1,12 @@
 <section id="checkout" class="box full clearfix">
-	<h3 id="top">Fizetés <span id="secure">Secure connection</span></h3>
 	<ol id="steps" class="clearfix">
 		<li class="active">Bejelentkezés</li>
 		<li>Számlázás &amp; Szállítás</li>
 		<li>Adatok ellenőrzése &amp; Fizetés</li>
 	</ol>
-	<%= render :partial => "users/login", :locals => { :logintext => ", hogy mentett adataival vásárolhasson", :resource => resource } %>
-	<%= render "guest" %>
+	<h3 id="top">Bejelentkezés</h3>
+	<div class="clearfix">
+		<%= render :partial => "users/login", :locals => { :logintext => ", hogy mentett adataival vásárolhasson", :resource => resource } %>
+		<%= render "guest" %>
+	</div>
 </section>

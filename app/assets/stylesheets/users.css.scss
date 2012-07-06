@@ -5,18 +5,15 @@
 @import '_product_modal.css.scss';
 
 #top{
-	// border-bottom:1px solid;
+	float:left;
 	padding-bottom:20px;
-	span{
-		float:right;
-		color:#60bb78;
-		// @include small-caps;
-		font-size:16px;
-		background: url(secure.png) no-repeat left center;
-		padding-left:25px;
-	}
-		margin-bottom:0;
+	background:#d2d1d1;
+	color:$text-brown;
+	padding:10px 20px;
+	clear:right;
+	margin-bottom:20px
 }
+
 
 #register #top{
 	margin-bottom:20px;
