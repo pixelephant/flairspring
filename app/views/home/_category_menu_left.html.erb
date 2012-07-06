@@ -4,10 +4,13 @@
 		<% current = "" %>
 		<% sub_categories.each_with_index do |sub_cat,i| %>
 			<% unless current == sub_cat.custom_category_group_id %>
+				<%= '</ul>'.html_safe if i > 0 %>
 				<% if sub_cat.custom_category_group_id.nil? %>
 					<h3>Nincs nevem</h3>
+					<ul>
 				<% else %>
 					<h3><%= sub_cat.custom_category_group.name %></h3>
+					<ul>
 				<% end %>							
 			<% end %>
 			<% current = sub_cat.custom_category_group_id %>
@@ -16,10 +19,12 @@
 					<%=	link_to(sub_cat.name, custom_category_url(@category, sub_cat)) %>
 				<% end %>
 			</li>
+			<%= '</ul>'.html_safe if i == (sub_categories.count - 1) %>
 		<% end %>
 	</ul>
 	<ul>
 		<h3>Ajánljuk</h3>
+			<ul>
 					<li>
 						<%= link_to "Új termékek", "#" %>
 					</li>
@@ -29,5 +34,6 @@
 					<li>
 						<%= link_to "Összes termék", "#" %>
 					</li>
+			</ul>
 	</ul>
 <% end %>
