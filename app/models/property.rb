@@ -28,7 +28,11 @@ class Property < ActiveRecord::Base
 	private
 
 	def add_numeric
-		self.num = self.property_name.gsub(",",".").to_f if helper.is_a_number?(self.property_name.gsub(",","."))
+		self.num = self.property_name.gsub(",",".").to_f if is_a_number?(self.property_name.gsub(",","."))
+	end
+
+	def is_a_number?(s)
+		s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
 	end
 
 end
