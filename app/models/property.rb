@@ -21,6 +21,8 @@ class Property < ActiveRecord::Base
 	has_many :properties_to_custom_categories
 	has_many :custom_categories, :through => :properties_to_custom_categories
 
+	# accepts_nested_attributes_for :custom_categories
+
 	has_and_belongs_to_many :product_sets
 
 	validates :property_name, :presence => true
