@@ -30,8 +30,9 @@
 		<% else %>
 			<% Property.where(:property_category_id => property_category[:id]).each do |property| %>
 				<div class="field">
+					<%  %>
 					<label for="<%= property.property_category.id.to_s %>"> <%= property.property_name %> </label>
-					<%= check_box_tag property.property_category.id.to_s + "[]", property.id, ((params[property.property_category.id.to_s].include?(property.id.to_s) ? true : false) if params[property.property_category.id.to_s] ) %>
+					<%= check_box_tag property.property_category.id.to_s + "[]", property.id, property_disabled?(property,params,@fix_properties), :disabled => (@fix_properties.keys.include?(property.property_category.id) ? true : false) %>
 				</div>
 			<% end %>
 		<% end %>
