@@ -15,8 +15,8 @@ development:
   database: madearthome_development
   pool: 5
   username: root
-  password:
-  socket: /opt/lampp/var/mysql/mysql.sock
+  password: tyeF2q
+  socket: /tmp/mysql.sock
 
 # wordpress:
 #   adapter: mysql2

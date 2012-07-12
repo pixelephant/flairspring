@@ -178,6 +178,52 @@ body{
 	background: url(pattern.jpg) repeat white;
 }
 
+
+#topmenu{
+	width:980px;
+	margin:0 auto;
+	background:white;
+	padding:10px 0;
+	position: relative;
+	z-index: 1;
+}
+
+#misc-menu{
+	overflow:hidden;
+	float:right;
+	li{
+		padding:5px;
+		float:left;
+		a{
+			display:block;
+			color:$text-brown;
+			text-decoration:none;
+		}
+	}
+}
+
+.minicart{
+	margin-left:50px;
+	font-size:22px;
+	float:right;
+	padding:5px;
+	color:$orange;
+	text-decoration:none;
+	background: url(cart.png) no-repeat left center;
+	padding-left:30px;
+}
+
+#minicart{
+	position: absolute;
+	top:50px;
+	right:0;
+	border:1px solid;
+	width:400px;
+	z-index:100;
+	background:white;
+	display:none;
+}
+
 #section-wrap{
 	background:white;
 	width:980px;
@@ -204,7 +250,6 @@ body{
 	background:$header-green;
 	-webkit-box-shadow: inset 1px -10px 10px 0px rgba(0, 0, 0, 0.1);
 	box-shadow: inset 1px -10px 10px 0px rgba(0, 0, 0, 0.1);
-	margin-top:15px;
 	overflow:hidden;
 }
 
