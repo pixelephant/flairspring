@@ -10,8 +10,10 @@ class CustomCategory < ActiveRecord::Base
 	has_many :custom_category_translations, :dependent => :destroy
 	accepts_nested_attributes_for :custom_category_translations
 
-	has_many :properties, :through => :properties_to_custom_categories
 	has_many :properties_to_custom_categories
+	has_many :properties, :through => :properties_to_custom_categories
+
+	# accepts_nested_attributes_for :properties
 
 	belongs_to :category
 	belongs_to :discount
@@ -19,57 +21,25 @@ class CustomCategory < ActiveRecord::Base
 
 	validates :name,:category_id , :presence => true
 
-	def products(sort='price', params=nil)
-		properties_of_custom_category = self.properties
+	def products
+		category_id = self.category.id
+		properties = self.properties
+		property_count = properties.count
 
-		#query
-		unless params.nil?
-
-			q = []
-			# params.delete("commit")
-
-			params.each do |key, val|
-				unless ((key.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil) || (val.blank?))
-					if params[key].kind_of?(Array)
-						#Vagy benne van az adott halmazban vagy nincsen benne egyik értékben sem a kategóriáé közül
-						q << ("(properties.id IN (" + params[key].join(",") + ") OR (properties.id NOT IN (SELECT id FROM properties WHERE properties.property_category_id=#{key})))")
-					else
-						v = params[key].split(";")
-						# prop_cat = Property.where({:property_category_id => ??, }).property_category_id
-						prop_cat = key.to_i
-						prop_ids = Property.find(:all, :select => "properties.id", :conditions => ["properties.property_category_id = ? AND properties.property_name BETWEEN #{v[0]} AND #{v[1]}", prop_cat], :group => "properties.id")
-						a = []
-						prop_ids.each do |prop|
-							a << prop.id
-						end
-						unless a.empty?
-							q << ("(properties.id IN (" + a.join(",") + ") OR (properties.id NOT IN (SELECT id FROM properties WHERE properties.property_category_id = #{prop_cat})))")
-						end
-					end
-				end
-			end
-			
-			a = ""
-			
-			unless params[:designer].blank?
-				if params[:designer].include?("NULL")
-					params[:designer].delete("NULL")
-					a = " OR (products.designer_id IS NULL)"
-				end
-				q << ("((products.designer_id IN (" + params[:designer].join(",") + "))#{a})")
-			end
-
-			q = q.join(" AND ")
-			#query
-
-			unless q.blank?
-				q = " AND " + q
-			end
+		prop = []
+		properties.each do |p|
+			prop << p.id
 		end
+		v = prop.join(",")
+    condit = " AND (properties.id IN (#{v}))"
 
-		p = Product.find(:all, :joins => :properties, :select => "products.*, count(properties.id)", :conditions => ["properties.id IN (?) AND products.category_id = ?#{q}", properties_of_custom_category, self.category_id], :group => "products.id having count(properties.id) = #{properties_of_custom_category.count}", :order => ["products." + sort])
-		logger.info "Custom Category products"
-		logger.debug "p value: #{p}"
+		p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id AS id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{category_id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
+		return nil if p.blank?
+		ids = []
+		p.each do |i|
+			ids << i.id
+		end
+		p = Product.where("products.id IN (#{ids.join(',')})")
 		return p
 	end
 

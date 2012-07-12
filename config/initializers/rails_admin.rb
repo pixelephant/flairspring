@@ -193,7 +193,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 	# end
 
 	def property_label_method
-		self.property_name
+		self.property_category ? self.property_category.category_name + ": " + self.property_name : self.property_name
 	end
 
 	def property_category_label_method

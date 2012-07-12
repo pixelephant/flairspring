@@ -26,6 +26,14 @@ def flatten_param_hash( params )
   params
 end
 
+#CustomCategoryFilterben
+def property_disabled?(property,params,fix_properties)
+	value = (params[property.property_category.id.to_s].include?(property.id.to_s) ? true : false) if params[property.property_category.id.to_s]
+	value2 = (fix_properties[property.property_category.id].include?(property.id) ? true : false) if fix_properties[property.property_category.id]
+
+	return value || value2
+end
+
 
 	#Devise login
 	def resource_name

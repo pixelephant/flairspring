@@ -16,6 +16,10 @@ class ProductsController < ApplicationController
   def show
 
     @product = Product.find(params[:id])
+
+    # @product.click = @product.click.to_i + 1
+    # @product.save
+
 		@category = @product.category
 
     @size_weight = @product.properties.joins(:property_category).where(:property_categories => {:id => [74,75,76,77]})
@@ -54,6 +58,10 @@ class ProductsController < ApplicationController
 	# POST /products/quicklook/1.json
 	def quicklook
     @product = Product.find(params[:id])
+
+    # @product.click = @product.click.to_i + 1
+    # @product.save
+
 		@category = @product.category
 
     @size_weight = @product.properties.joins(:property_category).where(:property_categories => {:id => [74,75,76,77]})

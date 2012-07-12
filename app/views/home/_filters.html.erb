@@ -8,7 +8,7 @@
 	<% @designers.each do |designer| %>
 		<div class="field">
 			<label for="<%= designer.name.parameterize %>"> <%= designer.name %> </label>
-			<%= check_box_tag 'designer[]', designer.id, ((params[:designer].include?(designer.id.to_s) ? true : false) if params[:designer]) %>
+			<%= check_box_tag 'designer[]', designer.id, ((!params[:designer] || params[:designer].include?(designer.id.to_s) ? true : false)) %>
 		</div>
 	<% end %>
 		<% if @designers.any? %>
@@ -25,13 +25,14 @@
 		<% if property_category[:numeric] %>
 	<!-- Csúszka helye -->
 			<!-- mértékegységek nem lehetnek törtek, a low és a high value nem jó mindenhol -->
-			<input id="<%= property_category[:id].to_s.parameterize %>" type="slider" data-unit="<%= property_category[:unit] %>" data-from="<%= property_category[:from] %>" data-to="<%= property_category[:to] %>" name="<%= property_category[:name].parameterize %>" value="<%=property_category[:low]%>;<%=property_category[:high]%>" />
+			<input id="<%= property_category[:id].to_s.parameterize %>" type="slider" data-unit="<%= property_category[:unit] %>" data-from="<%= property_category[:from] %>" data-to="<%= property_category[:to] %>" name="<%= property_category[:id].to_s.parameterize %>" value="<%=property_category[:low]%>;<%=property_category[:high]%>" />
 <!-- Csúszka helye  -->
 		<% else %>
 			<% Property.where(:property_category_id => property_category[:id]).each do |property| %>
 				<div class="field">
+					<%  %>
 					<label for="<%= property.property_category.id.to_s %>"> <%= property.property_name %> </label>
-					<%= check_box_tag property.property_category.id.to_s + "[]", property.id, ((params[property.property_category.id.to_s].include?(property.id.to_s) ? true : false) if params[property.property_category.id.to_s] ) %>
+					<%= check_box_tag property.property_category.id.to_s + "[]", property.id, property_disabled?(property,params,@fix_properties), :disabled => (@fix_properties.keys.include?(property.property_category.id) ? true : false) %>
 				</div>
 			<% end %>
 		<% end %>
