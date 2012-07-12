@@ -31,37 +31,6 @@ class CustomCategoriesController < ApplicationController
 
     @property_categories = []
 
-    prod_ids = []
-    @custom_category.products.each do |pr|
-      prod_ids << pr.id
-    end
-
-    prod_sql = ""
-    unless prod_ids.blank?
-      prod_sql = " AND products.id IN (#{prod_ids.join(',')})"
-    end
-
-    property_categories.each do |property_category|
-      if property_category.properties.any?
-        p = Hash.new
-        p.store(:name, property_category.category_name.to_s)
-        p[:id] = property_category.id
-        if property_category.properties.first.num.nil? || property_category.properties.last.num.nil?
-          p[:numeric] = false
-        else
-          p[:numeric] = true
-
-          p[:to] = Property.all(:select => "MAX(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.ceil
-          p[:from] = Property.all(:select => "MIN(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.floor
-          v = params[property_category.id.to_s].split(";") if params[property_category.id.to_s]
-          params[property_category.id.to_s] ? p[:low] = v[0].to_f.floor : p[:low] = p[:from]
-          params[property_category.id.to_s] ? p[:high] = v[1].to_f.ceil : p[:high] = p[:to]
-          p[:unit] = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","")
-        end
-        @property_categories << p
-      end
-    end
-
     @description = @custom_category.name.to_s.capitalize
 
     @keywords = ""
@@ -72,7 +41,6 @@ class CustomCategoriesController < ApplicationController
     #   end
     # end
 
-    # @property_categories = PropertyCategory.find(:all, :joins => :property_categories_to_categories, :select => "property_categories.*", :conditions => ["property_categories_to_categories.category_id = #{@category.id}"], :group => "property_categories.id")    
     @designers = Designer.find(:all, :joins => :products, :select => "designers.*", :conditions => ["designers.id = products.designer_id AND products.category_id = #{@category.id}"], :group => "designers.id")
 
     where = []
@@ -138,30 +106,65 @@ class CustomCategoriesController < ApplicationController
       property_count = property_count + 1
     end
 
-    condit = " AND " + where.join(" AND ") unless where.blank?
-    # condit = where.join(" AND ") unless where.blank?
+    discount_sql_table = ""
+    discount_sql_column = ""
+    if params[:recommend] == "sale"
+      where << "(discounts_to_products.discount_id IS NOT NULL)"
+      property_count = property_count + 1
+      discount_sql_table = " LEFT JOIN discounts_to_products ON products.id = discounts_to_products.product_id"
+      discount_sql_column = ",discounts_to_products.discount_id"
+    end
+
+    condit = " AND " + where.join(" AND ") unless where.blank?    
+
+    if property_count > 0
+      prod = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
+    else
+      prod = @custom_category.products.select("id").where(condit)
+    end
+
+    #Properties filter
+    prod_ids = []
+    prod.each do |q|
+      prod_ids << q.id
+    end
+
+    if prod.any?
+      prod_sql = " AND products.id IN (#{prod_ids.join(',')})"
+    else
+      prod_sql = ""
+    end
+
+    property_categories.each do |property_category|
+      if property_category.properties.any?
+        p = Hash.new
+        p.store(:name, property_category.category_name.to_s)
+        p[:id] = property_category.id
+        if property_category.properties.first.num.nil? || property_category.properties.last.num.nil?
+          p[:numeric] = false
+        else
+          p[:numeric] = true
+
+          p[:to] = Property.all(:select => "MAX(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.ceil
+          p[:from] = Property.all(:select => "MIN(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.floor
+          v = params[property_category.id.to_s].split(";") if params[property_category.id.to_s]
+          params[property_category.id.to_s] ? p[:low] = v[0].to_f.floor : p[:low] = p[:from]
+          params[property_category.id.to_s] ? p[:high] = v[1].to_f.ceil : p[:high] = p[:to]
+          p[:unit] = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","")
+        end
+        @property_categories << p
+      end
+    end
 
 		if params[:page] == 'all'
 			session[:view_all] = true
       
-      if property_count > 0
-        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
-      else
-        p = Product.select("id").where(condit)
-      end
-
-      @products = Product.where(:id => p)
+      @products = Product.where(:id => prod)
       @kaminari_products = Kaminari.paginate_array(@products.order(sort)).page(params[:page]).per(21)
 		else
 			session[:view_all] = false
 
-      if property_count > 0
-        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
-      else
-        p = Product.select("id").where(condit)
-      end
-
-      @products = Product.where(:id => p).order(sort).page(params[:page]).per(21)
+      @products = Product.where(:id => prod).order(sort).page(params[:page]).per(21)
 			@kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
 		end
 
