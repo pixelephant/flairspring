@@ -1,42 +1,44 @@
-<%= link_to t('.cart_link') + ("(" + cart_count.to_s + ")" if !cart_count.nil?).to_s , "/cart", :class => "minicart" + (" empty" if cart_count.nil? || cart_count == 0 ).to_s  %>
-<% if Cart.exists?(session[:cart_id]) %>
-<% cart = Cart.find(session[:cart_id]) %>
-	<% if cart.line_items.any? %>
-		<div id="minicart">
-			<table id="minicart-table">
-				<tbody>
-					<% cart.line_items.each do |item| %>
-					<tr>
-						<td>
-							<%= (image_tag item.product.default_photo.image_file.thumb, :title => item.product.default_photo.alt, :class => "class") if !item.product.default_photo.nil? %>
-								<span class="title">
-									<%= item.product.name %>
-								</span>
-						</td>
-						<td class="property-cell">
-							<span class="property">Color: Red</span>
-							<span class="property">Anyag: Bőr</span>
-						</td>
-						<td class="quantity-cell">
-							<span><%= item.quantity %></span> db
-						</td>
-						<td class="price-cell">
-							<span><%= item.product.price %></span> Ft
-						</td>
-					</tr>
-					<% end %>
-				</tbody>
-				<tfoot>
-					<tr class="total">
-						<td colspan="4">Subtotal* <span class="total-price"><%= cart.total %></span> Ft</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<small>*Szállítási díj nélkül</small><%= link_to t('.cart_link'), "/cart", :class => "button" %>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
+<%= link_to  "/cart", :class => "minicart" + (" empty" if cart_count.nil? || cart_count == 0 ).to_s do %>
+	<%= t('.cart_link') + ("(" + cart_count.to_s + ")" if !cart_count.nil?).to_s %>
+	<% if Cart.exists?(session[:cart_id]) %>
+	<% cart = Cart.find(session[:cart_id]) %>
+		<% if cart.line_items.any? %>
+			<div id="minicart">
+				<table id="minicart-table">
+					<tbody>
+						<% cart.line_items.each do |item| %>
+						<tr>
+							<td>
+								<%= (image_tag item.product.default_photo.image_file.thumb, :title => item.product.default_photo.alt, :class => "class") if !item.product.default_photo.nil? %>
+									<span class="title">
+										<%= item.product.name %>
+									</span>
+							</td>
+							<td class="property-cell">
+								<span class="property">Color: Red</span>
+								<span class="property">Anyag: Bőr</span>
+							</td>
+							<td class="quantity-cell">
+								<span><%= item.quantity %></span> db
+							</td>
+							<td class="price-cell">
+								<span><%= item.product.price %></span> Ft
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+					<tfoot>
+						<tr class="total">
+							<td colspan="4">Subtotal* <span class="total-price"><%= cart.total %></span> Ft</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<small>*Szállítási díj nélkül</small><%= link_to t('.cart_link'), "/cart", :class => "button" %>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		<% end %>
 	<% end %>
 <% end %>
