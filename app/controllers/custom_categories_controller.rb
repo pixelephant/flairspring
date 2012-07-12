@@ -130,8 +130,13 @@ class CustomCategoriesController < ApplicationController
 		elsif params[:sort] == 'by_highest_price'
 			sort = 'products.price DESC'
 		else
-			sort = 'products.updated_at'
+			sort = 'products.created_at'
 		end
+
+    if params[:recommend] == "new"
+      where << "(products.created_at > (CURDATE() - INTERVAL #{NEW_PRODUCT_DAYS} DAY))"
+      property_count = property_count + 1
+    end
 
     condit = " AND " + where.join(" AND ") unless where.blank?
     # condit = where.join(" AND ") unless where.blank?

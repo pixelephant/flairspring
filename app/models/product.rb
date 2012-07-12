@@ -144,4 +144,8 @@ class Product < ActiveRecord::Base
 	
 	end
 
+	def on_sale?
+		self.full_price < self.price ? true : false
+	end
+
 end

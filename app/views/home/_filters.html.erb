@@ -8,7 +8,7 @@
 	<% @designers.each do |designer| %>
 		<div class="field">
 			<label for="<%= designer.name.parameterize %>"> <%= designer.name %> </label>
-			<%= check_box_tag 'designer[]', designer.id, ((params[:designer].include?(designer.id.to_s) ? true : false) if params[:designer]) %>
+			<%= check_box_tag 'designer[]', designer.id, ((!params[:designer] || params[:designer].include?(designer.id.to_s) ? true : false)) %>
 		</div>
 	<% end %>
 		<% if @designers.any? %>
