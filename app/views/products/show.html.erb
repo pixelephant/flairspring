@@ -90,7 +90,7 @@
 
 		<%= render :partial => ('products/properties') %>
 		<% box += 1 %>
-	</section>-->
+	</section>
 
 	<% if !@product.advice.nil? %>
 		<section class="box third has-ribbon<%= box_class(box % 3) %>" id="expert-advice">
@@ -140,6 +140,18 @@
 	<%= render :partial => ('home/product_ad_' + i.to_s), :locals => {:cl => (i % 3)} %>
 	
 	<% end %>
+-->
+<div class="clearfix">
+	<div class="pbox">
+		<h3>Első doboz</h3>
+	</div>
+	<div class="pbox">
+		<h3>Második doboz</h3>
+	</div>
+	<div class="pbox last">
+		<h3>Harmadik doboz</h3>
+	</div>	
+</div>
 
 </div>
 

@@ -3,6 +3,8 @@
 @import '_product_boxes.css.scss';
 @import 'fancybox.css.scss';
 
+@import '_sliders.css.scss';
+
 #product-modals{
 	display:none;
 }
@@ -26,6 +28,8 @@
 
 #product-inner{
 	width:980px;
+	padding-bottom:20px;
+	border-bottom:1px solid $border-gray;
 }
 
 #picture-wrap{
@@ -122,7 +126,7 @@
 }
 
 #add-to-cart{
-	@include orange-button;
+	@include cart-button;
 	font-size:18px;
 	margin:20px 0;
 }
@@ -177,6 +181,39 @@
 	}
 }
 
+
+
+
+
+.pbox{
+	background:url(http://placekitten.com/g/320/250) center 38px no-repeat;
+	width:320px;
+	margin-right:10px;
+	margin-bottom:20px;
+	margin-top:20px;
+	&.last{
+		margin-right:0;
+	}
+	float:left;
+	height:250px;
+		h3{
+	  		background-color: transparent;
+	  		background-color: rgba(52, 67, 67, 0.4); 
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66344343,endColorstr=#66344343);
+	        zoom: 1;
+	        @include font-gill;
+			font-size: 18px;
+			padding: 10px;
+			color:$text-brown;
+			font-weight: normal;
+		}
+}
+
+
+
+
+
+
 #try-it{
 	.ribbon{
 		//background:url(ribbon-loc.png) no-repeat;
@@ -216,34 +253,40 @@
 }
 
 #about-designer,#about-manufacturer{
+	background:#eeeeee;
+	width:480px;
+	float:left;
+	margin-bottom:20px;
+	h4{
+		margin:20px 0;
+		color:$orange;
+		font-family:Verdana;
+	}
+	h4,p{
+		padding:0 10px;
+		font-weight:normal;
+	}
+	h3{
+		@include font-gill;
+		font-size:18px;
+		padding:10px;
+		color:$text-brown;
+		font-weight:normal;
+	}
 	p{
 	  line-height:1.5;
 	}
-	img{
-		float:right;
-		margin:20px;
-		height:160px;
-		border:5px solid;
+}
+
+#about-designer{
+	margin-right:20px;
+	h3{
+		background:#888888;
 	}
 }
 
-#set-slider{
-	a{
-		text-align:center;
-		margin-right:19px;
-		margin-bottom:20px;
-		display:block;
-		float:left;
-		text-decoration:none;
-		display:block;
-		text-decoration:underline;
-		@include font-gill;
-		@include transition-03s;
-		img{
-			border:5px solid;
-		}
-		&:hover .name{
-
-		}
+#about-manufacturer{
+	h3{
+		background:#a5a99a;
 	}
 }

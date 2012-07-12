@@ -346,6 +346,13 @@ $border-gray:#e3e4e0;
 	text-decoration:none;
 }
 
+@mixin cart-button{
+	@include orange-button;
+	background: url(cart.png) no-repeat 10px center $orange;
+	padding-left:40px;
+	text-decoration:none;
+}
+
 @mixin blue-button{
 	border:none;
 	color:#371d0e;

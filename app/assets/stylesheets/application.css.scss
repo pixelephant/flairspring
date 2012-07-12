@@ -211,17 +211,52 @@ body{
 	text-decoration:none;
 	background: url(cart.png) no-repeat left center;
 	padding-left:30px;
+	&:hover,&:focus{
+		#minicart{
+			display:block;
+		}
+	}
 }
 
 #minicart{
+	padding:10px;
 	position: absolute;
-	top:50px;
 	right:0;
-	border:1px solid;
-	width:400px;
+	border:1px solid black;
+	text-decoration:none;
+	width:600px;
 	z-index:100;
 	background:white;
 	display:none;
+	font-size:14px;
+	color:$text-brown;
+	.button{
+		@include cart-button;
+		float:right;
+	}
+	.total,.price-cell{
+		text-align:right;
+	}
+	small{
+		font-size:12px;
+	}
+	table{
+		width:100%;
+		tr{
+			border-bottom: 1px solid black;
+			td{
+				height:75px;
+				vertical-align: middle;
+			}
+		}
+		tfoot{
+			tr{
+				&:last-child{
+					border-bottom:none;
+				}
+			}
+		}
+	}
 }
 
 #section-wrap{
