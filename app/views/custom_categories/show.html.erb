@@ -20,7 +20,7 @@
 			<% c = c + " active" if session[:view_all] %>
 
 			<%= link_to t('.view_all'), flatten_param_hash(params.merge(:page => 'all')), :class => c %>
-			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+			<%= paginate @kaminari_products, :window => 0, :outer_window => 1 %>
 		</div>
 		<div id="product-grid" class="clearfix">
 			<%= render 'home/product_grid' %>
@@ -29,7 +29,7 @@
 			<a id="back-to-top" href="#product-list">&uarr; oldal tetejére</a>
 			<%= render 'home/product_grid_action_buttons' %>
 			<%= link_to t('.view_all'), flatten_param_hash(params.merge(:page => 'all')), :class => "view-all" %>
-			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+			<%= paginate @kaminari_products, :window => 0, :outer_window => 1 %>
 		</div>
 	</section>
 </div>
