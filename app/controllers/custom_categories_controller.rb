@@ -138,31 +138,35 @@ class CustomCategoriesController < ApplicationController
       property_count = property_count + 1
     end
 
+    discount_sql_table = ""
+    discount_sql_column = ""
+    if params[:recommend] == "sale"
+      where << "(discounts_to_products.discount_id IS NOT NULL)"
+      property_count = property_count + 1
+      discount_sql_table = " LEFT JOIN discounts_to_products ON products.id = discounts_to_products.product_id"
+      discount_sql_column = ",discounts_to_products.discount_id"
+    end
+
     condit = " AND " + where.join(" AND ") unless where.blank?
     # condit = where.join(" AND ") unless where.blank?
 
+      if property_count > 0
+        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
+      else
+        p = @custom_category.products.select("id").where(condit)
+      end
+
 		if params[:page] == 'all'
 			session[:view_all] = true
-      
-      if property_count > 0
-        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
-      else
-        p = Product.select("id").where(condit)
-      end
 
       @products = Product.where(:id => p)
       @kaminari_products = Kaminari.paginate_array(@products.order(sort)).page(params[:page]).per(21)
 		else
 			session[:view_all] = false
 
-      if property_count > 0
-        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
-      else
-        p = Product.select("id").where(condit)
-      end
-
       @products = Product.where(:id => p).order(sort).page(params[:page]).per(21)
-			@kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
+			# @kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
+      @kaminari_products = @products
 		end
 
     respond_to do |format|
