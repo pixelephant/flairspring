@@ -1,6 +1,5 @@
-<div class="box full" id="about-designer">
+<div class="box" id="about-designer">
 	<h3>A tervezőről</h3>
 	<h4><%= designer.name %></h4>
-	<%= image_tag designer.designer_photos.first.image_file, :title => designer.designer_photos.first.alt, :alt => designer.designer_photos.first.alt if designer.designer_photos.any? %>
 	<p> <%= designer.description %> </p>
 </div>

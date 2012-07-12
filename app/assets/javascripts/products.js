@@ -1,5 +1,7 @@
 //= require zoom
 //= require jquery.fancybox
+//= require carousel
+//= require jquery.easing
 
 $(window).load(function(){
 	
