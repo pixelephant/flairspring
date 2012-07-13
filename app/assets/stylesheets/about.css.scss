@@ -12,3 +12,116 @@
 	margin:10px;
 	margin-top:0;
 }
+
+#head{
+	margin-bottom:20px;
+	width:980px;
+	height:400px;
+	position:relative;
+	background:url(headers/rolunk_header.png) no-repeat;
+	h3{
+		position: absolute;
+		bottom:30px;
+		background:url(red_arrow_right_big.png) no-repeat;
+		width:232px;
+		height:78px;
+		color:white;
+		text-transform:uppercase;
+		padding-left:30px;
+		line-height:78px;
+		font-weight:normal;
+	}
+}
+
+h4.red{
+	background:url(red_arrow_right_long.png) no-repeat;
+	width:500px;
+	padding-left:19px;
+	height:28px;
+	color:white;
+	font-size:14px;
+	line-height:28px;
+	font-weight:normal;
+	margin-bottom:20px;
+}
+
+h4.green{
+	background:url(green_arrow_right_long.png) no-repeat;
+	width:300px;
+	padding-left:13px;
+	height:28px;
+	color:white;
+	font-size:14px;
+	line-height:28px;
+	font-weight:normal;
+	margin:20px 0;
+}
+
+h4.full{
+	width:960px;
+	background:#bbbeb2;
+	padding:10px;
+	color:#361d0b;
+	font-weight:normal;
+	margin-bottom:20px;
+}
+
+p{
+	color:$text-brown2;
+	line-height:1.5;
+}
+
+p.marg{
+	margin:20px 0;
+}
+
+.catalog{
+	padding:20px 0;
+	background: url(catalog.png) no-repeat center right #eeeeee;
+	li{
+		padding-left:10px;
+		line-height:1.5;
+		color:#361d0b;
+		strong{
+			color:#d74849;
+		}
+	}
+}
+
+
+.empl{
+	width:478px;
+	height:318px;
+	float:left;
+	overflow:hidden;
+	margin-bottom:20px;
+	&.first{
+		margin-right:20px;
+	}
+	.left,.right{
+		float:left;
+		height:318px;
+	}
+	.left{
+		width:219px;
+		background:#f2f3f1;
+		padding:10px;
+	}
+	.right{
+		width:219px;
+		padding:10px;
+	}
+	border:1px solid #dddddd;
+	.name{
+		color:$orange;
+		border-bottom:1px solid #dddddd;
+	}
+	.quote{
+		color:#716c65;
+		font-style:italic;
+		font-size:18px;
+	}
+	.title{
+		color:#bdbcb8;
+	}
+}
