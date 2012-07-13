@@ -22,9 +22,12 @@ class CustomCategory < ActiveRecord::Base
 	validates :name,:category_id , :presence => true
 
 	def products
+
 		category_id = self.category.id
 		properties = self.properties
 		property_count = properties.count
+
+		return nil if properties.blank?
 
 		prop = []
 		properties.each do |p|

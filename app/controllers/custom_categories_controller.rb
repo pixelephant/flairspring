@@ -32,8 +32,14 @@ class CustomCategoriesController < ApplicationController
     @property_categories = []
 
     prod_ids = []
-    @custom_category.products.each do |pr|
-      prod_ids << pr.id
+
+    unless @custom_category.products.blank?
+      @custom_category.products.each do |pr|
+        prod_ids << pr.id
+      end
+      @custom_category_empty = false
+    else
+      @custom_category_empty = true
     end
 
     prod_sql = ""
@@ -156,24 +162,29 @@ class CustomCategoriesController < ApplicationController
     condit = " AND " + where.join(" AND ") unless where.blank?
     # condit = where.join(" AND ") unless where.blank?
 
+    unless @custom_category.products.blank?
       if property_count > 0
         p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
       else
         p = @custom_category.products.select("id").where(condit)
       end
 
-		if params[:page] == 'all'
-			session[:view_all] = true
+  		if params[:page] == 'all'
+  			session[:view_all] = true
 
-      @products = Product.where(:id => p)
-      @kaminari_products = Kaminari.paginate_array(@products.order(sort)).page(params[:page]).per(21)
-		else
-			session[:view_all] = false
+        @products = Product.where(:id => p)
+        @kaminari_products = Kaminari.paginate_array(@products.order(sort)).page(params[:page]).per(21)
+  		else
+  			session[:view_all] = false
 
-      @products = Product.where(:id => p).order(sort).page(params[:page]).per(21)
-			# @kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
-      @kaminari_products = @products
-		end
+        @products = Product.where(:id => p).order(sort).page(params[:page]).per(21)
+  			# @kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
+        @kaminari_products = @products
+  		end
+    else
+      @products = []
+      @kaminari_products = []
+    end
 
     respond_to do |format|
       format.html # show.html.erb
