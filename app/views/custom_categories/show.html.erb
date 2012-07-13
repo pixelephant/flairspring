@@ -1,10 +1,9 @@
 <div class="clearfix">
 	<section id="sidebar">
-			<form action="" method="GET" id="filter-form" class="">
-				
+			<form action="" method="GET" id="filter-form" class="">								
 				<div id="filters" class="box">
 					<h3><%= t('.filter') %></h3>
-					<%= render 'home/filters' unless @products.blank? %>
+					<%= render 'home/filters' unless @custom_category_empty %>
 				</div>
 				<nav id="category-nav">
 						<%= render 'home/category_menu_left' %>

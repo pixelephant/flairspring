@@ -37,6 +37,9 @@ class CustomCategoriesController < ApplicationController
       @custom_category.products.each do |pr|
         prod_ids << pr.id
       end
+      @custom_category_empty = false
+    else
+      @custom_category_empty = true
     end
 
     prod_sql = ""
