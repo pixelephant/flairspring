@@ -51,11 +51,17 @@ class CustomCategoriesController < ApplicationController
         else
           p[:numeric] = true
 
-          p[:to] = Property.all(:select => "MAX(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.ceil
-          p[:from] = Property.all(:select => "MIN(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.floor
+          min_max = Property.all(:select => "MAX(properties.num) AS max_num, MIN(properties.num) AS min_num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id")
+
+          # p[:to] = Property.all(:select => "MAX(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.ceil
+          # p[:from] = Property.all(:select => "MIN(properties.num) AS num", :joins => :products, :conditions => "products.category_id = #{@category.id} AND properties.property_category_id = #{property_category.id}#{prod_sql}", :group => "property_category_id").first.num.to_f.floor
+
+          p[:to] = min_max.any? ? min_max.first.max_num.to_f.ceil : 0
+          p[:from] = min_max.any? ? min_max.first.min_num.to_f.floor : 0
+
           v = params[property_category.id.to_s].split(";") if params[property_category.id.to_s]
-          params[property_category.id.to_s] ? p[:low] = v[0].to_f.floor : p[:low] = p[:from]
-          params[property_category.id.to_s] ? p[:high] = v[1].to_f.ceil : p[:high] = p[:to]
+          p[:low] = params[property_category.id.to_s] ? v[0].to_f.floor : p[:from]
+          p[:high] = params[property_category.id.to_s] ? v[1].to_f.ceil : p[:to]
           p[:unit] = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","")
         end
         @property_categories << p

@@ -1,9 +1,10 @@
 <div class="clearfix">
 	<section id="sidebar">
 			<form action="" method="GET" id="filter-form" class="">
+				
 				<div id="filters" class="box">
 					<h3><%= t('.filter') %></h3>
-					<%= render 'home/filters' %>
+					<%= render 'home/filters' if @products.any? %>
 				</div>
 				<nav id="category-nav">
 						<%= render 'home/category_menu_left' %>
@@ -24,6 +25,7 @@
 		</div>
 		<div id="product-grid" class="clearfix">
 			<%= render 'home/product_grid' %>
+			<p><%= "Sajnos nem találtunk terméket a kiválasztott feltételek alapján." unless @products.any? %></p>
 		</div>
 		<div id="action-bottom" class="box">
 			<a id="back-to-top" href="#product-list">&uarr; oldal tetejére</a>
