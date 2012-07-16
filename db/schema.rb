@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628145001) do
+ActiveRecord::Schema.define(:version => 20120703073717) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120628145001) do
     t.string   "additional"
     t.datetime "created_at"
     t.datetime "updated_at"
-t.boolean  "billing",    :default => false, :null => false
+    t.boolean  "billing",    :default => false, :null => false
     t.text     "name"
     t.boolean  "default"
   end
@@ -112,6 +112,17 @@ t.boolean  "billing",    :default => false, :null => false
   end
 
   add_index "contents", ["slug"], :name => "index_contents_on_slug"
+
+  create_table "coupons", :force => true do |t|
+    t.string   "code"
+    t.boolean  "used"
+    t.integer  "offer_value"
+    t.integer  "offer_type"
+    t.date     "valid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order_id"
+  end
 
   create_table "custom_categories", :force => true do |t|
     t.string   "name"
@@ -253,6 +264,8 @@ t.boolean  "billing",    :default => false, :null => false
     t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
+    t.integer  "price"
   end
 
   create_table "orders", :force => true do |t|
@@ -262,6 +275,11 @@ t.boolean  "billing",    :default => false, :null => false
     t.text     "basket_serialization"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.date     "estimated_date"
+    t.integer  "payment_type"
+    t.integer  "discount_used"
+    t.integer  "price"
   end
 
   create_table "photos", :force => true do |t|
@@ -308,20 +326,21 @@ t.boolean  "billing",    :default => false, :null => false
   add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
 
   create_table "products", :force => true do |t|
-    t.string   "name",              :null => false
+    t.string   "name",                             :null => false
     t.string   "short_description"
     t.text     "long_description"
-    t.integer  "category_id",       :null => false
+    t.integer  "category_id",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sku",               :null => false
-    t.integer  "price",             :null => false
+    t.string   "sku",                              :null => false
+    t.integer  "price",                            :null => false
     t.integer  "designer_id"
     t.integer  "manufacturer_id"
     t.string   "slug"
     t.text     "advice"
     t.string   "video"
     t.integer  "brand_id"
+    t.integer  "click",             :default => 0
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug"
@@ -345,7 +364,7 @@ t.boolean  "billing",    :default => false, :null => false
     t.integer  "property_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "numeric"
+    t.float    "num"
   end
 
   create_table "properties_to_categories", :force => true do |t|
@@ -484,6 +503,7 @@ t.boolean  "billing",    :default => false, :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
+    t.string   "accounting_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
