@@ -155,9 +155,9 @@ class CustomCategoriesController < ApplicationController
     discount_sql_table = ""
     discount_sql_column = ""
     if params[:recommend] == "sale"
-      where << "(discounts_to_products.discount_id IS NOT NULL)"
+      where << "(discounts_to_products.discount_id IS NOT NULL OR categories.discount_id IS NOT NULL)"
       property_count = property_count + 1
-      discount_sql_table = " LEFT JOIN discounts_to_products ON products.id = discounts_to_products.product_id"
+      discount_sql_table = " LEFT JOIN discounts_to_products ON products.id = discounts_to_products.product_id INNER JOIN categories ON products.category_id = categories.id"
       discount_sql_column = ",discounts_to_products.discount_id"
     end
 

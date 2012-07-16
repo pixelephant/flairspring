@@ -1,5 +1,7 @@
 RailsAdmin.config do |config|
 
+	config.main_app_name = "Flairspring"
+
 	require 'i18n'
   I18n.default_locale = :en
 
@@ -62,7 +64,11 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 	#Product
 	config.model Product do
 		#Product edit form
+
 		edit do
+			field :name do
+				
+			end
 
 			field :product_relates do
 				# associated_collection_scope do
@@ -97,7 +103,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 			field :id
 			field :discount_type do
 				pretty_value do
-					value == 1 ? 'Percent' : 'Value'
+					value == 1 ? 'Value' : 'Percent'
 				end
 			end
 			include_all_fields
@@ -108,7 +114,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 			field :id
 			field :discount_type do
 				pretty_value do
-					value == 1 ? 'Percent' : 'Value'
+					value == 1 ? 'Value' : 'Percent'
 				end
 			end
 			include_all_fields
