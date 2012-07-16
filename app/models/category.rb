@@ -23,4 +23,13 @@ class Category < ActiveRecord::Base
 
 	validates :name, :presence => true
 
+	def dynamic_property_categories
+		a = []
+		self.products.each do |product|
+			a = (a|product.property_category_ids)
+		end
+
+		return a
+	end
+
 end

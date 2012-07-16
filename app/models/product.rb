@@ -148,4 +148,12 @@ class Product < ActiveRecord::Base
 		self.full_price < self.price ? true : false
 	end
 
+	def property_category_ids
+		a = []
+		self.properties.group(:property_category_id).each do |prop|
+			a << prop.property_category_id
+		end
+		return a
+	end
+
 end

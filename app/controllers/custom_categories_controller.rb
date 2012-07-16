@@ -27,10 +27,7 @@ class CustomCategoriesController < ApplicationController
 
     # @title = " - " + @category.name.capitalize + " - " + @custom_category.name.titleize
     @title = @category.name.capitalize
-    property_categories = PropertyCategory.where("id NOT IN (79,78,73)")
-
-    @property_categories = []
-
+    
     prod_ids = []
 
     unless @custom_category.products.blank?
@@ -46,6 +43,11 @@ class CustomCategoriesController < ApplicationController
     unless prod_ids.blank?
       prod_sql = " AND products.id IN (#{prod_ids.join(',')})"
     end
+
+    # property_categories = PropertyCategory.where("id NOT IN (79,78,73) AND id IN (#{@category.dynamic_property_categories.join(",")})")
+    property_categories = @category.property_categories.where(:visible => 1)
+
+    @property_categories = []
 
     property_categories.each do |property_category|
       if property_category.properties.any?

@@ -1,5 +1,10 @@
 #encoding: utf-8
 
+#Sending many parameters
+if Rack::Utils.respond_to?("key_space_limit=")
+  Rack::Utils.key_space_limit = 123456789
+end
+
 DESCRIPTION = "Flairspring - Bútor, lámpa, tükör, komfort fotel"
 KEYWORDS = "Flairspring keywords - Bútor, lámpa, tükör, komfort fotel"
 
