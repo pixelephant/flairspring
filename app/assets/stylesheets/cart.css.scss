@@ -7,7 +7,9 @@ p.empty-cart{
 }
 
 #cart{
-	margin-top: 120px;
+	border-bottom:1px solid #e3e4e0;
+	padding-bottom:20px;
+	margin-bottom:20px;
 }
 
 #cart-top{
@@ -15,8 +17,15 @@ p.empty-cart{
 	padding-bottom:20px;
 	h3{
 		float:left;
-		margin-bottom:0;
-		margin-top:3px;
+		background:url(green_arrow_right_long.png) no-repeat;
+		width:300px;
+		padding-left:13px;
+		height:28px;
+		color:white;
+		font-size:14px;
+		line-height:28px;
+		font-weight:normal;
+		margin:20px 0;
 	}
 	.right{
 		float:right;
@@ -71,8 +80,8 @@ p.empty-cart{
 			margin-right:10px;
 		}
 		h6{
-			@include font-gill;
-			color:$brand-darkblue;
+			font-weight:normal;
+			color:#705f53;
 			text-transform:uppercase;
 			font-size:13px;
 			margin-top:5px;
@@ -81,30 +90,26 @@ p.empty-cart{
 	}
 	
 	thead{
-		border-bottom:1px solid $border-gray;
 		th{
 			padding:10px 5px;
-			color:#adadad;
+			background:#a5a99a;
 			font-weight:normal;
 			text-align:left;
 			font-size:12px;
+			color:$text-brown2;
 		}
 	}
 	tbody{
-		tr{
-			border-bottom:1px solid $border-gray;
-			
-		}
 		td{
 			padding:20px 10px;
 			vertical-align:middle;
+			color:#705f53;
 		}
 		
 		
 		.multiply-cell,.equals-cell{
 			width:10px;
 			color:#adadad;
-			@include font-gill;
 			font-size:16px;
 		}
 		
@@ -117,11 +122,11 @@ p.empty-cart{
 			}
 		}
 		.property{
-			@include small-caps;
+			
 		}
 		
 		.price-cell,.sum-price-cell{
-			@include font-gill;
+			
 			font-size:16px;
 		}
 		.price-cell{
@@ -152,27 +157,23 @@ p.empty-cart{
 
 #cart-bottom{
 	margin-top:20px;
-	border:1px dashed #aaa;
-	background:#F2F7FB;
+	background:#e3e4e0;
 	padding:20px;
 }
 
 #coupon{
 	float:left;
-	width:200px;
+	width:250px;
 	label{
 		display:block;
 		margin-bottom:10px;
-		color:#333;
-		@include small-caps;
+		color:#3c2514;
+		text-transform:uppercase;
 	}
 	input[type="text"]{
 		border: 1px solid #C2C2C2;
 		margin: 0;
 		padding: 0;
-		-moz-border-radius: 3px 3px 3px 3px;
-		border-radius: 3px 3px 3px 3px;
-		border-radius: 3px 3px 3px 3px;
 		-webkit-appearance: textfield;
 		-moz-box-sizing: content-box;
 		-webkit-box-sizing: content-box;
@@ -184,7 +185,7 @@ p.empty-cart{
 		width:100px;
 	}
 	.button{
-		@include gray-button;
+		@include orange-button;
 		font-size:12px;
 		padding:6px 5px;
 		float:left;
@@ -203,34 +204,33 @@ p.empty-cart{
 }
 
 #total{
-	width:585px;
+	width:610px;
 	float:left;
 	text-align:right;
 	position:relative;
 	p{
-		@include font-gill;
 		padding-left:350px;
+		overflow:hidden;
+		line-height:2;
 	}
 	span,b{
 		font-weight:normal;
 		margin:3px;
-		@include font-gill;
 		font-size:18px;
 	}
 	.subtotal,.shipping-cost{
-		font-size:22px;
 	}
 	b{
-		@include small-caps;
 		float:left;
 	}
 	.total-price{
-		font-size:25px;
-		color:$brand-orange;
+		color:$red;
+		font-size:18px;
 	}
 	
 	#total-price{
-		color:$brand-orange;
+		color:$red;
+		font-size:18px;
 	}
 }
 
@@ -239,19 +239,46 @@ p.empty-cart{
 	float:right;
 	input[type="submit"]{
 		@include orange-button;
-		font-size:15px;
+		font-size:20px;
 	}
 	a{
-		color:$brand-lightblue;
-		@include transition-03s;
-		&:hover{
-			color:$brand-darkblue;
-		}
+		text-decoration:none;
+		color:#705f53;
 	}
 }
 
 .loy{
 	margin-top:20px;
+}
+
+#info{
+	border-bottom:1px solid #e3e4e0;
+	padding-bottom:20px;
+	margin-bottom:20px;
+	overflow:hidden;
+	.box{
+		width:320px;
+		margin-right:10px;
+		float:left;
+		&.last{
+			margin-right:0;
+		}
+		h3{
+			text-transform:uppercase;
+			background:#ced0c8;
+			color:$orange;
+			font-weight:normal;
+			padding:10px;
+			font-size:16px;
+			margin-bottom:10px;
+		}
+		p{
+			color:$text-brown2;
+			line-height:1.5;
+			font-size:14px;
+			padding: 0 10px;
+		}
+	}
 }
 
 @import "_simple_footer.css.scss";

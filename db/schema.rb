@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716112422) do
+ActiveRecord::Schema.define(:version => 20120628145001) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.string   "additional"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "billing",    :default => false, :null => false
+t.boolean  "billing",    :default => false, :null => false
     t.text     "name"
     t.boolean  "default"
   end
@@ -81,8 +81,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "updated_at"
   end
 
-  add_index "categories_custom_category_groups", ["category_id", "custom_category_group_id"], :name => "relation", :unique => true
-
   create_table "category_translations", :force => true do |t|
     t.integer  "category_id"
     t.string   "locale"
@@ -115,17 +113,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
 
   add_index "contents", ["slug"], :name => "index_contents_on_slug"
 
-  create_table "coupons", :force => true do |t|
-    t.string   "code"
-    t.boolean  "used",        :default => false, :null => false
-    t.integer  "offer_value"
-    t.integer  "offer_type"
-    t.date     "valid_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order_id"
-  end
-
   create_table "custom_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -136,8 +123,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.integer  "custom_category_group_id"
   end
 
-  add_index "custom_categories", ["category_id"], :name => "category_id"
-  add_index "custom_categories", ["custom_category_group_id"], :name => "custom_category_group_id"
   add_index "custom_categories", ["slug"], :name => "index_custom_categories_on_slug"
 
   create_table "custom_category_group_translations", :force => true do |t|
@@ -209,8 +194,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "updated_at"
   end
 
-  add_index "discounts_to_products", ["product_id", "discount_id"], :name => "relation", :unique => true
-
   create_table "line_items", :force => true do |t|
     t.integer  "product_id"
     t.integer  "cart_id"
@@ -270,8 +253,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity"
-    t.integer  "price"
   end
 
   create_table "orders", :force => true do |t|
@@ -281,11 +262,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.text     "basket_serialization"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.date     "estimated_date"
-    t.integer  "payment_type"
-    t.integer  "discount_used"
-    t.integer  "price"
   end
 
   create_table "photos", :force => true do |t|
@@ -296,8 +272,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "photos", ["product_id"], :name => "product"
 
   create_table "product_sets", :force => true do |t|
     t.integer  "price"
@@ -334,21 +308,20 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
   add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
 
   create_table "products", :force => true do |t|
-    t.string   "name",                             :null => false
+    t.string   "name",              :null => false
     t.string   "short_description"
     t.text     "long_description"
-    t.integer  "category_id",                      :null => false
+    t.integer  "category_id",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sku",                              :null => false
-    t.integer  "price",                            :null => false
+    t.string   "sku",               :null => false
+    t.integer  "price",             :null => false
     t.integer  "designer_id"
     t.integer  "manufacturer_id"
     t.string   "slug"
     t.text     "advice"
     t.string   "video"
     t.integer  "brand_id"
-    t.integer  "click",             :default => 0
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug"
@@ -359,8 +332,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "products_properties", ["property_id", "product_id"], :name => "relation", :unique => true
 
   create_table "products_stores", :force => true do |t|
     t.integer  "store_id"
@@ -374,7 +345,7 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.integer  "property_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "num"
+    t.float    "numeric"
   end
 
   create_table "properties_to_categories", :force => true do |t|
@@ -399,10 +370,9 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
   end
 
   create_table "property_categories", :force => true do |t|
-    t.string   "category_name",                   :null => false
+    t.string   "category_name", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "visible",       :default => true
   end
 
   create_table "property_categories_to_categories", :force => true do |t|
@@ -411,8 +381,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "property_categories_to_categories", ["property_category_id", "category_id"], :name => "relation", :unique => true
 
   create_table "property_category_translations", :force => true do |t|
     t.integer  "property_category_id"
@@ -516,7 +484,6 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
-    t.string   "accounting_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
