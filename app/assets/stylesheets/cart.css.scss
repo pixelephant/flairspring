@@ -1,9 +1,9 @@
 @import '_mixins.css.scss';
 
 p.empty-cart{
-	font-size:30px;
-	text-align:center;
+	font-size:18px;
 	margin-top:20px;
+	color:$text-brown2;
 }
 
 #cart{
@@ -280,5 +280,5 @@ p.empty-cart{
 		}
 	}
 }
-
+@import "_sliders.css.scss";
 @import "_simple_footer.css.scss";
