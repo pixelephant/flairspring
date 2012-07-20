@@ -28,6 +28,9 @@ end
 
 #CustomCategoryFilterben
 def property_disabled?(property,params,fix_properties)
+
+	return false if property.blank? || params.blank? || fix_properties.blank?
+
 	value = (params[property.property_category.id.to_s].include?(property.id.to_s) ? true : false) if params[property.property_category.id.to_s]
 	value2 = (fix_properties[property.property_category.id].include?(property.id) ? true : false) if fix_properties[property.property_category.id]
 

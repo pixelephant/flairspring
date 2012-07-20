@@ -25,7 +25,8 @@ class CustomCategory < ActiveRecord::Base
 
 		category_id = self.category.id
 		properties = self.properties
-		property_count = properties.count
+		# property_count = properties.count
+		property_category_count = properties.select("DISTINCT property_category_id").count
 
 		return nil if properties.blank?
 
@@ -36,7 +37,7 @@ class CustomCategory < ActiveRecord::Base
 		v = prop.join(",")
     condit = " AND (properties.id IN (#{v}))"
 
-		p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id AS id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{category_id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
+		p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id AS id, COUNT(properties.id) AS prop_count FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id` WHERE `products`.`category_id` = #{category_id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_category_count}")
 		return nil if p.blank?
 		ids = []
 		p.each do |i|

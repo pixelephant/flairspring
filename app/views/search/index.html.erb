@@ -3,7 +3,7 @@
 		<form action="#" id="filter-form" class="">
 			<div id="filters" class="box">
 					<h3><%= t('.filter') %></h3>
-					<%= render 'home/filters' %>
+					<%= render 'home/filters' unless @products.blank? %>
 				</div>
 		</form>
 	</section>
@@ -15,17 +15,18 @@
 			<% c = "view-all" %>
 			<% c = c + " active" if session[:view_all] %>
 
-			<%= link_to t('.view_all'), request.path + "?page=all", :class => c %>
-			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+			<%= link_to t('.view_all'), flatten_param_hash(params.merge(:page => 'all')), :class => c %>
+			<%= paginate @kaminari_products, :window => 0, :outer_window => 1 unless @kaminari_products.blank? %>
 		</div>
 		<div id="product-grid" class="clearfix">
 			<%= render 'home/product_grid' %>
+			<p><%= "Sajnos nem találtunk terméket a kiválasztott feltételek alapján." if @products.blank? %></p>
 		</div>
 		<div id="action-bottom" class="box">
 			<a id="back-to-top" href="#product-list">back to top</a>
 			<%= render 'home/product_grid_action_buttons' %>
-			<%= link_to t('.view_all'), request.path + "?page=all", :class => "view-all" %>
-			<%= paginate @kaminari_products, :window => 2, :outer_window => 1 %>
+			<%= link_to t('.view_all'), flatten_param_hash(params.merge(:page => 'all')), :class => c %>
+			<%= paginate @kaminari_products, :window => 0, :outer_window => 1 unless @kaminari_products.blank? %>
 		</div>
 	</section>
 </div>

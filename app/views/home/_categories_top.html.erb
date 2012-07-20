@@ -6,25 +6,25 @@
 				<div class="col1">
 					<% sub_categories = category.custom_categories.order("custom_category_group_id DESC")  %>
 					<% current = "" %>
-					<% product_per_column = sub_categories.count / 3 if !sub_categories.blank? %>
+					<% product_per_column = (sub_categories.count+3) / 2 if !sub_categories.blank? %>
 					<% sub_categories.each_with_index do |sub_cat,i| %>
 						<% unless current == sub_cat.custom_category_group_id %>
 							<% if sub_cat.custom_category_group_id.nil? %>
 								<h5>Nincs nevem</h5>
 							<% else %>
 								<h5><%= sub_cat.custom_category_group.name %></h5>
-							<% end %>							
+							<% end %>
 						<% end %>
 						<% current = sub_cat.custom_category_group_id %>
-						<% if i == product_per_column || i == product_per_column * 2 %>
-							</div>
-							<div class="col1">
-						<% end %>
 						<li>
 							<%= link_to_if(session[:view_all], sub_cat.name, custom_category_url(category, sub_cat, :page => 'all')) do %>
 								<%=	link_to(sub_cat.name, custom_category_url(category, sub_cat)) %>
 							<% end %>
 						</li>
+						<% if i == product_per_column || i == product_per_column * 2 %>
+							</div>
+							<div class="col1">
+						<% end %>
 					<% end %>
 				</div>
 				<div class="col1 fix">
