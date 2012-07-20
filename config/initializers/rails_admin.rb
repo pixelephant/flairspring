@@ -1,3 +1,4 @@
+#encoding: utf-8
 RailsAdmin.config do |config|
 
 	config.main_app_name = "Flairspring"
@@ -9,9 +10,9 @@ RailsAdmin.config do |config|
 
 	#Custom actions
 	config.actions do
-		member :import do
-			i18n_key :import
-		end
+		# member :import do
+		# 	i18n_key :import
+		# end
 		config.actions do
 		  # root actions
 		  dashboard                     # mandatory
@@ -33,12 +34,116 @@ RailsAdmin.config do |config|
 
 	#Add all excluded models here:
 	config.excluded_models = [PropertiesToProduct, Wishlist, WishlistItem, PropertyCategoriesToCategory,AdvantagesToProduct,DiscountsToProduct,PropertiesToCategory,RelatedProduct,
-PropertiesToCustomCategory,PropertiesToLineItem,Cart]
+PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
+
+	#Visibility START
+	config.model AdvantageTranslation do
+		visible false
+	end
+
+	config.model CategoryTranslation do
+		visible false
+	end
+
+	config.model ContentTranslation do
+		visible false
+	end
+
+	config.model CustomCategoryGroupTranslation do
+		visible false
+	end
+
+	config.model CustomCategoryTranslation do
+		visible false
+	end
+
+	config.model DesignerTranslation do
+		visible false
+	end
+
+	config.model ManufacturerTranslation do
+		visible false
+	end
+
+	config.model ProductTranslation do
+		visible false
+	end
+
+	config.model PropertyCategoryTranslation do
+		visible false
+	end
+
+	config.model PropertyTranslation do
+		visible false
+	end
+
+	config.model SubcontentTranslation do
+		visible false
+	end
+
+	config.model LinksProduct do
+		visible false
+	end
+
+	config.model ProductsStore do
+		visible false
+	end
+
+	#Visibility END
+
+	#Address
+	config.model Address do
+		#Property name
+		object_label_method do
+			:address_label_method
+		end
+	end
 
 	#Category
 	config.model Category do
 		edit do
-			exclude_fields :custom_categories
+			exclude_fields :custom_categories, :slug, :properties
+			field :name
+			field :position
+		end
+	end
+
+	#Content
+	config.model Content do
+		edit do
+			exclude_fields :slug
+		end
+	end
+
+	#Coupon
+	config.model Coupon do
+		object_label_method do
+			:coupon_label_method
+		end
+		list do
+			field :id
+			field :offer_type do
+				pretty_value do
+					value == 1 ? 'Összeg' : 'Termék'
+				end
+			end
+			include_all_fields
+		end
+		show do
+			field :id
+			field :offer_type do
+				pretty_value do
+					value == 1 ? 'Összeg' : 'Termék'
+				end
+			end
+			include_all_fields
+		end
+		#Discount edit form
+		edit do
+			field :offer_type do
+				partial "discount_dropdown"
+			end
+			include_all_fields
 		end
 	end
 
@@ -49,7 +154,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 			:property_label_method
 		end
 		edit do
-			exclude_fields :categories, :custom_categories
+			exclude_fields :categories, :custom_categories, :num
 		end
 	end
 
@@ -80,7 +185,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 				# end
 			end
 			include_all_fields
-			exclude_fields :properties_to_products, :advantages_to_products, :discounts_to_products, :inverse_product_relates, :order_items, :line_items
+			exclude_fields :properties_to_products, :advantages_to_products, :discounts_to_products, :inverse_product_relates, :order_items, :line_items, :slug, :click
 		end
 	end
 
@@ -90,9 +195,8 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 	config.model CustomCategory do
 		#Product edit form
 		edit do
-
+			exclude_fields :properties_to_products, :advantages_to_products, :discounts_to_products, :inverse_product_relates, :slug
 			include_all_fields
-			exclude_fields :properties_to_products, :advantages_to_products, :discounts_to_products, :inverse_product_relates
 		end
 	end
 
@@ -168,6 +272,17 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 		end
 	end
 
+	#Order
+	config.model Order do
+		edit do
+			exclude_fields :payment_type, :discount_used, :basket_serialization
+			include_all_fields
+		end
+		object_label_method do
+			:order_label_method
+		end
+	end
+
 	#OrderItem
 	config.model OrderItem do
 		object_label_method do
@@ -186,6 +301,12 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 	config.model Store do
 		object_label_method do
 			:store_label_method
+		end
+	end
+
+	config.model User do
+		object_label_method do
+			:user_label_method
 		end
 	end
 
@@ -215,7 +336,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 	end
 
 	def advantage_label_method
-		self.advantage
+		self.name
 	end
 
 	def discount_label_method
@@ -223,8 +344,17 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 		self.value.to_s << type
 	end
 
+	def coupon_label_method
+		type = self.offer_type == 2 ? ' Termék' : 'Összeg'
+		self.offer_type = type
+	end
+
 	def order_item_label_method
 		self.product.name
+	end
+
+	def order_label_method
+		self.user.title_name + " " + self.user.first_name + " " + self.user.last_name + " - " + self.created_at.to_s
 	end
 
 	def link_label_method
@@ -233,6 +363,14 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart]
 
 	def store_label_method
 		self.name
+	end
+
+	def user_label_method
+		self.title_name + " " + self.first_name + " " + self.last_name
+	end
+
+	def address_label_method
+		self.zip + " " + self.city + ", " + self.additional
 	end
 
 end
