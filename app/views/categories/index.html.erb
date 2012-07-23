@@ -1,5 +1,5 @@
 <div class="clearfix" id="category-<%= @category.slug %>">
-	<%= link_to (category_path(@category) + "/osszes"), :class => "chead"  do %>
+	<%= link_to(category_path(@category) + "/osszes", :class => "chead") do %>
 		<h3><%= @category.name %></h3>
 		<%= image_tag @category.image_file unless @category.image_file.blank? %>
 	<% end %>
