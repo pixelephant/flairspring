@@ -121,12 +121,17 @@
 	width:725px;
 	float:left;
 	overflow:hidden;
+	a{
+		display:block;
+		text-decoration:none;
+	}
 	.sub{
 		width:228px;
 		float:left;
-		height:200px;
+		height:194px;
 		margin-bottom:20px;
 		margin-right:20px;
+		position:relative;
 		&:nth-child(3n){
 			margin-right:0;
 			
@@ -141,35 +146,10 @@
 			padding: 10px;
 			color:$text-brown;
 			font-weight: normal;
+			position:absolute;
+			width:208px;
 		}
 	}
-}
-
-
-/* Sub dobozok */
-
-#sub-hinta{
-	background: url(/assets/category/fotelek/subs/hintazo.png) no-repeat center top;
-}
-
-#sub-forgo{
-	background: url(/assets/category/fotelek/subs/forgo.png) no-repeat center top;
-}
-
-#sub-fal{
-	background: url(/assets/category/fotelek/subs/fal.png) no-repeat center ;
-}
-
-#sub-falforgo{
-	background: url(/assets/category/fotelek/subs/falforgo.png) no-repeat center ;
-}
-
-#sub-motoros{
-	background: url(/assets/category/fotelek/subs/motoros.png) no-repeat center ;
-}
-
-#sub-magas{
-	background: url(/assets/category/fotelek/subs/magas.png) no-repeat center top;
 }
 
 /* Promó dobozok */
