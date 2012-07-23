@@ -40,6 +40,8 @@ class Product < ActiveRecord::Base
 
 	validates :sku, :name, :uniqueness => true
 
+	attr_protected
+
 	searchable do
     text :name, :short_description, :long_description
  			# text :product_translations do

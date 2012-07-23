@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716112422) do
+ActiveRecord::Schema.define(:version => 20120723083556) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
   create_table "advantage_translations", :force => true do |t|
     t.integer  "advantage_id"
     t.string   "locale"
-    t.string   "advantage"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
   add_index "advantage_translations", ["locale"], :name => "index_advantage_translations_on_locale"
 
   create_table "advantages", :force => true do |t|
-    t.string   "advantage",  :null => false
+    t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "updated_at"
   end
 
+  add_index "categories_custom_category_groups", ["category_id", "custom_category_group_id"], :name => "relation", :unique => true
+
   create_table "category_translations", :force => true do |t|
     t.integer  "category_id"
     t.string   "locale"
@@ -115,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
 
   create_table "coupons", :force => true do |t|
     t.string   "code"
-    t.boolean  "used"
+    t.boolean  "used",        :default => false, :null => false
     t.integer  "offer_value"
     t.integer  "offer_type"
     t.date     "valid_date"
@@ -132,8 +134,11 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.integer  "discount_id"
     t.string   "slug"
     t.integer  "custom_category_group_id"
+    t.string   "image_file"
   end
 
+  add_index "custom_categories", ["category_id"], :name => "category_id"
+  add_index "custom_categories", ["custom_category_group_id"], :name => "custom_category_group_id"
   add_index "custom_categories", ["slug"], :name => "index_custom_categories_on_slug"
 
   create_table "custom_category_group_translations", :force => true do |t|
@@ -204,6 +209,8 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "discounts_to_products", ["product_id", "discount_id"], :name => "relation", :unique => true
 
   create_table "line_items", :force => true do |t|
     t.integer  "product_id"
@@ -291,6 +298,8 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "updated_at"
   end
 
+  add_index "photos", ["product_id"], :name => "product"
+
   create_table "product_sets", :force => true do |t|
     t.integer  "price"
     t.text     "description"
@@ -352,6 +361,8 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.datetime "updated_at"
   end
 
+  add_index "products_properties", ["property_id", "product_id"], :name => "relation", :unique => true
+
   create_table "products_stores", :force => true do |t|
     t.integer  "store_id"
     t.integer  "product_id"
@@ -395,12 +406,16 @@ ActiveRecord::Schema.define(:version => 20120716112422) do
     t.boolean  "visible",       :default => true
   end
 
+  add_index "property_categories", ["visible"], :name => "visible"
+
   create_table "property_categories_to_categories", :force => true do |t|
     t.integer  "property_category_id", :null => false
     t.integer  "category_id",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "property_categories_to_categories", ["property_category_id", "category_id"], :name => "relation", :unique => true
 
   create_table "property_category_translations", :force => true do |t|
     t.integer  "property_category_id"

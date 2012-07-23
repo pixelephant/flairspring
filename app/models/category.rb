@@ -10,6 +10,8 @@ class Category < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id :name, :use => [:slugged]
 
+	mount_uploader :image_file, ImageUploader
+
 	has_many :products
 	has_many :property_categories_to_categories
 	has_many :property_categories, :through => :property_categories_to_categories

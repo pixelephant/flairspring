@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @category = Category.first
+    @category = Category.find(params[:id])
+    @custom_categories = @category.custom_categories
 
     respond_to do |format|
       format.html # index.html.erb

@@ -2,7 +2,7 @@ class CustomCategoriesController < ApplicationController
   # GET /custom_categories
   # GET /custom_categories.json
 
-  caches_action :show, :cache_path => Proc.new { |c| c.params }
+  # caches_action :show, :cache_path => Proc.new { |c| c.params }
 
   def index
     @custom_categories = CustomCategory.all
@@ -17,12 +17,12 @@ class CustomCategoriesController < ApplicationController
   # GET /custom_categories/1.json
   def show
 
-    if params[:category_id]
+    unless params[:id] == 'osszes'
       @category = Category.find(params[:category_id])
       @custom_category = CustomCategory.find(params[:id])
     else
-      @category = Category.find(params[:id])
-      @custom_category = Category.find(params[:id])
+      @category = Category.find(params[:category_id])
+      @custom_category = Category.find(params[:category_id])
     end
 
     # @title = " - " + @category.name.capitalize + " - " + @custom_category.name.titleize
@@ -102,7 +102,8 @@ class CustomCategoriesController < ApplicationController
 
     properties = []
 
-    property_count = 0
+    # property_count = 0
+    property_category_count = 0
 
     params.each do |key, val|
       unless key.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil
@@ -113,14 +114,16 @@ class CustomCategoriesController < ApplicationController
           property.each do |p|
             properties << p.id
           end
-          property_count = property_count.to_i + 1
+          # property_count = property_count.to_i + 1
+          property_category_count = property_category_count + 1
         else
           v = []
           params[key].each do |p|
             v << p.to_s
             properties << p
           end
-          property_count = property_count.to_i + v.count.to_i
+          # property_count = property_count.to_i + v.count.to_i
+          property_category_count = property_category_count + 1
         end
       end
     end
@@ -131,8 +134,9 @@ class CustomCategoriesController < ApplicationController
       @fix_properties[p.property_category_id] = [] if @fix_properties[p.property_category_id].nil?
       @fix_properties[p.property_category_id] << p.id
       properties << p.id
-      property_count = property_count + 1
+      # property_count = property_count + 1
     end
+    property_category_count = property_category_count + @custom_category.properties.select("Distinct property_category_id").count.to_i
 
     v = properties.join(",")
     where << "(properties.id IN (#{v}))" unless v.blank?
@@ -165,8 +169,9 @@ class CustomCategoriesController < ApplicationController
     # condit = where.join(" AND ") unless where.blank?
 
     unless @custom_category.products.blank?
-      if property_count > 0
-        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_count}")
+      logger.debug "property_category_count: #{property_category_count}"
+      if property_category_count > 0
+        p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_category_count}")
       else
         p = @custom_category.products.select("id").where(condit)
       end
