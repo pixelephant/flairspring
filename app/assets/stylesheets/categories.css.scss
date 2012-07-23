@@ -1,5 +1,21 @@
 @import '_mixins.css.scss';
 
+.chead{
+	margin-bottom:20px;
+	h3{
+		position: absolute;
+		bottom:30px;
+		background:url(red_arrow_right_big.png) no-repeat;
+		width:232px;
+		height:78px;
+		color:white;
+		text-transform:uppercase;
+		padding-left:30px;
+		line-height:78px;
+		font-weight:normal;
+	}
+}
+
 #sidebar{
 	width:235px;
 	float:left;
@@ -155,43 +171,7 @@
 /* Promó dobozok */
 
 #category-fotelek{
-	#lazboy-promo{
-		margin-bottom:20px;
-		display:block;
-	    position:relative;
-		width:980px;
-		height:294px;
-		background:url(/assets/home/lazboy.png) no-repeat center;
-		h3{
-			background:$background-green;
-			float:left;
-			padding:10px;
-			color:$text-brown;
-			font-weight:normal;
-		}
-		.feat{
-			position:absolute;
-			text-transform:uppercase;
-			text-align:center;
-			color:$text-brown;
-		}
-		#lab{
-		top: 210px;
-		left: 500px;
-	}
-	#doles{
-		top: 75px;
-		left: 195px;
-	}
-	#emel{
-		top:95px;
-		left:655px;
-	}
-	}
-
-	#big{
-		background: url(category/fotelek/fotel-big.png) no-repeat center center white;
-	}
+	
 
 	#hintazo-promo{
 		width:350px;
