@@ -17,12 +17,12 @@ class CustomCategoriesController < ApplicationController
   # GET /custom_categories/1.json
   def show
 
-    if params[:category_id]
+    unless params[:id] == 'osszes'
       @category = Category.find(params[:category_id])
       @custom_category = CustomCategory.find(params[:id])
     else
-      @category = Category.find(params[:id])
-      @custom_category = Category.find(params[:id])
+      @category = Category.find(params[:category_id])
+      @custom_category = Category.find(params[:category_id])
     end
 
     # @title = " - " + @category.name.capitalize + " - " + @custom_category.name.titleize
