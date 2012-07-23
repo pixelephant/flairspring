@@ -4,6 +4,8 @@ class Category < ActiveRecord::Base
 
 	default_scope :order => 'position ASC'
 
+	mount_uploader :image_file, ImageUploader
+
 	has_many :category_translations, :dependent => :destroy
 	accepts_nested_attributes_for :category_translations
 
