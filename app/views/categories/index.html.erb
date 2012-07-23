@@ -1,11 +1,8 @@
-<div class="clearfix" id="category-fotelek">
-	<%= image_tag @category.image_file unless @category.image_file.blank? %>
-	<a href="/fotelek/lazboy" class="box promo full" id="lazboy-promo">
-		<h3>La-Z-Boy komfort fotelek</h3>
-		<span class="feat" id="doles">Nagy <br> dőlésszög</span>
-		<span class="feat" id="lab">Magasított <br> lábak</span>
-		<span class="feat" id="emel">Emelhető <br> lábrész</span>
-	</a>
+<div class="clearfix" id="category-<%= @category.slug %>">
+	<%= link_to (category_path(@category) + "/osszes") do %>
+		<h3><%= @category.name %></h3>
+		<%= image_tag @category.image_file unless @category.image_file.blank? %>
+	<% end %>
 	<div class="clearfix">
 		<section id="sidebar">
 			<nav id="category-nav">
@@ -16,8 +13,10 @@
 		<section id="sub-list">
 			<% @custom_categories.each do |custom_category| %>
 				<div class="sub">
-					<h3><%= custom_category.name %></h3>
-					<%= image_tag custom_category.image_file unless custom_category.image_file.blank? %>
+						<%= link_to (category_path(@category) + "/" + custom_category.slug) do %>
+							<h3><%= custom_category.name %></h3>
+							<%= custom_category.image_file.blank? ? custom_category.name : image_tag(custom_category.image_file) %>
+						<% end %>
 				</div>
 			<% end %>			
 			

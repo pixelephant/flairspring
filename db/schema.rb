@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723083556) do
+ActiveRecord::Schema.define(:version => 20120723092500) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20120723083556) do
     t.integer  "discount_id"
     t.string   "slug"
     t.integer  "position"
+    t.string   "image_file"
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug"
