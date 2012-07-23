@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(:version => 20120723083556) do
     t.integer  "discount_id"
     t.string   "slug"
     t.integer  "position"
-    t.string   "image_file"
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug"
@@ -135,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20120723083556) do
     t.integer  "discount_id"
     t.string   "slug"
     t.integer  "custom_category_group_id"
+    t.string   "image_file"
   end
 
   add_index "custom_categories", ["category_id"], :name => "category_id"

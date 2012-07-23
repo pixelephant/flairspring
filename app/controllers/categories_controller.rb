@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @category = Category.first
+    @custom_categories = @category.custom_categories
 
     respond_to do |format|
       format.html # index.html.erb

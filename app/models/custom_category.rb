@@ -7,6 +7,8 @@ class CustomCategory < ActiveRecord::Base
 
 	translates :name
 
+	mount_uploader :image_file, ImageUploader
+
 	has_many :custom_category_translations, :dependent => :destroy
 	accepts_nested_attributes_for :custom_category_translations
 
