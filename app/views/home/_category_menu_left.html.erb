@@ -33,7 +33,7 @@
 						<%= link_to "Akciós termékek", flatten_param_hash(params.merge(params.merge(:recommend => "sale"))) %>
 					</li>
 					<li>
-						<%= link_to "Összes termék", "#" %>
+						<%= link_to "Összes termék", "/" + @category.slug + "/osszes" %>
 					</li>
 			</ul>
 	</ul>
