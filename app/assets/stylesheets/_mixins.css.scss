@@ -364,6 +364,13 @@ $border-gray:#e3e4e0;
 	text-decoration:none;
 }
 
+
+.button{
+	&.blue,&.orange{
+		@include orange-button;
+	}
+}
+
 @mixin gray-button{
 	@include button;
 	color:#585857;

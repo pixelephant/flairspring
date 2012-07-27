@@ -170,6 +170,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	display:none;
 }
 
+.no-result{
+	font-size:18px;
+	margin:30px 0;
+	text-align:center;
+}
+
 html{
 	@include font-gill;
 }

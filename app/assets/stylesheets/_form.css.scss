@@ -1,6 +1,6 @@
 @import '_mixins.css.scss';
 
-form{
+form:not(#search-form){
 	input[type="text"],input[type="email"],input[type="password"],input[type="tel"]{
 		border:1px solid;
 		height:20px;

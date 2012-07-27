@@ -5,12 +5,10 @@
 @import '_product_modal.css.scss';
 
 #top{
-	float:left;
-	padding-bottom:20px;
 	background:#d2d1d1;
 	color:$text-brown;
 	padding:10px 20px;
-	clear:right;
+	clear:both;
 	margin-bottom:20px;
 }
 
@@ -55,6 +53,39 @@
 #or{
 	@include gray-button;
 }
+
+
+#advantages{
+	overflow:hidden;
+	.third{
+		width: 320px;
+		margin-right: 10px;
+		margin-bottom: 20px;
+		margin-top: 20px;
+		float: left;
+		&.last{
+			margin-right:0;
+		}
+		h3{
+			background-color: transparent;
+			background-color: rgba(52, 67, 67, 0.4);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66344343,endColorstr=#66344343);
+			zoom: 1;
+			font-family: "Verdana", sans-serif;
+			font-size: 18px;
+			padding: 10px;
+			color: #2e1301;
+			font-weight: normal;
+		}
+		p{
+			margin-top:20px;
+			line-height:1.5;
+			padding-left:10px;
+		}
+	}
+}
+
+
 
 .user_new{
 	label{
