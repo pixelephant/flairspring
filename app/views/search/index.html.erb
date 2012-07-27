@@ -20,7 +20,7 @@
 		</div>
 		<div id="product-grid" class="clearfix">
 			<%= render 'home/product_grid' %>
-			<p><%= "Sajnos nem találtunk terméket a kiválasztott feltételek alapján." if @products.blank? %></p>
+			<p class="no-result"><%= "Sajnos nem találtunk terméket a kiválasztott feltételek alapján." if @products.blank? %></p>
 		</div>
 		<div id="action-bottom" class="box">
 			<a id="back-to-top" href="#product-list">back to top</a>

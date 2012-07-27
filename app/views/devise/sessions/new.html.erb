@@ -2,24 +2,26 @@
 
 <section id="reglogin" class="box full clearfix">
 	<h3 id="top">Regisztráljon vagy jelentkezzen be <!-- span id="secure">Secure connection</span--></h3>
-	<%= render :partial => "users/login", :locals => { :logintext => ", hogy szerkeszthesse adatait vagy tovább lépjen a fizetéshez", :resource => resource } %>
-	<%= render "users/register-cta", :locals => { :resource => resource} %>
+	<div class="clearfix">
+		<%= render :partial => "users/login", :locals => { :logintext => ", hogy szerkeszthesse adatait vagy tovább lépjen a fizetéshez", :resource => resource } %>
+		<%= render "users/register-cta", :locals => { :resource => resource} %>
+	</div>
 </section>
 
-<div class="box-wrap clearfix">
-	<section class="box third">
+<div id="advantages">
+	<section class="third">
 		<h3>Kívánságlista</h3>
 		<p>
 			<span class="lead">Regisztrált vásárlóink</span> saját kívánságlistát hozhatnak létre
 		</p>
 	</section>
-	<section class="box third mid">
+	<section class="third mid">
 		<h3>Gyrosabb vásárlás</h3>
 		<p>
 			<span class="lead">regisztrációt követően</span> nem kell minden alkalommal megadnia megrendelési adatait
 		</p>
 	</section>
-	<section class="box third last">
+	<section class="third last">
 		<h3>Egyéni ajánlatok</h3>
 		<p>
 			<span class="lead">Regisztrált vásárlóink</span> <em>kizárólagos kedvezményeket</em> és vásárlásaik után <em>~3%</em> kedvezményt kaphatnak hűségprogramban

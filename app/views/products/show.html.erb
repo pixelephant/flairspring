@@ -64,7 +64,7 @@
 				<p><label for="">Szállítási idő</label> 12 nap</p>
 				<% if !@designer.nil? %>
 
-					<p><span><%= t('designer') %>: </span><%= @designer.name %></p>
+					<p><label><%= t('designer') %>: </label><%= @designer.name %></p>
 				<% end %>
 				<% @size_weight.each do |property| %>
 					<p>
