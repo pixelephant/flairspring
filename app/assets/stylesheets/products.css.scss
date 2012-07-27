@@ -132,15 +132,15 @@
 }
 
 #add-to-whishlist{
-	@include gray-button;
-	font-size:10px;
+	font-size:14px;
 	padding:4px;
 	margin-left:20px;
 	position:relative;
 	top:-5px;
 	color:$brand-orange;
+	text-decoration:none;
 	span{
-		color:$text-color;
+		color:$text-brown2;
 	}
 	&.added{
 		color:green;
