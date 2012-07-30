@@ -1,7 +1,6 @@
 //= require jquery.easing
 //= require carousel
 //= require mousewheel
-//= require modal
 
 var shipping_threshold = 1000;
 var shipping_fee = 4500;

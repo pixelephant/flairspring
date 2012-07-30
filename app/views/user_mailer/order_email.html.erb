@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Köszönjük megrendelését!</h1>
+    <p>Megrendelő adatai:</p>
+    <ul>
+      <li>Név: <%= @order.user.title_name + " " + @order.user.first_name + " " + @order.user.last_name %></li>
+    </ul>
+    <p>Számlázási cím</p>
+    <%= @order.invoice_address.zip + " " + @order.invoice_address.city + " " + @order.invoice_address.additional %>
+    <p>Szállítási cím</p>
+    <%= @order.shipping_address.zip + " " + @order.shipping_address.city + " " + @order.shipping_address.additional %>
+    <p>Termékek:</p>
+    <ul>
+      <% @order.order_items.each do |o_item| %>
+        <%= o_item.quantity.to_s + " db " + o_item.product.name.to_s + ", ár: " + o_item.price.to_s + " Ft" %>
+      <% end %>
+    </ul>
+  </body>
+</html>

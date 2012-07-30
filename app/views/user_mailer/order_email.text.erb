@@ -1,0 +1,13 @@
+    Köszönjük megrendelését!
+    Megrendelő adatai:
+      Név: <%= @order.user.title_name + " " + @order.user.first_name + " " + @order.user.last_name %>
+    Számlázási cím
+    <%= @order.invoice_address.zip + " " + @order.invoice_address.city + " " + @order.invoice_address.additional %>
+----------------------------------------------------------------------    
+    Szállítási cím
+    <%= @order.shipping_address.zip + " " + @order.shipping_address.city + " " + @order.shipping_address.additional %>
+======================================================================
+      Termékek:
+      <% @order.order_items.each do |o_item| %>
+        <%= o_item.quantity.to_s + " db " + o_item.product.name.to_s + ", ár: " + o_item.price.to_s + " Ft" %>
+      <% end %>

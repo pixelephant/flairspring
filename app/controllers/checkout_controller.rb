@@ -117,6 +117,7 @@ class CheckoutController < ApplicationController
       @order.payment_type = params[:payment_type]
       if @order.save
         LineItem.destroy_all(:cart_id => current_cart.id)
+        UserMailer.order_email(@order).deliver
       end
 
       if current_user
