@@ -49,8 +49,12 @@ gem 'friendly_id'
 gem 'kaminari'
 
 #Search
-gem 'sunspot_solr'
-gem 'sunspot_rails'
+# gem 'sunspot_solr'
+# gem 'sunspot_rails'
+
+#PDF
+# gem 'pdfkit'
+gem 'prawn'
 
 #MailChimp
 gem 'gibbon'

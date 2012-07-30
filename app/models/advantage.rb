@@ -1,6 +1,6 @@
 class Advantage < ActiveRecord::Base
 
-	translates :advantage
+	translates :name
 
 	has_many :advantage_translations, :dependent => :destroy
 	accepts_nested_attributes_for :advantage_translations
@@ -8,7 +8,7 @@ class Advantage < ActiveRecord::Base
 	has_many :products, :through => :advantages_to_products
 	has_many :advantages_to_products
 
-	validates :advantage, :presence => true
+	validates :name, :presence => true
 
-	validates :advantage, :uniqueness => true
+	validates :name, :uniqueness => true
 end

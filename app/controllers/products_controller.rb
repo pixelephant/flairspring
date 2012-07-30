@@ -51,6 +51,12 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @product }
+      format.pdf do
+        pdf = ProductPdf.new(@product, view_context)
+        send_data pdf.render, :filename => "#{@product.name}.pdf", 
+                          :type => "application/pdf",
+                          :disposition => "inline"
+      end
     end
   end
 
@@ -65,6 +71,7 @@ class ProductsController < ApplicationController
 		@category = @product.category
 
     @size_weight = @product.properties.joins(:property_category).where(:property_categories => {:id => [74,75,76,77]})
+    @properties = @product.properties.joins(:property_category).where("property_categories.id NOT IN (74,75,76,77)")
 		#session[:last_viewed_products] = []
 		(session[:last_viewed_products] ||= []).delete(params[:id])
 		session[:last_viewed_products] << params[:id] if !session[:last_viewed_products].index(params[:id])

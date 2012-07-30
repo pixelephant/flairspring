@@ -44,6 +44,8 @@ Madearthome::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
+  config.assets.precompile += ['about.js', 'admin.js', 'admin_ajax.js', 'admin_custom.js', 'advantages.js', 'brand.js', 'carousel.js', 'cart.js', 'categories.js', 'checkout.js', 'custom_categories.js', 'designers.js', 'discounts.js', 'home.js', 'jquery.easing.js', 'jquery.easytabs.min.js', 'jquery.fancybox.js', 'jquery.prettyLoader.js', 'jquery.slider.min.js', 'jquery.tooltip.js', 'jquery.validate', 'mousewheel.js', 'orders.js', 'photos.js', 'products.js', 'properties.js', 'registration.js', 'search.js', 'sessions.js', 'simplyscroll.js', 'users.js', 'video.min.js', 'wishlists.js', 'zoom.js']
+  config.assets.precompile += ['about.css', 'ad.css', 'brand.css', 'categories.css', 'checkout.css', 'custom_categories.css', 'designers.css', 'discounts.css', 'fancybox.css', 'home.css', 'orders.css', 'photos.css', 'prettyLoader.css', 'products.css', 'properties.css', 'registrations.css', 'scaffolds.css', 'search.css', 'users.css', 'video.min.css', 'wishlists.css']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

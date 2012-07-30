@@ -42,12 +42,12 @@ class Product < ActiveRecord::Base
 
 	attr_protected
 
-	searchable do
-    text :name, :short_description, :long_description
- 			# text :product_translations do
-		  #   product_translations.map {|product_translation|  product_translation.long_description}
-	  	# end
-  end
+	# searchable do
+ #    text :name, :short_description, :long_description
+ # 			# text :product_translations do
+	# 	  #   product_translations.map {|product_translation|  product_translation.long_description}
+	#   	# end
+ #  end
 
 
 	def default_photo

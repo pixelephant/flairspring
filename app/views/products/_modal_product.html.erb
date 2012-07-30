@@ -18,10 +18,11 @@
 			</div>
 			<div class="right">
 				<div id="price">
-					<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% if @product.price != productPrice(@product) %>
 						<p class="list-price"><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
+					<% else %>
+						<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% end %>
 				</div>
 				<div id="short-description">

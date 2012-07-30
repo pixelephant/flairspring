@@ -14,4 +14,6 @@ class Order < ActiveRecord::Base
 		return sum
 	end
 
+	
+
 end
