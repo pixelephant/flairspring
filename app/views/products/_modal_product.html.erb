@@ -25,10 +25,6 @@
 						<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% end %>
 				</div>
-				<div id="short-description">
-					<h2><%= @product.name %></h2>
-					<%= lead(@product.long_description).html_safe %>
-				</div>
 				<div id="short-description-box">
 					<p>
 						<%= lead(@product.long_description).html_safe %>
@@ -47,8 +43,8 @@
 						</p>
 					<% end %>
 				</div>
-				<a class="button" href="<%= product_path(@product) %>"><%= t('show') %></a>
 			</div>
+			<a class="button" href="<%= product_path(@product) %>"><%= t('show') %></a>
 		<% end %>
 	</div>
 </div>

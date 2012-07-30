@@ -54,7 +54,6 @@
 }
 
 #properties-box{
-	border-top:1px solid $border-gray;
 	padding-top:20px;
 	p{
 		line-height:2;
@@ -66,8 +65,18 @@
 	}
 }
 
+#short-description{
+	padding-top:20px;
+	padding-bottom:20px;
+	margin:20px 0;
+	border-top:1px solid $border-gray;
+	border-bottom:1px solid $border-gray;
+	line-height:1.5;
+}
+
+
 #product-title{
-	background: url(csill.png) no-repeat 470px1 center $background-green;
+	background: url(csill.png) no-repeat 470px center $background-green;
 	font-weight:normal;
 	border-left:10px solid $orange;
 	padding:10px;
