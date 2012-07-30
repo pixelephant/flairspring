@@ -74,19 +74,18 @@
 #product-title{
 	background: url(csill.png) no-repeat 470px center $background-green;
 	font-weight:normal;
-	@include font-gill;
-	font-weight:normal;
 	border-left:10px solid $orange;
 	padding:10px;
 	color:$text-brown2;
 	h2{
-		font-size:22px;
+		font-size:18px;
+		font-weight:normal;
 		text-transform:uppercase;
 		.sku{
 			font-size:12px;
 			float:right;
 			text-transform:lowercase;
-			padding-top:15px;
+			padding-top:10px;
 		}
 	}
 }

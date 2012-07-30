@@ -1,4 +1,5 @@
 #product-modal{
+	color:$text-brown2;
 	width:760px;
 	min-height:400px;
 	margin:0 auto;
@@ -19,12 +20,6 @@
 		padding:10px;
 		min-height:280px;
 	}
-	.short-description{
-		margin:10px 0;
-	}
-	.properties{
-		margin:10px 0;
-	}
 	.button{
 		@include orange-button;
 		float:right;
@@ -35,22 +30,6 @@
 		bottom:0;
 		right:0;
 	}
-	.price{
-		margin:10px 0;
-		font-weight:bold;
-		text-decoration:none;
-		color:#3c3c3c;
-		.current-price{
-			
-		}
-		.old-price{
-			font-weight:normal;
-			text-decoration:line-through;
-		}
-	}
-	p{
-		line-height:1.5;
-	}
 	td{
 		width:260px;
 		height:300px;
@@ -58,27 +37,52 @@
 	}
 }
 
+#price p{
+	line-height:1.4;
+	font-size:22px;
+	color:$text-brown2;
+	margin-bottom:5px;
+	span{
+		font-size:24px;
+	}
+	&.list-price span{
+		text-decoration:line-through;
+	}
+	&.discount-price span{
+		color:$orange;
+	}
+}
+
+#properties-box{
+	border-top:1px solid $border-gray;
+	padding-top:20px;
+	p{
+		line-height:2;
+		label{
+			float:left;
+			width:235px;
+			margin-right:20px;
+		}
+	}
+}
+
 #product-title{
-	overflow:hidden;
-	line-height:1;
-	text-transform:uppercase;
-	
-	img{
-		width:25px;
-		height:25px;
-		float:right;
-	}
+	background: url(csill.png) no-repeat 470px1 center $background-green;
+	font-weight:normal;
+	border-left:10px solid $orange;
+	padding:10px;
+	color:$text-brown2;
 	h2{
-		float:left;
 		font-size:18px;
-		font-weight:bold;
+		font-weight:normal;
+		text-transform:uppercase;
+		.sku{
+			font-size:12px;
+			float:right;
+			text-transform:lowercase;
+			padding-top:10px;
+		}
 	}
-	.sku{
-		font-size:14px;
-		display:block;
-		text-transform:lowercase;
-	}
-	border-bottom:1px solid;
 }
 
 #modal-next,#modal-prev{
