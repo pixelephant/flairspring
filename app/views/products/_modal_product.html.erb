@@ -1,4 +1,9 @@
 <div id="product-modal">
+	<div id="product-title">
+		<h2><%= @product.name.titleize %>
+			<span class="sku">Cikkszám: <%= @product.sku %></span>
+		</h2>
+	</div>
 	<div class="clearfix">
 		<% unless @product.blank? %>
 			<div class="left">
@@ -12,30 +17,35 @@
 				</table>
 			</div>
 			<div class="right">
-				<div id="product-title">
-					<h2><%= @product.name.titleize %>
-						<span class="sku">Cikkszám: <%= @product.sku %></span>
-					</h2>
-					<%= image_tag @product.brand.small_image_file, :title => @product.brand.name, :class => "class" %>
-				</div>
-				<div id="info-box">
-					<div class="third" id="price">
-						<%= render :partial => "price", :locals => { :product => @product } %>
-					</div>
-				</div>
-				<div class="properties">
-					<% unless @product.designer.blank? %>
-						<p><span><%= t('designer') %>: </span><%= @product.designer.name %></p>
+				<div id="price">
+					<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+					<% if @product.price != productPrice(@product) %>
+						<p class="list-price"><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
 					<% end %>
-					<% @size_weight.each do |property| %>
-						<p><span><%= property.property_category.category_name.to_s %>: </span><%= property.property_name %></p>
-					<% end %>
-
+				</div>
+				<div id="short-description">
+					<h2><%= @product.name %></h2>
+					<%= lead(@product.long_description).html_safe %>
 				</div>
 				<div id="short-description-box">
 					<p>
 						<%= lead(@product.long_description).html_safe %>
 					</p>
+				</div>
+				<div id="properties-box">
+					<p><label for="">Szállítási idő</label> 12 nap</p>
+					<% if !@designer.nil? %>
+
+						<p><label><%= t('designer') %>: </label><%= @designer.name %></p>
+					<% end %>
+					<% @size_weight.each do |property| %>
+						<p>
+							<%= label(:property_category, :id, PropertyCategory.find(property.property_category_id).category_name.capitalize ) %>
+							<%= property.property_name.capitalize %>
+						</p>
+					<% end %>
+					<%= render :partial => ('products/properties') %>
 				</div>
 				<a class="button" href="<%= product_path(@product) %>"><%= t('show') %></a>
 			</div>
