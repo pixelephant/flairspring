@@ -4,6 +4,16 @@
 	<div class="field"><label for="">Ajándék jár hozzá</label><input type="checkbox" name="kedv" id="" /></div>
 </fieldset> -->
 
+<%= field_set_tag t('brand') do %>
+	<% @brands.each do |brand| %>
+		<div class="field">
+			<label for="<%= brand.name.parameterize %>"> <%= brand.name %> </label>
+			<%= check_box_tag 'brand[]', brand.name.parameterize, ((!params[:brand] || params[:brand].include?(brand.name.parameterize) ? true : false)) %>
+		</div>
+	<% end %>
+	<%= submit_tag "frissítés", :class => "update" %>
+<% end %>
+
 <%= field_set_tag t('designer') do %>
 	<% @designers.each do |designer| %>
 		<div class="field">
@@ -11,12 +21,6 @@
 			<%= check_box_tag 'designer[]', designer.id, ((!params[:designer] || params[:designer].include?(designer.id.to_s) ? true : false)) %>
 		</div>
 	<% end %>
-		<% if @designers.any? %>
-			<div class="field">
-				<label for="nil"> Nincs designer </label>
-				<%= check_box_tag 'designer[]', "NULL", true %>
-			</div>
-		<% end %>
 	<%= submit_tag "frissítés", :class => "update" %>
 <% end %>
 

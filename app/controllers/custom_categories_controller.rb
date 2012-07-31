@@ -17,7 +17,7 @@ class CustomCategoriesController < ApplicationController
   # GET /custom_categories/1.json
   def show
 
-    unless params[:id] == 'osszes'
+    unless params[:id] == 'osszes' || !Brand.find_by_name(params[:id]).blank?
       @category = Category.find(params[:category_id])
       @custom_category = CustomCategory.find(params[:id])
     else
@@ -88,17 +88,33 @@ class CustomCategoriesController < ApplicationController
 
     # @property_categories = PropertyCategory.find(:all, :joins => :property_categories_to_categories, :select => "property_categories.*", :conditions => ["property_categories_to_categories.category_id = #{@category.id}"], :group => "property_categories.id")    
     @designers = Designer.find(:all, :joins => :products, :select => "designers.*", :conditions => ["designers.id = products.designer_id AND products.category_id = #{@category.id}"], :group => "designers.id")
+    @brands = Brand.find(:all, :joins => :products, :select => "brands.*", :conditions => ["brands.id = products.brand_id AND products.category_id = #{@category.id}"], :group => "brands.id")
 
     where = []
     designer = []
+    
 
     unless params[:designer].blank?
       params[:designer].each do |d|
-        designer << d
+        unless d.blank?
+          designer << d
+        end
       end
     end
 
     where << ("designer_id IN (" + designer.join(",") + ")") unless designer.blank?
+
+    brand = []
+    unless params[:brand].blank?
+      params[:brand].each do |b|
+        unless Brand.find_by_name(b).blank?
+          brand << Brand.find_by_name(b).id
+        end
+      end
+    end
+
+    where << ("brand_id IN (" + brand.join(",") + ")") unless brand.blank?
+
 
     properties = []
 
@@ -166,10 +182,13 @@ class CustomCategoriesController < ApplicationController
     end
 
     condit = " AND " + where.join(" AND ") unless where.blank?
+    condit = where[0] if where.count == 1
     # condit = where.join(" AND ") unless where.blank?
 
+    logger.debug "property_category_count: #{condit}"
+
     unless @custom_category.products.blank?
-      logger.debug "property_category_count: #{property_category_count}"
+      #logger.debug "property_category_count: #{property_category_count}"
       if property_category_count > 0
         p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_category_count}")
       else

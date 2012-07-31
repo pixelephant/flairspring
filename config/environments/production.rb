@@ -50,6 +50,15 @@ Madearthome::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "mail.flairspring.hu",
+    :port                 => 26,
+    :user_name            => 'flairspring@flairspring.hu',
+    :password             => 'fl4irspring',
+    :authentication       => 'plain',
+    :enable_starttls_auto => false}
+
   # Enable threaded mode
   # config.threadsafe!
 
