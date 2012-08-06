@@ -98,7 +98,7 @@
 }
 
 #loyalty,#edit-data{
-	background:#F2F7FB;
+	background:#dbdada;
 	// border:1px dashed;
 	padding:20px;
 	width:400px;
@@ -116,7 +116,7 @@
 }
 
 #loyalty{
-	margin-right:35px;
+	margin-right:100px;
 	h4{
 		margin-top:20px;
 	}
@@ -124,6 +124,9 @@
 		// @include orange-button;
 		top:20px;
 		position:relative;
+	}
+	p{
+		line-height:1.5;
 	}
 }
 
@@ -139,22 +142,28 @@
 		top:20px;
 		position:relative;
 	}
+	p{
+		line-height:1.5;
+	}
 }
 
 
 .username{
 	background:none !important;
-	
 }
 
 .table-wrap{
 	margin-top:40px;
 	h4{
-		// @include font-gill;
-		text-transform:uppercase;
-		margin-top:0;
-		margin-bottom:20px;
-		font-weight:bold;
+		background:url(green_arrow_right_long.png) no-repeat;
+	width:300px;
+	padding-left:13px;
+	height:28px;
+	color:white;
+	font-size:14px;
+	line-height:28px;
+	font-weight:normal;
+	margin:20px 0;
 	}
 }
 
@@ -209,5 +218,7 @@
 		margin:-4px 4px;
 	}
 }
+
+
 
 @import "_order_table.css.scss";
