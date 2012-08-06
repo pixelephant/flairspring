@@ -23,6 +23,7 @@ $(document).ready(function(){
 		    // Animation complete.
 		  });
 		}
+		return false;
 	});
 
 });

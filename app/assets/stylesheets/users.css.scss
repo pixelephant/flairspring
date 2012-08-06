@@ -98,7 +98,7 @@
 }
 
 #loyalty,#edit-data{
-	background:#dbdada;
+	background:#eee;
 	// border:1px dashed;
 	padding:20px;
 	width:400px;
@@ -112,6 +112,7 @@
 		font-style:italic;
 		margin-bottom:20px;
 		margin-top:0;
+		color:#F15E2F;
 	}
 }
 
@@ -127,6 +128,9 @@
 	}
 	p{
 		line-height:1.5;
+		a{
+			color:#F15E2F;
+		}
 	}
 }
 
@@ -134,6 +138,7 @@
 	font-size:24px;	
 	// @include font-gill;
 	margin-bottom:20px;
+	color:#F15E2F;
 }
 
 #edit-data{
@@ -169,36 +174,46 @@
 
 .user-table{
 	width:100%;
-	border:1px solid #c2c2c2;
+	border:1px solid #918f8f;
 	thead{
-		// @include background-gradient(#fafafa,#efefef);
+		
+		  background-color: #ffffff;
+		  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f1f1f1));
+		  background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:    -moz-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:      -o-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:         linear-gradient(to bottom, #ffffff, #f1f1f1);
+
 		th{
-			// @include font-gill;
-			font-size:14px;
+			font-size:16px;
 			font-weight:normal;
 			padding:10px;
 			text-align:left;
+			border-right:1px solid #918f8f;
 		}
 	}
 	tfoot{
-		// @include background-gradient(#fafafa,#efefef);
+		  background-color: #ffffff;
+		  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f1f1f1));
+		  background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:    -moz-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:      -o-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:         linear-gradient(to bottom, #ffffff, #f1f1f1);
 	}
 	tbody{
 		a{
-			// @include transition-03s;
-			&:hover{
-				
-			}
+			color:#F15E2F;
 		}
 		tr{
-			border-top:1px solid #c2c2c2;
-			border-bottom:1px solid #c2c2c2;
-			// @include font-gill;
+			border-bottom:1px solid #918f8f;
 			font-weight:normal;
 			font-size:14px;
-			&:nth-child(even){
-				// @include background-gradient(#f4f5f7,#dee8f4);
-			}
+			background-color: #ffffff;
+		  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f1f1f1));
+		  background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:    -moz-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:      -o-linear-gradient(top, #ffffff, #f1f1f1);
+		  background-image:         linear-gradient(to bottom, #ffffff, #f1f1f1);
 		}
 		td{
 			padding:10px;
@@ -207,6 +222,7 @@
 }
 
 #tablePagination{
+	margin-bottom:20px;
 	margin-top:5px;
 	padding:5px;
 }

@@ -2,8 +2,8 @@
 
 
 #slider{
-	width:940px;
-	height:425px;
+	width:980px;
+	height:443px;
 	margin:0 auto;
 	overflow:hidden;
 	position:relative;
@@ -33,8 +33,8 @@
 		}
 	}
 	.slide{
-		width:940px;
-		height:425px;
+		width:980px;
+		height:443px;
 		margin:0 auto;
 		position:relative;
 		&.video{
@@ -62,7 +62,7 @@
 	text-align: center;
 	overflow: hidden;
 	margin-right:16px;
-	background:#eee;
+	
 		&:last-child{
 			margin-right:0;
 		}
