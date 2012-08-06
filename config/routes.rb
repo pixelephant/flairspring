@@ -48,6 +48,7 @@ Madearthome::Application.routes.draw do
 	# Nyelv eleje
 	# scope '(:locale)/', :shallow_path => "(:locale)", :locale => /en|hu/ do
 
+		match 'wishlist' => 'users#account'
 		match 'fiokom' => 'users#account'
 
 		# match 'category' => "categories#index"

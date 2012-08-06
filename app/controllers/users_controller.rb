@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
       render "account"
     else
-      render "register"
+      render "new"
     end
   end
 
