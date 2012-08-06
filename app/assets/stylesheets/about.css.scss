@@ -1,5 +1,13 @@
 @import '_mixins.css.scss';
 
+.more{
+	color:#F15E2F;
+}
+
+.about{
+	margin-top:10px;
+}
+
 #store_image{
 	border:5px solid $border-blue;
 	margin:20px auto;
