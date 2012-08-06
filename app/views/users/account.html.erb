@@ -4,7 +4,7 @@
 		<div id="loyalty">
 			<p>Önnek eddig a</p>
 			<h4>Törzsvásárlói programban</h4>
-			<p id="loyalty-sum"><%= number_to_currency(current_user.personal_discount_available, :precision => 0) %>-ja</p>
+			<p id="loyalty-sum"><%= number_to_currency(current_user.personal_discount_available, :precision => 0, :format => "%n %u") %>-ja</p>
 			<p>gyűlt össze, melyet bármikor beválthat tetszőleges vásárlásra a <a href="/cart">kosár oldalon</a> található gomb segítségével.</p>
 		</div>
 		<div id="edit-data">
