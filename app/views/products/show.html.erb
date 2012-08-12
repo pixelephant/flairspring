@@ -30,10 +30,11 @@
 		<div id="right-side">
 			<div id="info-box">
 				<div id="price">
-					<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% if @product.price != productPrice(@product) %>
 						<p class="list-price"><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
+					<% else %>
+						<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% end %>
 				</div>
 				<div id="buy-box">
@@ -169,7 +170,7 @@
 
 
 <!-- TOP SELLERS & OTHER ALSO BOUGHT -->
-<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Legnépszerűbbek", :id1 => "popular-products", :title2 => "Mások ezt vették hozzá", :id2 => "also-products"} %>
+<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Legnépszerűbbek", :id1 => "popular-products", :title2 => "Mások ezt vették hozzá", :id2 => "also-products", :product => @product} %>
 
 <!-- RELATED PRODUCTS -->
 <%= (render :partial => "home/product_slider_full_big", :locals => {:title => "A termékhez ajánljuk", :id => "related-products", :products => @product.product_relates }) if @product.product_relates.any? %>

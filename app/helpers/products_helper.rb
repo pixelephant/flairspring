@@ -39,14 +39,13 @@ module ProductsHelper
 
 		#Category discount factor
 		if !p.category.discount.nil?
-			p.category.discount.each do |d|
-				if d.discount_type == 1
-					price = price - d.value
-				end
+			d = p.category.discount
+			if d.discount_type == 1
+				price = price - d.value
+			end
 
-				if d.discount_type == 2
-					price = price - (price * (d.value.to_f / 100))
-				end
+			if d.discount_type == 2
+				price = price - (price * (d.value.to_f / 100))
 			end
 
 			return price.round if price < p.price

@@ -3,112 +3,46 @@
 		<h3><%= title1 %> <a href="#" class="arrow right"></a><a href="#" class="arrow left"></a></h3>  
 		  <div class="slider-inner">
 			<ul class="carousel">
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
+				<% Product.where(:category_id => product.category_id).order('click desc').limit(8).each do |prod| %>
+					<li>
+						<%= link_to prod do %>
+							<%= image_tag prod.photos.first.image_file, :title => prod.name, :class => "class" %>
+							<p class="name"><%= prod.name %></p>
+
+							<% if prod.price != productPrice(prod) %>
+								<p class="price"><span class="current-price"><%= number_to_currency(productPrice(prod), :precision => 0) %></span> <span class="old-price"><%= number_to_currency(prod.price, :precision => 0) %></span></p>
+							<% else %>
+								<p class="price"><span class="current-price"><%= number_to_currency(prod.price, :precision => 0) %></span></p>
+							<% end %>
+						<% end %>
+					</li>
+				<% end %>				
 			</ul>
 		</div>
 	</section>
 
 	<section class="half slider clearfix" id="<%= id2 %>">
-			<h3><%= title2 %> <a href="#" class="arrow right"></a><a href="#" class="arrow left"></a></h3>  
-			  <div class="slider-inner">
-				<ul class="carousel">
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
-				<li >
-					<a href="#">
-						<%= image_tag "matthew.png", :title => "title", :class => "class" %>
-						<p class="name">Okalami</p>
-						<p class="price"><span class="current-price">110 000 Ft</span> <span class="old-price">140 00 Ft</span></p>
-					</a>
-				</li>
+		<h3><%= title2 %> <a href="#" class="arrow right"></a><a href="#" class="arrow left"></a></h3>
+			<% prods = OrderItem.find_by_sql("SELECT product_id FROM `order_items` WHERE order_id IN (SELECT order_id FROM order_items WHERE product_id = #{product.id}) AND product_id <> #{product.id} GROUP BY product_id") %>
+			<% p_ids = [] %>
+			<% prods.each do |p| %>
+				<% p_ids << p.product_id %>
+			<% end %>
+		  <div class="slider-inner">
+			<ul class="carousel">
+				<% Product.where(:id => p_ids).each do |products| %>
+					<li>
+						<%= link_to products do %>
+							<%= image_tag products.photos.first.image_file, :title => products.name, :class => "class" %>
+							<p class="name"><%= products.name %></p>
+							<% if products.price != productPrice(products) %>
+								<p class="price"><span class="current-price"><%= number_to_currency(productPrice(products), :precision => 0) %></span> <span class="old-price"><%= number_to_currency(products.price, :precision => 0) %></span></p>
+							<% else %>
+								<p class="price"><span class="current-price"><%= number_to_currency(products.price, :precision => 0) %></span></p>
+							<% end %>
+						<% end %>
+					</li>
+				<% end %>
 			</ul>
 		</div>
 	</section>
