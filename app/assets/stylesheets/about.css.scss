@@ -5,7 +5,13 @@
 }
 
 .about{
-	margin-top:10px;
+	margin:10px;
+}
+
+div.clearfix iframe:first-child{
+	float: left;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 #store_image{
