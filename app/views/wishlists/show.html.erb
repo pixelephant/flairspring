@@ -1,20 +1,40 @@
-<p id="notice"><%= notice %></p>
+<section id="account" class="box full clearfix">
+	<div class="table-wrap">
+		<h4>Ajándéklista</h4>
 
-<p>
-  <b>Custom url:</b>
-  <%= @wishlist.custom_url %>
-</p>
+		<% if @wishlist.blank? %>
+		<p>A kívánságlista nem létezik vagy nem publikus!</p>
+		<% else %>
+			<table id="whishlist-table" class="user-table">
+				<thead>
+					<tr>
+						<th>Termék</th>
+						<th>Állapot</th>
+						<th>Ára</th>
+						<th>Műveletek</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="4">&nbsp;</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<% @wishlist.first.wishlist_items.each do |item| %>
+						<tr id="<%= item.id %>">
+							<td><a rel="group" class="fancybox ajax" href="/products/quicklook/<%= item.product.id %>"><%= item.product.name.titleize %></a></td>
+							<td><span class="status delivered"><%= item.sold ? 'Megvéve' : 'Még nem vették meg' %></span></td>
+							<td><%= number_to_currency(item.product.price, :precision => 0) %></td>
+							<td>
+								<% unless item.sold? %>
+									<a data-product="<%= item.id %>" class="buy-from-wishlist" href="#">megveszem</a>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
 
-<p>
-  <b>User:</b>
-  <%= @wishlist.user_id %>
-</p>
-
-<p>
-  <b>Public:</b>
-  <%= @wishlist.public %>
-</p>
-
-
-<%= link_to 'Edit', edit_wishlist_path(@wishlist) %> |
-<%= link_to 'Back', wishlists_path %>
+	</div>
+</section>

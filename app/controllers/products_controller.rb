@@ -179,4 +179,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def buy_from_wishlist
+    
+    item = WishlistItem.find(params[:id])
+    product = item.product
+
+    session[:wishlist_items] ||= []
+
+    if current_cart.add_product(product.id,1).save!
+      session[:wishlist_items] << {:wishlist_item_id => item.id, :product_id => product.id}
+      status = 'true'
+    else
+      status = 'false'
+    end
+
+    respond_to do |format|
+      format.json { render :json => {:status => status}.to_json }
+    end
+  end
+
 end

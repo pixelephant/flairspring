@@ -9,8 +9,8 @@
 		</div>
 		<div id="edit-data">
 			<h4>Adatmódosítás</h4>
-			<p>Alapértelmezett szállítási címe: <%= @default_address.zip %>, <%= @default_address.city %>, <%= @default_address.additional %></p>
-			<p>Alapértelmezett fizetési módja: Banki átutalás</p>
+			<p>Szállítási címe: <%= @default_address.zip %>, <%= @default_address.city %>, <%= @default_address.additional %></p>
+			<!-- <p>Alapértelmezett fizetési módja: Banki átutalás</p> -->
 			<p>A számlát: <%= @accounting_name %> nevére állítjuk ki</p>
 			<a href="#" class="button blue">Adatmódosítás</a>
 		</div>
@@ -47,7 +47,7 @@
 	</div>
 
 	<div class="table-wrap">
-		<h4>Ajándéklistám</h4>
+		<h4>Ajándéklistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
 		<table id="whishlist-table" class="user-table">
 			<thead>
 				<tr>

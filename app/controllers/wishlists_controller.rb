@@ -1,4 +1,21 @@
 class WishlistsController < ApplicationController
+
+  def publish
+    wishlist = Wishlist.find(params[:id])
+
+    wishlist.custom_url = params[:id]
+    wishlist.public = true
+    if wishlist.save!
+      status = "true"
+    else
+      status = "false"
+    end
+
+    respond_to do |format|
+      format.json { render :json => {:status => status} }
+    end
+  end
+
   # GET /wishlists
   # GET /wishlists.json
   def index
@@ -13,7 +30,7 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
-    @wishlist = Wishlist.find(params[:id])
+    @wishlist = Wishlist.where(:id => params[:id], :public => 1)
 
     respond_to do |format|
       format.html # show.html.erb

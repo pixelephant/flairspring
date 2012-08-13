@@ -67,7 +67,26 @@ $(document).ready(function(){
 		//ajax call
 		$.ajax({
 		  type: 'POST',
-		  url: "/products/remove_from_wishlist",
+		  url: "/products/buy_from_wishlist",
+			data: {id : id},
+			headers: {
+    		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  		},
+		  success: function(resp){
+		  	if(resp.status == 'true'){
+		  		console.log(id);
+		  		$("#" + id).remove();
+		  	}
+		}});
+		return false;
+	});
+
+	$(".publish").click(function(){
+		var id = $(this).attr('id');
+		//ajax call
+		$.ajax({
+		  type: 'POST',
+		  url: "/wishlists/publish",
 			data: {id : id},
 			headers: {
     		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

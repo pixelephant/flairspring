@@ -50,6 +50,12 @@ class CheckoutController < ApplicationController
       session[:checkout_user] = @user.id
     else
       @user = current_user
+      @user.title_name = data[:title_name]
+      @user.first_name = data[:first_name]
+      @user.last_name = data[:last_name]
+      @user.phone = data[:phone]
+      @user.admin = false
+      @user.save!
     end
 
     shipping_address = @user.addresses.where(:billing => 0).first
@@ -99,6 +105,18 @@ class CheckoutController < ApplicationController
 
     @order.discount_used = @personal_discount
     @order.save
+
+    unless session[:wishlist_items].blank?
+      session[:wishlist_items].each do |item|
+        unless @order.order_items.where(:product_id => item[:product_id]).blank?
+          w = WishlistItem.find(item[:wishlist_item_id])
+          w.sold = 1
+          w.save!
+        end
+      end
+      session[:wishlist_items] = []
+    end
+
     session[:order_id] = @order.id
 
     render 'payment'
