@@ -71,6 +71,7 @@ GEM
     execjs (1.3.0)
       multi_json (~> 1.0)
     fastercsv (1.5.4)
+    fastimage (1.2.13)
     friendly_id (4.0.0)
     gibbon (0.3.5)
       httparty (> 0.6.0)
@@ -193,6 +194,7 @@ DEPENDENCIES
   devise
   execjs
   fastercsv
+  fastimage
   friendly_id
   gibbon
   globalize3

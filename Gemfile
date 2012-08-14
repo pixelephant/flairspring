@@ -34,6 +34,7 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 gem 'rmagick'
 gem 'carrierwave'
+gem 'fastimage'
 
 #Excel
 #gem 'roo'

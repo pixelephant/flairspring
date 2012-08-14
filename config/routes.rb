@@ -36,9 +36,12 @@ Madearthome::Application.routes.draw do
 
 	post 'products/add_to_wishlist' => 'products#add_to_wishlist'
 	post 'products/remove_from_wishlist' => 'products#remove_from_wishlist'
+	post 'products/buy_from_wishlist' => 'products#buy_from_wishlist'
 
 	post 'cart/coupon' => 'cart#coupon'
 	post 'checkout/regisztralok' => 'checkout#lazy_registration'
+
+	post 'wishlists/publish' => 'wishlists#publish'
 	#Ajax routes END
 
 	#Categories START
@@ -114,7 +117,7 @@ Madearthome::Application.routes.draw do
 
 		#resources :wishlist_items
 
-		#resources :wishlists
+		resources :wishlists
 
 		resources :order_items
 

@@ -1,8 +1,10 @@
 #encoding: utf-8
 class ProductPdf < Prawn::Document
 
+  require 'fastimage'
+
 	def initialize(product, view)
-    super()
+    super(:page_size => 'A4', :page_layout => :landscape, :margin => [0,0,0,0])
 
     @product = product
     @view = view
@@ -10,9 +12,9 @@ class ProductPdf < Prawn::Document
     self.font("/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf")
 
     #Background
-    # image product.photos.first.image_file.path, :height => 400, :width => 300
+    image "/media/Data/Work/Projects/flairspring/public/hatter.png", :width => 845, :height => 595
 
-    # move_up 400
+    move_up 550
 
     # text "Név: " + product.name.titleize, :indent_paragraphs => 0
 
@@ -24,8 +26,12 @@ class ProductPdf < Prawn::Document
 
     move_up 200
 
+    img_size = FastImage.size(product.photos.first.image_file.path)
+    w = (img_size[0].to_f * (200/img_size[1].to_f)).to_i
+
     y_position = cursor
-    image product.photos.first.image_file.path, :height => 200, :at => [390, y_position]
+    image "/media/Data/Work/Projects/flairspring/public/fp_frame.png", :height => 210, :width => w+10, :at => [385, y_position+3]
+    image product.photos.first.image_file.path, :height => 200, :at => [390, y_position], :border => 2
   end
 
   def properties_table

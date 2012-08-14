@@ -173,4 +173,19 @@ namespace :import do
   	end
   end
 
+  task :last_year => :environment do
+
+  	counter = 0
+
+  	puts "Reading file: last_year.CSV"
+  	CSV.foreach("public/last_year.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+  		if Product.exists?(:sku => row[0]) && row[7] == 'kifutott'
+  			Product.find_by_sku(row[0]).delete
+  			puts "Product: " + row[0] + " deleted!"
+  		end
+  		puts counter = counter + 1
+  	end
+
+  end
+
 end
