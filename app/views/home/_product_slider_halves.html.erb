@@ -6,7 +6,7 @@
 				<% Product.where(:category_id => product.category_id).order('click desc').limit(8).each do |prod| %>
 					<li>
 						<%= link_to prod do %>
-							<%= image_tag prod.photos.first.image_file, :title => prod.name, :class => "class" %>
+							<%= image_tag prod.photos.first.image_file, :title => prod.name, :class => "class" if prod.photos.any? %>
 							<p class="name"><%= prod.name %></p>
 
 							<% if prod.price != productPrice(prod) %>
@@ -33,7 +33,7 @@
 				<% Product.where(:id => p_ids).each do |products| %>
 					<li>
 						<%= link_to products do %>
-							<%= image_tag products.photos.first.image_file, :title => products.name, :class => "class" %>
+							<%= image_tag products.photos.first.image_file, :title => products.name, :class => "class" if prod.photos.any? %>
 							<p class="name"><%= products.name %></p>
 							<% if products.price != productPrice(products) %>
 								<p class="price"><span class="current-price"><%= number_to_currency(productPrice(products), :precision => 0) %></span> <span class="old-price"><%= number_to_currency(products.price, :precision => 0) %></span></p>
