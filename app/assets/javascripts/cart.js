@@ -65,10 +65,14 @@ $("document").ready(function(){
 					$("#personal-discount").addClass("active");
 					val = parseInt($(".total-price").html()) - parseInt(resp.value);
 					$(".total-price").html(val);
+					$(".discount").html(parseInt(resp.value) + " Ft");
+					$("#personal-discount").html("Beváltva");
 				}else{
 					$("#personal-discount").removeClass("active");
 					val = parseInt($(".total-price").html()) + parseInt(resp.value);
 					$(".total-price").html(val);
+					$(".discount").html('0 Ft');
+					$("#personal-discount").html("Beváltom");
 				}
 				//Ár levonása
 		}});

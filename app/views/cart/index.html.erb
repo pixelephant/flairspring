@@ -86,9 +86,10 @@
 				<% end %>
 			</div>
 			<div id="total">
-					<p><b>Cart subtotal</b> <span class="subtotal"><%= number_to_currency(cart_subtotal, :precision => 0) %></span></p>
-					<p><b>Shipping</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
-					<p id="total-price"><b>Total</b> <span class="total-price"><%= (cart_subtotal + shipping - @discount) %></span> Ft</p>
+					<p><b>Részösszeg</b> <span class="subtotal"><%= number_to_currency(cart_subtotal, :precision => 0) %></span></p>
+					<p><b>Szállítás</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
+					<p><b>Kedvezmény</b> <span class="discount"><%= number_to_currency(((@discount > 0 ? @discount : 0)) ,:precision => 0) %></span></p>
+					<p id="total-price"><b>Összessen</b> <span class="total-price"><%= (cart_subtotal + shipping - @discount) %></span> Ft</p>
 			</div>
 		</div>
 		<form id="checkout-form" action="/checkout">

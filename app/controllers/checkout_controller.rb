@@ -54,7 +54,7 @@ class CheckoutController < ApplicationController
       @user.first_name = data[:first_name]
       @user.last_name = data[:last_name]
       @user.phone = data[:phone]
-      @user.admin = false
+      # @user.admin = false
       @user.save!
     end
 
@@ -69,10 +69,12 @@ class CheckoutController < ApplicationController
 
     shipping = shipping_address.id
 
+    billing_address = current_user.addresses.where(:billing => 1).first
+
     if data[:same] == 1 && !shipping_address.nil?
       billing = shipping
     else
-      billing_address = Address.new(:user_id => @user.id, :billing => 1)
+      billing_address = Address.new(:user_id => @user.id, :billing => 1) if billing_address.nil?
 
       billing_address.city = data[:billing_city]
       billing_address.name = data[:billing_name]
@@ -83,7 +85,7 @@ class CheckoutController < ApplicationController
       billing = billing_address.id
     end
 
-    @order = Order.create(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => @user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date))
+    @order = Order.new(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => @user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date))
 
     sum = 0
 

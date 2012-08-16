@@ -95,7 +95,7 @@ end
 			cart = Cart.find(session[:cart_id])
 			subtotal = 0
 			cart.line_items.each do |item|
-				subtotal += (item.quantity * item.product.price)
+				subtotal += (item.quantity * item.product.full_price)
 			end
 		subtotal
 		else
