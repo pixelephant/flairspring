@@ -1,77 +1,124 @@
 <%= form_for "payment", :url => "/checkout/payment" do |f| %>
-<div class="block">
-	<h5>Kapcsolattartási információk</h5>
-		<fieldset>
-			<div class="half">
-				<%= f.label :title_name, "Titulus" %>
-  			<%= f.text_field :title_name, :value => (@user.title_name if @user), :size => 5 %>
-			</div>
-			<div class="half">
-				<%= f.label :last_name, "Vezetéknév" %>
-  			<%= f.text_field :last_name, :value => (@user.last_name if @user) %>
-			</div>
-			<div class="half">
-				<%= f.label :first_name, "Keresztnév" %>
-  			<%= f.text_field :first_name, :value => (@user.first_name if @user) %>
-			</div>
-		</fieldset>
-		<fieldset>
-			<%= f.label :email, "E-mail cím" %>
-			<%= f.email_field :email, :value => (@user.email if @user) %>
-		</fieldset>
-		<fieldset>
-			<%= f.label :phone, "Telefonszám" %>
-			<%= f.phone_field :phone, :value => (@user.phone if @user) %>
-		</fieldset>
-</div>
-<div class="block">
-	<h5>Szállítási információk</h5>
-	<fieldset>
-		<%= f.label :shipping_name, "Szállítási név" %>
-		<%= f.text_field :shipping_name, :value => (@shipping_address.name unless @shipping_address.blank?) %>
-	</fieldset>
-	<fieldset>
-		<div class="half">
-			<%= f.label :shipping_zip, "Irányítószám" %>
-			<%= f.text_field :shipping_zip, :value => (@shipping_address.zip unless @shipping_address.blank?), :size => 4 %>
-		</div>
-		<div class="half">
-			<%= f.label :shipping_city, "Város" %>
-			<%= f.text_field :shipping_city, :value => (@shipping_address.city unless @shipping_address.blank?) %>
-		</div>
-	</fieldset>
-	<fieldset>
-		<%= f.label :shipping_additional, "Cím" %>
-		<%= f.text_field :shipping_additional, :value => (@shipping_address.additional unless @shipping_address.blank?) %>
-	</fieldset>
+<div id="shipping-form">
+	<div class="block">
+		<h5>Kapcsolattartási információk</h5>
+			<fieldset>
+				<div class="half">
+					<%= f.label :title_name, "Titulus" %>
+	  			<%= f.text_field :title_name, :value => (@user.title_name if @user), :size => 5 %>
+				</div>
+				<div class="half">
+					<%= f.label :last_name, "Vezetéknév" %>
+	  			<%= f.text_field :last_name, :value => (@user.last_name if @user) %>
+				</div>
+				<div class="half">
+					<%= f.label :first_name, "Keresztnév" %>
+	  			<%= f.text_field :first_name, :value => (@user.first_name if @user) %>
+				</div>
+			</fieldset>
+			<fieldset>
+				<%= f.label :email, "E-mail cím" %>
+				<%= f.email_field :email, :value => (@user.email if @user) %>
+			</fieldset>
+			<fieldset>
+				<%= f.label :phone, "Telefonszám" %>
+				<%= f.phone_field :phone, :value => (@user.phone if @user) %>
+			</fieldset>
 	</div>
 	<div class="block">
-		<h5>Számlázási információk</h5>
+		<h5>Szállítási információk</h5>
 		<fieldset>
-			<%= f.check_box "same" %>
-			<%= f.label "same", "Megegyezik a szállítási adatokkal", :id => "same_l" %>
-		</fieldset>
-		<fieldset>
-			<%= f.label :billing_name, "Számlázási név" %>
-			<%= f.text_field :billing_name, :value => (@billing_address.name unless @billing_address.blank?) %>
+			<%= f.label :shipping_name, "Szállítási név" %>
+			<%= f.text_field :shipping_name, :value => (@shipping_address.name unless @shipping_address.blank?) %>
 		</fieldset>
 		<fieldset>
 			<div class="half">
-				<%= f.label :billing_zip, "irányítószám" %>
-				<%= f.text_field :billing_zip, :value => (@billing_address.zip unless @billing_address.blank?), :size => 4 %>
+				<%= f.label :shipping_zip, "Irányítószám" %>
+				<%= f.text_field :shipping_zip, :value => (@shipping_address.zip unless @shipping_address.blank?), :size => 4 %>
 			</div>
 			<div class="half">
-				<%= f.label :billing_city, "Város" %>
-				<%= f.text_field :billing_city, :value => (@billing_address.city unless @billing_address.blank?) %>
+				<%= f.label :shipping_city, "Város" %>
+				<%= f.text_field :shipping_city, :value => (@shipping_address.city unless @shipping_address.blank?) %>
 			</div>
 		</fieldset>
 		<fieldset>
-			<%= f.label :billing_additional, "Cím" %>
-			<%= f.text_field :billing_additional, :value => (@billing_address.additional unless @billing_address.blank?) %>
+			<%= f.label :shipping_additional, "Cím" %>
+			<%= f.text_field :shipping_additional, :value => (@shipping_address.additional unless @shipping_address.blank?) %>
 		</fieldset>
+		</div>
+		<div class="block">
+			<h5>Számlázási információk</h5>
+			<fieldset>
+				<%= f.check_box "same" %>
+				<%= f.label "same", "Megegyezik a szállítási adatokkal", :id => "same_l" %>
+			</fieldset>
+			<fieldset>
+				<%= f.label :billing_name, "Számlázási név" %>
+				<%= f.text_field :billing_name, :value => (@billing_address.name unless @billing_address.blank?) %>
+			</fieldset>
+			<fieldset>
+				<div class="half">
+					<%= f.label :billing_zip, "irányítószám" %>
+					<%= f.text_field :billing_zip, :value => (@billing_address.zip unless @billing_address.blank?), :size => 4 %>
+				</div>
+				<div class="half">
+					<%= f.label :billing_city, "Város" %>
+					<%= f.text_field :billing_city, :value => (@billing_address.city unless @billing_address.blank?) %>
+				</div>
+			</fieldset>
+			<fieldset>
+				<%= f.label :billing_additional, "Cím" %>
+				<%= f.text_field :billing_additional, :value => (@billing_address.additional unless @billing_address.blank?) %>
+			</fieldset>
+		</div>
+		<div class="block">
+			<%= button_tag "Tovább", :id => "proceed-to-payment" %>
+			<%= link_to "vissza az előző lépéshez", "/checkout", :class => "step-back" %>
+		</div>
 	</div>
-	<div class="block">
-		<%= f.submit "Tovább" %>
-		<%= link_to "vissza az előző lépéshez", "/checkout", :class => "step-back" %>
+	<div id="payment-form">
+		<div class="block">
+			<h5>Ajándék lesz?</h5>
+			<fieldset>
+				<%= f.check_box "gift-wrap", {:id => "gift-wrap"} %>
+				<%= f.label "gift-wrap", "Szeretnék ingyenes díszcsomagolást", {:id => "gift-wrap"} %>
+			</fieldset>
+		</div>
+		
+		<div class="block">
+			<h5>Fizetési mód</h5>
+			<fieldset>
+				<div class="clearfix">
+					<%= f.radio_button "payment_type", "1" ,{:id => "payment-card"} %>
+					<%= f.label "payment_type", "Bankkártya", {:class => "right-label"} %>
+					<!-- <input type="radio" name="payment_type" value="1" id="payment-card" />
+					<label class="right-label" for="payment-card">Bankkártya</label> -->
+				</div>
+				
+				<div class="clearfix">
+					<%= f.radio_button "payment_type", "2" ,{:id => "payment-paypal"} %>
+					<%= f.label "payment_type", "Paypal", {:class => "right-label"} %>
+					<!-- <input type="radio" name="payment_type" value="2" id="payment-paypal" />			
+					<label class="right-label" for="payment-paypal">Paypal</label>				 -->
+				</div>
+				
+				<div class="clearfix">
+					<%= f.radio_button "payment_type", "3" ,{:id => "payment-transfer", :checked => true} %>
+					<%= f.label "payment_type", "Átutalás", {:class => "right-label"} %>
+<!-- 					<input type="radio" name="payment_type" value="3" id="payment-transfer" checked="checked"/>
+					<label class="right-label" for="payment-transfer">Átutalás</label> -->
+				</div>
+
+			</fieldset>
+		</div>
+		
+		<div class="block" id="payment-credit-card">
+			<h5>Bankkártyás fizetés</h5>
+			<p>A megredenlés gombra kattintva átirányítjuk a BANK biztonságos fizetési oldalára. Sikeres átutalás után, a BANK visszairányítja hozzánk, ahol a rendelési nyugtát megkapja.</p>
+		</div>
+		<div class="block">
+			<input type="submit" value="megrendelem" /> 	
+			<a class="step-back" id="back-to-shipping" href="#">vissza az előző lépéshez</a>
+		</div>
 	</div>
 <% end %>

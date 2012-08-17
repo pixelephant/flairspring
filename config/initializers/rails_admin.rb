@@ -124,7 +124,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 			field :id
 			field :offer_type do
 				pretty_value do
-					value == 1 ? 'Összeg' : 'Termék'
+					value == 1 ? 'Összeg' : (value == 2 ? 'Termék' : 'Százalék')
 				end
 			end
 			include_all_fields
@@ -133,18 +133,18 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 			field :id
 			field :offer_type do
 				pretty_value do
-					value == 1 ? 'Összeg' : 'Termék'
+					value == 1 ? 'Összeg' : (value == 2 ? 'Termék' : 'Százalék')
 				end
 			end
 			include_all_fields
 		end
 		#Discount edit form
-		edit do
-			field :offer_type do
-				partial "discount_dropdown"
-			end
-			include_all_fields
-		end
+		# edit do
+		# 	field :offer_type do
+		# 		partial "discount_dropdown"
+		# 	end
+		# 	include_all_fields
+		# end
 	end
 
 	#Property
@@ -207,7 +207,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 			field :id
 			field :discount_type do
 				pretty_value do
-					value == 1 ? 'Value' : 'Percent'
+					value == 1 ? 'Összeg' : 'Százalék'
 				end
 			end
 			include_all_fields
@@ -218,7 +218,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 			field :id
 			field :discount_type do
 				pretty_value do
-					value == 1 ? 'Value' : 'Percent'
+					value == 1 ? 'Összeg' : 'Százalék'
 				end
 			end
 			include_all_fields
@@ -226,9 +226,9 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 		end
 		#Discount edit form
 		edit do
-			field :discount_type do
-				partial "discount_dropdown"
-			end
+			# field :discount_type do
+			# 	partial "discount_dropdown"
+			# end
 			include_all_fields
 			exclude_fields :products
 		end
@@ -345,7 +345,7 @@ PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
 	end
 
 	def coupon_label_method
-		type = self.offer_type == 2 ? ' Termék' : 'Összeg'
+		type = self.offer_type == 2 ? ' Termék' : (self.offer_type == 1 ? 'Összeg' : 'Százalék')
 		self.offer_type = type
 	end
 

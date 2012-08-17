@@ -160,7 +160,6 @@ input[type="radio"]{
 	color:$text-brown;
 }
 
-
 .thankyou{
 	h3{
 		font-size:50px;
@@ -191,6 +190,10 @@ input[type="radio"]{
 				margin-bottom:10px;
 			}
 	}
+}
+
+#payment-form{
+	display:none;
 }
 
 

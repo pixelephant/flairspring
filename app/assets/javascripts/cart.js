@@ -15,7 +15,9 @@ $("document").ready(function(){
 
 		var shipping = subtotal > shipping_threshold ? 0 : 4500;
 
-		var total = subtotal + shipping;
+		var discount = parseInt($(".discount").html());
+
+		var total = subtotal + shipping - discount;
 
 		$(".subtotal").html(subtotal);
 		$(".shipping-cost").html(shipping);
@@ -95,10 +97,12 @@ $("document").ready(function(){
 				if(resp.status == "true"){
 					$("#use-coupon").addClass("active");
 					val = parseInt($(".total-price").html()) - parseInt(resp.value);
+					$(".discount").html(resp.value + ' Ft');
 					$(".total-price").html(val);
 				}else{
 					$("#use-coupon").removeClass("active");
 					val = parseInt($(".total-price").html()) + parseInt(resp.value);
+					$(".discount").html('0 Ft');
 					$(".total-price").html(val);
 				}
 				//Ár levonása

@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
 	has_many :order_items, :dependent => :destroy
 	belongs_to :shipping_address, :class_name => "Address", :foreign_key => "shipping_address_id"
 	belongs_to :invoice_address, :class_name => "Address", :foreign_key => "invoice_address_id"
+	has_one :coupon
 
 	accepts_nested_attributes_for :order_items
 
@@ -13,7 +14,5 @@ class Order < ActiveRecord::Base
 		end
 		return sum
 	end
-
-	
 
 end

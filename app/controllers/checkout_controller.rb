@@ -5,7 +5,7 @@ class CheckoutController < ApplicationController
   def index
 		@cart = Cart.find(session[:cart_id])
 
-    @personal_discount = 0
+    @personal_discount = (current_user.personal_discount_available > current_cart.total ? current_cart.total : current_user.personal_discount_available)
 
     if current_user
       #redirect_to billing_shipping
@@ -16,7 +16,6 @@ class CheckoutController < ApplicationController
       # if session[:personal_discount] == @user.id
       #   @personal_discount = (@user.personal_discount_available > current_cart.total ? current_cart.total : @user.personal_discount_available)
       # end
-
       redirect_to :action => "billing_shipping"
     else
       render 'register-login'
@@ -25,10 +24,18 @@ class CheckoutController < ApplicationController
   end
 
   def billing_shipping
+    @personal_discount = 0
+    @other_discount = 0
+
+    @other_discount = session[:coupon_val] unless session[:coupon_code].nil?
+
     unless current_user.blank?
       @user = current_user
       @shipping_address = current_user.addresses.where(:billing => 0).first
       @billing_address = current_user.addresses.where(:billing => 1).first
+      if session[:personal_discount] == current_user.id
+        @personal_discount = (current_user.personal_discount_available > current_cart.total ? current_cart.total : current_user.personal_discount_available)
+      end
     end
 
     render 'billing-shipping'
@@ -94,7 +101,12 @@ class CheckoutController < ApplicationController
       sum = sum + li.product.full_price.to_i
     end
 
+    
+    sum = sum - session[:coupon_val].to_i unless session[:coupon_code].nil?
+    
+
     @order.price = sum
+
     @personal_discount = 0
 
     if current_user
@@ -104,24 +116,43 @@ class CheckoutController < ApplicationController
     end
 
     session.delete(:personal_discount)
-
     @order.discount_used = @personal_discount
-    @order.save
 
-    unless session[:wishlist_items].blank?
-      session[:wishlist_items].each do |item|
-        unless @order.order_items.where(:product_id => item[:product_id]).blank?
-          w = WishlistItem.find(item[:wishlist_item_id])
-          w.sold = 1
-          w.save!
+    # Payment types:
+    # 1 - kártya
+    # 2 - paypal
+    # 3 - transfer
+
+    @order.payment_type = data[:payment_type]
+    if @order.save
+      LineItem.destroy_all(:cart_id => current_cart.id)
+      UserMailer.order_email(@order).deliver
+
+      unless session[:wishlist_items].blank?
+        session[:wishlist_items].each do |item|
+          unless @order.order_items.where(:product_id => item[:product_id]).blank?
+            w = WishlistItem.find(item[:wishlist_item_id])
+            w.sold = 1
+            w.save!
+          end
         end
+        session[:wishlist_items] = []
       end
-      session[:wishlist_items] = []
+
+      unless session[:coupon_code].nil?
+        c = Coupon.where(:code => session[:coupon_code]).first
+        c.used = 1
+        c.order_id = @order.id
+        c.save
+        session[:coupon_code] = nil
+        session[:coupon_val] = nil
+      end
+
+      render 'thankyou'
+    else
+      redirect_to 'billing-shipping'
     end
 
-    session[:order_id] = @order.id
-
-    render 'payment'
   end
 
   def thankyou
@@ -129,6 +160,7 @@ class CheckoutController < ApplicationController
     unless session[:order_id]
       redirect_to '/cart'
     else
+
       # Payment types:
       # 1 - kártya
       # 2 - paypal
@@ -139,6 +171,8 @@ class CheckoutController < ApplicationController
         LineItem.destroy_all(:cart_id => current_cart.id)
         UserMailer.order_email(@order).deliver
       end
+
+      @personal_discount = @order.discount_used
 
       if current_user
         @user = current_user

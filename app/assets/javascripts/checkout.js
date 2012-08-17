@@ -17,7 +17,25 @@ $("document").ready(function(){
   }
 
 
+  $("#proceed-to-payment").click(function(){
+    $("h3#top").html("Ellenőrzés &amp; Fizetés");
+    $("#shipping-step").removeClass("active");
+    $("#payment-step").addClass("active");
+    $("#shipping-form").hide();
+    $("#payment-form").show();
+    $('html, body').animate({scrollTop:100}, 'slow');
+    return false;
+  });
 
+  $("#back-to-shipping").click(function(){
+    $("h3#top").html("Számlázás &amp; Szállítás");
+    $("#shipping-step").addClass("active");
+    $("#payment-step").removeClass("active");
+    $("#payment-form").hide();
+    $("#shipping-form").show();
+    $('html, body').animate({scrollTop:100}, 'slow');
+    return false;
+  });
 
 
   $("#payment_same").change(function(){

@@ -73,13 +73,15 @@ class CartController < ApplicationController
 
   def coupon
     coupon = Coupon.where("used = 0 AND code = '#{params[:code]}' AND valid_date > NOW()")
-    discount = (coupon.any? ? coupon.first.coupon_value(session[:cart_id]) : 0)
+    discount = (coupon.any? ? coupon.first.coupon_value(current_cart) : 0)
     respond_to do |format|
       if params[:action] == 'coupon' && coupon.any? && (session[:coupon_code] != params[:code])
         session[:coupon_code] = params[:code]
+        session[:coupon_val] = discount
         format.json { render :json => {:status => "true", :value => discount} }
       else
         session[:coupon_code] = nil
+        session[:coupon_val] = nil
         format.json { render :json => {:status => "false", :value => discount} }
       end
     end

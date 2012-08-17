@@ -5,13 +5,6 @@
 </fieldset> -->
 
 <%= field_set_tag t('brand') do %>
-	<% @brands.each do |brand| %>
-		<div class="field">
-			<label for="<%= brand.name.parameterize %>"> <%= brand.name %> </label>
-			<%= check_box_tag 'brand[]', brand.name.parameterize, ((!params[:brand] || params[:brand].include?(brand.name.parameterize) ? true : false)) %>
-		</div>
-	<% end %>
-	<%= submit_tag "frissítés", :class => "update" %>
 <% end %>
 
 <%= field_set_tag t('designer') do %>

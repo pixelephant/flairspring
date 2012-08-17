@@ -24,7 +24,7 @@
 				<td class="right">Kellenek</td>
 			</tr>
 			<tr class="info last">
-				<td>Estimated arrival</td>
+				<td>Várható érkezés</td>
 				<td class="right"><%= @order.estimated_date %></td>
 			</tr>
 			<% @order.order_items.each do |item| %>
@@ -47,8 +47,28 @@
 					Ingyenes
 				</td>
 			</tr>
+			<% if @order.discount_used > 0 %>
+				<tr>
+					<td>
+						Hűségkedvezmény
+					</td>
+					<td class="right">
+						<%= @order.discount_used %>
+					</td>
+				</tr>
+			<% end %>
+			<% unless @order.coupon.blank? %>
+				<tr>
+					<td>
+						Kupon-kedvezmény
+					</td>
+					<td class="right">
+						<%= @order.order_sum.to_i - @order.price.to_i %>
+					</td>
+				</tr>
+			<% end %>
 			<tr>
-				<td><strong>Total</strong></td>
+				<td><strong>Végösszeg</strong></td>
 				<td class="right"><strong><%= number_to_currency(@order.price, :precision => 0) %></strong></td>
 			</tr>
 		</tbody>

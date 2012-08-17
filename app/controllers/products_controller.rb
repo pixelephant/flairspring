@@ -17,8 +17,8 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
 
-    # @product.click = @product.click.to_i + 1
-    # @product.save
+    @product.click = @product.click.to_i + 1
+    @product.save
 
 		@category = @product.category
 

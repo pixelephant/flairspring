@@ -14,7 +14,7 @@ form:not(#search-form){
 		display:block;
 	}
 
-	input[type="submit"]{
+	#proceed-to-payment,input[type="submit"]{
 		@include orange-button;
 	}
 

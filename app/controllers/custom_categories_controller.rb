@@ -182,7 +182,7 @@ class CustomCategoriesController < ApplicationController
     end
 
     condit = " AND " + where.join(" AND ") unless where.blank?
-    condit = where[0] if where.count == 1
+    condit = " AND " + where[0] if where.count == 1
     # condit = where.join(" AND ") unless where.blank?
 
     logger.debug "property_category_count: #{condit}"
