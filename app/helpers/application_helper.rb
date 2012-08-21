@@ -1,4 +1,5 @@
 module ApplicationHelper
+#encoding: utf-8
 
 #
 # Converts the given HASH array like 'params' to a flat
@@ -122,6 +123,15 @@ end
 			e = ''
 		end
 		'<span class="lead">' + i.to_s + '</span> ' + e.to_s
+	end
+
+	def product_ribbon(product)
+		tag = ""
+
+		tag = "Uj" if product.new?
+		tag = "Akcios" if product.on_sale?
+
+		return '<div class="ribbon"><p>' + tag + '</p></div>' unless tag == ''
 	end
 
 end

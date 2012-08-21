@@ -26,11 +26,11 @@
 		<h3>Ajánljuk</h3>
 			<ul>
 					<li>
-						<%= link_to "Új termékek", flatten_param_hash(params.merge(params.merge(:recommend => "new"))) %>
+						<%= link_to "Új termékek", "/" + @category.slug + "/osszes?recommend=new" %>
 					</li>
 
 					<li>
-						<%= link_to "Akciós termékek", flatten_param_hash(params.merge(params.merge(:recommend => "sale"))) %>
+						<%= link_to "Akciós termékek", "/" + @category.slug + "/osszes?recommend=sale" %>
 					</li>
 					<li>
 						<%= link_to "Összes termék", "/" + @category.slug + "/osszes" %>

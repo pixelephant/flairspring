@@ -169,20 +169,29 @@ class CustomCategoriesController < ApplicationController
 
     if params[:recommend] == "new"
       where << "(products.created_at > (CURDATE() - INTERVAL #{NEW_PRODUCT_DAYS} DAY))"
-      property_count = property_count + 1
+      # property_count = property_count + 1
     end
 
     discount_sql_table = ""
     discount_sql_column = ""
     if params[:recommend] == "sale"
       where << "(discounts_to_products.discount_id IS NOT NULL OR categories.discount_id IS NOT NULL)"
-      property_count = property_count + 1
+      # property_count = property_count + 1
       discount_sql_table = " LEFT JOIN discounts_to_products ON products.id = discounts_to_products.product_id INNER JOIN categories ON products.category_id = categories.id"
       discount_sql_column = ",discounts_to_products.discount_id"
     end
 
-    condit = " AND " + where.join(" AND ") unless where.blank?
-    condit = " AND " + where[0] if where.count == 1
+    # condit = " AND " + where.join(" AND ") unless where.blank?
+    # condit = " AND " + where[0] if where.count == 1
+
+    unless where.blank?
+      if where.count == 1
+        # condit = " AND " + where[0]
+      else
+        condit = " AND " + where.join(" AND ")
+      end
+    end
+
     # condit = where.join(" AND ") unless where.blank?
 
     logger.debug "property_category_count: #{condit}"

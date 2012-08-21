@@ -150,6 +150,10 @@ class Product < ActiveRecord::Base
 		self.full_price < self.price ? true : false
 	end
 
+	def new?
+		((Time.now - self.created_at).to_i / (3600 * 24) < NEW_PRODUCT_DAYS) ? true : false
+	end
+
 	def property_category_ids
 		a = []
 		self.properties.group(:property_category_id).each do |prop|
