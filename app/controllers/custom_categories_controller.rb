@@ -181,27 +181,29 @@ class CustomCategoriesController < ApplicationController
       discount_sql_column = ",discounts_to_products.discount_id"
     end
 
-    # condit = " AND " + where.join(" AND ") unless where.blank?
-    # condit = " AND " + where[0] if where.count == 1
-
     unless where.blank?
       if where.count == 1
-        # condit = " AND " + where[0]
+        condit = where[0]
       else
-        condit = " AND " + where.join(" AND ")
+        condit = where.join(" AND ")
       end
     end
 
     # condit = where.join(" AND ") unless where.blank?
 
-    logger.debug "property_category_count: #{condit}"
+    logger.debug "_CONDITION_: #{condit}"
 
     unless @custom_category.products.blank?
       #logger.debug "property_category_count: #{property_category_count}"
       if property_category_count > 0
+        condit = " AND " + condit
         p = Product.find_by_sql("SELECT prop.id FROM (SELECT DISTINCT products.id, COUNT(properties.id) AS prop_count#{discount_sql_column} FROM `products` INNER JOIN `products_properties` ON `products_properties`.`product_id` = `products`.`id` INNER JOIN `properties` ON `properties`.`id` = `products_properties`.`property_id`#{discount_sql_table} WHERE `products`.`category_id` = #{@category.id}#{condit} GROUP BY products.id) AS prop WHERE prop.prop_count >= #{property_category_count}")
       else
-        p = @custom_category.products.select("id").where(condit)
+        if params[:recommend] == "sale"
+          p = Product.find_by_sql("SELECT products.id#{discount_sql_column} FROM products #{discount_sql_table} WHERE products.category_id = #{@category.id} AND #{condit}")
+        else
+          p = @custom_category.products.select("id").where(condit)
+        end
       end
 
   		if params[:page] == 'all'
