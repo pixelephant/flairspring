@@ -223,4 +223,100 @@ namespace :import do
 
   end
 
+  task :custom_category, [:col1, :col2] => :environment do |task, args|
+  	args.with_defaults(:col1 => 16)
+  	args.with_defaults(:col2 => 78)
+
+  	time = Time.now
+		counter = 0
+		del_counter = 0
+		puts "Searching for uttermost.csv..."
+		puts "Going to add products to custom category"
+ 
+ 		c_categories = []
+ 		categ = []
+ 		c_categories_gr = []
+
+		CSV.foreach("public/Minta_kategoria_lista_balazs.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+
+			if counter == 0
+				for i in (args.col1)..(args.col2)
+					categ << row[i]
+				end
+			end
+
+			if counter == 1
+				for i in (args.col1)..(args.col2)
+					unless PropertyCategory.exists?(:category_name => row[i])
+						puts "Property category: " + row[i].to_s
+						PropertyCategory.create(:category_name => row[i])
+					end
+					c_categories_gr << row[i]
+				end
+			end
+
+			if counter == 2
+				for i in (args.col1)..(args.col2)
+					a = (i-args.col1)
+					puts "AAAAA:" + a.to_s
+					unless Property.exists?(:property_name => row[i])
+						puts "PropCat name: " + c_categories_gr[a]
+						pcid = PropertyCategory.find_by_category_name(c_categories_gr[a]).id
+						Property.create(:property_name => row[i], :property_category_id => pcid)
+					end
+					c_categories << row[i] 
+				end
+			end
+
+			if counter > 2
+				if Product.where(:sku => row[1]).any?
+					prod = Product.find_by_sku(row[1])
+					puts "Product found: " + row[1]
+					for i in 16..78
+						index = (i.to_i - args.col1.to_i)
+					  if row[i] == 'x' || row[i] == 'X'
+					   	c_name = (c_categories[index])
+					   	puts "Value found: " + c_name
+
+					   	if prod.category.custom_categories.exists?(:name => c_name)
+					   		puts "Custom Category: " + c_name
+					   	else
+					   		if CustomCategoryGroup.exists?(:name => c_categories_gr[index])
+					   			ccg = CustomCategoryGroup.find_by_name(c_categories_gr[index])
+					   		else
+					   			ccg = CustomCategoryGroup.create(:name => c_categories_gr[index])
+					   		end
+					   		unless prod.category.custom_categories.exists?(:name => c_name)
+					   			if CustomCategory.exists?(:name => c_name)
+					   				cc = CustomCategory.find_by_name(:name => c_name)
+					   			else
+					   				cc = CustomCategory.create(:name => c_name, :custom_category_group_id => ccg.id)
+					   			end
+					   			prod.category.custom_categories << cc
+					   		end
+					   		unless CustomCategory.find_by_name(c_name).properties.include?(Property.find_by_property_name(c_name))
+					   			CustomCategory.find_by_name(c_name).properties << Property.find_by_property_name(c_name)
+					   		end
+					   	end
+				   		CustomCategory.where(:name => c_name).first.properties.each do |p|
+					   		# prop = Property.find_by_property_name(p.property_name)
+					   		unless prod.properties.include?(p)
+					   			prod.properties << Property.find_by_property_name(c_name)
+					   		end
+					   	end
+
+					   	if prod.save!
+			   				puts "Property added: " + c_name + " to product: " + prod.name
+			   			end
+
+					  end
+					end
+				end
+			end
+			counter = counter + 1
+		end
+
+		puts (Time.now - time).to_s
+  end
+
 end
