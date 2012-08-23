@@ -51,7 +51,16 @@ var sdiv = $("#newest-products .slider-inner");
 
 	myPlayer.addEvent("ended",function(){
 		$(myPlayer.posterImage.el).show();
-	})
+	});
+
+	var myPlayer2 = _V_("example_video_2");
+	_V_("example_video_2").ready(function(){
+		var myPlayer2 = this;
+	});
+
+	myPlayer2.addEvent("ended",function(){
+		$(myPlayer2.posterImage.el).show();
+	});
 
 	$("#slider-thumbs li").click(function(){
 		var $this = $(this);
