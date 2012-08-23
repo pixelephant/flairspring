@@ -185,6 +185,10 @@ body{
 }
 
 
+#mag{
+	color:orange !important;
+}
+
 #topmenu{
 	width:980px;
 	margin:0 auto;
@@ -389,6 +393,7 @@ body{
 			text-decoration:none;
 			color:#fff;
 			height:35px;
+			line-height:35px;
 			font-size:15px;
 		}
 		&:hover,&:focus{
