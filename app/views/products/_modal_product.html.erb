@@ -19,10 +19,10 @@
 			<div class="right">
 				<div id="price">
 					<% if @product.price != productPrice(@product) %>
-						<p class="list-price"><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
-						<p class="discount-price"><%= t('.sale_price') %>: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
+						<p class="list-price">Lista ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+						<p class="discount-price">Kedvezményes ár: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
 					<% else %>
-						<p><%= t('.list_price') %>: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+						<p>Ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% end %>
 				</div>
 				<div id="short-description-box">
@@ -31,7 +31,7 @@
 					</p>
 				</div>
 				<div id="properties-box">
-					<p><label for="">Szállítási idő</label> 12 nap</p>
+					<p><label for="">Szállítási idő</label><%= SHIPPING[@product.brand.id] %></p>
 					<% if !@designer.nil? %>
 
 						<p><label><%= t('designer') %>: </label><%= @designer.name %></p>
