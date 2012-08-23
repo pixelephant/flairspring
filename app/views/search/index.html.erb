@@ -30,4 +30,4 @@
 		</div>
 	</section>
 </div>
-<%= render 'home/last_viewed_carousel' if !session[:last_viewed_products].blank? %>
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Utoljára megtekintett termékek", :id => "last-viewed", :products => Product.where(:slug => session[:last_viewed_products])} unless session[:last_viewed_products].blank? %>
