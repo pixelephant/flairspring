@@ -15,6 +15,12 @@ PERSONAL_DISCOUNT = 0.03
 MELYSEG = 74
 SZELESSEG = 75
 MAGASSAG = 76
+SULY = 77
 
 #Napban
 NEW_PRODUCT_DAYS = 14
+
+#Szállítási idők
+#Uttermost - 1
+#La-z-boy - 2
+SHIPPING = {1 => "3-8 hét", 2 => "3 hónap"}

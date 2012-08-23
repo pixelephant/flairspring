@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
 		@category = @product.category
 
     @size_weight = @product.properties.joins(:property_category).where(:property_categories => {:id => [74,75,76,77]})
-    @properties = @product.properties.joins(:property_category).where("property_categories.id NOT IN (74,75,76,77)")
+    @properties = @product.properties.joins(:property_category).where("visible=1 AND property_categories.id NOT IN (74,75,76,77)")
 
     @title = @product.name.titleize + " - " + @category.name
     @description = truncate(@product.long_description, :length => 156).capitalize
@@ -48,6 +48,9 @@ class ProductsController < ApplicationController
     session[:last_viewed_products] = session[:last_viewed_products][(session[:last_viewed_products].length-6),6] if session[:last_viewed_products].length > 6
 		@designer = @product.designer
 		@brand = @product.brand
+
+    @shipping = SHIPPING[@brand.id]
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @product }

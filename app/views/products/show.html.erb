@@ -60,7 +60,7 @@
 			</div>
 
 			<div id="properties-box">
-				<p><label for="">Szállítási idő</label> 12 nap</p>
+				<p><label for="">Szállítási idő</label><%= @shipping %></p>
 				<% if !@designer.nil? %>
 
 					<p><label><%= t('designer') %>: </label><%= @designer.name %></p>
