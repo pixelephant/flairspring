@@ -32,11 +32,15 @@
 			color:white;
 		}
 	}
+	.slides{
+		width:5880px;
+	}
 	.slide{
 		width:980px;
 		height:443px;
 		margin:0 auto;
 		position:relative;
+		float: left;
 		&.video{
 			background:black;
 		}
