@@ -66,9 +66,14 @@ var sdiv = $("#newest-products .slider-inner");
 		var $this = $(this);
 		$this.siblings().removeClass("active").end().addClass("active");
 		$("#slider").scrollTo($this.find("a").attr("href"),300,function(){
-			if($($this.find("a").attr("href")).hasClass("video")){
-				//myPlayer.play();
-		}
+			if($this.find("a").attr("href") == "#slide-3"){
+				myPlayer.play();
+				myPlayer2.pause();
+			}
+			else if($this.find("a").attr("href") == "#slide-4"){
+				myPlayer2.play();
+				myPlayer.pause();
+			}
 		else{
 			
 				myPlayer.pause();
