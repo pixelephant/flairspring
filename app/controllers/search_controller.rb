@@ -7,7 +7,21 @@ class SearchController < ApplicationController
 	  # end
 
 	  if params[:search]
-		 	@products = Product.where("name LIKE ('%#{params[:search]}%') OR long_description LIKE ('%#{params[:search]}%')")
+
+	  	where = ""
+
+	  	unless params[:designer].blank?
+		  	designer = []
+	      params[:designer].each do |d|
+		      unless d.blank?
+		        designer << d
+		      end
+		    end
+	    end
+
+	    where = (" AND designer_id IN (" + designer.join(",") + ")") unless designer.blank?
+
+		 	@products = Product.where("(name LIKE ('%#{params[:search]}%') OR long_description LIKE ('%#{params[:search]}%')) AND visible = 1#{where}")
 
 		 	product_id = []
 

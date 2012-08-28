@@ -17,13 +17,17 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
 
+    unless @product.visible?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     @product.click = @product.click.to_i + 1
     @product.save
 
 		@category = @product.category
 
     @size_weight = @product.properties.joins(:property_category).where(:property_categories => {:id => [74,75,76,77]})
-    @properties = @product.properties.joins(:property_category).where("visible=1 AND property_categories.id NOT IN (74,75,76,77)")
+    @properties = @product.properties.joins(:property_category).where("visible_product_view=1 AND property_categories.id NOT IN (74,75,76,77)")
 
     @title = @product.name.titleize + " - " + @category.name
     @description = truncate(@product.long_description, :length => 156).capitalize

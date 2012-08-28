@@ -50,7 +50,7 @@ class CustomCategoriesController < ApplicationController
     @property_categories = []
 
     property_categories.each do |property_category|
-      if property_category.properties.any?
+      if property_category.properties.any? && property_category.visible?
         p = Hash.new
         p.store(:name, property_category.category_name.to_s)
         p[:id] = property_category.id
@@ -70,7 +70,8 @@ class CustomCategoriesController < ApplicationController
           v = params[property_category.id.to_s].split(";") if params[property_category.id.to_s]
           p[:low] = params[property_category.id.to_s] ? v[0].to_f.floor : p[:from]
           p[:high] = params[property_category.id.to_s] ? v[1].to_f.ceil : p[:to]
-          p[:unit] = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","")
+          p[:unit] = property_category.category_name.scan(/\(?\w+\)/)[-1].gsub(")","").gsub("(","") unless property_category.category_name.scan(/\(?\w+\)/)[-1].nil?
+          p[:unit] = "" if p[:unit].blank?
         end
         @property_categories << p
       end
@@ -168,7 +169,7 @@ class CustomCategoriesController < ApplicationController
 		end
 
     if params[:recommend] == "new"
-      where << "(products.created_at > (CURDATE() - INTERVAL #{NEW_PRODUCT_DAYS} DAY))"
+      where << "(products.new_product = 1)"
       # property_count = property_count + 1
     end
 
@@ -191,7 +192,7 @@ class CustomCategoriesController < ApplicationController
 
     # condit = where.join(" AND ") unless where.blank?
 
-    logger.debug "_CONDITION_: #{condit}"
+    # logger.debug "_CONDITION_: #{condit}"
 
     unless @custom_category.products.blank?
       #logger.debug "property_category_count: #{property_category_count}"
@@ -209,12 +210,12 @@ class CustomCategoriesController < ApplicationController
   		if params[:page] == 'all'
   			session[:view_all] = true
 
-        @products = Product.where(:id => p)
+        @products = Product.where(:id => p, :visible => true)
         @kaminari_products = Kaminari.paginate_array(@products.order(sort)).page(params[:page]).per(21)
   		else
   			session[:view_all] = false
 
-        @products = Product.where(:id => p).order(sort).page(params[:page]).per(21)
+        @products = Product.where(:id => p, :visible => true).order(sort).page(params[:page]).per(21)
   			# @kaminari_products = Kaminari.paginate_array(@products).page(params[:page]).per(21)
         @kaminari_products = @products
   		end

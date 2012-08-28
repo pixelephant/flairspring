@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723092500) do
+ActiveRecord::Schema.define(:version => 20120828101834) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120723092500) do
     t.string   "slug"
     t.integer  "position"
     t.string   "image_file"
+    t.string   "ribbon_text"
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug"
@@ -336,14 +337,14 @@ ActiveRecord::Schema.define(:version => 20120723092500) do
   add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
 
   create_table "products", :force => true do |t|
-    t.string   "name",                             :null => false
+    t.string   "name",                                 :null => false
     t.string   "short_description"
     t.text     "long_description"
-    t.integer  "category_id",                      :null => false
+    t.integer  "category_id",                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sku",                              :null => false
-    t.integer  "price",                            :null => false
+    t.string   "sku",                                  :null => false
+    t.integer  "price",                                :null => false
     t.integer  "designer_id"
     t.integer  "manufacturer_id"
     t.string   "slug"
@@ -351,6 +352,8 @@ ActiveRecord::Schema.define(:version => 20120723092500) do
     t.string   "video"
     t.integer  "brand_id"
     t.integer  "click",             :default => 0
+    t.boolean  "new_product",       :default => false
+    t.boolean  "visible",           :default => true
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug"
@@ -401,10 +404,11 @@ ActiveRecord::Schema.define(:version => 20120723092500) do
   end
 
   create_table "property_categories", :force => true do |t|
-    t.string   "category_name",                   :null => false
+    t.string   "category_name",                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "visible",       :default => true
+    t.boolean  "visible",              :default => true
+    t.boolean  "visible_product_view", :default => true
   end
 
   add_index "property_categories", ["visible"], :name => "visible"

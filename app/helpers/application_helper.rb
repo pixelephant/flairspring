@@ -128,7 +128,7 @@ end
 	def product_ribbon(product)
 		tag = ""
 
-		tag = "Uj" if product.new?
+		tag = "Uj" if product.new_product?
 		tag = "Akcios" if product.on_sale?
 
 		return '<div class="ribbon"><p>' + tag + '</p></div>' unless tag == ''
