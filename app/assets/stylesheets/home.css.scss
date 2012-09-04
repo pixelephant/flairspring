@@ -242,9 +242,11 @@
 	text-align:center;
 }
 
+.blog-entry h4{
+	color:#7B7A71 !important;
+}
 
-
-#about-us{
+#about-us, #blog{
 	width:980px;
 	margin:0 auto;
 	text-align:center;
@@ -272,6 +274,10 @@
 			color:$text-gray2;
 		}
 	}
+}
+
+#blog-wrap{
+	width:490px;
 }
 
 #blog{
@@ -317,8 +323,8 @@ a.promo{
 		color:$text-brown;
 	}
 	#lab{
-		top: 225px;
-		left: 500px;
+		top: 215px;
+		left: 505px;
 	}
 	#doles{
 		top: 90px;

@@ -5,6 +5,13 @@
 
 @import '_sliders.css.scss';
 
+#under-image{
+	a{
+		color: #997FA9;
+	}
+	text-align:center;
+}
+
 #product-modals{
 	display:none;
 }
@@ -50,7 +57,7 @@
 	height:75px;
 	line-height:75px;
 	div{
-		float:left;
+		// float:left;
 		margin:0 5px;
 	}
 	.fb-like iframe{
@@ -186,7 +193,7 @@
 
 
 .pbox{
-	background:url(http://placekitten.com/g/320/250) center 38px no-repeat;
+	// background:url(http://placekitten.com/g/320/250) center 38px no-repeat;
 	width:320px;
 	margin-right:10px;
 	margin-bottom:20px;
@@ -253,7 +260,7 @@
 }
 
 #about-designer,#about-manufacturer{
-	background:#eeeeee;
+	// background:#eeeeee;
 	width:480px;
 	float:left;
 	margin-bottom:20px;

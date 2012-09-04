@@ -7,23 +7,26 @@
 			<% if @product.photos.any? %>
 				<div id="picture-wrap">
 					<div id="current-picture">
-						<a href=<%= @product.default_photo.image_file.to_s %> class='zoomable' rel="gal1">
+						<a href="<%= @product.default_photo.image_file.to_s %>" class='zoomable' rel="gal1">
 							<%= image_tag(@product.default_photo.image_file.product_page_default.to_s) %>
 						</a>
 					</div>
 				</div>
-				<div id="social-buttons">
-				  	<div id="fb-root"></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  if (d.getElementById(id)) return;
-					  js = d.createElement(s); js.id = id;
-					  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=136997593064327";
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
+				<div id="under-image" class="links">
+					<a href="<%= @product.default_photo.image_file.to_s %>" target="_blank">Megnyitás nagy méretben</a>
+					<div id="social-buttons">
+					  	<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=136997593064327";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
 
-					<div class="fb-like" data-href="http://www.flairspring.hu/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-					
+						<div class="fb-like" data-href="http://www.flairspring.hu/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+						
+					</div>
 				</div>
 			</div>
 			<% end %>
@@ -140,15 +143,25 @@
 	
 	<% end %>
 -->
+
+<!-- TOP SELLERS & OTHER ALSO BOUGHT -->
+<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Legnépszerűbbek", :id1 => "popular-products", :title2 => "Mások ezt vették hozzá", :id2 => "also-products", :product => @product} %>
+
+<!-- RELATED PRODUCTS -->
+<%= (render :partial => "home/product_slider_full_big", :locals => {:title => "A termékhez ajánljuk", :id => "related-products", :products => @product.product_relates }) if @product.product_relates.any? %>
+
 <div class="clearfix">
 	<div class="pbox">
 		<h3>Első doboz</h3>
+		<%= image_tag "product_boxes/1.png" %>
 	</div>
 	<div class="pbox">
 		<h3>Második doboz</h3>
+		<%= image_tag "product_boxes/2.png" %>
 	</div>
 	<div class="pbox last">
 		<h3>Harmadik doboz</h3>
+		<%= image_tag "product_boxes/3.png" %>
 	</div>	
 </div>
 
@@ -165,13 +178,6 @@
 		<%= render :partial => "about_brand", :locals => {:brand => @brand}%>
 	<% end %>
 </div>
-
-
-<!-- TOP SELLERS & OTHER ALSO BOUGHT -->
-<%= render :partial => "home/product_slider_halves", :locals => {:title1 => "Legnépszerűbbek", :id1 => "popular-products", :title2 => "Mások ezt vették hozzá", :id2 => "also-products", :product => @product} %>
-
-<!-- RELATED PRODUCTS -->
-<%= (render :partial => "home/product_slider_full_big", :locals => {:title => "A termékhez ajánljuk", :id => "related-products", :products => @product.product_relates }) if @product.product_relates.any? %>
 
 <div id="product-modals">
 	<div id="szallitas">

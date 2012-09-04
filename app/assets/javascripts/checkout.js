@@ -1,3 +1,5 @@
+//= require jquery.validate
+
 $("document").ready(function(){
   if($("#cart-summary").offset() != null ){
   	var top = $('#cart-summary').offset().top - parseFloat($('#cart-summary').css('marginTop').replace(/auto/, 0));
@@ -16,24 +18,43 @@ $("document").ready(function(){
     });
   }
 
+  $("#checkout-form").validate({
+    rules:{
+     "payment[last_name]" : "required",
+     "payment[first_name]" : "required",
+     "payment[email]" : "required",
+     "payment[phone]" : "required",
+     "payment[shipping_name]" : "required",
+     "payment[shipping_zip]" : "required",
+     "payment[shipping_city]" : "required",
+     "payment[shipping_additional]" : "required"
+    }
+  });
+
 
   $("#proceed-to-payment").click(function(){
-    $("h3#top").html("Ellenőrzés &amp; Fizetés");
-    $("#shipping-step").removeClass("active");
-    $("#payment-step").addClass("active");
-    $("#shipping-form").hide();
-    $("#payment-form").show();
-    $('html, body').animate({scrollTop:100}, 'slow');
+
+    if($("#checkout-form").valid()){
+      $("#csik").attr("src", "/assets/csik3.png");
+      $("h3#top").html("Ellenőrzés &amp; Fizetés");
+      $("#shipping-step").removeClass("active");
+      $("#payment-step").addClass("active");
+      $("#shipping-form").hide();
+      $("#payment-form").show();
+    }
+
+    $('html, body').animate({scrollTop:500}, 'slow');    
     return false;
   });
 
   $("#back-to-shipping").click(function(){
+    $("#csik").attr("src", "/assets/csik2.png");
     $("h3#top").html("Számlázás &amp; Szállítás");
     $("#shipping-step").addClass("active");
     $("#payment-step").removeClass("active");
     $("#payment-form").hide();
     $("#shipping-form").show();
-    $('html, body').animate({scrollTop:100}, 'slow');
+    $('html, body').animate({scrollTop:500}, 'slow');
     return false;
   });
 

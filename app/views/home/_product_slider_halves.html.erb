@@ -30,10 +30,11 @@
 			<% end %>
 		  <div class="slider-inner">
 			<ul class="carousel">
-				<% Product.where(:id => p_ids).each do |products| %>
+				<% carousel_products = (p_ids.empty? ? Product.order("RAND()").limit(1) : Product.where(:id => p_ids)) %>
+				<% carousel_products.each do |products| %>
 					<li>
 						<%= link_to products do %>
-							<%= image_tag products.photos.first.image_file, :title => products.name, :class => "class" if prod.photos.any? %>
+							<%= image_tag products.photos.first.image_file, :title => products.name, :class => "class" if products.photos.any? %>
 							<p class="name"><%= products.name %></p>
 							<% if products.price != productPrice(products) %>
 								<p class="price"><span class="current-price"><%= number_to_currency(productPrice(products), :precision => 0) %></span> <span class="old-price"><%= number_to_currency(products.price, :precision => 0) %></span></p>

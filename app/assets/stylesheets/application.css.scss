@@ -376,6 +376,9 @@ body{
 	height:35px;
 	background:$background-green;
 	margin:10px auto;
+	.active{
+		background: #f15e2f;
+	}
 	li{
 		float:left;
 		height:35px;
@@ -532,5 +535,7 @@ body{
 	}
 }
 
-
+.blog-entry a{
+	color: #F15E2F;
+}
 

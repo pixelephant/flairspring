@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 			admin_path
 		else
 			if current_cart.line_items.any?
-				"/" + I18n.locale.to_s + "/checkout"
+				"/checkout"
 			else
 				"/"
 			end

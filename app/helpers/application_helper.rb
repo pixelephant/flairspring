@@ -67,7 +67,7 @@ end
 
 	def is_active_category_with_index?(page_name, index)
 		cl = []
-    cl << 'active' if params[:id] == page_name
+    cl << 'active' if (params[:id] == page_name || params[:category_id] == page_name)
 		cl << 'first' if index == 0
 		cl << 'last' if (Category.count && !Content.all.any?) == index + 1
 
@@ -93,12 +93,13 @@ end
 
 	def cart_subtotal
 		if Cart.exists?(session[:cart_id])
-			cart = Cart.find(session[:cart_id])
-			subtotal = 0
-			cart.line_items.each do |item|
-				subtotal += (item.quantity * item.product.full_price)
-			end
-		subtotal
+			# cart = Cart.find(session[:cart_id])
+			# subtotal = 0
+			# cart.line_items.each do |item|
+			# 	subtotal += (item.quantity * item.product.full_price)
+			# end
+		# subtotal
+			Cart.find(session[:cart_id]).total
 		else
 			nil
 		end

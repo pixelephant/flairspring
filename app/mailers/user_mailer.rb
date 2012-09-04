@@ -7,4 +7,10 @@ class UserMailer < ActionMailer::Base
 
     mail(:to => @order.user.email, :subject => "Megrendelés")
   end
+
+  def order_status(order)
+    @order = order
+
+    mail(:to => @order.user.email, :subject => "Megrendelésének állapota változott")
+  end
 end

@@ -7,6 +7,12 @@ class Order < ActiveRecord::Base
 
 	accepts_nested_attributes_for :order_items
 
+	after_update :send_email_on_status_change
+
+  def send_email_on_status_change
+    UserMailer.order_status(self) if (self.status_changed?)
+  end
+
 	def order_sum
 		sum = 0
 		self.order_items.each do |item|

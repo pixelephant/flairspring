@@ -18,6 +18,8 @@ Madearthome::Application.routes.draw do
 	match "adatvedelem" => "comingsoon#how"
 	match "sajtoanyagok" => "comingsoon#sajtoanyagok"
 
+	match 'user_root' => redirect("/")
+
 	resources :comingsoon
 
 	#Admin ajax routes START

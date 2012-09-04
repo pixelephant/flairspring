@@ -8,11 +8,15 @@
 			<p>gyűlt össze, melyet bármikor beválthat tetszőleges vásárlásra a <a href="/cart">kosár oldalon</a> található gomb segítségével.</p>
 		</div>
 		<div id="edit-data">
-			<h4>Adatmódosítás</h4>
-			<p>Szállítási címe: <%= @default_address.zip %>, <%= @default_address.city %>, <%= @default_address.additional %></p>
+			<h4>Rendelési adataim</h4>
+			<p>Szállítási címe: 
+				<% unless @default_address.nil? %>
+					<%= @default_address.zip.to_s %>, <%= @default_address.city.to_s %>, <%= @default_address.additional.to_s %>
+				<% end %>
+			</p>
 			<!-- <p>Alapértelmezett fizetési módja: Banki átutalás</p> -->
-			<p>A számlát: <%= @accounting_name %> nevére állítjuk ki</p>
-			<a href="#" class="button blue">Adatmódosítás</a>
+			<p>A számlát: <%= @accounting_name.to_s %> nevére állítjuk ki</p>
+			<a href="/edit" class="button blue">Jelszó módosítás</a>
 		</div>
 	</div>
 	<div class="table-wrap">
@@ -46,6 +50,7 @@
 		</table>
 	</div>
 
+<% unless @wishlist.nil? %>
 	<div class="table-wrap">
 		<h4>Ajándéklistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
 		<table id="whishlist-table" class="user-table">
@@ -74,5 +79,6 @@
 			</tbody>
 		</table>
 	</div>
+<% end %>
 
 </section>

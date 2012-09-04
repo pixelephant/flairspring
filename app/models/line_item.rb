@@ -1,4 +1,7 @@
 class LineItem < ActiveRecord::Base
+
+	default_scope :order => 'product_set_id DESC'
+
 	belongs_to :product
 	belongs_to :cart
 

@@ -34,7 +34,7 @@ RailsAdmin.config do |config|
 
 	#Add all excluded models here:
 	config.excluded_models = [PropertiesToProduct, Wishlist, WishlistItem, PropertyCategoriesToCategory,AdvantagesToProduct,DiscountsToProduct,PropertiesToCategory,RelatedProduct,
-PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload]
+PropertiesToCustomCategory,PropertiesToLineItem,Cart, LineItem, MassUpload, ExtraPropertiesToProductVariation, RemovedPropertyToProductVariation]
 
 	#Visibility START
 	config.model AdvantageTranslation do

@@ -19,7 +19,7 @@
 			<div class="right">
 				<div id="price">
 					<% if @product.price != productPrice(@product) %>
-						<p class="list-price">Lista ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
+						<p class="list-price">Ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 						<p class="discount-price">Kedvezményes ár: <span> <%= number_to_currency(productPrice(@product), :precision => 0) %></span></p>
 					<% else %>
 						<p>Ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>

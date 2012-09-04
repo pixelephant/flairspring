@@ -27,6 +27,8 @@ class Product < ActiveRecord::Base
 	has_many :inverse_related_products, :class_name => "RelatedProduct", :foreign_key => "related_product_id"
 	has_many :inverse_product_relates, :through => :inverse_related_products, :source => :product
 
+	has_many :product_variations
+
 	has_many :discounts_to_products
 	has_many :discounts, :through => :discounts_to_products
 

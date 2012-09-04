@@ -6,7 +6,7 @@
 	<a href="/fotelek" class="box promo" id="lazyboy-promo">
 			<h3>La-Z-Boy komfort fotelek</h3>
 			<span class="feat" id="doles">Nagy <br> dőlésszög</span>
-			<span class="feat" id="lab">Magasított <br> lábak</span>
+			<span class="feat" id="lab">Szabadal-<br>maztatott <br> funkciók</span>
 			<span class="feat" id="emel">Emelhető <br> lábrész</span>
 	</a>
 
@@ -15,7 +15,7 @@
 				<h3>900 féle lámpa</h3>
 		</a>
 
-		<a href="/mirrors" class="box promo" id="mirrors-promo">
+		<a href="/tukrok" class="box promo" id="mirrors-promo">
 			
 				<h3>400 féle keretezett tükör</h3>
 			
@@ -82,14 +82,20 @@
 </section>
 
 <section id="blog">
-	<h3>Friss hírek</h3>
-	<h4>A Flairspring blogból</h4>
-	<% @blogposts.each do |article| %>
+	<div id="blog-wrap">
+		<h3>Friss hírek</h3>
+		<h4>A Flairspring blogból</h4>
+		<% @blogposts.each do |article| %>
+			<div class="blog-entry">
+				<h4 class="gray"><%= article.post_title %></h4>			
+				<p><%= truncate strip_tags(article.post_content).html_safe, :length => 470, :omission => '...' %><%= link_to "Tovább magazinunkhoz &raquo;".html_safe, "http://blog.flairspring.hu/?p=" + article.id.to_s %></p>
+			</div>
+		<% end %>
 		<div class="blog-entry">
-			<h5><%= article.post_title %></h5>			
-			<p><%= truncate strip_tags(article.post_content).html_safe, :length => 470, :omission => '...' %><%= link_to "Bővebben &raquo;".html_safe, "http://blog.flairsprin.hu/?p=" + article.id.to_s %></p>
+				<h4>Klasszikus terek</h4>
+				<p>“Az elegancia soha nem megy ki a divatból” tartja a mondás. Nem véletlen, hogy az&nbsp;évszázadok alatt kialakult sokféle klasszikus stílus különböző elemeit a legtöbb híres&nbsp;designer belekeveri akár a modern enteriőrökbe is. Sokan azonban egyáltalán nem&nbsp;szeretik a modern stílust és inkább teljesen klasszikus otthont szeretnének kialakítani&nbsp;maguknak. Ebben az esetben kézenfekvő antik kereskedőknél körülnézni, de azt&nbsp;mindenképpen számításba kell venni, hogy - főleg az a...<a href="http://blog.flairspring.hu/?p=399">Bővebben »</a></p>
 		</div>
-	<% end %>
+	</div>
 </section>
 
 <section class="box full" id="brands">

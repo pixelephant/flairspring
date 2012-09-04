@@ -57,10 +57,10 @@ hu:
 
   products:
     show:
-      list_price: "Lista ár"
+      list_price: "Ár"
       sale_price: "Akciós ár"
       add_to_cart: "Kosárba rakom"
-      specifications: "Tulajdonságok"
+      specifications: "Méretek"
       designer: "Tervező"
       dimensions: "Méretek"
       weight: "Súly (kg)"

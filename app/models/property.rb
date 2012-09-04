@@ -25,6 +25,9 @@ class Property < ActiveRecord::Base
 
 	has_and_belongs_to_many :product_sets
 
+	has_many :extra_properties_to_product_variations
+	has_many :product_variations, :through => :extra_properties_to_product_variations
+
 	validates :property_name, :presence => true
 
 	private

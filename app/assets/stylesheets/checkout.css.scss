@@ -3,10 +3,26 @@
 @import '_login.css.scss';
 @import '_shipping.css.scss';
 
+#csik{
+	width: 505px;
+	position:relative;
+	left: -10px;
+}
+
+#csik-div{
+	text-align: center;
+	position:relative;
+	top: -50px;
+}
+
 #checkout{
 	position:relative;
 	padding-top:20px;
 	padding-bottom:20px;
+}
+
+#header-image{
+	margin-top: 10px;
 }
 
 .wr{
@@ -37,7 +53,7 @@ form{
 		padding:0px 30px 10px 30px;
 		color:#afafaf;
 		font-style:italic;
-		border-bottom:1px solid $gray;
+		// border-bottom:1px solid $gray;
 		&.active{
 			color:black;
 			font-weight:bold;
@@ -195,7 +211,6 @@ input[type="radio"]{
 #payment-form{
 	display:none;
 }
-
 
 @import "_simple_footer.css.scss";
 @import "_order_table.css.scss";

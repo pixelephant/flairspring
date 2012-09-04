@@ -5,10 +5,10 @@
 		<h3>Kosarad tartalma</h3>
 		<% render 'cart/register_cta' unless current_user %>
 	</div>
-		<p class="empty-cart">Kosarad üres! Nézd meg a speckó ajánlatainkat alább! </p>
+		<p class="empty-cart">Kosara üres! Nézze meg mások mit vásároltak! </p>
 </section>
 
-<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Speckó ajánlatok üres kosárra", :id => "cart-slider", :products => Product.order("updated_at").limit(10)} %>
+<%= render :partial => "home/product_slider_full_big", :locals => {:title => "Mások ezt vették", :id => "cart-slider", :products => Product.order("updated_at").limit(10)} %>
 
 <div class="clearfix" id="info">
 	<section class="box third" id="payment-options">

@@ -10,7 +10,7 @@
 			<thead>
 				<tr>
 						<th>Termék</th>
-						<th>Tulajdonságok</th>
+						<th>Méretek</th>
 						<th>Kedvezmények</th>
 						<th>Darab ár</th>
 						<th width=20 class="multiply-cell">&nbsp;</th>
@@ -21,48 +21,64 @@
 				</tr>
 			</thead>
 			<tbody>
+			<% product_sets = [] %>
 			<% @cart.line_items.each do |li| %>
 
-				<tr data-id="<%= li.product.id %>">
-						<td class="product-cell">
-							<div class="clearfix">
-								<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
-								<h6><%= li.product.name %></h6>
-							</div>
-						</td>
-						<td class="property-cell">
-							<% li.product.optional_properties.each do |property| %>
-								<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
-							<% end %>
+				<% unless product_sets.include?(li.product_set_id) %>
+					<tr data-id="<%= li.product.id %>">
+							<td class="product-cell">
+								<div class="clearfix">
+									<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
+									<% if li.product_variation_id.nil? %>
+										<h6><%= li.product.name %></h6>
+									<% else %>
+										<h6><%= ProductVariation.find(li.product_variation_id).name %></h6>
+									<% end %>
+								</div>
+							</td>
+							<td class="property-cell">
+								<% li.product.optional_properties.each do |property| %>
+									<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
+								<% end %>
 
-							<p><span class="property">Mag X Szel X Mely: </span><%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %></p>
+								<p><span class="property">Mag X Szel X Mely: </span><%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %></p>
 
-						</td>
-						<td class="discount-cell">
-							<span class="discount-element">Ajándék kutya</span>
-							<span class="discount-element">Ingyenes összeszerelés</span>
-						</td>
-						<td class="price-cell">
-							<span>
-								<%= price = productPrice(li.product.id) %> Ft
-							</span>
-						</td>
-						<td class="multiply-cell">
-							x
-						</td>
-						<td class="quantity-cell">
-							<input type="number" min='0' max="5" name="" id="" value="<%= q = li.quantity %>"/> db
-						</td>
-						<td class="equals-cell">
-							=
-						</td>
-						<td class="sum-price-cell">
-							<span><%= price * q %></span> Ft
-						</td>
-						<td class="actions-cell">
-							<a class="delete" href="">x</a>
-						</td>
-					</tr>
+							</td>
+							<td class="discount-cell">
+								<span class="discount-element">Ajándék kutya</span>
+								<span class="discount-element">Ingyenes összeszerelés</span>
+							</td>
+							<td class="price-cell">
+								<span>
+									<% if li.product_set_id.nil? %>
+										<% if li.product_variation_id.nil? %>
+											<%= price = productPrice(li.product.id) %> Ft
+										<% else %>
+											<%= price = ProductVariation.find(li.product_variation_id).price %> Ft
+										<% end %>
+									<% else %>
+										<%= price = ProductSet.find(li.product_set_id).price %> Ft
+									<% end %>
+								</span>
+							</td>
+							<td class="multiply-cell">
+								x
+							</td>
+							<td class="quantity-cell">
+								<input type="number" min='0' max="5" name="" id="" value="<%= q = li.quantity %>"/> db
+							</td>
+							<td class="equals-cell">
+								=
+							</td>
+							<td class="sum-price-cell">
+								<span><%= price * q %></span> Ft
+							</td>
+							<td class="actions-cell">
+								<a class="delete" href="">x</a>
+							</td>
+						</tr>
+						<% product_sets << li.product_set_id unless li.product_set_id.nil? %>
+					<% end %>
 				<% end %>
 			</tbody>
 		</table>
@@ -86,10 +102,10 @@
 				<% end %>
 			</div>
 			<div id="total">
-					<p><b>Részösszeg</b> <span class="subtotal"><%= number_to_currency(cart_subtotal, :precision => 0) %></span></p>
+					<p id="subtotal"><b><%= @cart.line_items.first.quantity == 1 ? 'Kosárban lévő termék összege' : 'Kosárban lévő termékek összege' %></b> <span class="subtotal"><%= number_to_currency(@cart.total, :precision => 0) %></span></p>
 					<p><b>Szállítás</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
 					<p><b>Kedvezmény</b> <span class="discount"><%= number_to_currency(((@discount > 0 ? @discount : 0)) ,:precision => 0) %></span></p>
-					<p id="total-price"><b>Összessen</b> <span class="total-price"><%= (cart_subtotal + shipping - @discount) %></span> Ft</p>
+					<p id="total-price"><b>Összessen</b> <span class="total-price"><%= (@cart.total + shipping - @discount) %></span> Ft</p>
 			</div>
 		</div>
 		<form id="checkout-form" action="/checkout">
@@ -118,4 +134,6 @@
 	</section>
 </div>
 
-<%= render :partial => "home/product_slider_full_big", :locals => {:title => "A kosaradban lévőkhöz ajánljuk", :id => "cart-slider", :products => @r_products } %>
+<% if @r_products.any? %>
+	<%= render :partial => "home/product_slider_full_big", :locals => {:title => "A kosaradban lévőkhöz ajánljuk", :id => "cart-slider", :products => @r_products } %>
+<% end %>

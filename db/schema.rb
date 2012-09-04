@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828101834) do
+ActiveRecord::Schema.define(:version => 20120903090116) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -214,12 +214,21 @@ ActiveRecord::Schema.define(:version => 20120828101834) do
 
   add_index "discounts_to_products", ["product_id", "discount_id"], :name => "relation", :unique => true
 
+  create_table "extra_properties_to_product_variations", :force => true do |t|
+    t.integer  "product_variation_id"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "line_items", :force => true do |t|
     t.integer  "product_id"
     t.integer  "cart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",   :default => 1
+    t.integer  "quantity",             :default => 1
+    t.integer  "product_variation_id"
+    t.integer  "product_set_id"
   end
 
   create_table "links", :force => true do |t|
@@ -275,6 +284,8 @@ ActiveRecord::Schema.define(:version => 20120828101834) do
     t.datetime "updated_at"
     t.integer  "quantity"
     t.integer  "price"
+    t.integer  "product_variation_id"
+    t.integer  "product_set_id"
   end
 
   create_table "orders", :force => true do |t|
@@ -289,6 +300,8 @@ ActiveRecord::Schema.define(:version => 20120828101834) do
     t.integer  "payment_type"
     t.integer  "discount_used"
     t.integer  "price"
+    t.text     "invoice_address_text"
+    t.text     "shipping_address_text"
   end
 
   create_table "photos", :force => true do |t|
@@ -335,6 +348,14 @@ ActiveRecord::Schema.define(:version => 20120828101834) do
 
   add_index "product_translations", ["locale"], :name => "index_product_translations_on_locale"
   add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
+
+  create_table "product_variations", :force => true do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "product_id"
+  end
 
   create_table "products", :force => true do |t|
     t.string   "name",                                 :null => false
@@ -460,6 +481,13 @@ ActiveRecord::Schema.define(:version => 20120828101834) do
   create_table "related_products", :force => true do |t|
     t.integer  "product_id",         :null => false
     t.integer  "related_product_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "removed_property_to_product_variations", :force => true do |t|
+    t.integer  "product_variation_id"
+    t.integer  "property_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
