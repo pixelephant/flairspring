@@ -1,7 +1,8 @@
 <div id="product-modal">
 	<div id="product-title">
-		<h2><%= @product.name.titleize %>
-			<span class="sku">Cikkszám: <%= @product.sku %></span>
+		<h2><span id="product-modal-name"><%= @product.name.titleize %></span>
+			<span class="sku"><strong>Cikkszám: <%= @product.sku %></strong></span>
+			<div class="clearfix"></div>
 		</h2>
 	</div>
 	<div class="clearfix">
@@ -25,11 +26,13 @@
 						<p>Ár: <span> <%= number_to_currency(@product.price, :precision => 0) %></span></p>
 					<% end %>
 				</div>
+				<hr class="product-modal-hr" />
 				<div id="short-description-box">
 					<p>
 						<%= lead(@product.long_description).html_safe %>
 					</p>
 				</div>
+				<hr class="product-modal-hr" />
 				<div id="properties-box">
 					<p><label for="">Szállítási idő</label><%= SHIPPING[@product.brand.id] %></p>
 					<% if !@designer.nil? %>
@@ -43,8 +46,10 @@
 						</p>
 					<% end %>
 				</div>
+				<div>
+					<a id="modal-show" class="button" href="<%= product_path(@product) %>"><%= t('show') %></a>
+				</div>
 			</div>
-			<a class="button" href="<%= product_path(@product) %>"><%= t('show') %></a>
 		<% end %>
 	</div>
 </div>

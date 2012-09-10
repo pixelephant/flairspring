@@ -87,9 +87,9 @@
 		text-transform:uppercase;
 		.sku{
 			font-size:12px;
-			float:right;
-			text-transform:lowercase;
-			padding-top:10px;
+			float:left;
+			//text-transform:lowercase;
+			padding-top:4px;
 		}
 	}
 }
@@ -107,4 +107,19 @@
 
 #product-modal-wrap{
 	display:none;
+}
+
+#product-modal-name{
+	float:right;
+	margin-right:80px;
+}
+
+#modal-show{
+	//margin-right: 322px !important;
+	color: white !important;
+}
+
+.product-modal-hr{
+	color: #c6cdc1 !important;
+	background-color: #c6cdc1 !important;
 }
