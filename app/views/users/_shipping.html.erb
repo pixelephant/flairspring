@@ -2,9 +2,10 @@
 <div id="shipping-form">
 	<div class="block">
 
-		<p>(A csillaggal jelölt adatok kitöltése kötelező)</p>
-
 		<h5>Kapcsolattartási információk</h5>
+
+		<p id="starred">(A csillaggal jelölt adatok kitöltése kötelező)</p>
+
 			<fieldset>
 				<div class="half">
 					<%= f.label :title_name, "Titulus" %>
@@ -15,7 +16,7 @@
 	  			<%= f.text_field :last_name, :value => (@user.last_name if @user), :class => "required" %>
 				</div>
 				<div class="half">
-					<%= f.label :first_name, "Keresztnév *" %>
+					<%= f.label :first_name, "Keresztnév *", :id => "payment_first_name_label" %>
 	  			<%= f.text_field :first_name, :value => (@user.first_name if @user) %>
 				</div>
 			</fieldset>
@@ -64,7 +65,7 @@
 					<%= f.label :billing_zip, "irányítószám" %>
 					<%= f.text_field :billing_zip, :value => (@billing_address.zip unless @billing_address.blank?), :size => 4 %>
 				</div>
-				<div class="half">
+				<div class="half" id="billing_city_div">
 					<%= f.label :billing_city, "Város" %>
 					<%= f.text_field :billing_city, :value => (@billing_address.city unless @billing_address.blank?) %>
 				</div>
@@ -119,6 +120,14 @@
 			</fieldset>
 		</div>
 		
+		<div class="block" id="payment-transfer">
+			<h5>Átutalásos fizetés</h5>
+			<p>Átutalásos fizetés választása esetén a következő adatokat szükséges kitölteni az utalás elindításánál:<br />
+				Az összeget a <span class="orange">CIB Bank 10701180-49586705-51100005</span> számú számlaszámára kérjük átutalni. <br />
+				A közvélemény rovatban a <span class="orange">megrendelés számát</span> szükséges feltüntetni.<br />
+				A kedvezményezett neve: <span class="orange">Flairspring Kft.</span></p>
+		</div>
+
 		<div class="block" id="payment-credit-card">
 			<h5>Bankkártyás fizetés</h5>
 			<p>A megredenlés gombra kattintva átirányítjuk a BANK biztonságos fizetési oldalára. Sikeres átutalás után, a BANK visszairányítja hozzánk, ahol a rendelési nyugtát megkapja.</p>

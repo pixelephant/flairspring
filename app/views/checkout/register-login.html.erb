@@ -1,9 +1,12 @@
 <section id="checkout" class="box full clearfix">
 	<ol id="steps" class="clearfix">
 		<li class="active">Bejelentkezés</li>
-		<li>Számlázás &amp; Szállítás</li>
-		<li>Ellenőrzése &amp; Fizetés</li>
+		<li>Számlázás és Szállítás</li>
+		<li>Ellenőrzése és Fizetés</li>
 	</ol>
+	<div id="csik-div">
+		<%= image_tag "csik1.png", :id => "csik" %>
+	</div>
 	<h3 id="top">Bejelentkezés</h3>
 	<div class="clearfix wr">
 		<%= render :partial => "users/login", :locals => { :logintext => " a vásárlás folytatásához!", :resource => resource } %>

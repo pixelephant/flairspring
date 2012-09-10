@@ -5,11 +5,11 @@
 			<p>Rendelés összege <span class="price"><span><%= cart_subtotal %></span> Ft</span></p>
 			<p>Szállítási költség <span class="price"><span><%= cart_shipping %></span> Ft</span></p>
 			<p class="total">Kupon kedvezmény <span class="price"><span><%= @other_discount.to_i %></span> Ft</span></p>	
-			<p class="total">Hűségkedvezmény <span class="price"><span><%= @personal_discount.to_i %></span> Ft</span></p>	
+			<p class="total">Törzsvásárlói kedvezmény <span class="price"><span><%= @personal_discount.to_i %></span> Ft</span></p>	
 			<p class="total">Összesen <span class="price"><span><%= cart_shipping.to_i + cart_subtotal.to_i - @personal_discount.to_i - @other_discount.to_i %></span> Ft</span></p>
 		</div>
 		<div class="section">
-			<h5>Elakadt?</h5>
+			<h5>Segítségre van szüksége?</h5>
 			<p class="phone">+36-30-375-8600</p>
 		</div>
 	</div>

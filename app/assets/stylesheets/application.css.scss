@@ -306,7 +306,9 @@ body{
 
 #search-form{
 	margin-top:30px;
-	float:right;
+	float:left;
+	position:relative;
+	left: 100px;
 	div{
 		overflow:hidden;
 	}
@@ -537,5 +539,9 @@ body{
 
 .blog-entry a{
 	color: #F15E2F;
+}
+
+#starred{
+	margin-bottom: 20px !important;
 }
 

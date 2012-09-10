@@ -12,7 +12,7 @@
 						<th>Termék</th>
 						<th>Méretek</th>
 						<th>Kedvezmények</th>
-						<th>Darab ár</th>
+						<th class="price-cell">Darab ár</th>
 						<th width=20 class="multiply-cell">&nbsp;</th>
 						<th>Mennyiség</th>
 						<th></th>
@@ -37,16 +37,15 @@
 								</div>
 							</td>
 							<td class="property-cell">
+								
+								<p><span class="property">Ma: <%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X Sze: <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X Me: <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %> (cm)</span></p>
 								<% li.product.optional_properties.each do |property| %>
 									<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
 								<% end %>
-
-								<p><span class="property">Mag X Szel X Mely: </span><%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %></p>
-
 							</td>
 							<td class="discount-cell">
-								<span class="discount-element">Ajándék kutya</span>
-								<span class="discount-element">Ingyenes összeszerelés</span>
+								<span class="discount-element"></span>
+								<span class="discount-element"></span>
 							</td>
 							<td class="price-cell">
 								<span>

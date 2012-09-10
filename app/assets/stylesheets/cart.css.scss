@@ -1,5 +1,14 @@
 @import '_mixins.css.scss';
 
+.price-cell{
+	width:100px !important;
+	text-align: center !important;
+}
+
+#cart_product_price{
+	width: 88px !important;
+}
+
 p.empty-cart{
 	font-size:18px;
 	margin-top:20px;
@@ -132,9 +141,6 @@ p#subtotal{
 		.price-cell,.sum-price-cell{
 			
 			font-size:16px;
-		}
-		.price-cell{
-			width:70px
 		}
 		.actions-cell{
 			text-align:center;

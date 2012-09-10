@@ -3,6 +3,39 @@
 @import '_login.css.scss';
 @import '_shipping.css.scss';
 
+span.orange{
+	color:$orange;;
+}
+
+#payment_billing_zip, #payment_shipping_zip{
+	width: 100px !important;
+}
+
+#payment_shipping_city{
+	margin-left: 4px;
+	width: 354px;
+}
+
+#billing_last_name{
+	width:403px;
+}
+
+#payment_billing_city{
+	width: 342px;
+}
+
+#payment_email,#payment_phone,#payment_shipping_name,#payment_shipping_additional,#payment_billing_name,#payment_billing_additional{
+	width: 475px !important;	
+}
+
+#billing_city_div{
+	margin-left: 17px;
+}
+
+#payment_first_name_label{
+	margin-top: 10px;	
+}
+
 #csik{
 	width: 505px;
 	position:relative;
@@ -46,7 +79,7 @@ form{
 #steps{
 	clear:both;
 	margin:20px auto 50px auto;
-	width:650px;
+	width:660px;
 	text-align:center;
 	li{
 		float:left;

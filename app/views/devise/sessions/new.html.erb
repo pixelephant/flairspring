@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag("users") %>
 
 <section id="reglogin" class="box full clearfix">
-	<h3 id="top">Regisztráljon vagy jelentkezzen be <!-- span id="secure">Secure connection</span--></h3>
+	<h3 id="top">Regisztráció és belejelentkezés <!-- span id="secure">Secure connection</span--></h3>
 	<div class="clearfix">
 		<%= render :partial => "users/login", :locals => { :logintext => " a vásárlás folytatásához", :resource => resource } %>
 		<%= render "users/register-cta", :locals => { :resource => resource} %>
@@ -16,15 +16,15 @@
 		</p>
 	</section>
 	<section class="third mid">
-		<h3>Gyrosabb vásárlás</h3>
+		<h3>Gyorsabb vásárlás</h3>
 		<p>
-			<span class="lead">regisztrációt követően</span> nem kell minden alkalommal megadnia megrendelési adatait
+			<span class="lead">A regisztrációt követően</span> nem szükséges minden alkalommal megadnia megrendeléshez szükséges adatait.
 		</p>
 	</section>
 	<section class="third last">
 		<h3>Egyéni ajánlatok</h3>
 		<p>
-			<span class="lead">Regisztrált vásárlóink</span> <em>kizárólagos kedvezményeket</em> és vásárlásaik után <em>~3%</em> kedvezményt kaphatnak hűségprogramban
+			<span class="lead">Regisztrált vásárlóink</span> <em>kizárólagos kedvezményeket</em> és vásárlásaik után <em>3%</em> kedvezményt kaphatnak törzsvásárlói programunk keretében.
 		</p>
 	</section>
 </div>
