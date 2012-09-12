@@ -19,18 +19,49 @@ $("document").ready(function(){
   }
 
   $("#checkout-form").validate({
-    rules:{
-     "payment[last_name]" : "required",
-     "payment[first_name]" : "required",
-     "payment[email]" : "required",
-     "payment[phone]" : "required",
-     "payment[shipping_name]" : "required",
-     "payment[shipping_zip]" : "required",
-     "payment[shipping_city]" : "required",
-     "payment[shipping_additional]" : "required"
-    }
-  });
-
+      rules:{
+       "payment[last_name]" : {
+          required: true
+        },
+       "payment[first_name]" : {
+          required: true
+        },
+       "payment[email]" : {
+          required: true
+        },
+       "payment[phone]" : {
+          required: true
+        },
+       "payment[shipping_name]" : {
+          required: {
+            depends: function(element) {
+              return ($("#payment_personal_pickup").attr("checked") == undefined);
+            }
+          }
+        },
+       "payment[shipping_zip]" : {
+          required: {
+            depends: function(element) {
+              return ($("#payment_personal_pickup").attr("checked") == undefined);
+            }
+          }
+        },
+       "payment[shipping_city]" : {
+          required: {
+            depends: function(element) {
+              return ($("#payment_personal_pickup").attr("checked") == undefined);
+            }
+          }
+        },
+       "payment[shipping_additional]" : {
+          required: {
+            depends: function(element) {
+              return ($("#payment_personal_pickup").attr("checked") == undefined);
+            }
+          }
+        }
+      }
+    });
 
   $("#proceed-to-payment").click(function(){
 

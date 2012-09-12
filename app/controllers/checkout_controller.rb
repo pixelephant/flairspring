@@ -98,7 +98,7 @@ class CheckoutController < ApplicationController
       billing = billing_address.id
     end
 
-    @order = Order.new(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => @user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date), :shipping_address_text => shipping_address_text, :invoice_address_text => invoice_address_text)
+    @order = Order.new(:shipping_address_id => shipping, :invoice_address_id => billing, :user_id => @user.id, :status => "Feldolgozás alatt", :estimated_date => ((Time.now + 7.days).to_date), :shipping_address_text => shipping_address_text, :invoice_address_text => invoice_address_text, :gift => data[:gift_wrap], :personal_pickup => data[:personal_pickup])
 
     sum = 0
     product_sets = []

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903090116) do
+ActiveRecord::Schema.define(:version => 20120912111943) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "user_id"
@@ -302,6 +302,8 @@ ActiveRecord::Schema.define(:version => 20120903090116) do
     t.integer  "price"
     t.text     "invoice_address_text"
     t.text     "shipping_address_text"
+    t.boolean  "personal_pickup"
+    t.boolean  "gift"
   end
 
   create_table "photos", :force => true do |t|

@@ -1,6 +1,6 @@
 <%= form_for "payment", :url => "/checkout/payment", :html => {:id => "checkout-form"} do |f| %>
 <div id="shipping-form">
-	<div class="block">
+	<div class="block" id="checkout-contact-info">
 
 		<h5>Kapcsolattartási információk</h5>
 
@@ -29,8 +29,12 @@
 				<%= f.phone_field :phone, :value => (@user.phone if @user) %>
 			</fieldset>
 	</div>
-	<div class="block">
+	<div class="block" id="checkout-shipping-info">
 		<h5>Szállítási információk</h5>
+		<fieldset>
+			<%= f.label "personal_pickup", "Személyes átvétel üzletünkben (1054 Budapest, Szabadság tér 14.)", :id => "personal_pickup" %>
+			<%= f.check_box "personal_pickup" %>
+		</fieldset>
 		<fieldset>
 			<%= f.label :shipping_name, "Szállítási név *" %>
 			<%= f.text_field :shipping_name, :value => (@shipping_address.name unless @shipping_address.blank?) %>
@@ -88,8 +92,8 @@
 		<div class="block">
 			<h5>Ajándékba szánja?</h5>
 			<fieldset>
-				<%= f.check_box "gift-wrap", {:id => "gift-wrap"} %>
-				<%= f.label "gift-wrap", "Szeretnék ingyenes díszcsomagolást", {:id => "gift-wrap"} %>
+				<%= f.check_box "gift_wrap", {:id => "gift_wrap"} %>
+				<%= f.label "gift_wrap", "Szeretnék ingyenes díszcsomagolást", {:id => "gift_wrap"} %>
 			</fieldset>
 		</div>
 		
@@ -119,7 +123,19 @@
 
 			</fieldset>
 		</div>
-		
+
+		<div class="block" id="payment-credit-card">
+			<h5>Bankkártyás fizetés</h5>
+			<p>A megredenlés gombra kattintva átirányítjuk a BANK biztonságos fizetési oldalára. Sikeres átutalás után, a BANK visszairányítja hozzánk, ahol a rendelési nyugtát megkapja.</p>
+		</div>
+
+		<div class="block" id="payment-paypal">
+			<h5>Paypal</h5>
+			<p>Fizetés Pay Pal rendszeren keresztül
+					Önnek lehetősége van a világ legnagyobb, nemzetközi internetes fizetési rendszere, a PayPal segítségével fizetni bankártyájával vagy már meglévő PayPal számlájával.
+					Ennél a fizetési módnál az adatok megadása után át lesz irányítva a PayPal titkosított oldalára, ahol kérjük kövesse a megadott utasításokat.</p>
+		</div>
+
 		<div class="block" id="payment-transfer">
 			<h5>Átutalásos fizetés</h5>
 			<p>Átutalásos fizetés választása esetén a következő adatokat szükséges kitölteni az utalás elindításánál:<br />
@@ -128,10 +144,6 @@
 				A kedvezményezett neve: <span class="orange">Flairspring Kft.</span></p>
 		</div>
 
-		<div class="block" id="payment-credit-card">
-			<h5>Bankkártyás fizetés</h5>
-			<p>A megredenlés gombra kattintva átirányítjuk a BANK biztonságos fizetési oldalára. Sikeres átutalás után, a BANK visszairányítja hozzánk, ahol a rendelési nyugtát megkapja.</p>
-		</div>
 		<div class="block">
 			<input type="submit" value="Megrendelem" /> 	
 			<a class="step-back" id="back-to-shipping" href="#">vissza az előző lépéshez</a>

@@ -3,6 +3,14 @@
 @import '_login.css.scss';
 @import '_shipping.css.scss';
 
+#back-to-home{
+	float:left;
+}
+
+#magazine{
+	float:right;
+}
+
 span.orange{
 	color:$orange;;
 }
@@ -13,7 +21,7 @@ span.orange{
 
 #payment_shipping_city{
 	margin-left: 4px;
-	width: 354px;
+	width: 343px;
 }
 
 #billing_last_name{
@@ -194,6 +202,10 @@ input[type="radio"]{
 }
 
 #payment_same,#same_l{
+	float:left;
+}
+
+#personal_pickup,#payment_personal_pickup{
 	float:left;
 }
 
