@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Order < ActiveRecord::Base
 	belongs_to :user
 	has_many :order_items, :dependent => :destroy
@@ -20,5 +21,9 @@ class Order < ActiveRecord::Base
 		end
 		return sum
 	end
+
+	def status_enum
+    [ [ 'Feldolgozás alatt', 'Feldolgozás alatt' ], [ 'Feldolgozva', 'Feldolgozva' ], [ 'Kiszállítás alatt', 'Kiszállítás alatt' ], [ 'Átvehető', 'Átvehető' ], [ 'Teljesítve', 'Teljesítve' ] ]
+  end
 
 end

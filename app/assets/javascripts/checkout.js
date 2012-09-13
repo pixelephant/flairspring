@@ -119,7 +119,7 @@ $("document").ready(function(){
       success: function(resp){
         if(resp.status == 'true'){
           $("#lazy-registration").remove();
-          $(".promo").append("Regisztrációja sikeres! Ideiglenesen a rendeléshez használt email címével tud bejelentkezni. Jelszava szintén az email cím, melyet a megrendeléskor megadott!");
+          $(".promo:first p").html("Regisztrációja sikeres! Ideiglenesen a rendeléshez használt email címével tud bejelentkezni. Jelszava szintén az email cím, melyet a megrendeléskor megadott!");
         }
     }});
     return false;

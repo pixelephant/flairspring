@@ -19,7 +19,7 @@ class Coupon < ActiveRecord::Base
 	end
 
 	def offer_type_enum
-      [ [ 'Összeg', '1' ], [ 'Termék', '2' ], [ 'Százalék', '3' ] ]
+    [ [ 'Összeg', '1' ], [ 'Termék', '2' ], [ 'Százalék', '3' ] ]
   end
 
 end

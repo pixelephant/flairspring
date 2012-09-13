@@ -5,12 +5,12 @@ class UserMailer < ActionMailer::Base
   def order_email(order)
     @order = order
 
-    mail(:to => @order.user.email, :subject => "Megrendelés")
+    mail(:to => @order.email, :subject => "Megrendelés")
   end
 
   def order_status(order)
     @order = order
 
-    mail(:to => @order.user.email, :subject => "Megrendelésének állapota változott")
+    mail(:to => @order.email, :subject => "Megrendelésének állapota változott")
   end
 end

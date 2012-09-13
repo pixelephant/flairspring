@@ -1,4 +1,4 @@
-namespace :import do
+namespace :uttermost do
 
   desc "import all images from public/import_images folder, attach to product with sku same as image filename"
   task :images, [:del] => :environment do |task, args|
@@ -26,7 +26,7 @@ namespace :import do
 		      # carrierwave transformation
 		      pict.save!
 					product_counter += 1
-		      # FileUtils.rm(file_path)
+		      FileUtils.rm(file_path)
 				end
       end
       # Move processed image somewhere else or just remove it. It is

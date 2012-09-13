@@ -1,4 +1,12 @@
 #encoding: utf-8
+#
+# TASKOK:
+# rake import:uttermost - a megfelelően formázott csv dokumentumból importálja a termékeket az adatbázisba
+# rake import:categories - a megfelelően formázott csv dokumentumban lévő termékeket a megadott kategóriába rakja
+# rake import:related - a megfelelően formázott csv dokumentumban lévő termékkapcsolatokat rakja az adatbázisba
+# rake import:last_year - a megfelelően formázott csv dokumentumban felsorolt termékeket eltávolítja az adatbázisból
+# rake import:custom_category - a csv dokumentumban lévő "custom category"-kat hozza létre és helyezi el bennük a termékeket 
+
 namespace :import do
 
   desc "import products from uttermost.csv"
@@ -230,7 +238,7 @@ namespace :import do
   	time = Time.now
 		counter = 0
 		del_counter = 0
-		puts "Searching for uttermost.csv..."
+		puts "Searching for Minta_kategoria_lista_balazs.csv..."
 		puts "Going to add products to custom category"
  
  		c_categories = []
@@ -243,14 +251,32 @@ namespace :import do
 				for i in (args.col1)..(args.col2)
 					categ << row[i]
 				end
+
+				for i in 16..78
+					puts row[i].to_s + " - " + i.to_s
+				end
 			end
 
 			if counter == 1
-				for i in (args.col1)..(args.col2)
+				for i in 16..78
+					index = i - 16
 					unless PropertyCategory.exists?(:category_name => row[i])
 						puts "Property category: " + row[i].to_s
-						PropertyCategory.create(:category_name => row[i])
+						p = PropertyCategory.create(:category_name => row[i])
+					else
+						p = PropertyCategory.find_by_category_name(row[i])
 					end
+
+					puts i.to_s + " - Category: " + categ[index].to_s
+
+					unless Category.find_by_name(categ[index]).property_categories.include?(p)
+						Category.find_by_name(categ[index]).property_categories << p
+					end
+
+					if CustomCategoryGroup.find_by_name(row[i]).blank?
+						custom = CustomCategoryGroup.create(:name => row[i])
+					end
+
 					c_categories_gr << row[i]
 				end
 			end
@@ -258,13 +284,38 @@ namespace :import do
 			if counter == 2
 				for i in (args.col1)..(args.col2)
 					a = (i-args.col1)
-					puts "AAAAA:" + a.to_s
-					unless Property.exists?(:property_name => row[i])
+					puts "Custom Category: " + row[i]
+
+					if c_categories_gr[a] == "Anyagok"
+						p = row[i].split(" ")
+						p_name = p[0]
+					else
+						p_name = row[i]
+					end
+
+					p_cat = PropertyCategory.find_by_category_name(c_categories_gr[a]).id
+
+					unless Property.where(:property_name => p_name, :property_category_id => p_cat).any?
 						puts "PropCat name: " + c_categories_gr[a]
 						pcid = PropertyCategory.find_by_category_name(c_categories_gr[a]).id
-						Property.create(:property_name => row[i], :property_category_id => pcid)
+						Property.create(:property_name => p_name, :property_category_id => pcid)
 					end
-					c_categories << row[i] 
+
+					property = Property.find_by_property_name(p_name)
+
+					unless CustomCategory.exists?(:name => row[i])
+						puts "Custom Category Group: " + c_categories_gr[a]
+						custom_group = CustomCategoryGroup.find_by_name(c_categories_gr[a]).id
+						category_id = Category.find_by_name(categ[a]).id
+						custom = CustomCategory.create(:name => row[i], :custom_category_group_id => custom_group, :category_id => category_id)
+					end
+
+					unless CustomCategory.find_by_name(row[i]).properties.include?(property)
+						puts "Adding property (" + property.property_name + ") to cutom category"
+						CustomCategory.find_by_name(row[i]).properties << property
+					end
+
+					c_categories << row[i]
 				end
 			end
 
@@ -278,35 +329,22 @@ namespace :import do
 					   	c_name = (c_categories[index])
 					   	puts "Value found: " + c_name
 
-					   	if prod.category.custom_categories.exists?(:name => c_name)
-					   		puts "Custom Category: " + c_name
-					   	else
-					   		if CustomCategoryGroup.exists?(:name => c_categories_gr[index])
-					   			ccg = CustomCategoryGroup.find_by_name(c_categories_gr[index])
-					   		else
-					   			ccg = CustomCategoryGroup.create(:name => c_categories_gr[index])
-					   		end
-					   		unless prod.category.custom_categories.exists?(:name => c_name)
-					   			if CustomCategory.exists?(:name => c_name)
-					   				cc = CustomCategory.find_by_name(:name => c_name)
-					   			else
-					   				cc = CustomCategory.create(:name => c_name, :custom_category_group_id => ccg.id)
-					   			end
-					   			prod.category.custom_categories << cc
-					   		end
-					   		unless CustomCategory.find_by_name(c_name).properties.include?(Property.find_by_property_name(c_name))
-					   			CustomCategory.find_by_name(c_name).properties << Property.find_by_property_name(c_name)
-					   		end
-					   	end
-				   		CustomCategory.where(:name => c_name).first.properties.each do |p|
-					   		# prop = Property.find_by_property_name(p.property_name)
-					   		unless prod.properties.include?(p)
-					   			prod.properties << Property.find_by_property_name(c_name)
-					   		end
+					   	if c_categories_gr[index] == 'Anyagok'
+					   		puts "Anyagok: " + c_categories[index]
+								p = c_categories[index].split(" ")
+								p_name = p[0]
+							else
+								p_name = c_categories[index]
+							end
+
+					   	property = Property.find_by_property_name(p_name)
+
+					   	unless prod.properties.include?(property)
+					   		prod.properties << property
 					   	end
 
 					   	if prod.save!
-			   				puts "Property added: " + c_name + " to product: " + prod.name
+			   				puts "Property added: " + p_name + " to product: " + prod.name
 			   			end
 
 					  end

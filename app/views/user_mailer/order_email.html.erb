@@ -7,12 +7,12 @@
     <h1>Köszönjük megrendelését!</h1>
     <p>Megrendelő adatai:</p>
     <ul>
-      <li>Név: <%= @order.user.title_name + " " + @order.user.first_name + " " + @order.user.last_name %></li>
+      <li>Név: <%= @order.title_name + " " + @order.first_name + " " + @order.last_name %></li>
     </ul>
     <p>Számlázási cím</p>
-    <%= @order.invoice_address.zip + " " + @order.invoice_address.city + " " + @order.invoice_address.additional %>
+    <%= @order.invoice_address_text %>
     <p>Szállítási cím</p>
-    <%= @order.shipping_address.zip + " " + @order.shipping_address.city + " " + @order.shipping_address.additional %>
+    <%= @order.shipping_address_text %>
     <p>Termékek:</p>
     <ul>
       <% @order.order_items.each do |o_item| %>
