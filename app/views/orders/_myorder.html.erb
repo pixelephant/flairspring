@@ -1,5 +1,91 @@
-<% @order_items.each do |item| %>
+<section id="cart" class="box full clearfix">
+	<div id="cart-top" class="clearfix">
+		<h3>Rendelés tartalma</h3>
+	</div>
+		<table id="cart-table">
+			<thead>
+				<tr>
+						<th>Termék</th>
+						<th>Méretek</th>
+						<th>Kedvezmények</th>
+						<th class="price-cell">Darab ár</th>
+						<th width=20 class="multiply-cell">&nbsp;</th>
+						<th>Mennyiség</th>
+						<th></th>
+						<th>Összesen</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% product_sets = [] %>
+			<% @order_items.each do |li| %>
 
-	Termék: <%= item.product.name %>, <%= item.quantity %> db, Darab ár: <%= item.price %><br />
-
-<% end %>
+				<% unless product_sets.include?(li.product_set_id) %>
+					<tr data-id="<%= li.product.id %>">
+							<td class="product-cell">
+								<div class="clearfix">
+									<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
+									<% if li.product_variation_id.nil? %>
+										<h6><%= li.product.name %></h6>
+									<% else %>
+										<h6><%= ProductVariation.find(li.product_variation_id).name %></h6>
+									<% end %>
+								</div>
+							</td>
+							<td class="property-cell">
+								
+								<p><span class="property">Ma: <%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X Sze: <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X Me: <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %> (cm)</span></p>
+								<% li.product.optional_properties.each do |property| %>
+									<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
+								<% end %>
+							</td>
+							<td class="discount-cell">
+								<span class="discount-element"></span>
+								<span class="discount-element"></span>
+							</td>
+							<td class="price-cell">
+								<span>
+									<%= price = li.price %> Ft
+								</span>
+							</td>
+							<td class="multiply-cell">
+								x
+							</td>
+							<td class="quantity-cell">
+								<%= q = li.quantity %> db
+							</td>
+							<td class="equals-cell">
+								=
+							</td>
+							<td class="sum-price-cell">
+								<span><%= price * q %></span> Ft
+							</td>
+						</tr>
+						<% product_sets << li.product_set_id unless li.product_set_id.nil? %>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+		<div id="cart-bottom" class="clearfix">
+			<div id="coupon">
+				<label for="">Rendelés dátuma:</label><div> <%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
+			</div>
+			<div id="total">
+					<p id="subtotal">
+						<b><%= @order_items.count == 1 ? 'Termék ára' : 'Termékek ára' %></b>
+						<span class="subtotal"><%= @order.price %></span> Ft
+					</p>
+					<!-- <p>
+						<b>Szállítás</b>
+						<span class="shipping-cost"></span> Ft
+					</p> -->
+					<p>
+						<b>Kedvezmény</b>
+						<span class="discount"><%= @order.discount_used %></span> Ft
+					</p>
+					<p id="total-price">
+						<b>Összesen</b>
+						<span class="total-price"><%= @order.price - @order.discount_used %></span> Ft
+					</p>
+			</div>
+		</div>
+	</section>

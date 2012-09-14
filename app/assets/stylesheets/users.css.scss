@@ -3,6 +3,15 @@
 @import '_login.css.scss';
 @import 'fancybox.css.scss';
 @import '_product_modal.css.scss';
+@import 'cart.css.scss';
+
+p#subtotal {
+    padding-left: 350px !important;
+}
+
+#total{
+	float:right !important;
+}
 
 #top{
 	background:#d2d1d1;
