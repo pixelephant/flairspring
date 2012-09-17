@@ -176,9 +176,9 @@
 	left:899px;
 }
 
-#slide-1-plus-10{
-	top:276px;
-	left:895px;
+#slide-1-plus-11{
+	top:260px;
+	left:617px;
 }
 
 #slide-2-plus-1{
@@ -277,7 +277,7 @@
 }
 
 #blog-wrap{
-	width:490px;
+	width:980px;
 }
 
 #blog{
@@ -289,11 +289,14 @@
 	border-top:1px solid $border-gray;
 	overflow:hidden;
 	.blog-entry{
-		width:490px;
+		width:480px;
 		float:left;
 		&:first-child{
 			width:489px;
 			border-right:1px solid $border-gray;
+		}
+		&.right{
+			padding-left: 20px;
 		}
 	}
 }

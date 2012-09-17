@@ -128,6 +128,7 @@ Madearthome::Application.routes.draw do
 		resources :user_addresses
 
     match 'users/register' => 'users#register'
+    match 'users/edit' => 'users#edit'
 
 		#resources :users
 

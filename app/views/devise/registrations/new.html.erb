@@ -82,6 +82,10 @@
 				<%= f.fields_for :addresses do |builder| %>
 					<% if i == 0 %>
 						<%= builder.hidden_field :billing, :value => true %>
+						<fieldset>
+							<%= builder.label :name, "Számlázási név" %>
+							<%= builder.text_field :name %>
+						</fieldset>
 	    			<fieldset>
 	    				<div class="half">
 								<%= builder.label :zip, "Irányítószám" %>

@@ -1,6 +1,6 @@
  #encoding: utf-8
 class CheckoutController < ApplicationController
-  layout "simple"
+  # layout "simple"
 
   def index
 		@cart = Cart.find(session[:cart_id])

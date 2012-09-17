@@ -29,5 +29,16 @@ $("document").ready(function(){
 
 	$("a.tooltip").click(function(){
 		return false;
-	})
+	});
+
+  $("#wishlist-not-signed-in").click(function(){
+    $.fancybox({
+      href : "#wishlist-message",
+      openEffect  : 'elastic',
+      closeEffect : 'elastic',
+      autoSize: true
+    });
+    return false;
+  });
+
 });

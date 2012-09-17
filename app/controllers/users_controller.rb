@@ -13,8 +13,8 @@ class UsersController < ApplicationController
       @default_address = current_user.addresses.find_by_default(true)
       @default_address = current_user.addresses.first if @default_address.nil?
 
-      unless current_user.accounting_name.blank?
-        @accounting_name = current_user.accounting_name
+      unless current_user.addresses.where(:billing => true).first.blank?
+        @accounting_name = current_user.addresses.where(:billing => true).first.name
       else
         @accounting_name = current_user.title_name.to_s + " " + current_user.first_name.to_s + " " + current_user.last_name.to_s
       end
@@ -60,7 +60,43 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(current_user)
+
+    if @user
+      @user.title_name = params[:user]['title_name']
+      @user.first_name = params[:user]['first_name']
+      @user.last_name = params[:user]['last_name']
+      @user.phone = params[:user]['phone']
+
+      billing_address = @user.addresses.where(:billing => true).first
+      address = params[:user]['addresses_attributes']['3']
+      if billing_address.blank?
+        billing_address = Address.create(:name => address['name'], :zip => address['zip'], :city => address['city'], :additional => address['additional'], :billing => true)
+        @user.addresses << billing_address
+      else
+        billing_address.name = address['name']
+        billing_address.zip = address['zip']
+        billing_address.city = address['city']
+        billing_address.additional = address['additional']
+        billing_address.save!
+      end
+
+      shipping_address = @user.addresses.where(:billing => false).first
+      address = params[:user]['addresses_attributes']['0']
+      if shipping_address.blank?
+        shipping_address = Address.create(:zip => address['zip'], :city => address['city'], :additional => address['additional'], :billing => false)
+        @user.addresses << shipping_address
+      else
+        shipping_address.zip = address['zip']
+        shipping_address.city = address['city']
+        shipping_address.additional = address['additional']
+        shipping_address.save!
+      end
+
+      @user.save
+    end
+
+    redirect_to '/edit'
   end
 
   # POST /users

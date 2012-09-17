@@ -1,7 +1,7 @@
-<div class="block">
   
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <%= devise_error_messages! %>
+<div class="block">
 
     <h5>Jelszó megváltoztatása</h5>
 
@@ -17,10 +17,111 @@
     <fieldset><%= f.label :current_password, "Régi jelszó" %> <!-- <i>(adja meg jelenlegi jelszavát, hogy azonosíthassuk)</i> -->
     <%= f.password_field :current_password %></fieldset>
 
+
+
+    <fieldset><%= f.submit "Jelszó változtatása" %></fieldset>
+
+</div>
+  <% end %>
+
+
+  <%= form_for(resource, :as => resource_name, :url => 'users/edit') do |f| %>
+  <div class="block">
+    <h5>Kapcsolattartási információk</h5>
+    <fieldset>
+      <div class="half">
+        <%= f.label :title_name, "Titulus" %>
+        <%= f.text_field :title_name, :size => 5 %>
+      </div>
+      <div class="half">
+        <%= f.label :last_name, "Vezetéknév" %>
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="half">
+        <%= f.label :first_name, "Keresztnév" %>
+        <%= f.text_field :first_name %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <%= f.label :phone, "Telefonszám" %>
+      <%= f.phone_field :phone %>
+    </fieldset>
+  <div>
+
+    <% current_user.addresses.build %>
+      <div class="block">
+        <h5>Szállítási információk <a href="#" title="" class="tooltip">?</a></h5>
+        <% i = 0 %>
+        <%= f.fields_for :addresses do |builder| %>
+          <% if i == 0 %>
+          <% shipping = current_user.addresses.where(:billing => false).first %>
+            <fieldset>
+              <div class="half">
+                <%= builder.label :zip, "Irányítószám" %>
+                  <%= builder.text_field :zip, :class => ["digits"], :minlength => 4, :length => 4, :value => (shipping.zip if shipping) %>
+                <!--label for="register-zip">Irányítószám</label>
+                <input type="text" name="regsiter-zip" id="register-zip" /-->
+              </div>
+              <div class="half">
+                <%= builder.label :city, "Város" %>
+                  <%= builder.text_field :city, :class => [], :value => (shipping.city if shipping) %>
+                <!-- <label for="regsiter-city">Város</label>
+                <input type="text" name="regsiter-city" id="register-city" /> -->
+              </div>
+            </fieldset>
+            <fieldset>
+              <%= builder.label :additional, "Cím" %>
+                <%= builder.text_field :additional, :class => [], :value => (shipping.additional if shipping) %>
+              <!-- <label for="register-address">Cím</label>
+              <input type="text" name="regsiter-address" id="register-address" /> -->
+            </fieldset>
+            <% i = i+1 %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="block">
+        <h5>Számlázási információk</h5>
+        <fieldset>
+          <%= label_tag "same", "Megegyezik a szállítási adatokkal", :id => "same_l" %>
+          <%= check_box_tag "same" %>
+        </fieldset>
+        <% i = 0 %>
+        <%= f.fields_for :addresses do |builder| %>
+          <% if i == 0 %>
+          <% billing = current_user.addresses.where(:billing => true).first %>
+            <%= builder.hidden_field :billing, :value => true %>
+            <fieldset>
+              <%= builder.label :name, "Számlázási név" %>
+              <%= builder.text_field :name, :value => (billing.name if billing) %>
+            </fieldset>
+            <fieldset>
+              <div class="half">
+                <%= builder.label :zip, "Irányítószám" %>
+                  <%= builder.text_field :zip, :class => ["digits"], :minlength => 4, :length => 4, :value => (billing.zip if billing) %>
+                <!--label for="register-zip">Irányítószám</label>
+                <input type="text" name="regsiter-zip" id="register-zip" /-->
+              </div>
+              <div class="half">
+                <%= builder.label :city, "Város" %>
+                  <%= builder.text_field :city, :class => [], :value => (billing.city if billing) %>
+                <!-- <label for="regsiter-city">Város</label>
+                <input type="text" name="regsiter-city" id="register-city" /> -->
+              </div>
+            </fieldset>
+            <fieldset>
+              <%= builder.label :additional, "Cím" %>
+                <%= builder.text_field :additional, :class => [], :value => (billing.additional if billing) %>
+              <!-- <label for="register-address">Cím</label>
+              <input type="text" name="regsiter-address" id="register-address" /> -->
+            </fieldset>
+            <% i = i + 1 %>
+          <% end %>
+        <% end %>
+    </div>
+
     <fieldset><%= f.submit "Rendben" %></fieldset>
   <% end %>
 
   <!-- <h3>Cancel my account</h3>
 
   <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p> -->
-</div>

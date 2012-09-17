@@ -1,6 +1,10 @@
 //= require jquery.validate
+//= require jquery.maskedinput-1.3.min
 
 $("document").ready(function(){
+
+  $("#payment_phone").mask("+99 99 999-99-99");
+  
   if($("#cart-summary").offset() != null ){
   	var top = $('#cart-summary').offset().top - parseFloat($('#cart-summary').css('marginTop').replace(/auto/, 0));
     $(window).scroll(function (event) {
@@ -67,7 +71,7 @@ $("document").ready(function(){
 
     if($("#checkout-form").valid()){
       $("#csik").attr("src", "/assets/csik3.png");
-      $("h3#top").html("Ellenőrzés &amp; Fizetés");
+      $("h3#top").html("Ellenőrzés és Fizetés");
       $("#shipping-step").removeClass("active");
       $("#payment-step").addClass("active");
       $("#shipping-form").hide();
@@ -80,7 +84,7 @@ $("document").ready(function(){
 
   $("#back-to-shipping").click(function(){
     $("#csik").attr("src", "/assets/csik2.png");
-    $("h3#top").html("Számlázás &amp; Szállítás");
+    $("h3#top").html("Számlázás és Szállítás");
     $("#shipping-step").addClass("active");
     $("#payment-step").removeClass("active");
     $("#payment-form").hide();

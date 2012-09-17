@@ -1,6 +1,7 @@
 //= require jquery.tooltip
 //= require jquery.validate
 //= require jquery.fancybox
+//= require jquery.maskedinput-1.3.min
 
 /**
  * tablePagination - A table plugin for jQuery that creates pagination elements
@@ -33,6 +34,7 @@
 
 $(document).ready(function(){
 	$('.tooltip').tooltip();
+	$("#user_phone").mask("+99 99 999-99-99");
 
 	$(".fancybox").fancybox({
 			type : 'ajax',

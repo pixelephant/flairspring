@@ -11,15 +11,21 @@
 				<% end %>
 			</ul> -->
 		</li>
-		<li><%= link_to t('wishlist'),"/wishlist" %></li>
-		<li id="blog-link"><%= link_to "Flairspring Magazin", "http://blog.flairspring.hu" %></li>
+		<% if !user_signed_in? %>
+			<li><a href="#" id="wishlist-not-signed-in"><%= t('wishlist') %></a></li>
+		<% else %>
+			<li><%= link_to t('wishlist'),"/wishlist" %></li>
+		<% end %>		
+		<li id="blog-link"><%= link_to "Magazin", "http://blog.flairspring.hu" %></li>
 		<% unless user_signed_in? %>
 			<li><%= link_to t('register'), new_user_registration_path %></li>
 		<% end %>
 		<% if !user_signed_in? %>
 			<li><%= link_to t('login'), new_user_session_path %></li>
 		<% else %>
-			<li><%= link_to t('logout'), destroy_user_session_path, :method => :delete %></li>
+			<% name = ((current_user.first_name.blank? || current_user.last_name.blank?) ? current_user.email : current_user.title_name.to_s + " " + current_user.last_name.to_s + " " + current_user.first_name.to_s ) %>
+			<li><%= link_to ('Kijelentkezés - <em id="login-name">' + name + "</em>").html_safe, destroy_user_session_path, :method => :delete %></li>
 		<% end %>		
 	</ul>
 </nav>
+<div id="wishlist-message" class="hidden"><a href="/register">Regisztráció</a> után lehetősége van összeállítani saját kívánságlistáját, amelyet akár meg is oszthat ismerőseivel.</div>

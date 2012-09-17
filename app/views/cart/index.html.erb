@@ -10,7 +10,7 @@
 			<thead>
 				<tr>
 						<th>Termék</th>
-						<th>Méretek</th>
+						<th id="sizes">Méretek</th>
 						<th>Kedvezmények</th>
 						<th class="price-cell">Darab ár</th>
 						<th width=20 class="multiply-cell">&nbsp;</th>
@@ -40,7 +40,7 @@
 								
 								<p><span class="property">Ma: <%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X Sze: <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X Me: <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %> (cm)</span></p>
 								<% li.product.optional_properties.each do |property| %>
-									<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
+									<p><span class="property"><%= property.property_category.category_name.capitalize %>: </span><%= property.property_name %></p>
 								<% end %>
 							</td>
 							<td class="discount-cell">
@@ -128,7 +128,7 @@
 	</section>
 
 	<section class="box third last" id="faq-links">
-		<h3>Biztonságos shopping</h3>
+		<h3>Garancia</h3>
 		<p><span class="lead">Lorem ipsum dolor sit amet,</span> consectetur adipiscing elit. Integer imperdiet mauris eu turpis euismod rutrum dapibus vitae neque. Suspendisse potenti. Mauris eu erat et sapien posuere bibendum at fermentum purus. <a href="#">több infó</a></p>
 	</section>
 </div>

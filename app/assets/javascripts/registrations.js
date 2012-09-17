@@ -1,8 +1,10 @@
 //= require jquery.tooltip
 //= require jquery.validate
+//= require jquery.maskedinput-1.3.min
 
 $(document).ready(function(){
 	$('.tooltip').tooltip();
+	$("#user_phone").mask("+99 99 999-99-99");
 	
 	$("#user_new").validate({
   		rules:{
