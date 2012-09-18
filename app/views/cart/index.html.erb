@@ -92,7 +92,7 @@
 				</div>
 				<% if current_user %>
 					<div>
-						<label id="use-loyalty" class="loy" for="loyalty">Törzsvásárlói pontjaim</label>
+						<label id="use-loyalty" class="loy" for="loyalty">Törzsvásárlói kedvezmény</label>
 						<div>
 							<span><%= number_to_currency(current_user.personal_discount_available, :precision => 0) %></span>
 							<a class="button<%= " active" if session[:personal_discount] == current_user.id %>" id="personal-discount" href="#">Beváltom</a>
