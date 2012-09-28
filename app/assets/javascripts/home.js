@@ -24,20 +24,20 @@ function change_slide(){
 }
 
 function main_slide(){
-	main_slider_inter = setInterval(function(){change_slide()}, 9000);
+	main_slider_inter = setInterval(function(){change_slide()}, 12000);
 }
 
 $(document).ready(function(){
 
-var main_slider_inter = setInterval(function(){change_slide()}, 9000); // 100 milliseconds
+var main_slider_inter = setInterval(function(){change_slide()}, 12000); // 100 milliseconds
 
 $("#slider, #slider-thumbs, #fancybox-overlay, .fancybox-wrap").hover(
-  function () {
-    clearInterval(main_slider_inter);
-  }, 
-  function () {
-    main_slide();
-  }
+  // function () {
+  //   clearInterval(main_slider_inter);
+  // }, 
+  // function () {
+  //   main_slide();
+  // }
 );
 
 var sdiv = $("#newest-products .slider-inner");
@@ -85,6 +85,7 @@ var sdiv = $("#newest-products .slider-inner");
 	});
 
 	$("#slider-thumbs li").click(function(){
+		clearInterval(main_slider_inter);
 		var $this = $(this);
 		$this.siblings().removeClass("active").end().addClass("active");
 		$("#slider").scrollTo($this.find("a").attr("href"),300,function(){

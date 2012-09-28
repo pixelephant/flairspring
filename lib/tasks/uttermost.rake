@@ -22,7 +22,7 @@ namespace :import do
 		puts "Searching for uttermost.csv..."
 		puts "Going to delete existing proudcts, properties and property categories" if args.del == 'true'
  
-		CSV.foreach("public/uttermost.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		CSV.foreach("public/teljes_arlista_kategoriakkal.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 	  	if counter == 0
 	  		puts "Deleting property categories..." if args.del == 'true'
 	  		PropertyCategory.find_each(&:delete) if args.del == 'true'
@@ -30,7 +30,7 @@ namespace :import do
 	  		Product.find_each(&:delete) if args.del == 'true'
 	  		puts "Deleting properties..." if args.del == 'true'
 	  		Property.find_each(&:delete) if args.del == 'true'
-	  		for i in 9..20
+	  		for i in 6..12
 	  			puts row[i]
 	  			if PropertyCategory.exists?(:category_name => row[i].strip.downcase)
 	  				puts "PropertyCategoryFound: " + row[i].to_s
@@ -45,11 +45,11 @@ namespace :import do
 	  		end
 	  	else
 	  		unless row[1].blank? || Product.exists?(:sku => row[1].strip)
-	  			puts row[1]
-	  			p = Product.new(:sku => row[1].strip, :name => row[3].strip.downcase, :price => row[4].strip, :long_description => row[7].strip)
+	  			puts "SKU: " + row[1]
+	  			p = Product.new(:sku => row[1].strip, :name => row[3].strip.downcase, :price => row[4].strip, :long_description => row[15].strip)
 	  			#ANYAG
-	  			unless row[9].blank?
-		  			anyag = row[9].split(',')
+	  			unless row[6].blank?
+		  			anyag = row[6].split(',')
 		  			anyag.each do |a|
 		  				unless a.strip.blank?
 			  				if Property.where(:property_name => a.strip.downcase, :property_category_id => prop_cat[0]).any?
@@ -63,16 +63,16 @@ namespace :import do
 		  			end
 		  		end
 	  			#TÖBBI
-	  			for i in 10..20
+	  			for i in 7..12
 	  				puts "Current column: " + i.to_s
 	  				puts "Property: " + row[i].to_s
 	  				unless row[i].blank?
-			  			if Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-9)]).any?
-		  					prop = Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-9)]).first
+			  			if Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)]).any?
+		  					prop = Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)]).first
 		  					p.properties << prop
 		  				else
 		  					unless row[i].blank?
-			  					prop = Property.new(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-9)])
+			  					prop = Property.new(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)])
 			  					prop.save!
 			  					p.properties << prop
 			  				end
@@ -81,17 +81,17 @@ namespace :import do
 	  			end
 	  			#TÖBBI VÉGE
 	  			#DESIGNER
-	  			unless row[6].blank?
-	  				if Designer.where(:name => row[6]).any?
-	  					des = Designer.where(:name => row[6]).first
+	  			unless row[13].blank?
+	  				if Designer.where(:name => row[13]).any?
+	  					des = Designer.where(:name => row[13]).first
 	  				else
-	  					des = Designer.new(:name => row[6], :description => '-')
+	  					des = Designer.new(:name => row[13], :description => '-')
 	  					des.save!
 	  				end
 	  				p.designer_id = des.id
 	  			end
 	  				#IDEIGLENESEN MINDEN AZ ELSO KATEGORIA
-	  				p.category_id = 2
+	  				p.category_id = Category.where(:name => row[14]).first.id
 	  			#DESIGNER VÉGE
 	  			if p.save
 			  		product_counter = product_counter + 1
@@ -99,6 +99,7 @@ namespace :import do
 			  	else
 			  		puts "Error with product: " + counter.to_s
 			  	end
+			  	Rails.logger.debug p.errors.full_messages
 	  		end
 	  	end
 			puts counter = counter + 1
@@ -245,7 +246,7 @@ namespace :import do
  		categ = []
  		c_categories_gr = []
 
-		CSV.foreach("public/Minta_kategoria_lista_balazs.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		CSV.foreach("public/teljes_arlista_kategoriakkal_alaktegoria.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
 			if counter == 0
 				for i in (args.col1)..(args.col2)

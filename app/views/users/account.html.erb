@@ -14,6 +14,9 @@
 					<%= @default_address.zip.to_s %>, <%= @default_address.city.to_s %>, <%= @default_address.additional.to_s %>
 				<% end %>
 			</p>
+			<p>Számlázási címe:
+				
+			</p>
 			<!-- <p>Alapértelmezett fizetési módja: Banki átutalás</p> -->
 			<p>A számlát: <%= @accounting_name.to_s %> nevére állítjuk ki</p>
 			<a href="/edit" class="button blue">Jelszó és adatok módosítás</a>
@@ -52,7 +55,7 @@
 
 <% unless @wishlist.nil? %>
 	<div class="table-wrap">
-		<h4>Ajándéklistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
+		<h4>Kívánságlistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
 		<table id="whishlist-table" class="user-table">
 			<thead>
 				<tr>

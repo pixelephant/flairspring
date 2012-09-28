@@ -424,6 +424,8 @@ body{
 			li:hover,li:focus{
 				border:none;
 				color:$text-brown2;
+				height:auto !important;
+				line-height:1.2 !important;
 			}
 			a{
 				color:$text-brown;
@@ -549,4 +551,18 @@ body{
 #login-name{
 	font-size: 12px;
 	vertical-align: middle !important;
+}
+
+#main-nav .sub li{
+
+height:auto !important;
+line-height:1.2 !important;
+
+}
+
+#main-nav .sub li a{
+
+height:auto !important;
+line-height:1.2 !important;
+
 }

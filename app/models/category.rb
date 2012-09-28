@@ -11,6 +11,7 @@ class Category < ActiveRecord::Base
 	friendly_id :name, :use => [:slugged]
 
 	mount_uploader :image_file, ImageUploader
+	mount_uploader :product_page_image, ImageUploader
 
 	has_many :products
 	has_many :property_categories_to_categories

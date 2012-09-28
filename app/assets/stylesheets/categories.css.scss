@@ -75,7 +75,7 @@
 	 -moz-border-radius: 2px;
 	 -webkit-border-radius: 2px;
 	 border-radius: 2px;
-	 width:160px;
+	 width:105px;
 	 margin-right:4px;
 	 &:last-child{
 	 	margin-right:0;
@@ -110,11 +110,19 @@
 
 .tab-div{
 	// min-height:300px;
-	line-height:300px;
+	//line-height:300px;
 	text-align:center;
 	font-size:60px;
 	background:#e6e6e6;
-	height: 745px;
+	min-height: 745px;
+}
+
+.large-tab{
+	height: 1440px !important;
+}
+
+.tab5{
+	width: 192px !important;
 }
 
 #promos{

@@ -22,44 +22,101 @@
 			
 		</section>
 	</div>
-	<div id="tab-wrap" class="tab-container">
-		<ul class="etabs">
-		  <li class="tab">
-		    <a href="#tab-1">Kanapék</a>
-		  </li>
-		  <li class="tab">
-		  	<a href="#tab-2">Komfort</a>
-		  </li>
-		  <li class="tab">
-		    <a href="#tab-3">Dőlés</a>
-		  </li>
-		  <li class="tab">
-		    <a href="#tab-4">Irányítás</a>
-		  </li>
-		  <li class="tab">
-		    <a href="#tab-5">Kihúzható</a>
-		  </li>
-		  <li class="tab">
-		    <a href="#tab-6">Családi</a>
-		  </li>
-		</ul>
-		<div class="tab-div" id="tab-1">
-			<%= image_tag "tabs/2.png" %>
+
+	<% unless @category.id == 10 || @category.id == 2 || @category.id == 4 || @category.id == 6 %>
+		<div id="tab-wrap" class="tab-container">
+			<ul class="etabs">
+			  <li class="tab">
+			    <a href="#tab-1">Kanapék</a>
+			  </li>
+			  <li class="tab">
+			  	<a href="#tab-2">Komfort</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-3">Dőlés</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-4">Irányítás</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-5">Kihúzható</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-6">Családi</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-7">Kényelem</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-8">Minőség</a>
+			  </li>
+			  <li class="tab">
+			    <a href="#tab-9">Motoros</a>
+			  </li>
+			</ul>
+			<div class="tab-div" id="tab-1">
+				<%= image_tag "tabs/2.png" %>
+			</div>
+			<div class="tab-div" id="tab-2">
+				<%= image_tag "tabs/4.png" %>
+			</div>
+			<div class="tab-div" id="tab-3">
+				<%= image_tag "tabs/7.png" %>
+			</div>
+			<div class="tab-div" id="tab-4">
+				<%= image_tag "tabs/8.png" %>
+			</div>
+			<div class="tab-div" id="tab-5">
+				<%= image_tag "tabs/9.png" %>
+			</div>
+			<div class="tab-div" id="tab-6">
+				<%= image_tag "tabs/13.png" %>
+			</div>
+			<div class="tab-div" id="tab-7">
+				<%= image_tag "tabs/lzb1.jpg" %>
+			</div>
+			<div class="tab-div" id="tab-8">
+				<%= image_tag "tabs/lzb5.jpg" %>
+			</div>
+			<div class="tab-div" id="tab-9">
+				<%= image_tag "tabs/lzb11_12.jpg" %>
+			</div>
 		</div>
-		<div class="tab-div" id="tab-2">
-			<%= image_tag "tabs/4.png" %>
+	<% else %>
+		<div id="tab-wrap" class="tab-container">
+			<ul class="etabs">
+			  <li class="tab tab5">
+			    <a href="#tab-1">Tükrök</a>
+			  </li>
+			  <li class="tab tab5">
+			  	<a href="#tab-2">Műalkotások</a>
+			  </li>
+			  <li class="tab tab5">
+			    <a href="#tab-3">Fali műalkotások</a>
+			  </li>
+			  <li class="tab tab5">
+			    <a href="#tab-4">Kiegészítők</a>
+			  </li>
+			  <li class="tab tab5">
+			    <a href="#tab-5">Lámpák</a>
+			  </li>
+			</ul>
+			<div class="tab-div large-tab" id="tab-1">
+				<%= image_tag "tabs/1.jpg" %>
+			</div>
+			<div class="tab-div large-tab" id="tab-2">
+				<%= image_tag "tabs/2.jpg" %>
+			</div>
+			<div class="tab-div" id="tab-3">
+				<%= image_tag "tabs/3.jpg" %>
+			</div>
+			<div class="tab-div" id="tab-4">
+				<%= image_tag "tabs/4.jpg" %>
+			</div>
+			<div class="tab-div large-tab" id="tab-5">
+				<%= image_tag "tabs/5.jpg" %>
+			</div>
 		</div>
-		<div class="tab-div" id="tab-3">
-			<%= image_tag "tabs/7.png" %>
-		</div>
-		<div class="tab-div" id="tab-4">
-			<%= image_tag "tabs/8.png" %>
-		</div>
-		<div class="tab-div" id="tab-5">
-			<%= image_tag "tabs/9.png" %>
-		</div>
-		<div class="tab-div" id="tab-6">
-			<%= image_tag "tabs/13.png" %>
-		</div>
-	</div>
+	<% end %>
+
 </div>

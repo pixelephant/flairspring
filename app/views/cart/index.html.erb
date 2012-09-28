@@ -28,11 +28,13 @@
 					<tr data-id="<%= li.product.id %>">
 							<td class="product-cell">
 								<div class="clearfix">
-									<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
-									<% if li.product_variation_id.nil? %>
-										<h6><%= li.product.name %></h6>
-									<% else %>
-										<h6><%= ProductVariation.find(li.product_variation_id).name %></h6>
+									<%= link_to li.product, {:class => 'link'} do %>
+										<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" unless li.product.default_photo.blank? %>
+										<% if li.product_variation_id.nil? %>
+											<h6><%= li.product.name %></h6>
+										<% else %>
+											<h6><%= ProductVariation.find(li.product_variation_id).name %></h6>
+										<% end %>
 									<% end %>
 								</div>
 							</td>
@@ -101,7 +103,7 @@
 				<% end %>
 			</div>
 			<div id="total">
-					<p id="subtotal"><b><%= @cart.line_items.first.quantity == 1 ? 'Kosárban lévő termék összege' : 'Kosárban lévő termékek összege' %></b> <span class="subtotal"><%= number_to_currency(@cart.total, :precision => 0) %></span></p>
+					<p id="subtotal"><b><%= (@cart.line_items.first.quantity == 1 && @cart.line_items.count == 1) ? 'Kosárban lévő termék összege' : 'Kosárban lévő termékek összege' %></b> <span class="subtotal"><%= number_to_currency(@cart.total, :precision => 0) %></span></p>
 					<p><b>Szállítás</b> <span class="shipping-cost"><%= number_to_currency((shipping = 123) ,:precision => 0) %></span></p>
 					<p><b>Kedvezmény</b> <span class="discount"><%= number_to_currency(((@discount > 0 ? @discount : 0)) ,:precision => 0) %></span></p>
 					<p id="total-price"><b>Összessen</b> <span class="total-price"><%= (@cart.total + shipping - @discount) %></span> Ft</p>

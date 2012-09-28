@@ -101,5 +101,21 @@ $(document).ready(function(){
 		}});
 		return false;
 	});
+
+	$("#same").change(function(){
+
+    if($(this).is(":checked")){
+      $("#user_addresses_attributes_3_zip").val($("#user_addresses_attributes_0_zip").val());
+      $("#user_addresses_attributes_3_city").val($("#user_addresses_attributes_0_city").val());
+      $("#user_addresses_attributes_3_additional").val($("#user_addresses_attributes_0_additional").val());
+    }
+    else{
+      $("#payment_billing_name").val("");
+      $("#user_addresses_attributes_3_zip").val("");
+      $("#user_addresses_attributes_3_city").val("");
+      $("#user_addresses_attributes_3_additional").val("");
+    }
+
+  });
 	
 });

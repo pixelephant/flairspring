@@ -168,6 +168,10 @@
 </div>
 
 <div class="clearfix">
+	<%= image_tag @product.category.product_page_image unless @product.category.product_page_image.blank? %>
+</div>
+
+<div class="clearfix">
 	<!-- DESIGNER -->
 	<% unless @designer.nil? || @designer.description.blank? %>
 		<%= render :partial => "about_designer", :locals => {:designer => @designer}%>
