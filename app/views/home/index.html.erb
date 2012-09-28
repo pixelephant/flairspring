@@ -28,7 +28,7 @@
 		<h3>Vásárlás előtt kipróbálná?</h3>
 		<h4>Nézzen be boltunkba!</h4>
 		<p class="st"><em>Flairspring Pest</em></p>
-		<p class="st"><a href="http://g.co/maps/eubnb">1054 Budapest, Szabadság tér 14</a></p>
+		<p class="st"><a target="_blank" href="http://g.co/maps/eubnb">1054 Budapest, Szabadság tér 14</a></p>
 		<p class="st"><em>Nyitvatartás</em></p>
 		<p class="st">H-P : 10-18, Szo-V : 10-16 </p>
 	</div>
@@ -88,16 +88,16 @@
 		<% @blogposts.each do |article| %>
 			<div class="blog-entry">
 				<h4 class="gray"><%= article.post_title %></h4>			
-				<p><%= truncate strip_tags(article.post_content).html_safe, :length => 470, :omission => '...' %><%= link_to "Tovább magazinunkhoz &raquo;".html_safe, "http://blog.flairspring.hu/?p=" + article.id.to_s %></p>
+				<p><%= truncate strip_tags(article.post_content).html_safe, :length => 470, :omission => '...' %><%= link_to "Tovább magazinunkhoz &raquo;".html_safe, "http://blog.flairspring.hu/?p=" + article.id.to_s, {:target => "_blank"} %></p>
 			</div>
 		<% end %>
 		<div class="blog-entry left">
 				<h4>Klasszikus terek</h4>
-				<p>“Az elegancia soha nem megy ki a divatból” tartja a mondás. Nem véletlen, hogy az&nbsp;évszázadok alatt kialakult sokféle klasszikus stílus különböző elemeit a legtöbb híres&nbsp;designer belekeveri akár a modern enteriőrökbe is. Sokan azonban egyáltalán nem&nbsp;szeretik a modern stílust és inkább teljesen klasszikus otthont szeretnének kialakítani&nbsp;maguknak. Ebben az esetben kézenfekvő antik kereskedőknél körülnézni, de azt&nbsp;mindenképpen számításba kell venni, hogy - főleg az a...<a href="http://blog.flairspring.hu/?p=399">Bővebben »</a></p>
+				<p>“Az elegancia soha nem megy ki a divatból” tartja a mondás. Nem véletlen, hogy az&nbsp;évszázadok alatt kialakult sokféle klasszikus stílus különböző elemeit a legtöbb híres&nbsp;designer belekeveri akár a modern enteriőrökbe is. Sokan azonban egyáltalán nem&nbsp;szeretik a modern stílust és inkább teljesen klasszikus otthont szeretnének kialakítani&nbsp;maguknak. Ebben az esetben kézenfekvő antik kereskedőknél körülnézni, de azt&nbsp;mindenképpen számításba kell venni, hogy - főleg az a...<a target="_blank" href="http://blog.flairspring.hu/?p=399">Bővebben »</a></p>
 		</div>
 		<div class="blog-entry right">
 				<h4>Klasszikus terek</h4>
-				<p>“Az elegancia soha nem megy ki a divatból” tartja a mondás. Nem véletlen, hogy az&nbsp;évszázadok alatt kialakult sokféle klasszikus stílus különböző elemeit a legtöbb híres&nbsp;designer belekeveri akár a modern enteriőrökbe is. Sokan azonban egyáltalán nem&nbsp;szeretik a modern stílust és inkább teljesen klasszikus otthont szeretnének kialakítani&nbsp;maguknak. Ebben az esetben kézenfekvő antik kereskedőknél körülnézni, de azt&nbsp;mindenképpen számításba kell venni, hogy - főleg az a...<a href="http://blog.flairspring.hu/?p=399">Bővebben »</a></p>
+				<p>“Az elegancia soha nem megy ki a divatból” tartja a mondás. Nem véletlen, hogy az&nbsp;évszázadok alatt kialakult sokféle klasszikus stílus különböző elemeit a legtöbb híres&nbsp;designer belekeveri akár a modern enteriőrökbe is. Sokan azonban egyáltalán nem&nbsp;szeretik a modern stílust és inkább teljesen klasszikus otthont szeretnének kialakítani&nbsp;maguknak. Ebben az esetben kézenfekvő antik kereskedőknél körülnézni, de azt&nbsp;mindenképpen számításba kell venni, hogy - főleg az a...<a target="_blank" href="http://blog.flairspring.hu/?p=399">Bővebben »</a></p>
 		</div>
 	</div>
 </section>

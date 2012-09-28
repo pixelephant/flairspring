@@ -11,11 +11,7 @@
 				<% end %>
 			</ul> -->
 		</li>
-		<% if !user_signed_in? %>
-			<li><a href="#" id="wishlist-not-signed-in"><%= t('wishlist') %></a></li>
-		<% else %>
-			<li><%= link_to t('wishlist'),"/wishlist" %></li>
-		<% end %>		
+		<li><%= link_to t('wishlist'),"/wishlist" %></li>
 		<li id="blog-link"><%= link_to "Magazin", "http://blog.flairspring.hu" %></li>
 		<% unless user_signed_in? %>
 			<li><%= link_to t('register'), new_user_registration_path %></li>
@@ -28,4 +24,3 @@
 		<% end %>		
 	</ul>
 </nav>
-<div id="wishlist-message" class="hidden"><a href="/register">Regisztráció</a> után lehetősége van összeállítani saját kívánságlistáját, amelyet akár meg is oszthat ismerőseivel.</div>

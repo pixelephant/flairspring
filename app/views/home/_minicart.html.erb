@@ -11,7 +11,7 @@
 							<% unless product_sets.include?(item.product_set_id) %>
 								<tr>
 									<td>
-										<%= (image_tag item.product.default_photo.image_file.thumb, :title => item.product.default_photo.alt, :class => "class") if !item.product.default_photo.nil? %>
+										<%= link_to item.product, (image_tag item.product.default_photo.image_file.thumb, :title => item.product.default_photo.alt, :class => "class") if !item.product.default_photo.nil? %>
 									</td>
 									<td>
 										<% if item.product_set_id.nil? %>

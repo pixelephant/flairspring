@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 	$('.more').click(function() {
 
-		if($(this).parent().parent().css("height") == "680px"){
+		if($(this).parent().parent().css("height") == ($(this).parent().parent().data("height") + "px")){
 			$(this).parent().parent().animate({
 		    height: 318
 		  }, 1500, function() {
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		  });
 		}else{
 			$(this).parent().parent().animate({
-		    height: 680
+		    height: $(this).parent().parent().data("height")
 		  }, 1500, function() {
 		    // Animation complete.
 		  });

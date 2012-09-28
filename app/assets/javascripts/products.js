@@ -5,6 +5,16 @@
 
 $(window).load(function(){
 	
+	$(".wishlist-not-signed-in").click(function(){
+    $.fancybox({
+      href : "#wishlist-message",
+      openEffect  : 'elastic',
+      closeEffect : 'elastic',
+      autoSize: true
+    });
+    return false;
+  });
+
 	$("#add-to-whishlist").click(function(){
 		//ajax call
 		$.ajax({
