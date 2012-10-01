@@ -52,7 +52,7 @@
 			</tbody>
 		</table>
 	</div>
-
+	
 <% unless @wishlist.nil? %>
 	<div class="table-wrap">
 		<h4>Kívánságlistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>

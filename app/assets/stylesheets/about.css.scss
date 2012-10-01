@@ -140,3 +140,23 @@ p.marg{
 		color:#bdbcb8;
 	}
 }
+
+.static-map, .shop-info{
+	border: 10px solid #DDE8F5;
+	float: right;
+	height: 340px;
+	img{
+		height: 340px;
+	}
+}
+
+.shops{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.shop-info{
+	text-align: left;
+	min-height: 340px;
+	float:left;
+}
