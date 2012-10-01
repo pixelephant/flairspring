@@ -141,7 +141,7 @@ p.marg{
 	}
 }
 
-.static-map, .shop-info{
+.static-map{
 	border: 10px solid #DDE8F5;
 	float: right;
 	height: 340px;
@@ -156,7 +156,19 @@ p.marg{
 }
 
 .shop-info{
-	text-align: left;
-	min-height: 340px;
+	height: 340px;
+	width: 500px;
 	float:left;
+	p{
+		text-align: center;
+	}
+}
+
+.title{
+	padding-top: 40px;
+}
+
+.shop-name{
+	text-align: center;
+	background: none repeat scroll 0 0 #BBBEB2;
 }
