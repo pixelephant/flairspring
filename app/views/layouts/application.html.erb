@@ -10,11 +10,13 @@
   <meta name="description" content="<%= DESCRIPTION + (@description.to_s || "") %>" />
   <meta name="keywords" content="<%= KEYWORDS + (@keywords.to_s || "") %>" />
 
-  <title>Flairspring - <%= (@title || "") %></title>
+  <title class="noprint">Flairspring - <%= (@title || "") %></title>
   <%= stylesheet_link_tag    "application", controller_name %>
+  <%= stylesheet_link_tag "print", :media => "print" %>
   <%= javascript_include_tag "application", controller_name %>
   <%= csrf_meta_tags %>
   <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
+
 <!-- VIDEÓ -->
 <% if params[:controller] == 'home'%>
 <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
@@ -25,12 +27,12 @@
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6. chromium.org/developers/how-tos/chrome-frame-getting-started -->
 	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
-<div id="topmenu" class="clearfix">
+<div id="topmenu" class="clearfix noprint">
 	<%= render 'home/minicart' %>
 	<%= render 'home/misc_nav' %>
 </div>
 
-<div class="hidden">
+<div class="hidden noprint">
 <% if params[:controller] != 'home'%>
 		<nav id="breadcrumb" class="clearfix">
 			<p>
@@ -40,7 +42,7 @@
 <% end %>
 	
 </div>
-<header id="main-header">
+<header id="main-header" class="noprint">
 	<div class="inner">
 		<h1 id="logo">
 			<a href="/">
@@ -69,7 +71,7 @@
 	
 
 
-<nav id="main-nav">
+<nav id="main-nav" class="noprint">
 	<ul class="clearfix">
 		<%= render 'home/categories_top' %>
 	</ul>
@@ -79,17 +81,20 @@
 	<%= render 'slider' %>
 <% end %>
 
-<div id="main-wrap">
+<div id="main-wrap" class="noprint">
 	<%= yield %>
 </div>
 
-<section id="social-promo">
+<section id="social-promo" class="noprint">
 	<%= render 'home/newsletter' %>
 	<%= render 'home/shops_promo' %>
 </section>
 
 </section>
+
+<div class="noprint">
 <%= render 'home/footer' %>
+</div>
 
 </body>
 </html>

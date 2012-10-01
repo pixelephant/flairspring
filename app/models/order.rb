@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
 
 	after_update :send_email_on_status_change
 
+	default_scope :order => 'created_at DESC'
+
   def send_email_on_status_change
     UserMailer.order_status(self) if (self.status_changed?)
   end

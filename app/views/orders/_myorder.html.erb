@@ -1,4 +1,4 @@
-<section id="cart" class="box full clearfix">
+<section id="cart" class="box full clearfix print">
 	<div id="cart-top" class="clearfix">
 		<h3>Rendelés tartalma</h3>
 	</div>
@@ -23,7 +23,7 @@
 					<tr data-id="<%= li.product.id %>">
 							<td class="product-cell">
 								<div class="clearfix">
-									<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" %>
+									<%= image_tag li.product.default_photo.image_file.medium, :title => li.product.default_photo.alt, :class => "class" if li.product.default_photo %>
 									<% if li.product_variation_id.nil? %>
 										<h6><%= li.product.name %></h6>
 									<% else %>
@@ -33,7 +33,7 @@
 							</td>
 							<td class="property-cell">
 								
-								<p><span class="property">Ma: <%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X Sze: <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X Me: <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %> (cm)</span></p>
+								<p><span class="property">Ma: <%= li.product.properties.where(:property_category_id => MAGASSAG).first.property_name %> X Szé: <%= li.product.properties.where(:property_category_id => SZELESSEG).first.property_name %> X Mé: <%= li.product.properties.where(:property_category_id => MELYSEG).first.property_name %> (cm)</span></p>
 								<% li.product.optional_properties.each do |property| %>
 									<p><span class="property"><%= property.property_category.category_name %>: </span><%= property.property_name %></p>
 								<% end %>
