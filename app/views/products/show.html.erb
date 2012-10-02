@@ -154,20 +154,22 @@
 <!-- RELATED PRODUCTS -->
 <%= (render :partial => "home/product_slider_full_big", :locals => {:title => "A termékhez ajánljuk", :id => "related-products", :products => @product.product_relates }) if @product.product_relates.any? %>
 
-<div class="clearfix">
-	<div class="pbox">
-		<!-- <h3>Első doboz</h3> -->
-		<%= image_tag "product_boxes/1.png" %>
+<% if LAZBOY_CATEGORY_IDS.include?(@product.category_id) %>
+	<div class="clearfix">
+		<div class="pbox">
+			<!-- <h3>Első doboz</h3> -->
+			<%= image_tag "product_boxes/1.png" %>
+		</div>
+		<div class="pbox">
+			<!-- <h3>Második doboz</h3> -->
+			<%= image_tag "product_boxes/2.png" %>
+		</div>
+		<div class="pbox last">
+			<!-- <h3>Harmadik doboz</h3> -->
+			<%= image_tag "product_boxes/3.png" %>
+		</div>	
 	</div>
-	<div class="pbox">
-		<!-- <h3>Második doboz</h3> -->
-		<%= image_tag "product_boxes/2.png" %>
-	</div>
-	<div class="pbox last">
-		<!-- <h3>Harmadik doboz</h3> -->
-		<%= image_tag "product_boxes/3.png" %>
-	</div>	
-</div>
+<% end %>
 
 </div>
 

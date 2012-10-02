@@ -21,14 +21,14 @@ $(document).ready(function(){
 
 	$("#same").change(function(){
 		if($(this).is(":checked")){
-			$("#user_addresses_attributes_3_zip").val($("#user_addresses_attributes_0_zip").val());
-			$("#user_addresses_attributes_3_city").val($("#user_addresses_attributes_0_city").val());
-			$("#user_addresses_attributes_3_additional").val($("#user_addresses_attributes_0_additional").val());
+			$("#user_addresses_attributes_1_zip").val($("#user_addresses_attributes_0_zip").val());
+			$("#user_addresses_attributes_1_city").val($("#user_addresses_attributes_0_city").val());
+			$("#user_addresses_attributes_1_additional").val($("#user_addresses_attributes_0_additional").val());
 		}
 		else{
-			$("#user_addresses_attributes_3_zip").val("");
-			$("#user_addresses_attributes_3_city").val("");
-			$("#user_addresses_attributes_3_additional").val("");
+			$("#user_addresses_attributes_1_zip").val("");
+			$("#user_addresses_attributes_1_city").val("");
+			$("#user_addresses_attributes_1_additional").val("");
 		}
 	});
 

@@ -10,8 +10,11 @@ class UsersController < ApplicationController
       @wishlist_items = []
       @wishlist_items = current_user.wishlist.wishlist_items if current_user.wishlist
       @wishlist = current_user.wishlist
-      @default_address = current_user.addresses.find_by_default(true)
-      @default_address = current_user.addresses.first if @default_address.nil?
+      @shipping_address = current_user.addresses.find_by_billing(false)
+      @shipping_address = current_user.addresses.first if @shipping_address.nil?
+
+      @billing_address = current_user.addresses.find_by_billing(true)
+      @billing_address = current_user.addresses.first if @billing_address.nil?
 
       unless current_user.addresses.where(:billing => true).first.blank?
         @accounting_name = current_user.addresses.where(:billing => true).first.name

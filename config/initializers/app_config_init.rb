@@ -24,3 +24,5 @@ NEW_PRODUCT_DAYS = 14
 #Uttermost - 1
 #La-z-boy - 2
 SHIPPING = {1 => "3-8 hét", 2 => "3 hónap"}
+
+LAZBOY_CATEGORY_IDS = [7,8]

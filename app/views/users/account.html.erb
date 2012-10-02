@@ -10,12 +10,12 @@
 		<div id="edit-data">
 			<h4>Rendelési adataim</h4>
 			<p>Szállítási címe: 
-				<% unless @default_address.nil? %>
-					<%= @default_address.zip.to_s %>, <%= @default_address.city.to_s %>, <%= @default_address.additional.to_s %>
+				<% unless @shipping_address.nil? %>
+					<%= @shipping_address.zip.to_s %>, <%= @shipping_address.city.to_s %>, <%= @shipping_address.additional.to_s %>
 				<% end %>
 			</p>
 			<p>Számlázási címe:
-				
+				<%= @billing_address.zip.to_s %>, <%= @billing_address.city.to_s %>, <%= @billing_address.additional.to_s %>
 			</p>
 			<!-- <p>Alapértelmezett fizetési módja: Banki átutalás</p> -->
 			<p>A számlát: <%= @accounting_name.to_s %> nevére állítjuk ki</p>
@@ -46,13 +46,13 @@
 						<td><span class="status delivered"><%= order.status %></span></td>
 						<td><%= order.created_at %></td>
 						<td><%= order.estimated_date %></td>
-						<td><%= order.order_sum %></td>
+						<td><%= number_to_currency(order.order_sum, :precision => 0) %></td>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
 	</div>
-	
+
 <% unless @wishlist.nil? %>
 	<div class="table-wrap">
 		<h4>Kívánságlistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
