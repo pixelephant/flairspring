@@ -243,6 +243,18 @@ p#subtotal {
 	}
 }
 
+#my-wishlist{
+	background: url("green_arrow_right_extralong.png") no-repeat scroll 0 0 transparent;
+	width: 450px;
+	a{
+		text-decoration: none;
+		color: white;
+	}
+}
 
+#publication-more{
+	text-decoration: none;
+	color: #f15e2f;
+}
 
 @import "_order_table.css.scss";

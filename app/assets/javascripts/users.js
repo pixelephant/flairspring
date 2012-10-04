@@ -36,6 +36,10 @@ $(document).ready(function(){
 	$('.tooltip').tooltip();
 	$("#user_phone").mask("+99 99 999-99-99");
 
+	$("#publication-more").fancybox({
+
+	});
+
 	$(".fancybox").fancybox({
 			type : 'ajax',
 			openEffect	: 'elastic',

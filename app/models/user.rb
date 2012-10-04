@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
 	accepts_nested_attributes_for :addresses
 
+  after_create :send_reg_email
+
   def order_sum
     sum = 0
     self.orders.each do |order|
@@ -45,6 +47,10 @@ class User < ActiveRecord::Base
       return 0
     end
     return sum
+  end
+
+  def send_reg_email
+    UserMailer.reg_email(self).deliver    
   end
 
 end

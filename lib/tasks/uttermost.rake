@@ -21,8 +21,27 @@ namespace :import do
 		prop_cat = []
 		puts "Searching for uttermost.csv..."
 		puts "Going to delete existing proudcts, properties and property categories" if args.del == 'true'
- 
-		CSV.foreach("public/teljes_arlista_kategoriakkal.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+
+		row_sku = nil
+		row_material = nil
+		row_name = nil
+		row_designer = nil
+		row_price = nil
+		row_desc = nil
+		row_cat = nil
+
+		# uttermost_utolso_20120926.csv
+		# public/uttermost_2012_balazs.csv
+		CSV.foreach("public/uttermost_utolso_20120926.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+
+			# row_sku = 0
+			# row_material = 0
+			# row_name = 0
+			# row_designer = 0
+			# row_price = 0
+			# row_desc = 0
+			# row_cat = 0
+
 	  	if counter == 0
 	  		puts "Deleting property categories..." if args.del == 'true'
 	  		PropertyCategory.find_each(&:delete) if args.del == 'true'
@@ -30,7 +49,39 @@ namespace :import do
 	  		Product.find_each(&:delete) if args.del == 'true'
 	  		puts "Deleting properties..." if args.del == 'true'
 	  		Property.find_each(&:delete) if args.del == 'true'
-	  		for i in 6..12
+	  		
+	  		row.each_with_index do |r,i|
+	  			if(r.to_s.strip.downcase == 'anyag' || r.to_s.strip.downcase == 'anyaga')
+	  				row_material = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'tervező' || r.to_s.strip.downcase == 'designer')
+	  				row_designer = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'termék neve' || r.to_s.strip.downcase == 'név')
+	  				row_name = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'sku' || r.to_s.strip.downcase == 'termékszám')
+	  				row_sku = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'ár' || r.to_s.strip.downcase == 'kisker ár (ft)' || r.to_s.strip.downcase == 'kisker ár')
+	  				row_price = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'leírás' || r.to_s.strip.downcase == 'marketing leírás')
+	  				row_desc = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'kategóra' || r.to_s.strip.downcase == 'kategória')
+	  				row_cat = i
+	  				puts "Oszlop sorszáma: " + i.to_s
+	  			end
+	  		end
+
+	  		for i in (row_material + 1)..(row_designer - 1)
 	  			puts row[i]
 	  			if PropertyCategory.exists?(:category_name => row[i].strip.downcase)
 	  				puts "PropertyCategoryFound: " + row[i].to_s
@@ -43,62 +94,95 @@ namespace :import do
 	  				prop_cat << pc.id
 	  			end
 	  		end
+
+	  		puts "row_sku: " + row_sku.to_s
+				puts "row_material: " + row_material.to_s
+				puts "row_name: " + row_name.to_s
+				puts "row_designer: " + row_designer.to_s
+				puts "row_price: " + row_price.to_s
+				puts "row_desc: " + row_desc.to_s
+				puts "row_cat: " + row_cat.to_s
+
 	  	else
-	  		unless row[1].blank? || Product.exists?(:sku => row[1].strip)
-	  			puts "SKU: " + row[1]
-	  			p = Product.new(:sku => row[1].strip, :name => row[3].strip.downcase, :price => row[4].strip, :long_description => row[15].strip)
+	  		unless row[row_sku].blank?
+	  			puts "SKU: " + row[row_sku]
+	  			if Product.exists?(:sku => row[row_sku].strip)
+	  				puts "Product exists"
+	  				p = Product.find_by_sku(row[row_sku].strip)
+	  				p.name = row[row_name].strip.downcase
+	  				p.price = row[row_price].strip
+	  				p.long_description = row[row_desc].strip
+	  			else
+	  				puts "New product"
+	  				p = Product.new(:sku => row[row_sku].strip, :name => row[row_name].strip.downcase, :price => row[row_price].strip, :long_description => row[row_desc].strip)
+	  			end
 	  			#ANYAG
-	  			unless row[6].blank?
-		  			anyag = row[6].split(',')
+	  			unless row[row_material].blank?
+		  			anyag = row[row_material].split(',')
+		  			anyag_cat = PropertyCategory.find_by_category_name("anyag")
 		  			anyag.each do |a|
 		  				unless a.strip.blank?
-			  				if Property.where(:property_name => a.strip.downcase, :property_category_id => prop_cat[0]).any?
-			  					prop = Property.where(:property_name => a.strip.downcase).first
+			  				if Property.where(:property_name => a.strip.downcase, :property_category_id => 1).any?
+			  					prop = Property.where(:property_name => a.strip.downcase, :property_category_id => 1).first
 			  				else
-			  					prop = Property.new(:property_name => a.strip.downcase, :property_category_id => prop_cat[0])
+			  					prop = Property.new(:property_name => a.strip.downcase, :property_category_id => 1)
 			  					prop.save!
 			  				end
-			  				p.properties << prop
+			  				begin p.properties << prop
+
+			  				rescue Exception => e
+					  			puts "Product property exists: #{e.class}"
+								end
 			  			end
 		  			end
 		  		end
 	  			#TÖBBI
-	  			for i in 7..12
+	  			for i in (row_material + 1)..(row_designer - 1)
 	  				puts "Current column: " + i.to_s
 	  				puts "Property: " + row[i].to_s
 	  				unless row[i].blank?
-			  			if Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)]).any?
-		  					prop = Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)]).first
-		  					p.properties << prop
+			  			if Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-(row_material+1))]).any?
+		  					prop = Property.where(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-(row_material+1))]).first
+		  					begin p.properties << prop
+
+		  					rescue Exception => e
+					  			puts "Product property exists: #{e.class}"
+								end
 		  				else
 		  					unless row[i].blank?
-			  					prop = Property.new(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-6)])
+			  					prop = Property.new(:property_name => row[i].strip.downcase, :property_category_id => prop_cat[(i-(row_material+1))])
 			  					prop.save!
-			  					p.properties << prop
+			  					begin p.properties << prop
+
+			  					rescue Exception => e
+						  			puts "Product property exists: #{e.class}"
+									end
 			  				end
 		  				end
 		  			end
 	  			end
 	  			#TÖBBI VÉGE
 	  			#DESIGNER
-	  			unless row[13].blank?
-	  				if Designer.where(:name => row[13]).any?
-	  					des = Designer.where(:name => row[13]).first
+	  			unless row[row_designer].blank?
+	  				if Designer.where(:name => row[row_designer]).any?
+	  					des = Designer.where(:name => row[row_designer]).first
 	  				else
-	  					des = Designer.new(:name => row[13], :description => '-')
+	  					des = Designer.new(:name => row[row_designer], :description => '-')
 	  					des.save!
 	  				end
 	  				p.designer_id = des.id
 	  			end
 	  				#IDEIGLENESEN MINDEN AZ ELSO KATEGORIA
-	  				p.category_id = Category.where(:name => row[14]).first.id
+	  				# p.category_id = Category.where(:name => row[row_cat]).first.id
+	  				p.category_id = Category.first.id
+	  				p.brand_id = 1
 	  			#DESIGNER VÉGE
-	  			if p.save
-			  		product_counter = product_counter + 1
-			  		puts "Succesfully saved: " + counter.to_s + ", sku: " + row[1].to_s
-			  	else
-			  		puts "Error with product: " + counter.to_s
-			  	end
+	  			begin p.save
+						puts "Succesfully saved: " + counter.to_s + ", sku: " + row[row_sku].to_s
+						product_counter = product_counter + 1
+					rescue Exception => e
+		  			puts "Error with product: #{e.class}"
+					end
 			  	Rails.logger.debug p.errors.full_messages
 	  		end
 	  	end
@@ -113,11 +197,14 @@ namespace :import do
   	counter = 0
 
   	CSV.foreach("public/uttermost.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
-	  	if counter > 0
+
+  		row_id = 0
+
+	  	if counter > 0 && row_id > 0
 	  		if Product.exists?(:sku => row[1])
 	  			p = Product.where(:sku => row[1]).first
 
-	  			cat = row[8].strip
+	  			cat = row[row_id].strip
 
 	  			if cat == "TÜKRÖK"
 	  				cat_id = Category.where(:name => 'Tükrök').first.id
@@ -144,6 +231,13 @@ namespace :import do
 	  				puts "Category changed"
 	  			else
 	  				puts "Category change error"
+	  			end
+	  		end
+	  	else
+	  		row.each_with_index do |r,i|
+	  			if(r.to_s.strip.downcase == 'kategória' || r.to_s.strip.downcase == 'category')
+	  				row_id = i
+	  				puts "Oszlop sorszáma: " + i.to_s
 	  			end
 	  		end
 	  	end

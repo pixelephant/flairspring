@@ -55,7 +55,18 @@
 
 <% unless @wishlist.nil? %>
 	<div class="table-wrap">
-		<h4>Kívánságlistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
+		<% unless @wishlist.public %>
+			<p>A "Publikálom" feliratra kattintva akár e-mailen is megoszthatja kívánságlistáját ismerőseivel. <a id="publication-more" href="#wishlist-more-data">Bővebben</a></p>
+			<div style="display:none">
+				<div id="wishlist-more-data">
+					<p>Regisztrált felhasználóinknak lehetősége van összeállítani kedvenc termékeikből kívánságlistájukat.</p>
+					<p>Hogyan és mire használható ez a funkció?</p>
+					<p>Kiválaszthatja kívánatunkból kedvenc Uttermost kiegeszítőit és La-Z-Boy kanapéját vagy akár egy megálmodott enteriőrhöz szükséges tárgyakat is egybegyűjthet.</p>
+					<p>A kiválasztott terméket a "kívánságlista" gomb megnyomásával adhatja hozzá saját kívánságlistájához, ami a „Kosárba rakom” gomb mellett található.</p>
+				</div>
+			</div>
+		<% end %>
+		<h4 id="my-wishlist">Kívánságlistám - <%= @wishlist.public ? (link_to "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s, "http://beta2.flairspring.hu/wishlists/" + @wishlist.id.to_s) : (link_to 'Publikálom', '#publish', :class => 'publish', :id => @wishlist.id) %></h4>
 		<table id="whishlist-table" class="user-table">
 			<thead>
 				<tr>

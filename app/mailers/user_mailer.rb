@@ -13,4 +13,10 @@ class UserMailer < ActionMailer::Base
 
     mail(:to => @order.email, :subject => "Megrendelésének állapota változott")
   end
+
+  def reg_email(user)
+  	@user = user
+
+  	mail(:to => @user.email, :subject => "Köszönjük regisztrációját")
+  end
 end

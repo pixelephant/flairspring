@@ -554,20 +554,24 @@ body{
 }
 
 #main-nav .sub li{
-
-height:auto !important;
-line-height:1.2 !important;
-
+	height:auto !important;
+	line-height:1.2 !important;
 }
 
 #main-nav .sub li a{
-
-height:auto !important;
-line-height:1.2 !important;
-
+	height:auto !important;
+	line-height:1.2 !important;
 }
-
 
 #tel_example{
 	margin-top: 10px;
+}
+
+.product-cell a{
+	text-decoration: none;
+}
+
+#minicart-table a{
+	text-decoration: none;
+	color: black;
 }
