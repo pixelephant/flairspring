@@ -32,7 +32,8 @@ namespace :import do
 
 		# uttermost_utolso_20120926.csv
 		# public/uttermost_2012_balazs.csv
-		CSV.foreach("public/uttermost_utolso_20120926.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		# teljes_arlista_kategoriakkal.csv
+		CSV.foreach("public/teljes_arlista_kategoriakkal.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
 			# row_sku = 0
 			# row_material = 0
@@ -63,7 +64,7 @@ namespace :import do
 	  				row_name = i
 	  				puts "Oszlop sorszáma: " + i.to_s
 	  			end
-	  			if(r.to_s.strip.downcase == 'sku' || r.to_s.strip.downcase == 'termékszám')
+	  			if(r.to_s.strip.downcase == 'cikkszám' || r.to_s.strip.downcase == 'sku' || r.to_s.strip.downcase == 'termékszám')
 	  				row_sku = i
 	  				puts "Oszlop sorszáma: " + i.to_s
 	  			end
@@ -196,7 +197,9 @@ namespace :import do
 
   	counter = 0
 
-  	CSV.foreach("public/uttermost.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+  	# uttermost_utolso_20120926.csv
+		# public/uttermost_2012_balazs.csv
+  	CSV.foreach("public/uttermost_2012_balazs.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
   		row_id = 0
 
@@ -235,7 +238,7 @@ namespace :import do
 	  		end
 	  	else
 	  		row.each_with_index do |r,i|
-	  			if(r.to_s.strip.downcase == 'kategória' || r.to_s.strip.downcase == 'category')
+	  			if(r.to_s.strip.downcase == 'kategória' || r.to_s.strip.downcase == 'category' || r.to_s.strip.downcase == 'kategóra')
 	  				row_id = i
 	  				puts "Oszlop sorszáma: " + i.to_s
 	  			end
@@ -243,6 +246,8 @@ namespace :import do
 	  	end
 	  	counter = counter + 1
   	end
+
+  	puts counter
   end
 
   task :related => :environment do
