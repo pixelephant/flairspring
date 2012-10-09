@@ -3,16 +3,42 @@
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
-  <body style="background-image:url(beta2.flairspring.hu/regisztracio_blank.jpg);">
-    <p>Kedves  <%= @user.title_name + " " + @user.first_name + " " + @user.last_name %>!  Regisztrációja sikeresen megtörtént Flairspring webshopján (www.flairspring.hu).</p>
-    <p>A következő adatokkal regisztráltuk felhasználói profilját:</p>
-    <p>Email cím: <%= @user.email %></p>
-    <p>Mostantól a nap bármelyik órájában vásárolhat online boltunkban, ahol keresőrendszerünk segítségével néhány kattintással kiválaszthatja otthonába a stílusban, méretben vagy formában legjobban odaillő bútort, lakberendezési kiegészítőt.</p>
-    <p>Kívánságlista funkciónkkal pedig összeállíthatja ajándéklistáját vagy akár kedvenc enteriőrje berendezési tárgyait gyújtheti egy csokorba</p>
-    <p>Kívánságlistáját megoszthatja ismerőseivel, barátaival is!</p>
-    <p>Köszönjük regisztrációját, kellemes vásárlást kívánunk!</p>
-    <p>Üdvözlettel:</p>
-    <p>Flairspring</p>
-    <p>ugyfelszolgalat@flairspring.hu</p>
+  <body>
+    <table cellspacing="0" cellpadding="0" border="0" height="608" width="600" background="http://beta2.flairspring.hu/regisztracio_blank.jpg" style="border-collapse: collapse; border-spacing: 0; display: block;">
+      <tr height="165">
+        <td></td>
+      </tr>
+      <tr height="5">
+        <td width="90"></td>
+        <td width="560">
+          <font size="3px">Kedves  <%= @user.title_name + " " + @user.first_name + " " + @user.last_name %>!  Regisztrációja sikeresen megtörtént Flairspring webshopján (www.flairspring.hu).
+          </font>
+        </td>
+        <td width="90"></td>
+      </tr>
+      <tr height="20"></tr>
+      <tr height="5">
+        <td width="90"></td>
+        <td>
+          <font size="3px">A következő adatokkal regisztráltuk felhasználói profilját:</font>
+        </td>
+        <td width="90"></td>
+      </tr>
+      <tr height="10"></tr>
+      <tr height="5"><td width="90"></td><td border-spacing="0" cellspacing="0" cellpadding="0" border="0" margin="0"><font size="2px">Email cím: <%= @user.email %></font></td><td width="90"></td></tr>
+      <tr height="45"></tr>
+      <tr height="72"><td width="90"></td><td cellpadding="0" border-spacing="0px"><font size="2px"><p style="margin: 0;">Mostantól a nap bármelyik órájában vásárolhat online boltunkban, ahol keresőrendszerünk segítségével néhány kattintással kiválaszthatja otthonába a stílusban, méretben vagy formában legjobban odaillő bútort, lakberendezési kiegészítőt. Kívánságlista funkciónkkal pedig összeállíthatja ajándéklistáját vagy akár kedvenc enteriőrje berendezési tárgyait gyújtheti egy csokorba</p></font></td><td width="90"></td></tr>
+      <!-- <tr height="5"><td width="90"></td><td><font size="2px">Kívánságlista funkciónkkal pedig összeállíthatja ajándéklistáját vagy akár kedvenc enteriőrje berendezési tárgyait gyújtheti egy csokorba</font></td><td width="90"></td></tr> -->
+      <tr height="8"></tr>
+      <tr height="5"><td width="90"></td><td><font size="2px"><p style="margin: 0;">Kívánságlistáját megoszthatja ismerőseivel, barátaival is!</p></font></td><td width="90"></td></tr>
+      <tr height="8"></tr>
+      <tr height="5"><td width="90"></td><td><font size="2px">Köszönjük regisztrációját, kellemes vásárlást kívánunk!</font></td><td width="90"></td></tr>
+      <tr height="30"></tr>
+      <tr height="5"><td width="90"></td><td><font size="3px">Üdvözlettel:</font></td><td width="90"></td></tr>
+      <tr height="10"></tr>
+      <tr height="5"><td width="90"></td><td><font size="3px">Flairspring</font></td><td width="90"></td></tr>
+      <tr height="10"></tr>
+      <tr height="5"><td width="90"></td><td><font size="3px">ugyfelszolgalat@flairspring.hu</font></td><td width="90"></td></tr>
+    </table>
   </body>
 </html>
