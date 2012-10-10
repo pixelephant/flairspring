@@ -33,7 +33,8 @@ namespace :import do
 		# uttermost_utolso_20120926.csv
 		# public/uttermost_2012_balazs.csv
 		# teljes_arlista_kategoriakkal.csv
-		CSV.foreach("public/teljes_arlista_kategoriakkal.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		# teljes_arlista_related_20121003.csv
+		CSV.foreach("public/teljes_arlista_related_20121003.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
 			# row_sku = 0
 			# row_material = 0
@@ -196,18 +197,28 @@ namespace :import do
   task :categories => :environment do
 
   	counter = 0
+  	row_id = 0
+  	row_sku = nil
 
   	# uttermost_utolso_20120926.csv
 		# public/uttermost_2012_balazs.csv
-  	CSV.foreach("public/uttermost_2012_balazs.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		# teljes_arlista_related_20121003.csv
+  	CSV.foreach("public/teljes_arlista_related_20121003.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
-  		row_id = 0
+  		puts "Counter: " + counter.to_s + ", Row: " + row_id.to_s
 
 	  	if counter > 0 && row_id > 0
-	  		if Product.exists?(:sku => row[1])
-	  			p = Product.where(:sku => row[1]).first
+
+	  		puts "Id: " + row_id.to_s
+  			puts "Sku: " + row_sku.to_s
+
+	  		if Product.exists?(:sku => row[row_sku])
+	  			p = Product.where(:sku => row[row_sku]).first
 
 	  			cat = row[row_id].strip
+	  		
+	  			puts "Category: " + cat.to_s
+	  			puts "Product: " + p.name.to_s
 
 	  			if cat == "TÜKRÖK"
 	  				cat_id = Category.where(:name => 'Tükrök').first.id
@@ -240,7 +251,11 @@ namespace :import do
 	  		row.each_with_index do |r,i|
 	  			if(r.to_s.strip.downcase == 'kategória' || r.to_s.strip.downcase == 'category' || r.to_s.strip.downcase == 'kategóra')
 	  				row_id = i
-	  				puts "Oszlop sorszáma: " + i.to_s
+	  				puts "Id Oszlop sorszáma: " + i.to_s
+	  			end
+	  			if(r.to_s.strip.downcase == 'cikkszám' || r.to_s.strip.downcase == 'sku' || r.to_s.strip.downcase == 'termékszám')
+	  				row_sku = i
+	  				puts "Sku Oszlop sorszáma: " + i.to_s
 	  			end
 	  		end
 	  	end
@@ -255,11 +270,11 @@ namespace :import do
   	counter = 0
   	row_id = 0
 
-  	CSV.foreach("public/uttermost.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+  	CSV.foreach("public/teljes_arlista_related_20121003.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
   		puts counter
 	  	if counter > 0 && row_id > 0
-	  		if Product.exists?(:sku => row[1]) && !row[row_id].blank?
-	  			p = Product.where(:sku => row[1]).first
+	  		if Product.exists?(:sku => row[0]) && !row[row_id].blank?
+	  			p = Product.where(:sku => row[0]).first
 	  			related = row[row_id].strip
 	  			related_products = related.split("|")
 	  			
@@ -281,7 +296,7 @@ namespace :import do
 	  		end
 	  	else
 	  		row.each_with_index do |r,i|
-	  			if(r.to_s.strip.downcase == 'related products' || r.to_s.strip.downcase == 'kapcsolódó termékek')
+	  			if(r.to_s.strip.downcase == 'related products' || r.to_s.strip.downcase == 'kapcsolódó termékek' || r.to_s.strip.downcase == 'related items')
 	  				row_id = i
 	  				puts "Oszlop sorszáma: " + i.to_s
 	  			end
@@ -332,6 +347,8 @@ namespace :import do
   end
 
   task :custom_category, [:col1, :col2] => :environment do |task, args|
+  	require 'csv'
+
   	args.with_defaults(:col1 => 16)
   	args.with_defaults(:col2 => 78)
 
@@ -345,16 +362,17 @@ namespace :import do
  		categ = []
  		c_categories_gr = []
 
-		CSV.foreach("public/teljes_arlista_kategoriakkal_alaktegoria.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
+		CSV.foreach("public/teljes_arlista_related_20121003.csv", :quote_char => '"', :col_sep =>',', :row_sep =>:auto) do |row|
 
 			if counter == 0
 				for i in (args.col1)..(args.col2)
 					categ << row[i]
-				end
-
-				for i in 16..78
 					puts row[i].to_s + " - " + i.to_s
 				end
+
+				# for i in 16..78
+				# 	puts row[i].to_s + " - " + i.to_s
+				# end
 			end
 
 			if counter == 1
@@ -401,7 +419,7 @@ namespace :import do
 						Property.create(:property_name => p_name, :property_category_id => pcid)
 					end
 
-					property = Property.find_by_property_name(p_name)
+					property = Property.where(:property_name => p_name, :property_category_id => p_cat).first
 
 					unless CustomCategory.exists?(:name => row[i])
 						puts "Custom Category Group: " + c_categories_gr[a]
@@ -420,9 +438,9 @@ namespace :import do
 			end
 
 			if counter > 2
-				if Product.where(:sku => row[1]).any?
-					prod = Product.find_by_sku(row[1])
-					puts "Product found: " + row[1]
+				if Product.where(:sku => row[0]).any?
+					prod = Product.find_by_sku(row[0])
+					puts "Product found: " + row[0]
 					for i in 16..78
 						index = (i.to_i - args.col1.to_i)
 					  if row[i] == 'x' || row[i] == 'X'
