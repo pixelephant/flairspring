@@ -2,11 +2,11 @@
 	<div id="cart-summary">
 		<div class="section">
 			<h5>Rendelés összesítő</h5>
-			<p>Rendelés összege <span class="price"><span><%= cart_subtotal %></span> Ft</span></p>
-			<p>Szállítási költség <span class="price"><span><%= cart_shipping %></span> Ft</span></p>
-			<p class="total">Kupon kedvezmény <span class="price"><span><%= @other_discount.to_i %></span> Ft</span></p>	
-			<p class="total">Törzsvásárlói kedvezmény <span class="price"><span><%= @personal_discount.to_i %></span> Ft</span></p>	
-			<p class="total">Összesen <span class="price"><span><%= cart_shipping.to_i + cart_subtotal.to_i - @personal_discount.to_i - @other_discount.to_i %></span> Ft</span></p>
+			<p>Rendelés összege <span class="price"><span><%= number_to_currency(cart_subtotal, :precision => 0) %></span></span></p>
+			<p>Szállítási költség <span class="price"><span><%= number_to_currency(cart_shipping, :precision => 0) %></span></span></p>
+			<p class="total">Kupon kedvezmény <span class="price"><span><%= number_to_currency(@other_discount.to_i, :precision => 0) %></span></span></p>
+			<p class="total">Törzsvásárlói kedvezmény <span class="price"><span><%= number_to_currency(@personal_discount.to_i, :precision => 0) %></span></span></p>
+			<p class="total">Összesen <span class="price"><span><%= number_to_currency((cart_shipping.to_i + cart_subtotal.to_i - @personal_discount.to_i - @other_discount.to_i), :precision => 0) %></span></span></p>
 		</div>
 		<div class="section">
 			<h5>Segítségre van szüksége?</h5>
