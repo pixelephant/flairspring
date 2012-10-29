@@ -53,12 +53,15 @@
 								<span>
 									<% if li.product_set_id.nil? %>
 										<% if li.product_variation_id.nil? %>
-											<%= price = productPrice(li.product.id) %> Ft
+											<% price = productPrice(li.product.id) %>
+											<%= number_to_currency(price, :precision => 0) %>
 										<% else %>
-											<%= price = ProductVariation.find(li.product_variation_id).price %> Ft
+											<% price = ProductVariation.find(li.product_variation_id).price %>
+											<%= number_to_currency(price, :precision => 0) %>
 										<% end %>
 									<% else %>
-										<%= price = ProductSet.find(li.product_set_id).price %> Ft
+										<% price = ProductSet.find(li.product_set_id).price %>
+										<%= number_to_currency(price, :precision => 0) %>
 									<% end %>
 								</span>
 							</td>
@@ -72,7 +75,7 @@
 								=
 							</td>
 							<td class="sum-price-cell">
-								<span><%= price * q %></span> Ft
+								<span><%= number_to_currency((price * q), :precision => 0) %></span>
 							</td>
 							<td class="actions-cell">
 								<a class="delete" href="">x</a>

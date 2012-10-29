@@ -224,11 +224,11 @@ namespace :import do
 	  				cat_id = Category.where(:name => 'Tükrök').first.id
 	  			end
 
-	  			if cat == 'MŰVÉSZETI ALKOTÁSOK' || cat == 'ÓRÁK' || cat == 'KIEGÉSZÍTŐK' || cat == 'NÖVÉNYEK'
+	  			if cat == 'ÓRÁK' || cat == 'KIEGÉSZÍTŐK' || cat == 'NÖVÉNYEK'
 	  				cat_id = Category.where(:name => 'Kiegészítők').first.id
 	  			end
 
-	  			if cat == 'FÉM FALI DÍSZ'
+	  			if cat == 'MŰVÉSZETI ALKOTÁSOK' || cat == 'FÉM FALI DÍSZ'
 	  				cat_id = Category.where(:name => 'Faldekor').first.id
 	  			end
 

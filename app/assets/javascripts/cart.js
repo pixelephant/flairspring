@@ -10,24 +10,29 @@ $("document").ready(function(){
 	function recalculate_sum(){
 		var subtotal = 0;
 		$.each($(".sum-price-cell span"),function(){
-			subtotal += parseInt($(this).html());
+			subtotal += parseInt(stripNonNumeric($(this).html()));
 		});
 
 		var shipping = subtotal > shipping_threshold ? 0 : 4500;
 
-		var discount = parseInt($(".discount").html());
+		var discount = parseInt(stripNonNumeric($(".discount").html()));
 
 		var total = subtotal + shipping - discount;
 
+		subtotal = addCommas(subtotal);
+		total = addCommas(total);
+		discount = addCommas(discount);
+		shipping = addCommas(shipping);
+
 		$(".subtotal").html(subtotal);
 		$(".shipping-cost").html(shipping);
-		$(".total-price").html(subtotal + shipping)
+		$(".total-price").html(total)
 	}
 
 	$(".quantity-cell input[type='number']").bind("input",function(){
 		var $this = $(this);
-		var price = parseInt($this.parents("tr").find(".price-cell span").html());
-		$this.parents("tr").find(".sum-price-cell span").html(price * parseInt($this.val()));
+		var price = parseInt(stripNonNumeric($this.parents("tr").find(".price-cell span").html()));
+		$this.parents("tr").find(".sum-price-cell span").html(addCommas(price * parseInt(stripNonNumeric($this.val()))));
 		recalculate_sum();
 	});
 
