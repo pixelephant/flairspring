@@ -75,8 +75,6 @@ GEM
     friendly_id (4.0.0)
     gibbon (0.3.5)
       httparty (> 0.6.0)
-      httparty (> 0.6.0)
-      json (> 1.4.0)
       json (> 1.4.0)
       rdoc
     globalize3 (0.2.0)
@@ -176,7 +174,7 @@ GEM
     ttfunk (1.0.3)
     turn (0.8.2)
       ansi (>= 1.2.2)
-    tzinfo (0.3.31)
+    tzinfo (0.3.61)
     uglifier (1.2.2)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
